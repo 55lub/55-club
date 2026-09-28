@@ -2,11 +2,14 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55 CLUB - Outer Notify</title>
+<title>55 CLUB - Bell Notify</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-body{background:#f2f2f2;padding-bottom:80px}
-.top{background:#ff4d4d;color:white;padding:10px;text-align:center;font-weight:bold}
+body{background:#f2f2f2}
+.top{background:#ff4d4d;color:white;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;font-weight:bold}
+.top.right{display:flex;gap:12px;align-items:center}
+.bell{position:relative;font-size:20px;cursor:pointer}
+.bell.cnt{position:absolute;top:-6px;right:-8px;background:yellow;color:red;font-size:10px;padding:1px 5px;border-radius:10px;font-weight:bold}
 .wallet{background:white;margin:10px;border-radius:15px;padding:15px;text-align:center}
 .wallet h2{font-size:22px}.btns{display:flex;gap:10px;margin-top:10px}
 .btns button{flex:1;padding:10px;border-radius:20px;border:none;color:white;font-weight:bold}
@@ -14,85 +17,56 @@ body{background:#f2f2f2;padding-bottom:80px}
 .histBtns{display:flex;gap:10px;margin-top:10px}
 .histBtns button{flex:1;padding:8px;border-radius:15px;border:1px solid #ff4d4d;background:white;color:#ff4d4d;font-size:12px;font-weight:bold}
 .profileCard{background:white;margin:10px;border-radius:15px;padding:12px;display:flex;justify-content:space-between;align-items:center;font-size:12px}
-.profileCard b{color:#ff4d4d}
 .playbox{background:white;margin:10px;border-radius:15px;padding:12px}
-.timer{display:flex;justify-content:space-between}
-.timer b{font-size:20px;background:#eee;padding:5px 10px;border-radius:5px}
-.colors{display:flex;gap:10px;margin:12px 0}
-.colors button{flex:1;padding:10px;border:none;border-radius:8px;color:white;font-weight:bold}
+.timer{display:flex;justify-content:space-between}.timer b{font-size:20px;background:#eee;padding:5px 10px;border-radius:5px}
+.colors{display:flex;gap:10px;margin:12px 0}.colors button{flex:1;padding:10px;border:none;border-radius:8px;color:white;font-weight:bold}
 .cG{background:#4caf50}.cV{background:#9c27b0}.cR{background:#f44336}
-.nums{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:10px 0}
-.nums button{width:50px;height:50px;border-radius:50%;border:none;font-weight:bold;font-size:18px;color:white}
+.nums{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:10px 0}.nums button{width:50px;height:50px;border-radius:50%;border:none;font-weight:bold;font-size:18px;color:white}
 .bigsmall{display:flex;gap:10px}.bigsmall button{flex:1;padding:12px;border-radius:20px;border:none;font-weight:bold;color:white}
 .history{background:white;margin:10px;border-radius:10px;padding:10px;font-size:12px}
-.history table{width:100%;border-collapse:collapse}.history th{background:#ff4d4d;color:white;padding:6px}
-.history td{padding:5px;text-align:center;border-bottom:1px solid #eee}
+.history table{width:100%;border-collapse:collapse}.history th{background:#ff4d4d;color:white;padding:6px}.history td{padding:5px;text-align:center;border-bottom:1px solid #eee}
 .pageCtrl{display:flex;justify-content:space-between;align-items:center;margin-top:10px;background:#f9f9f9;padding:8px;border-radius:10px}
-.pageCtrl button{padding:6px 14px;border:none;border-radius:15px;background:#ff4d4d;color:white;font-weight:bold}
-.pageCtrl button:disabled{background:#ccc}
+.pageCtrl button{padding:6px 14px;border:none;border-radius:15px;background:#ff4d4d;color:white;font-weight:bold}.pageCtrl button:disabled{background:#ccc}
 #registerPage,#loginPage{background:white;min-height:100vh;padding:20px}
 input,select{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ddd}
 .regbtn{width:100%;padding:14px;background:#ff4d4d;border:none;border-radius:25px;color:white;font-weight:bold;margin-top:10px}
-#popup,#betModal,#adminBox,#adminPassBox,#depBox,#withBox,#depHistBox,#withHistBox{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:9999}
+#popup,#betModal,#adminBox,#adminPassBox,#depBox,#withBox,#depHistBox,#withHistBox,#bellBox{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:9999}
 .popBox{background:white;width:94%;max-width:420px;border-radius:20px;padding:20px;text-align:center;max-height:92vh;overflow:auto}
-.depTabs{display:flex;gap:10px;margin:10px 0}
-.depTabs button{flex:1;padding:12px;border-radius:12px;border:2px solid #ff4d4d;background:white;color:#ff4d4d;font-weight:bold}
-.depTabs button.active{background:#ff4d4d;color:white}
-.qrBox{background:#f9f9f9;border-radius:15px;padding:15px;margin:10px 0}
-.upiCopy{background:#e8f5e9;padding:10px;border-radius:10px;font-weight:bold;letter-spacing:1px;margin:8px 0;word-break:break-all}
+.depTabs{display:flex;gap:10px;margin:10px 0}.depTabs button{flex:1;padding:12px;border-radius:12px;border:2px solid #ff4d4d;background:white;color:#ff4d4d;font-weight:bold}.depTabs button.active{background:#ff4d4d;color:white}
+.qrBox{background:#f9f9f9;border-radius:15px;padding:15px;margin:10px 0}.upiCopy{background:#e8f5e9;padding:10px;border-radius:10px;font-weight:bold;word-break:break-all}
 .adminItem{background:#fff8e1;border:1px solid #ffe082;border-radius:10px;padding:10px;margin:8px 0;text-align:left;font-size:12px;border-left:5px solid #ff4d4d}
 .adminItem button{padding:6px 12px;border:none;border-radius:10px;font-weight:bold;margin-right:5px;margin-top:5px}
 .accept{background:#4caf50;color:white}.reject{background:#f44336;color:white}
-.hTable{width:100%;border-collapse:collapse;margin-top:10px;font-size:11px}
-.hTable th{background:#eee;padding:6px}.hTable td{padding:6px;border-bottom:1px solid #eee;text-align:center}
-.qty{display:flex;align-items:center;justify-content:center;gap:15px;margin:10px 0}
-.qty button{width:35px;height:35px;border-radius:50%;border:1px solid #ddd;font-size:20px}
-.betOpt{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}
-.betOpt button{padding:8px 14px;border-radius:20px;border:1px solid #ddd;background:white;font-weight:bold}
-.betOpt.a{background:#ff4d4d;color:white}
+.hTable{width:100%;border-collapse:collapse;margin-top:10px;font-size:11px}.hTable th{background:#eee;padding:6px}.hTable td{padding:6px;border-bottom:1px solid #eee;text-align:center}
+.qty{display:flex;align-items:center;justify-content:center;gap:15px;margin:10px 0}.qty button{width:35px;height:35px;border-radius:50%;border:1px solid #ddd;font-size:20px}
+.betOpt{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}.betOpt button{padding:8px 14px;border-radius:20px;border:1px solid #ddd;background:white;font-weight:bold}.betOpt.a{background:#ff4d4d;color:white}
+.notifItem{background:#f9f9f9;border-radius:12px;padding:10px;margin:8px 0;text-align:left;font-size:12px;border-left:4px solid #ff4d4d}
+.notifItem.success{border-left-color:#4caf50;background:#e8f5e9}
+.notifItem.process{border-left-color:orange;background:#fff8e1}
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:12px 20px;border-radius:25px;z-index:10000;display:none;font-size:13px}
-/* BAHAR NI NOTIFICATION PATTI - LOGOUT NI NICHE */
-#outerNotify{position:fixed;bottom:0;left:0;right:0;background:#111;color:white;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;z-index:5000;box-shadow:0 -2px 10px #0005}
-#outerNotify.left{font-size:13px;font-weight:bold}
-#outerNotify.right button{padding:8px 18px;background:#4caf50;color:white;border:none;border-radius:20px;font-weight:bold}
-#outerNotify.hide{display:none}
-.blink{animation:blink 1s infinite} @keyframes blink{0%{opacity:1}50%{opacity:0.3}}
 </style>
 </head>
 <body>
-
 <div id="toast" class="toast"></div>
 
-<!-- BAHAR NOTIFICATION - GAME NI BAHAR, LOGOUT PACHI PAN DEKHASE -->
-<div id="outerNotify" class="hide" onclick="openAdminFromOuter()">
-<div class="left">🔔 <span id="outerCount">0</span> NEW DEPOSIT <span class="blink">● LIVE</span><br><small style="font-weight:normal;font-size:11px;color:#aaa">Tap kari ne Accept karo</small></div>
-<div class="right"><button>OPEN</button></div>
-</div>
-
-<div id="registerPage">
-<h2 style="text-align:center;color:#ff4d4d">55 CLUB</h2>
-<input id="rPhone" type="number" placeholder="10 digit Mobile">
-<input id="rPass" type="password" placeholder="Password">
-<button class="regbtn" onclick="doReg()">Register - Auto UID</button>
-<p style="text-align:center;margin-top:15px" onclick="showLogin()">Login</p>
-</div>
-
-<div id="loginPage" style="display:none">
-<h2 style="text-align:center;color:#ff4d4d">55 CLUB - Login</h2>
-<input id="lPhone" type="text" placeholder="Mobile / UID">
-<input id="lPass" type="password" placeholder="Password">
-<button class="regbtn" onclick="doLogin()">Login</button>
-<p style="text-align:center;margin-top:15px" onclick="showReg()">Register</p>
-</div>
+<div id="registerPage"><h2 style="text-align:center;color:#ff4d4d">55 CLUB</h2><input id="rPhone" type="number" placeholder="10 digit Mobile"><input id="rPass" type="password" placeholder="Password"><button class="regbtn" onclick="doReg()">Register Auto UID</button><p style="text-align:center;margin-top:15px" onclick="showLogin()">Login</p></div>
+<div id="loginPage" style="display:none"><h2 style="text-align:center;color:#ff4d4d">Login</h2><input id="lPhone" type="text" placeholder="Mobile / UID"><input id="lPass" type="password" placeholder="Password"><button class="regbtn" onclick="doLogin()">Login</button><p style="text-align:center;margin-top:15px" onclick="showReg()">Register</p></div>
 
 <div id="gamePage" style="display:none">
-<div class="top" onclick="openAdmin()">55CLUB | <span id="userShow"></span> <span style="float:right" onclick="doLogout()">Logout</span></div>
+<div class="top">
+<div>55CLUB | <span id="userShow"></span></div>
+<div class="right">
+<div class="bell" onclick="openBell()">🔔<span id="bellCnt" class="cnt" style="display:none">0</span></div>
+<div onclick="doLogout()" style="font-size:12px">Logout</div>
+</div>
+</div>
+
 <div class="profileCard"><div><b id="pUsername">-</b><br>UID: <b id="pUID">-</b> | <span id="pMobile"></span></div><button onclick="copyUID()" style="padding:6px 12px;background:#ff4d4d;color:white;border:none;border-radius:10px;font-size:11px">Copy UID</button></div>
-<div class="wallet"><div style="display:flex;justify-content:space-between"><h2>₹ <span id="bal">0.00</span></h2><button onclick="refreshBal()" style="padding:6px 12px;border-radius:15px;border:1px solid #ddd;background:white">🔄</button></div><p id="myBet" style="font-weight:bold;color:#ff4d4d">Bet: -</p><div class="btns"><button class="b1" onclick="openDep()">Deposit</button><button class="b2" onclick="openWith()">Withdraw</button></div><div class="histBtns"><button onclick="openDepHist()">📥 Dep History</button><button onclick="openWithHist()">📤 With History</button></div></div>
+<div class="wallet"><div style="display:flex;justify-content:space-between"><h2>₹ <span id="bal">0.00</span></h2><button onclick="refreshBal()" style="padding:6px 12px;border-radius:15px;border:1px solid #ddd;background:white">🔄</button></div><p id="myBet" style="font-weight:bold;color:#ff4d4d">Bet: -</p><div class="btns"><button class="b1" onclick="openDep()">Deposit</button><button class="b2" onclick="openWith()">Withdraw</button></div><div class="histBtns"><button onclick="openDepHist()">📥 Dep Hist</button><button onclick="openWithHist()">📤 With Hist</button></div></div>
 <div class="playbox"><div class="timer"><span>WinGo 30s<br><small id="pid"></small></span><span><b id="tm">00:30</b></span></div><div class="colors"><button class="cG" onclick="openBetModal('Green')">Green</button><button class="cV" onclick="openBetModal('Violet')">Violet</button><button class="cR" onclick="openBetModal('Red')">Red</button></div><div class="nums"><button style="background:#9c27b0" onclick="openBetModal('Num0')">0</button><button style="background:#4caf50" onclick="openBetModal('Num1')">1</button><button style="background:#f44336" onclick="openBetModal('Num2')">2</button><button style="background:#4caf50" onclick="openBetModal('Num3')">3</button><button style="background:#4caf50" onclick="openBetModal('Num4')">4</button><button style="background:#9c27b0" onclick="openBetModal('Num5')">5</button><button style="background:#f44336" onclick="openBetModal('Num6')">6</button><button style="background:#4caf50" onclick="openBetModal('Num7')">7</button><button style="background:#f44336" onclick="openBetModal('Num8')">8</button><button style="background:#4caf50" onclick="openBetModal('Num9')">9</button></div><div class="bigsmall"><button style="background:orange" onclick="openBetModal('Big')">Big</button><button style="background:#2196F3" onclick="openBetModal('Small')">Small</button></div></div>
 <div class="history"><table><tr><th>Period</th><th>Num</th><th>BS</th><th>Color</th></tr><tbody id="hist"></tbody></table><div class="pageCtrl"><button id="prevBtn" onclick="prevPage()">◀ Prev</button><span id="pageInfo">Page 1</span><button id="nextBtn" onclick="nextPage()">Next ▶</button></div></div>
 
-<div id="depBox"><div class="popBox"><h3>Deposit</h3><div class="depTabs"><button id="qrBtn" onclick="showQR()" class="active">QR Pay</button><button id="upiBtn" onclick="showUPI()">UPI Pay</button></div><div id="qrSection"><div class="qrBox"><input id="depAmtQR" type="number" placeholder="Amount 1-3000" oninput="genQR()"><img id="qrImg" src="" style="width:180px;height:180px;margin:10px auto;display:none"><p id="qrText" style="font-size:11px;color:gray">Amount nakho</p></div><input id="depUTR_QR" type="text" placeholder="UTR"><button class="regbtn" onclick="submitDeposit('QR')">Confirm</button></div><div id="upiSection" style="display:none"><div class="qrBox"><div class="upiCopy" id="myUPI">6351@ybl</div><button onclick="copyUPI()" style="padding:6px 15px;background:#4caf50;color:white;border:none;border-radius:15px">Copy UPI</button><input id="depAmtUPI" type="number" placeholder="Amount 1-3000"></div><input id="depUTR_UPI" type="text" placeholder="UTR"><button class="regbtn" onclick="submitDeposit('UPI')">Confirm</button></div><button onclick="depBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
+<div id="depBox"><div class="popBox"><h3>Deposit</h3><div class="depTabs"><button id="qrBtn" onclick="showQR()" class="active">QR Pay</button><button id="upiBtn" onclick="showUPI()">UPI Pay</button></div><div id="qrSection"><div class="qrBox"><input id="depAmtQR" type="number" placeholder="Amount 1-3000" oninput="genQR()"><img id="qrImg" src="" style="width:180px;height:180px;margin:10px auto;display:none"><p id="qrText" style="font-size:11px;color:gray">Amount nakho</p></div><input id="depUTR_QR" type="text" placeholder="UTR"><button class="regbtn" onclick="submitDeposit('QR')">Confirm</button></div><div id="upiSection" style="display:none"><div class="qrBox"><div class="upiCopy" id="myUPI">6351@ybl</div><button onclick="copyUPI()" style="padding:6px 15px;background:#4caf50;color:white;border:none;border-radius:15px">Copy UPI</button><input id="depAmtUPI" type="number" placeholder="Amount"></div><input id="depUTR_UPI" type="text" placeholder="UTR"><button class="regbtn" onclick="submitDeposit('UPI')">Confirm</button></div><button onclick="depBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
 <div id="withBox"><div class="popBox"><h3>Withdraw</h3><input id="withAmt" type="number" placeholder="Amount"><input id="withUPI" type="text" placeholder="UPI ID"><button class="regbtn" onclick="submitWithdraw()">Submit</button><button onclick="withBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
 <div id="depHistBox"><div class="popBox"><h3>Deposit History</h3><table class="hTable"><tr><th>Time</th><th>Amt</th><th>UTR</th><th>Status</th></tr><tbody id="depHistBody"></tbody></table><button onclick="depHistBox.style.display='none'" class="regbtn">Close</button></div></div>
 <div id="withHistBox"><div class="popBox"><h3>Withdraw History</h3><table class="hTable"><tr><th>Time</th><th>Amt</th><th>UPI</th><th>Status</th></tr><tbody id="withHistBody"></tbody></table><button onclick="withHistBox.style.display='none'" class="regbtn">Close</button></div></div>
@@ -100,40 +74,43 @@ input,select{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px 
 <div id="popup"><div class="popBox"><h2 id="popTitle"></h2><p id="popMsg"></p><h3 id="popAmt"></h3><button class="regbtn" onclick="closePop()">OK</button></div></div>
 </div>
 
-<!-- ADMIN BOX - BAHAR THI PAN KHULSE -->
-<div id="adminPassBox"><div class="popBox"><h3>🔐 Admin Password</h3><input id="adminPassInput" type="password" placeholder="Password 6351"><button class="regbtn" onclick="checkAdminPass()">Open Admin</button><button onclick="adminPassBox.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
-<div id="adminBox"><div class="popBox" style="text-align:left"><h2 style="text-align:center;color:#ff4d4d">🔔 DEPOSIT NOTIFICATION PANEL</h2><p style="font-size:11px;text-align:center;color:green">Baher nu panel - Logout pachi pan kam kare</p><div style="background:#f5f5f5;padding:10px;border-radius:10px;margin:10px 0"><select id="adminNum"><option value="">Random</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select><select id="adminMode"><option value="single">Ek vaar</option><option value="always">Hamesha</option></select><button class="regbtn" onclick="setAdmin()">Set Result</button><input id="adminUPISet" type="text" value="6351@ybl" oninput="saveMyUPI()"></div><h3 style="font-size:13px;color:green">💰 Deposit LIVE <span id="depCount" style="background:red;color:white;padding:2px 6px;border-radius:10px">0</span></h3><div id="adminDepList" style="max-height:200px;overflow:auto"></div><h3 style="font-size:13px;color:red;margin-top:10px">💸 Withdraw <span id="withCount" style="background:red;color:white;padding:2px 6px;border-radius:10px">0</span></h3><div id="adminWithList" style="max-height:150px;overflow:auto"></div><div style="background:#e3f2fd;padding:10px;border-radius:10px;margin-top:10px"><h4 style="font-size:12px">👥 All Users</h4><div id="allUsersList" style="font-size:11px;max-height:100px;overflow:auto"></div></div><button onclick="adminBox.style.display='none'" style="width:100%;margin-top:15px;padding:10px;border:none;background:#eee;border-radius:20px">Close Panel</button></div></div>
+<!-- BELL NOTIFICATION CENTER - NO PASSWORD -->
+<div id="bellBox"><div class="popBox" style="text-align:left">
+<h2 style="text-align:center;color:#ff4d4d">🔔 Notification</h2>
+<p id="bellWelcome" style="text-align:center;font-size:12px;color:gray;margin-bottom:10px"></p>
+<div id="bellList" style="max-height:350px;overflow:auto"></div>
+<div id="adminInBell" style="display:none;margin-top:15px;border-top:1px dashed #ccc;padding-top:10px">
+<h3 style="font-size:13px;color:green">Admin - Deposit Accept <span id="depCount" style="background:red;color:white;padding:2px 6px;border-radius:10px">0</span></h3>
+<div id="adminDepList" style="max-height:150px;overflow:auto"></div>
+<h3 style="font-size:13px;color:red;margin-top:8px">Withdraw <span id="withCount" style="background:red;color:white;padding:2px 6px;border-radius:10px">0</span></h3>
+<div id="adminWithList" style="max-height:120px;overflow:auto"></div>
+<select id="adminNum" style="margin-top:10px"><option value="">Random Result</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+<button class="regbtn" onclick="setAdmin()">Set Result</button>
+<input id="adminUPISet" type="text" value="6351@ybl" oninput="saveMyUPI()" style="margin-top:8px">
+</div>
+<button onclick="bellBox.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button>
+</div></div>
 
 <script>
-const ADMIN_PASSWORD="6351"; const PER_PAGE=20;
-let bal=0,period=0,myBets=[],currentUser=null,tempBetType="",tempAmt=10,tempQty=1,nextResult=null,adminAlways=false,topClicks=0,timerOn=false,time=30;
+const ADMIN_PHONE="6351234567"; // tara admin number - change kari deje
+const PER_PAGE=20;
+let bal=0,period=0,myBets=[],currentUser=null,tempBetType="",tempAmt=10,tempQty=1,nextResult=null,adminAlways=false,timerOn=false,time=30;
 let MY_UPI=localStorage.getItem("55_my_upi")||"6351@ybl";
 let gameHistory=JSON.parse(localStorage.getItem("55_game_history")||"[]");
-let curPage=1,lastDepCount=0,lastWithCount=0;
-
+let curPage=1;
 function getWingoState(){return JSON.parse(localStorage.getItem("55_wingo_state")||"null")}
 function saveWingoState(){localStorage.setItem("55_wingo_state",JSON.stringify({period:period,time:time,lastTick:Date.now(),startTime:localStorage.getItem("55_wingo_start")||Date.now()}));}
 function initWingoState(){let st=getWingoState();let now=Date.now();let start=localStorage.getItem("55_wingo_start");if(start && (now-parseInt(start))>5*60*60*1000){localStorage.removeItem("55_wingo_state");localStorage.removeItem("55_wingo_start");gameHistory=[];localStorage.setItem("55_game_history",JSON.stringify(gameHistory));period=parseInt(now.toString().slice(-6));time=30;localStorage.setItem("55_wingo_start",now.toString());return;}if(st){period=st.period||parseInt(now.toString().slice(-6));let elapsed=Math.floor((now-st.lastTick)/1000);time=st.time-elapsed;while(time<0){time+=30;period++;}}else{period=parseInt(now.toString().slice(-6));time=30;localStorage.setItem("55_wingo_start",now.toString());}}
-function renderHistory(){let total=Math.max(1,Math.ceil(gameHistory.length/PER_PAGE));if(curPage>total)curPage=total;if(curPage<1)curPage=1;let s=(curPage-1)*PER_PAGE;let slice=gameHistory.slice(s,s+PER_PAGE);let h="";slice.forEach(r=>{h+=`<tr><td>${r.period}</td><td>${r.num}</td><td>${r.bs}</td><td>${r.color}</td></tr>`});if(document.getElementById('hist'))document.getElementById('hist').innerHTML=h||"<tr><td colspan=4>No data</td></tr>";if(document.getElementById('pageInfo')){pageInfo.innerText=`Page ${curPage}/${total}`;prevBtn.disabled=curPage<=1;nextBtn.disabled=curPage>=total;}}
+function renderHistory(){let total=Math.max(1,Math.ceil(gameHistory.length/PER_PAGE));if(curPage>total)curPage=total;if(curPage<1)curPage=1;let s=(curPage-1)*PER_PAGE;let slice=gameHistory.slice(s,s+PER_PAGE);let h="";slice.forEach(r=>{h+=`<tr><td>${r.period}</td><td>${r.num}</td><td>${r.bs}</td><td>${r.color}</td></tr>`});hist.innerHTML=h||"<tr><td colspan=4>No data</td></tr>";pageInfo.innerText=`Page ${curPage}/${total}`;prevBtn.disabled=curPage<=1;nextBtn.disabled=curPage>=total;}
 function prevPage(){if(curPage>1){curPage--;renderHistory();}}function nextPage(){let total=Math.ceil(gameHistory.length/PER_PAGE);if(curPage<total){curPage++;renderHistory();}}
 function showToast(m){toast.innerText=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',3000);}
-function notifyAdmin(msg){showToast("🔔 "+msg);try{let c=new (window.AudioContext||window.webkitAudioContext)();let o=c.createOscillator();o.frequency.value=900;o.connect(c.destination);o.start();setTimeout(()=>o.stop(),400);}catch(e){}if(navigator.vibrate)navigator.vibrate([300,100,300]);if(Notification&&Notification.permission==="granted"){new Notification("55 CLUB",{body:msg});}}
-function checkNewPayments(){
- let d=getAllDeposits().filter(x=>x.status=="Processing");
- let w=getAllWithdraws().filter(x=>x.status=="Processing");
- if(document.getElementById('depCount')) depCount.innerText=d.length;
- if(document.getElementById('withCount')) withCount.innerText=w.length;
- // BAHAR NOTIFICATION
- let outer=document.getElementById('outerNotify');
- let outerCount=document.getElementById('outerCount');
- if(d.length>0 || w.length>0){outer.classList.remove('hide'); outerCount.innerText=d.length+w.length;}
- else{outer.classList.add('hide');}
- if(d.length>lastDepCount && lastDepCount!==0){notifyAdmin(`NEW Deposit ₹${d[0].amt} - ${d[0].username}`);}
- if(w.length>lastWithCount && lastWithCount!==0){notifyAdmin(`NEW Withdraw ₹${w[0].amt}`);}
- lastDepCount=d.length; lastWithCount=w.length;
- if(document.getElementById('adminDepList')) renderAdminList();
-}
-function saveMyUPI(){MY_UPI=adminUPISet.value.trim()||"6351@ybl";localStorage.setItem("55_my_upi",MY_UPI);if(document.getElementById('myUPI'))myUPI.innerText=MY_UPI;}
+function getUsers(){return JSON.parse(localStorage.getItem("55_users")||"{}")}
+function saveUsers(u){localStorage.setItem("55_users",JSON.stringify(u))}
+function getAllDeposits(){return JSON.parse(localStorage.getItem("55_all_deposits")||"[]")}
+function saveAllDeposits(d){localStorage.setItem("55_all_deposits",JSON.stringify(d))}
+function getAllWithdraws(){return JSON.parse(localStorage.getItem("55_all_withdraws")||"[]")}
+function saveAllWithdraws(d){localStorage.setItem("55_all_withdraws",JSON.stringify(d))}
+function saveMyUPI(){MY_UPI=adminUPISet.value.trim()||"6351@ybl";localStorage.setItem("55_my_upi",MY_UPI);myUPI.innerText=MY_UPI;}
 function showQR(){qrSection.style.display='block';upiSection.style.display='none';qrBtn.classList.add('active');upiBtn.classList.remove('active');}
 function showUPI(){upiSection.style.display='block';qrSection.style.display='none';upiBtn.classList.add('active');qrBtn.classList.remove('active');}
 function genQR(){let amt=parseFloat(depAmtQR.value)||0;if(amt<1||amt>3000){qrImg.style.display='none';qrText.innerText="1-3000";return;}let url=`upi://pay?pa=${MY_UPI}&pn=55CLUB&am=${amt}&cu=INR`;qrImg.src=`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;qrImg.style.display='block';qrText.innerText=`₹${amt} QR`;}
@@ -141,27 +118,73 @@ function copyUPI(){navigator.clipboard.writeText(MY_UPI);showToast("UPI Copied")
 function copyUID(){navigator.clipboard.writeText(pUID.innerText);showToast("UID Copied");}
 function showReg(){loginPage.style.display='none';registerPage.style.display='block'}
 function showLogin(){registerPage.style.display='none';loginPage.style.display='block'}
-function getUsers(){return JSON.parse(localStorage.getItem("55_users")||"{}")}
-function saveUsers(u){localStorage.setItem("55_users",JSON.stringify(u))}
-function getAllDeposits(){return JSON.parse(localStorage.getItem("55_all_deposits")||"[]")}
-function saveAllDeposits(d){localStorage.setItem("55_all_deposits",JSON.stringify(d))}
-function getAllWithdraws(){return JSON.parse(localStorage.getItem("55_all_withdraws")||"[]")}
-function saveAllWithdraws(d){localStorage.setItem("55_all_withdraws",JSON.stringify(d))}
 let depHist=[],withHist=[];
 function genUID(){return "55"+Math.floor(100000+Math.random()*900000);}
 function genUsername(ph){return "Player"+ph.slice(-4)+Math.floor(10+Math.random()*90);}
-function doReg(){let p=rPhone.value.trim(),ps=rPass.value.trim();if(p.length!=10){alert("10 digit");return}let users=getUsers();if(users[p]){alert("Already");showLogin();return}let uid=genUID();while(Object.values(users).some(u=>u.uid==uid))uid=genUID();let username=genUsername(p);users[p]={pass:ps,bal:100,uid:uid,username:username,phone:p};saveUsers(users);alert(`Registered! ${username} UID:${uid}`);showLogin();}
-function doLogin(){let input=lPhone.value.trim(),ps=lPass.value.trim();let users=getUsers();let key=null;if(users[input])key=input;else{let e=Object.entries(users).find(([k,u])=>u.uid==input);if(e)key=e[0];}if(!key){alert("Not found");return}if(users[key].pass!=ps){alert("Wrong");return}currentUser=key;bal=users[key].bal;depHist=JSON.parse(localStorage.getItem("55_dep_"+key)||"[]");withHist=JSON.parse(localStorage.getItem("55_with_"+key)||"[]");localStorage.setItem("55_current",key);userShow.innerText=users[key].username;pUsername.innerText=users[key].username;pUID.innerText=users[key].uid;pMobile.innerText=users[key].phone;document.getElementById('bal').innerText=bal.toFixed(2);myUPI.innerText=MY_UPI;adminUPISet.value=MY_UPI;if(Notification)Notification.requestPermission();registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block';initWingoState();renderHistory();start();}
+function doReg(){let p=rPhone.value.trim(),ps=rPass.value.trim();if(p.length!=10){alert("10 digit");return}let users=getUsers();if(users[p]){alert("Already");showLogin();return}let uid=genUID();while(Object.values(users).some(u=>u.uid==uid))uid=genUID();let username=genUsername(p);users[p]={pass:ps,bal:100,uid:uid,username:username,phone:p};saveUsers(users);alert(`Registered ${username} UID:${uid}`);showLogin();}
+function doLogin(){let input=lPhone.value.trim(),ps=lPass.value.trim();let users=getUsers();let key=null;if(users[input])key=input;else{let e=Object.entries(users).find(([k,u])=>u.uid==input);if(e)key=e[0];}if(!key){alert("Not found");return}if(users[key].pass!=ps){alert("Wrong");return}currentUser=key;bal=users[key].bal;depHist=JSON.parse(localStorage.getItem("55_dep_"+key)||"[]");withHist=JSON.parse(localStorage.getItem("55_with_"+key)||"[]");localStorage.setItem("55_current",key);userShow.innerText=users[key].username;pUsername.innerText=users[key].username;pUID.innerText=users[key].uid;pMobile.innerText=users[key].phone;document.getElementById('bal').innerText=bal.toFixed(2);myUPI.innerText=MY_UPI;adminUPISet.value=MY_UPI;registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block';initWingoState();renderHistory();start();updateBell();}
 function doLogout(){localStorage.setItem("55_dep_"+currentUser,JSON.stringify(depHist));localStorage.setItem("55_with_"+currentUser,JSON.stringify(withHist));localStorage.removeItem("55_current");location.reload();}
 function refreshBal(){bal=getUsers()[currentUser].bal;document.getElementById('bal').innerText=bal.toFixed(2);}
 function openDep(){depBox.style.display='flex';showQR();}function openWith(){withBox.style.display='flex'}
-function submitDeposit(method){let amt,utr;if(method=='QR'){amt=parseFloat(depAmtQR.value)||0;utr=depUTR_QR.value.trim();}else{amt=parseFloat(depAmtUPI.value)||0;utr=depUTR_UPI.value.trim();}if(amt<1||amt>3000){alert("1-3000");return}if(utr.length<6){alert("UTR");return}let id=Date.now();let u=getUsers()[currentUser];let dep={id:id,user:currentUser,uid:u.uid,username:u.username,amt:amt,utr:utr,method:method,time:Date.now(),status:"Processing"};let all=getAllDeposits();all.unshift(dep);saveAllDeposits(all);depHist.unshift({id:id,date:new Date().toLocaleTimeString(),amt:amt,utr:utr,method:method,status:"Processing"});localStorage.setItem("55_dep_"+currentUser,JSON.stringify(depHist));depBox.style.display='none';depAmtQR.value="";depAmtUPI.value="";depUTR_QR.value="";depUTR_UPI.value="";qrImg.style.display='none';showToast("Processing - Admin ne khabar mali gayi");}
-function approveDep(id){let all=getAllDeposits();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Success";saveAllDeposits(all);let users=getUsers();users[all[i].user].bal+=all[i].amt;saveUsers(users);if(all[i].user==currentUser){bal=users[all[i].user].bal;document.getElementById('bal').innerText=bal.toFixed(2);}let uH=JSON.parse(localStorage.getItem("55_dep_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Success";localStorage.setItem("55_dep_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)depHist=uH;}checkNewPayments();}
-function rejectDep(id){let all=getAllDeposits();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Rejected";saveAllDeposits(all);let uH=JSON.parse(localStorage.getItem("55_dep_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Rejected";localStorage.setItem("55_dep_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)depHist=uH;}checkNewPayments();}
-function submitWithdraw(){let a=parseFloat(withAmt.value)||0;let upi=withUPI.value.trim();if(a<=0||a>bal){alert("Low");return}if(upi.length<4){alert("UPI");return}bal-=a;document.getElementById('bal').innerText=bal.toFixed(2);let users=getUsers();users[currentUser].bal=bal;saveUsers(users);let id=Date.now();let user=users[currentUser];let w={id:id,user:currentUser,uid:user.uid,username:user.username,amt:a,upi:upi,time:Date.now(),status:"Processing"};let all=getAllWithdraws();all.unshift(w);saveAllWithdraws(all);withHist.unshift({id:id,date:new Date().toLocaleTimeString(),amt:a,upi:upi,status:"Processing"});localStorage.setItem("55_with_"+currentUser,JSON.stringify(withHist));withBox.style.display='none';withAmt.value="";withUPI.value="";showToast("Withdraw Processing");}
-function approveWith(id){let all=getAllWithdraws();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Success";saveAllWithdraws(all);let uH=JSON.parse(localStorage.getItem("55_with_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Success";localStorage.setItem("55_with_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)withHist=uH;}checkNewPayments();}
-function rejectWith(id){let all=getAllWithdraws();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Rejected";saveAllWithdraws(all);let users=getUsers();users[all[i].user].bal+=all[i].amt;saveUsers(users);if(all[i].user==currentUser){bal=users[all[i].user].bal;document.getElementById('bal').innerText=bal.toFixed(2);}let uH=JSON.parse(localStorage.getItem("55_with_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Rejected";localStorage.setItem("55_with_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)withHist=uH;}checkNewPayments();}
-function checkAutoReject(){let all=getAllDeposits();let ch=false;all.forEach(d=>{if(d.status=="Processing"&&(Date.now()-d.time)>10*60*1000){d.status="Rejected";ch=true;let uH=JSON.parse(localStorage.getItem("55_dep_"+d.user)||"[]");let hi=uH.findIndex(h=>h.id==d.id);if(hi!=-1){uH[hi].status="Rejected";localStorage.setItem("55_dep_"+d.user,JSON.stringify(uH));if(d.user==currentUser)depHist=uH;}}});if(ch){saveAllDeposits(all);checkNewPayments();}}
+
+// BELL SYSTEM
+function openBell(){
+ let now=new Date();
+ bellWelcome.innerHTML=`Welcome <b>${getUsers()[currentUser]?.username||'User'}</b><br>${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+ let html="";
+ // User na potana notification
+ depHist.forEach(d=>{
+   if(d.status=="Processing") html+=`<div class="notifItem process">⏳ Deposit ₹${d.amt} - Processing thakyu<br><small>${d.date} | UTR:${d.utr}</small></div>`;
+   else if(d.status=="Success") html+=`<div class="notifItem success">✅ Deposit ₹${d.amt} - Success thai gayu!<br><small>${d.date}</small></div>`;
+   else html+=`<div class="notifItem" style="border-left-color:red">❌ Deposit ₹${d.amt} - Failed<br><small>${d.date}</small></div>`;
+ });
+ withHist.forEach(w=>{
+   if(w.status=="Processing") html+=`<div class="notifItem process">⏳ Withdraw ₹${w.amt} - Processing<br><small>${w.date} | ${w.upi}</small></div>`;
+   else if(w.status=="Success") html+=`<div class="notifItem success">✅ Withdraw ₹${w.amt} - Success! Paisa mokli didha<br><small>${w.date}</small></div>`;
+   else html+=`<div class="notifItem" style="border-left-color:red">❌ Withdraw ₹${w.amt} - Rejected<br><small>${w.date}</small></div>`;
+ });
+ if(html=="") html=`<div class="notifItem">👋 Welcome! Koi notification nathi<br><small>${now.toLocaleString()}</small></div>`;
+ bellList.innerHTML=html;
+
+ // Admin hoy to j admin panel dekhay - check phone = admin number OR first user
+ let isAdmin = true; // badha ma dekhase, pan tu chahe to: currentUser=="6351234567"
+ if(isAdmin){
+   adminInBell.style.display='block';
+   renderAdminList();
+ } else {
+   adminInBell.style.display='none';
+ }
+ bellBox.style.display='flex';
+ // seen
+ localStorage.setItem("55_bell_seen_"+currentUser, Date.now());
+ bellCnt.style.display='none';
+}
+function updateBell(){
+ let unread = depHist.filter(d=>d.status=="Processing").length + withHist.filter(w=>w.status=="Processing").length;
+ // plus admin pending
+ let allDep=getAllDeposits().filter(d=>d.status=="Processing").length;
+ let allWith=getAllWithdraws().filter(d=>d.status=="Processing").length;
+ let total = unread + allDep + allWith;
+ if(total>0){bellCnt.innerText=total; bellCnt.style.display='block';}
+ else{bellCnt.style.display='none';}
+}
+
+function submitDeposit(method){
+ let amt,utr;if(method=='QR'){amt=parseFloat(depAmtQR.value)||0;utr=depUTR_QR.value.trim();}else{amt=parseFloat(depAmtUPI.value)||0;utr=depUTR_UPI.value.trim();}
+ if(amt<1||amt>3000){alert("1-3000");return}if(utr.length<6){alert("UTR");return}
+ let id=Date.now();let u=getUsers()[currentUser];
+ let dep={id:id,user:currentUser,uid:u.uid,username:u.username,amt:amt,utr:utr,method:method,time:Date.now(),status:"Processing"};
+ let all=getAllDeposits();all.unshift(dep);saveAllDeposits(all);
+ depHist.unshift({id:id,date:new Date().toLocaleTimeString(),amt:amt,utr:utr,method:method,status:"Processing"});
+ localStorage.setItem("55_dep_"+currentUser,JSON.stringify(depHist));
+ depBox.style.display='none';depAmtQR.value="";depAmtUPI.value="";depUTR_QR.value="";depUTR_UPI.value="";qrImg.style.display='none';
+ showToast("Deposit Processing thakyu"); updateBell();
+}
+function approveDep(id){let all=getAllDeposits();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Success";saveAllDeposits(all);let users=getUsers();users[all[i].user].bal+=all[i].amt;saveUsers(users);if(all[i].user==currentUser){bal=users[all[i].user].bal;document.getElementById('bal').innerText=bal.toFixed(2);}let uH=JSON.parse(localStorage.getItem("55_dep_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Success";localStorage.setItem("55_dep_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)depHist=uH;}showToast("Deposit Success thai gayu!");updateBell();renderAdminList();}
+function rejectDep(id){let all=getAllDeposits();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Rejected";saveAllDeposits(all);let uH=JSON.parse(localStorage.getItem("55_dep_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Rejected";localStorage.setItem("55_dep_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)depHist=uH;}updateBell();renderAdminList();}
+function submitWithdraw(){let a=parseFloat(withAmt.value)||0;let upi=withUPI.value.trim();if(a<=0||a>bal){alert("Low");return}if(upi.length<4){alert("UPI");return}bal-=a;document.getElementById('bal').innerText=bal.toFixed(2);let users=getUsers();users[currentUser].bal=bal;saveUsers(users);let id=Date.now();let user=users[currentUser];let w={id:id,user:currentUser,uid:user.uid,username:user.username,amt:a,upi:upi,time:Date.now(),status:"Processing"};let all=getAllWithdraws();all.unshift(w);saveAllWithdraws(all);withHist.unshift({id:id,date:new Date().toLocaleTimeString(),amt:a,upi:upi,status:"Processing"});localStorage.setItem("55_with_"+currentUser,JSON.stringify(withHist));withBox.style.display='none';withAmt.value="";withUPI.value="";showToast("Withdraw Processing thakyu");updateBell();}
+function approveWith(id){let all=getAllWithdraws();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Success";saveAllWithdraws(all);let uH=JSON.parse(localStorage.getItem("55_with_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Success";localStorage.setItem("55_with_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)withHist=uH;}showToast("Withdraw Success!");updateBell();renderAdminList();}
+function rejectWith(id){let all=getAllWithdraws();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Rejected";saveAllWithdraws(all);let users=getUsers();users[all[i].user].bal+=all[i].amt;saveUsers(users);if(all[i].user==currentUser){bal=users[all[i].user].bal;document.getElementById('bal').innerText=bal.toFixed(2);}let uH=JSON.parse(localStorage.getItem("55_with_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Rejected";localStorage.setItem("55_with_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)withHist=uH;}updateBell();renderAdminList();}
 function openDepHist(){let h="";depHist.forEach(r=>{let c=r.status=="Success"?"green":r.status=="Rejected"?"red":"orange";h+=`<tr><td>${r.date}</td><td>₹${r.amt}</td><td>${r.utr}</td><td style="color:${c}">${r.status}</td></tr>`});depHistBody.innerHTML=h||"<tr><td colspan=4>No data</td></tr>";depHistBox.style.display='flex';}
 function openWithHist(){let h="";withHist.forEach(r=>{let c=r.status=="Success"?"green":r.status=="Rejected"?"red":"orange";h+=`<tr><td>${r.date}</td><td>₹${r.amt}</td><td>${r.upi}</td><td style="color:${c}">${r.status}</td></tr>`});withHistBody.innerHTML=h||"<tr><td colspan=4>No data</td></tr>";withHistBox.style.display='flex';}
 function openBetModal(t){if(time<=7){alert("7 sec band");return}tempBetType=t;tempAmt=10;tempQty=1;betTitle.innerText=t;qtyShow.innerText="X1";totalAmt.innerText=10;betModal.style.display='flex';}
@@ -169,24 +192,10 @@ function setModalAmt(a,el){tempAmt=a;document.querySelectorAll('.betOpt button')
 function changeQty(n){tempQty+=n;if(tempQty<1)tempQty=1;qtyShow.innerText="X"+tempQty;totalAmt.innerText=tempAmt*tempQty;}
 function confirmBet(){let tot=tempAmt*tempQty;if(bal<tot){alert("Low");return}bal-=tot;myBets.push({type:tempBetType,amt:tot});document.getElementById('bal').innerText=bal.toFixed(2);let u=getUsers();u[currentUser].bal=bal;saveUsers(u);myBet.innerText="Bet: "+myBets.map(b=>b.type).join(", ");betModal.style.display='none';}
 function closePop(){popup.style.display='none';myBets=[];myBet.innerText="Bet: -";}
-function openAdmin(){topClicks++;if(topClicks>=5){adminPassBox.style.display='flex';topClicks=0;adminPassInput.value="";}setTimeout(()=>topClicks=0,3000);}
-function openAdminFromOuter(){adminPassBox.style.display='flex';} // bahar thi direct
-function checkAdminPass(){if(adminPassInput.value==ADMIN_PASSWORD){adminPassBox.style.display='none';adminBox.style.display='flex';checkNewPayments();let users=getUsers();let list="";Object.values(users).forEach(u=>{list+=`${u.username} | UID:${u.uid} | ${u.phone} | ₹${u.bal}<br>`});allUsersList.innerHTML=list||"No users";}else{alert("Wrong");adminPassBox.style.display='none';}}
-function setAdmin(){let n=adminNum.value;let m=adminMode.value;if(n===""){nextResult=null;}else{nextResult=parseInt(n);adminAlways=(m=="always");}adminBox.style.display='none';}
-function renderAdminList(){let dAll=getAllDeposits().filter(d=>d.status=="Processing");let wAll=getAllWithdraws().filter(d=>d.status=="Processing");let dh="";if(dAll.length==0)dh="<p style='text-align:center;color:gray;font-size:11px'>No pending</p>";else dAll.forEach(d=>{let mins=Math.floor((Date.now()-d.time)/60000);dh+=`<div class="adminItem"><b>${d.username} (${d.uid})</b> - ₹${d.amt}<br>UTR:${d.utr} ${mins}m<br><button class="accept" onclick="approveDep(${d.id})">✅ Accept</button><button class="reject" onclick="rejectDep(${d.id})">❌ Reject</button></div>`;});adminDepList.innerHTML=dh;let wh="";if(wAll.length==0)wh="<p style='text-align:center;color:gray;font-size:11px'>No pending</p>";else wAll.forEach(d=>{wh+=`<div class="adminItem" style="background:#ffebee"><b>${d.username} (${d.uid})</b> - ₹${d.amt}<br>${d.upi}<br><button class="accept" onclick="approveWith(${d.id})">✅</button><button class="reject" onclick="rejectWith(${d.id})">❌</button></div>`;});adminWithList.innerHTML=wh;}
-function start(){if(timerOn)return;timerOn=true;if(document.getElementById('pid'))pid.innerText=period;if(document.getElementById('tm'))tm.innerText="00:"+(time<10?"0"+time:time);setInterval(()=>{time--;if(time<0){time=30;let winNum;if(nextResult!==null){winNum=nextResult;if(!adminAlways)nextResult=null;}else winNum=Math.floor(Math.random()*10);let winCol=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");let winBS=winNum>=5?"Big":"Small";gameHistory.unshift({period:period,num:winNum,bs:winBS,color:winCol});localStorage.setItem("55_game_history",JSON.stringify(gameHistory));curPage=1;renderHistory();if(myBets.length>0){let totalWin=0,totalBet=myBets.reduce((s,b)=>s+b.amt,0);myBets.forEach(b=>{let won=false;if(b.type==winCol)won=true;if(b.type==winBS)won=true;if(b.type=="Num"+winNum)won=true;if(b.type=="Green"&&[1,3,7,9].includes(winNum))won=true;if(b.type=="Red"&&[2,4,6,8].includes(winNum))won=true;if(b.type=="Violet"&&[0,5].includes(winNum))won=true;if(won){if(b.type.startsWith("Num"))totalWin+=b.amt*9;else totalWin+=b.amt*2;}});if(totalWin>0){bal+=totalWin;let u=getUsers();u[currentUser].bal=bal;saveUsers(u);popTitle.innerText="YOU WIN!";popMsg.innerText=`${winNum} ${winCol} ${winBS}`;popAmt.innerText=`+₹${totalWin.toFixed(2)}`;}else{popTitle.innerText="YOU LOSS!";popMsg.innerText=`${winNum} ${winCol} ${winBS}`;popAmt.innerText=`-₹${totalBet}`;}document.getElementById('bal').innerText=bal.toFixed(2);popup.style.display='flex';}period++;}if(document.getElementById('tm'))tm.innerText="00:"+(time<10?"0"+time:time);if(document.getElementById('pid'))pid.innerText=period;saveWingoState();checkAutoReject();},1000);}
-
-window.onload=()=>{
- // OUTER NOTIFY HAR HAAL MA CHALE - LOGIN VINA PAN
- lastDepCount=getAllDeposits().filter(d=>d.status=="Processing").length;
- lastWithCount=getAllWithdraws().filter(d=>d.status=="Processing").length;
- checkNewPayments();
- setInterval(checkNewPayments,3000);
- if(Notification) Notification.requestPermission();
-
- let cur=localStorage.getItem("55_current");
- if(cur){let u=getUsers();if(u[cur]){currentUser=cur;bal=u[cur].bal;depHist=JSON.parse(localStorage.getItem("55_dep_"+cur)||"[]");withHist=JSON.parse(localStorage.getItem("55_with_"+cur)||"[]");document.getElementById('bal').innerText=bal.toFixed(2);userShow.innerText=u[cur].username;pUsername.innerText=u[cur].username;pUID.innerText=u[cur].uid;pMobile.innerText=u[cur].phone;myUPI.innerText=MY_UPI;registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block';initWingoState();renderHistory();start();}}
-}
+function setAdmin(){let n=adminNum.value;if(n===""){nextResult=null;}else{nextResult=parseInt(n);}bellBox.style.display='none';}
+function renderAdminList(){let dAll=getAllDeposits().filter(d=>d.status=="Processing");let wAll=getAllWithdraws().filter(d=>d.status=="Processing");depCount.innerText=dAll.length;withCount.innerText=wAll.length;let dh="";if(dAll.length==0)dh="<p style='text-align:center;color:gray;font-size:11px'>No pending</p>";else dAll.forEach(d=>{dh+=`<div class="adminItem"><b>${d.username} (${d.uid})</b> ₹${d.amt}<br>UTR:${d.utr}<br><button class="accept" onclick="approveDep(${d.id})">✅ Accept</button><button class="reject" onclick="rejectDep(${d.id})">❌ Reject</button></div>`;});adminDepList.innerHTML=dh;let wh="";if(wAll.length==0)wh="<p style='text-align:center;color:gray;font-size:11px'>No pending</p>";else wAll.forEach(d=>{wh+=`<div class="adminItem" style="background:#ffebee"><b>${d.username}</b> ₹${d.amt}<br>${d.upi}<br><button class="accept" onclick="approveWith(${d.id})">✅</button><button class="reject" onclick="rejectWith(${d.id})">❌</button></div>`;});adminWithList.innerHTML=wh;}
+function start(){if(timerOn)return;timerOn=true;pid.innerText=period;tm.innerText="00:"+(time<10?"0"+time:time);setInterval(()=>{time--;if(time<0){time=30;let winNum;if(nextResult!==null){winNum=nextResult;nextResult=null;}else winNum=Math.floor(Math.random()*10);let winCol=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");let winBS=winNum>=5?"Big":"Small";gameHistory.unshift({period:period,num:winNum,bs:winBS,color:winCol});localStorage.setItem("55_game_history",JSON.stringify(gameHistory));curPage=1;renderHistory();if(myBets.length>0){let totalWin=0,totalBet=myBets.reduce((s,b)=>s+b.amt,0);myBets.forEach(b=>{let won=false;if(b.type==winCol)won=true;if(b.type==winBS)won=true;if(b.type=="Num"+winNum)won=true;if(b.type=="Green"&&[1,3,7,9].includes(winNum))won=true;if(b.type=="Red"&&[2,4,6,8].includes(winNum))won=true;if(b.type=="Violet"&&[0,5].includes(winNum))won=true;if(won){if(b.type.startsWith("Num"))totalWin+=b.amt*9;else totalWin+=b.amt*2;}});if(totalWin>0){bal+=totalWin;let u=getUsers();u[currentUser].bal=bal;saveUsers(u);popTitle.innerText="YOU WIN!";popMsg.innerText=`${winNum} ${winCol} ${winBS}`;popAmt.innerText=`+₹${totalWin.toFixed(2)}`;}else{popTitle.innerText="YOU LOSS!";popMsg.innerText=`${winNum} ${winCol} ${winBS}`;popAmt.innerText=`-₹${totalBet}`;}document.getElementById('bal').innerText=bal.toFixed(2);popup.style.display='flex';}period++;}tm.innerText="00:"+(time<10?"0"+time:time);pid.innerText=period;saveWingoState();},1000);}
+window.onload=()=>{let cur=localStorage.getItem("55_current");if(cur){let u=getUsers();if(u[cur]){currentUser=cur;bal=u[cur].bal;depHist=JSON.parse(localStorage.getItem("55_dep_"+cur)||"[]");withHist=JSON.parse(localStorage.getItem("55_with_"+cur)||"[]");document.getElementById('bal').innerText=bal.toFixed(2);userShow.innerText=u[cur].username;pUsername.innerText=u[cur].username;pUID.innerText=u[cur].uid;pMobile.innerText=u[cur].phone;myUPI.innerText=MY_UPI;adminUPISet.value=MY_UPI;registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block';initWingoState();renderHistory();start();updateBell();}}}
 </script>
 </body>
-  </html>
+ </html>
