@@ -22,8 +22,8 @@ body{background:#f2f2f2}
 .cG{background:#4caf50} .cV{background:#9c27b0} .cR{background:#f44336}
 .nums{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:10px 0}
 .nums button{width:50px;height:50px;border-radius:50%;border:none;font-weight:bold;font-size:18px;color:white}
-.betx{display:flex;gap:5px;margin:10px 0} .betx button{padding:8px 10px;border-radius:15px;border:1px solid #ddd;background:white;font-weight:bold}
-.betx .a{background:#ff4d4d;color:white;border-color:#ff4d4d}
+.betx{display:flex;gap:5px;margin:10px 0;flex-wrap:wrap} .betx button{padding:8px 12px;border-radius:15px;border:1px solid #ddd;background:white;font-weight:bold}
+.betx .a{background:#ff4d4d;color:white}
 .bigsmall{display:flex;gap:10px} .bigsmall button{flex:1;padding:12px;border-radius:20px;border:none;font-weight:bold;color:white}
 .history{background:white;margin:10px;border-radius:10px;padding:10px;font-size:12px}
 .history table{width:100%;border-collapse:collapse} .history th{background:#ff4d4d;color:white;padding:6px}
@@ -31,10 +31,11 @@ body{background:#f2f2f2}
 #registerPage,#loginPage{background:white;min-height:100vh;padding:20px}
 input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ddd}
 .regbtn{width:100%;padding:14px;background:#ff4d4d;border:none;border-radius:25px;color:white;font-weight:bold;margin-top:15px}
-/* POPUP */
-#popup{position:fixed;top:0;left:0;right:0;bottom:0;background:#0008;display:none;align-items:center;justify-content:center;z-index:999}
-.popupBox{background:white;width:85%;max-width:300px;border-radius:20px;padding:20px;text-align:center}
-.popupBox h2{margin-bottom:10px} .winC{color:#4caf50} .lossC{color:#f44336}
+/* WIN LOSS POPUP FIX */
+#popup{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:9999}
+.popBox{background:white;width:85%;max-width:320px;border-radius:20px;padding:25px;text-align:center;box-shadow:0 5px 20px #0005}
+.popBox h2{font-size:24px;margin-bottom:10px}
+.winC{color:#16a34a} .lossC{color:#dc2626}
 </style>
 </head>
 <body>
@@ -78,12 +79,12 @@ input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #
 <button style="background:#9c27b0" onclick="betNum(5)">5</button><button style="background:#f44336" onclick="betNum(6)">6</button><button style="background:#4caf50" onclick="betNum(7)">7</button><button style="background:#f44336" onclick="betNum(8)">8</button><button style="background:#4caf50" onclick="betNum(9)">9</button>
 </div>
 <div class="betx">
-<button onclick="setAmt(10)" class="a" id="x1">X1 (10)</button>
-<button onclick="setAmt(50)" id="x5">X5 (50)</button>
-<button onclick="setAmt(100)" id="x10">X10 (100)</button>
-<button onclick="setAmt(200)" id="x20">X20</button>
-<button onclick="setAmt(500)" id="x50">X50</button>
-<button onclick="setAmt(1000)" id="x100">X100</button>
+<button onclick="setAmt(10,this)" class="a">X1 (10)</button>
+<button onclick="setAmt(50,this)">X5 (50)</button>
+<button onclick="setAmt(100,this)">X10 (100)</button>
+<button onclick="setAmt(200,this)">X20</button>
+<button onclick="setAmt(500,this)">X50</button>
+<button onclick="setAmt(1000,this)">X100</button>
 </div>
 <div class="bigsmall"><button style="background:orange" onclick="bet('Big')">Big</button><button style="background:#2196F3" onclick="bet('Small')">Small</button></div>
 </div>
@@ -96,17 +97,16 @@ input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #
 <h3>Demo Deposit</h3>
 <p>UPI: <b>demo@okaxis</b></p>
 <input id="depAmt" type="number" placeholder="Amount">
-<input placeholder="UTR (kuch bhi likho)">
 <button class="regbtn" onclick="addBal()">Submit (Fake Add)</button>
 <button onclick="depBox.style.display='none'" style="width:100%;margin-top:10px">Close</button>
 </div>
 
-<!-- WIN LOSS POPUP -->
+<!-- WIN LOSS POPUP WITH OK BUTTON -->
 <div id="popup">
-<div class="popupBox">
+<div class="popBox">
 <h2 id="popTitle">WIN</h2>
-<p id="popMsg"></p>
-<p id="popBal" style="margin:10px 0;font-weight:bold"></p>
+<p id="popMsg" style="margin:10px 0"></p>
+<h3 id="popAmt"></h3>
 <button class="regbtn" onclick="closePop()">OK</button>
 </div>
 </div>
@@ -114,73 +114,79 @@ input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #
 </div>
 
 <script>
-let bal=0.03; let time=30; let period=Date.now(); let betAmt=10; let curBet=null;
+let bal=0.03, time=30, period=Date.now(), betAmt=10;
+let myBets=[]; // unlimited bets
 
 function showReg(){loginPage.style.display='none';registerPage.style.display='block'}
 function showLogin(){registerPage.style.display='none';loginPage.style.display='block'}
 function doReg(){localStorage.setItem("u_"+rPhone.value,rPass.value);alert("Register ok");lPhone.value=rPhone.value;showLogin()}
 function doLogin(){let p=localStorage.getItem("u_"+lPhone.value); if(p&&p==lPass.value){registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block'; start()}else alert("Pehle Register karo!")}
 function openDep(){depBox.style.display='block'}
-function addBal(){let a=parseFloat(depAmt.value)||0; bal+=a; document.getElementById('bal').innerText=bal.toFixed(2); depBox.style.display='none'; alert("Demo balance add ho gaya!")}
-function setAmt(a){ betAmt=a; document.getElementById('betAmtShow').innerText=a; document.querySelectorAll('.betx button').forEach(b=>b.classList.remove('a')); event.target.classList.add('a'); }
+function addBal(){let a=parseFloat(depAmt.value)||0; bal+=a; document.getElementById('bal').innerText=bal.toFixed(2); depBox.style.display='none';}
+
+function setAmt(a,el){ betAmt=a; document.getElementById('betAmtShow').innerText=a; document.querySelectorAll('.betx button').forEach(b=>b.classList.remove('a')); el.classList.add('a'); }
 
 function bet(c){
- if(time<=7){ alert("7 sec pehla betting band thai gayu! Next round ma lagavo"); return; }
- if(curBet){ alert("Ek bet lagi gayi che! Result pachi biji lagshe"); return; }
- if(bal<betAmt){ alert("Balance ochu che! Deposit karo"); return; }
- bal-=betAmt; curBet=c; 
+ if(time<=7){ alert("7 second pehla betting bandh! Wait for next round"); return; }
+ if(bal<betAmt){ alert("Balance kam che! Deposit karo"); return; }
+ bal-=betAmt;
+ myBets.push({type:c, amt:betAmt});
  document.getElementById('bal').innerText=bal.toFixed(2);
- document.getElementById('myBet').innerText="Tari Bet: "+c+" | ₹"+betAmt;
+ document.getElementById('myBet').innerText="Bet: "+myBets.map(b=>b.type).join(", ") + " | Total ₹"+ (myBets.reduce((s,b)=>s+b.amt,0));
 }
+
 function betNum(n){ bet("Num"+n) }
 
-function closePop(){ document.getElementById('popup').style.display='none'; document.getElementById('myBet').innerText="Bet: -"; }
+function closePop(){ document.getElementById('popup').style.display='none'; myBets=[]; document.getElementById('myBet').innerText="Bet: -"; }
 
 function start(){
  setInterval(()=>{
-  time--; 
+  time--;
   if(time<0){
-    time=30; 
+    time=30;
     let winNum=Math.floor(Math.random()*10);
-    let winCol= (winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
+    let winCol=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
     let winBS= winNum>=5?"Big":"Small";
-    let row=`<tr><td>${period}</td><td>${winNum}</td><td>${winBS}</td><td>${winCol}</td></tr>`;
-    hist.innerHTML=row+hist.innerHTML;
-    
-    if(curBet){
-        let won=false;
-        if(curBet==winCol) won=true;
-        if(curBet==winBS) won=true;
-        if(curBet=="Num"+winNum) won=true;
-        // check color by number also
-        if(curBet=="Green" && [1,3,7,9].includes(winNum)) won=true;
-        if(curBet=="Red" && [2,4,6,8].includes(winNum)) won=true;
-        if(curBet=="Violet" && [0,5].includes(winNum)) won=true;
+    hist.innerHTML=`<tr><td>${period}</td><td>${winNum}</td><td>${winBS}</td><td>${winCol}</td></tr>`+hist.innerHTML;
 
-        let popup=document.getElementById('popup');
-        if(won){
-            let winPrize = curBet.startsWith("Num") ? betAmt*9 : betAmt*2;
-            bal+=winPrize;
-            document.getElementById('popTitle').innerText="WINNER! 🎉";
+    if(myBets.length>0){
+        let totalWin=0, totalBet=myBets.reduce((s,b)=>s+b.amt,0);
+        myBets.forEach(b=>{
+            let won=false;
+            if(b.type==winCol) won=true;
+            if(b.type==winBS) won=true;
+            if(b.type=="Num"+winNum) won=true;
+            if(b.type=="Green" && [1,3,7,9].includes(winNum)) won=true;
+            if(b.type=="Red" && [2,4,6,8].includes(winNum)) won=true;
+            if(b.type=="Violet" && [0,5].includes(winNum)) won=true;
+            if(won){
+                if(b.type.startsWith("Num")) totalWin+=b.amt*9;
+                else totalWin+=b.amt*2;
+            }
+        });
+
+        let pop=document.getElementById('popup');
+        if(totalWin>0){
+            bal+=totalWin;
+            document.getElementById('popTitle').innerText="YOU WIN! 🎉";
             document.getElementById('popTitle').className="winC";
-            document.getElementById('popMsg').innerText=`Result: ${winNum} ${winCol} ${winBS} | Tari Bet: ${curBet}`;
-            document.getElementById('popBal').innerText=`+₹${winPrize} malya!`;
-            popup.style.display='flex';
-        } else {
-            document.getElementById('popTitle').innerText="LOSS 😢";
+            document.getElementById('popMsg').innerText=`Result: ${winNum} ${winCol} ${winBS}`;
+            document.getElementById('popAmt').innerText=`+₹${totalWin.toFixed(2)} | Bet ₹${totalBet}`;
+            document.getElementById('popAmt').style.color="#16a34a";
+        }else{
+            document.getElementById('popTitle').innerText="YOU LOSS! 😢";
             document.getElementById('popTitle').className="lossC";
-            document.getElementById('popMsg').innerText=`Result: ${winNum} ${winCol} ${winBS} | Tari Bet: ${curBet}`;
-            document.getElementById('popBal').innerText=`-₹${betAmt} gaya`;
-            popup.style.display='flex';
+            document.getElementById('popMsg').innerText=`Result: ${winNum} ${winCol} ${winBS}`;
+            document.getElementById('popAmt').innerText=`-₹${totalBet} Loss`;
+            document.getElementById('popAmt').style.color="#dc2626";
         }
         document.getElementById('bal').innerText=bal.toFixed(2);
-        curBet=null;
+        pop.style.display='flex';
     }
-    period++; 
+    period++;
   }
   tm.innerText="00:"+(time<10?"0"+time:time);
   pid.innerText=period;
-  if(time==7 && curBet){ document.getElementById('myBet').innerText+=" - LOCKED"; }
  },1000);
 }
 </script>
