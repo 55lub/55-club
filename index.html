@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>55 CLUB</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f5f6fa}
+.header{background:linear-gradient(90deg,#ff6b6b,#ff8a80);color:white;padding:20px;position:relative;text-align:center}
+.header h1{font-size:22px}
+.top{position:absolute;left:15px;top:22px} .lang{position:absolute;right:15px;top:18px}
+.form-box{padding:20px}
+.tabs{display:flex;border-bottom:2px solid #ffd0d0;margin-bottom:20px}
+.tab{flex:1;text-align:center;padding:12px;color:#888} .tab.active{color:#ff6b6b;border-bottom:2px solid #ff6b6b;font-weight:bold}
+.input-label{margin:15px 0 8px;display:flex;align-items:center;gap:8px;color:#333;font-weight:600}
+.input-row{display:flex;gap:10px}
+.input-row select{padding:14px;border:none;background:white;border-radius:12px;width:90px}
+.input{width:100%;padding:14px;border:none;background:white;border-radius:12px;outline:none}
+.btn{width:100%;padding:15px;background:linear-gradient(90deg,#ff6b6b,#ff8a80);border:none;border-radius:30px;color:white;font-size:18px;font-weight:bold;margin-top:25px}
+.btn2{background:white;border:1px solid #ff6b6b;color:#ff6b6b}
+.small{font-size:13px;margin-top:12px;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+
+<div id="registerPage">
+  <div class="header"><span class="top">‹</span><h1>🎯 55CLUB</h1><span class="lang">🇺🇸 EN</span>
+    <div style="text-align:left;margin-top:15px"><b>Register</b><br><small>Please register by phone number or email</small></div>
+  </div>
+  <div class="form-box">
+    <div class="tabs"><div class="tab active">📱 Register your phone</div></div>
+    
+    <div class="input-label">📱 Phone number</div>
+    <div class="input-row"><select><option>+91</option></select><input id="rPhone" class="input" placeholder="Please enter the phone number"></div>
+    
+    <div class="input-label">🔒 Set password</div><input id="rPass" type="password" class="input" placeholder="Set password">
+    <div class="input-label">🔒 Confirm password</div><input id="rCPass" type="password" class="input" placeholder="Confirm password">
+    <div class="input-label">🎫 Invite code</div><input id="rInvite" class="input" placeholder="Please enter the invitation code">
+    
+    <div style="margin-top:15px"><label><input type="checkbox" checked> I have read and agree <span style="color:#ff6b6b">[Privacy Agreement]</span></label></div>
+    <button class="btn" onclick="doRegister()">Register</button>
+    <p style="text-align:center;margin-top:15px" onclick="showLogin()">Already have account? <b style="color:#ff6b6b">Log in</b></p>
+  </div>
+</div>
+
+<div id="loginPage" style="display:none">
+  <div class="header"><span class="top">‹</span><h1>🎯 55CLUB</h1><span class="lang">🇺🇸 EN</span>
+    <div style="text-align:left;margin-top:15px"><b>Log in</b><br><small>Please log in with your phone number or email</small></div>
+  </div>
+  <div class="form-box">
+    <div class="tabs"><div class="tab active">📱 Phone Number</div><div class="tab">✉️ Email</div></div>
+    <div class="input-label">📱 Phone number</div>
+    <div class="input-row"><select><option>+91</option></select><input id="lPhone" class="input" placeholder="Please enter the phone number"></div>
+    <div class="input-label">🔒 Password</div><input id="lPass" type="password" class="input" placeholder="Password">
+    <div class="small"><label><input type="checkbox" checked> Remember password</label><span style="color:#ff6b6b">Forgot password?</span></div>
+    <button class="btn" style="background:#d0d0d0" onclick="doLogin()">Log in</button>
+    <button class="btn btn2" onclick="showRegister()">Register</button>
+  </div>
+</div>
+
+<div id="homePage" style="display:none;text-align:center;padding:50px">
+  <h1>Welcome to 55 CLUB! 🎉</h1>
+  <p id="welcomeUser"></p>
+  <button class="btn" onclick="location.reload()">Logout</button>
+</div>
+
+<script>
+function showLogin(){registerPage.style.display='none';loginPage.style.display='block'}
+function showRegister(){loginPage.style.display='none';registerPage.style.display='block'}
+
+function doRegister(){
+  if(rPass.value!=rCPass.value){alert("Password match nahi ho raha!");return}
+  if(!rPhone.value||!rPass.value||!rInvite.value){alert("Sab bharo!");return}
+  localStorage.setItem("55user_"+rPhone.value, JSON.stringify({pass:rPass.value, invite:rInvite.value}));
+  alert("Register ho gaya! Ab login karo");
+  lPhone.value=rPhone.value; showLogin();
+}
+function doLogin(){
+  let data = localStorage.getItem("55user_"+lPhone.value);
+  if(!data){alert("Pehle Register karo! Ye number registered nahi hai.");return}
+  let u=JSON.parse(data);
+  if(u.pass==lPass.value){
+    registerPage.style.display='none';loginPage.style.display='none';homePage.style.display='block';
+    welcomeUser.innerText="Phone: "+lPhone.value+" | Invite: "+u.invite;
+  }else{alert("Wrong password!")}
+}
+</script>
+</body>
+      </html>
