@@ -1,52 +1,146 @@
 <!DOCTYPE html>
-<html><head><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55 CLUB Demo Result</title>
-<style>*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-body{background:#f2f2f2}.top{background:#ff4d4d;color:white;padding:10px;text-align:center}
-.wallet{background:white;margin:10px;border-radius:15px;padding:15px;text-align:center}
-.b{padding:10px;border-radius:20px;border:none;color:white;flex:1}
-.btns{display:flex;gap:10px;margin-top:10px}.b1{background:#ff4d4d}.b2{background:orange}
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>55 CLUB - Demo Win Loss</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#f2f2f2}
+.top{background:#ff4d4d;color:white;padding:10px;text-align:center;font-weight:bold}
+.wallet{background:white;margin:10px;border-radius:15px;padding:15px;text-align:center;box-shadow:0 2px 5px #0001}
+.wallet h2{font-size:22px} .btns{display:flex;gap:10px;margin-top:10px}
+.btns button{flex:1;padding:10px;border-radius:20px;border:none;color:white;font-weight:bold}
+.b1{background:#ff4d4d} .b2{background:#ff8a5b}
+.tabs{display:flex;gap:8px;padding:10px;overflow:auto}
+.tabs div{background:white;padding:8px 12px;border-radius:10px;font-size:12px;white-space:nowrap}
+.tabs .active{background:#ff4d4d;color:white}
 .playbox{background:white;margin:10px;border-radius:15px;padding:12px}
-.betBtn{padding:12px;border:none;border-radius:10px;color:white;font-weight:bold;flex:1}
-</style></head><body>
-<div class="top">55CLUB DEMO - Fake Points</div>
-<div class="wallet"><h2>₹ <span id="bal">100</span></h2><small>Demo Balance</small>
-<p id="myBet" style="margin-top:8px;color:#ff4d4d;font-weight:bold">Bet: -</p>
-<p id="res" style="font-weight:bold"></p>
+.timer{display:flex;justify-content:space-between;align-items:center}
+.timer b{font-size:20px;letter-spacing:2px;background:#eee;padding:5px 10px;border-radius:5px}
+.colors{display:flex;gap:10px;margin:12px 0}
+.colors button{flex:1;padding:10px;border:none;border-radius:8px;color:white;font-weight:bold}
+.cG{background:#4caf50} .cV{background:#9c27b0} .cR{background:#f44336}
+.nums{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:10px 0}
+.nums button{width:50px;height:50px;border-radius:50%;border:none;font-weight:bold;font-size:18px;color:white}
+.betx{display:flex;gap:5px;margin:10px 0} .betx button{padding:5px 10px;border-radius:15px;border:1px solid #ddd;background:white}
+.betx .a{background:#ff4d4d;color:white}
+.bigsmall{display:flex;gap:10px} .bigsmall button{flex:1;padding:12px;border-radius:20px;border:none;font-weight:bold;color:white}
+.history{background:white;margin:10px;border-radius:10px;padding:10px;font-size:12px}
+.history table{width:100%;border-collapse:collapse} .history th{background:#ff4d4d;color:white;padding:6px}
+.history td{padding:5px;text-align:center;border-bottom:1px solid #eee}
+#registerPage,#loginPage{background:white;min-height:100vh;padding:20px}
+input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ddd}
+.regbtn{width:100%;padding:14px;background:#ff4d4d;border:none;border-radius:25px;color:white;font-weight:bold;margin-top:15px}
+.badge{padding:8px;border-radius:10px;margin:8px 0;font-weight:bold}
+.win{background:#d4edda;color:#155724} .loss{background:#f8d7da;color:#721c24}
+</style>
+</head>
+<body>
+
+<div id="registerPage">
+<h2 style="text-align:center;color:#ff4d4d">55 CLUB - Register</h2>
+<input id="rPhone" placeholder="Phone number"><input id="rPass" type="password" placeholder="Password"><input id="rInvite" placeholder="Invite code">
+<button class="regbtn" onclick="doReg()">Register</button>
+<p style="text-align:center;margin-top:10px" onclick="showLogin()">Login</p>
 </div>
+
+<div id="loginPage" style="display:none">
+<h2 style="text-align:center;color:#ff4d4d">55 CLUB - Login</h2>
+<input id="lPhone" placeholder="Phone"><input id="lPass" type="password" placeholder="Password">
+<button class="regbtn" onclick="doLogin()">Log in</button>
+<p style="text-align:center;margin-top:10px" onclick="showReg()">Register</p>
+</div>
+
+<div id="gamePage" style="display:none">
+<div class="top">55CLUB - DEMO (Fake Points)</div>
+<div class="wallet">
+<h2>₹ <span id="bal">100.00</span></h2><small>Wallet balance - Demo Only</small>
+<div id="myBetInfo" class="badge" style="background:#fff3cd">Bet: -</div>
+<div id="resultInfo" class="badge" style="display:none"></div>
+<div class="btns">
+<button class="b1" onclick="openDep()">Deposit (Demo)</button>
+<button class="b2" onclick="alert('Demo ma Withdraw band che')">Withdraw</button>
+</div>
+</div>
+<div class="tabs"><div class="active">WinGo 30sec</div><div>WinGo 1Min</div><div>WinGo 3Min</div><div>WinGo 5Min</div></div>
 <div class="playbox">
-<div style="display:flex;justify-content:space-between"><span>Period: <b id="pid">1</b></span><b id="tm">00:30</b></div>
-<div style="display:flex;gap:10px;margin:10px 0">
-<button class="betBtn" style="background:#4caf50" onclick="placeBet('Green')">Green</button>
-<button class="betBtn" style="background:#9c27b0" onclick="placeBet('Violet')">Violet</button>
-<button class="betBtn" style="background:#f44336" onclick="placeBet('Red')">Red</button>
+<div class="timer"><span>WinGo 30sec <br><small id="pid">20260928001</small></span><span><small>Time remaining</small><br><b id="tm">00:30</b></span></div>
+<div class="colors"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div>
+<div class="nums">
+<button style="background:#9c27b0" onclick="bet('Num0')">0</button><button style="background:#4caf50" onclick="bet('Num1')">1</button><button style="background:#f44336" onclick="bet('Num2')">2</button><button style="background:#4caf50" onclick="bet('Num3')">3</button><button style="background:#4caf50" onclick="bet('Num4')">4</button>
+<button style="background:#9c27b0" onclick="bet('Num5')">5</button><button style="background:#f44336" onclick="bet('Num6')">6</button><button style="background:#4caf50" onclick="bet('Num7')">7</button><button style="background:#f44336" onclick="bet('Num8')">8</button><button style="background:#4caf50" onclick="bet('Num9')">9</button>
 </div>
-<div style="display:flex;gap:10px">
-<button class="betBtn" style="background:orange" onclick="placeBet('Big')">Big</button>
-<button class="betBtn" style="background:#2196F3" onclick="placeBet('Small')">Small</button>
+<div class="betx"><button>Random</button><button class="a">X1</button><button>X5</button><button>X10</button><button>X20</button><button>X50</button><button>X100</button></div>
+<div class="bigsmall"><button style="background:orange" onclick="bet('Big')">Big</button><button style="background:#2196F3" onclick="bet('Small')">Small</button></div>
 </div>
-<div id="nums" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px"></div>
+<div class="history">
+<table><tr><th>Period</th><th>Number</th><th>Big Small</th><th>Color</th></tr><tbody id="hist"></tbody></table>
 </div>
+<div id="depBox" style="display:none;position:fixed;bottom:0;left:0;right:0;background:white;padding:20px;border-radius:20px 20px 0 0;box-shadow:0 -2px 10px #0003">
+<h3>Demo Deposit</h3><p>UPI: <b>demo@okaxis</b> <button onclick="navigator.clipboard.writeText('demo@okaxis')">Copy</button></p>
+<input id="depAmt" type="number" placeholder="Amount"><input placeholder="UTR kuch bhi likho">
+<button class="regbtn" onclick="addBal()">Submit (Fake Add)</button>
+<button onclick="depBox.style.display='none'" style="width:100%;margin-top:10px">Close</button>
+</div>
+</div>
+
 <script>
-let bal=100, curBet=null, time=30, period=1;
-let numsDiv=document.getElementById('nums');
-for(let i=0;i<=9;i++){ let b=document.createElement('button'); b.innerText=i; b.style.cssText="width:50px;height:50px;border-radius:50%;border:none;color:white;font-weight:bold;background:"+(i==0||i==5?"#9c27b0":(i%2==0?"#f44336":"#4caf50")); b.onclick=()=>placeBet('Num'+i); numsDiv.appendChild(b); }
-function placeBet(t){ if(curBet){alert("Pela result aava do!");return} if(bal<10){alert("Demo balance khatam!");return} curBet=t; bal-=10; document.getElementById('bal').innerText=bal; document.getElementById('myBet').innerText="Tari Bet: "+t+" (10 Rs)"; }
-setInterval(()=>{
-time--; document.getElementById('tm').innerText="00:"+(time<10?"0"+time:time);
-if(time<=0){ time=30; period++; document.getElementById('pid').innerText=period;
-let winNum=Math.floor(Math.random()*10);
-let winColor= winNum==0||winNum==5?"Violet":(winNum%2==0?"Red":"Green");
-let winBS= winNum>=5?"Big":"Small";
-let winMsg=`Result: ${winNum} | ${winColor} | ${winBS}`;
-document.getElementById('res').innerText=winMsg;
-// CHECK WIN
-let won=false;
-if(curBet){ if(curBet==winColor) won=true; if(curBet==winBS) won=true; if(curBet=="Num"+winNum) won=true; }
-if(won){ bal+=20; document.getElementById('res').innerText=winMsg+" - YOU WIN +20"; }
-else if(curBet){ document.getElementById('res').innerText=winMsg+" - YOU LOSS -10"; }
-document.getElementById('bal').innerText=bal;
-curBet=null; setTimeout(()=>{document.getElementById('myBet').innerText="Bet: -";},2000);
+let bal=100, time=30, period=20260928001, curBet=null;
+function showReg(){loginPage.style.display='none';registerPage.style.display='block'}
+function showLogin(){registerPage.style.display='none';loginPage.style.display='block'}
+function doReg(){localStorage.setItem("u_"+rPhone.value,rPass.value);alert("Register ok");lPhone.value=rPhone.value;showLogin()}
+function doLogin(){let p=localStorage.getItem("u_"+lPhone.value); if(p&&p==lPass.value){registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block'; start()}else alert("Pehle Register karo!")}
+function openDep(){depBox.style.display='block'}
+function addBal(){let a=parseFloat(depAmt.value)||0; bal+=a; document.getElementById('bal').innerText=bal.toFixed(2); depBox.style.display='none'; alert("Demo balance add ho gaya!")}
+
+function bet(t){
+ if(curBet){ alert("Result aava do! Ek bet j lagse"); return; }
+ if(bal<10){ alert("Balance kam che! Deposit karo"); return; }
+ curBet=t; bal-=10; document.getElementById('bal').innerText=bal.toFixed(2);
+ document.getElementById('myBetInfo').innerText="Tari Bet: "+t+" | 10 Rs lagya";
+ document.getElementById('resultInfo').style.display='none';
 }
-},1000);
-</script></body></html>
+
+function start(){
+ setInterval(()=>{
+  time--; if(time<0){ 
+    time=30; 
+    let winNum=Math.floor(Math.random()*10);
+    let winColor= (winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
+    let winBS= winNum>=5?"Big":"Small";
+    let row=`<tr><td>${period}</td><td>${winNum}</td><td>${winBS}</td><td>${winColor}</td></tr>`;
+    document.getElementById('hist').innerHTML=row+document.getElementById('hist').innerHTML;
+    
+    // WIN LOSS CHECK
+    if(curBet){
+        let won=false;
+        if(curBet==winColor) won=true;
+        if(curBet==winBS) won=true;
+        if(curBet=="Num"+winNum) won=true;
+        // Green = 1,3,7,9 | Red = 2,4,6,8 | Violet = 0,5
+        if(curBet=="Green" && [1,3,7,9].includes(winNum)) won=true;
+        if(curBet=="Red" && [2,4,6,8].includes(winNum)) won=true;
+
+        let rDiv=document.getElementById('resultInfo');
+        rDiv.style.display='block';
+        if(won){
+            bal+=19.6; // 1.96x j win ma
+            rDiv.className="badge win";
+            rDiv.innerText=`Result ${winNum} ${winColor} ${winBS} - YOU WIN +19.6`;
+        } else {
+            rDiv.className="badge loss";
+            rDiv.innerText=`Result ${winNum} ${winColor} ${winBS} - YOU LOSS -10`;
+        }
+        document.getElementById('bal').innerText=bal.toFixed(2);
+        curBet=null;
+        setTimeout(()=>{document.getElementById('myBetInfo').innerText="Bet: -";},3000);
+    }
+    period++; 
+  }
+  document.getElementById('tm').innerText="00:"+(time<10?"0"+time:time);
+  document.getElementById('pid').innerText=period;
+ },1000);
+}
+</script>
+</body>
+</html>￼Enter
