@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55 CLUB - Demo</title>
+<title>55 CLUB - Demo Admin Control</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
 body{background:#f2f2f2}
@@ -24,14 +24,14 @@ body{background:#f2f2f2}
 .history table{width:100%;border-collapse:collapse}.history th{background:#ff4d4d;color:white;padding:6px}
 .history td{padding:5px;text-align:center;border-bottom:1px solid #eee}
 #registerPage,#loginPage{background:white;min-height:100vh;padding:20px}
-input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ddd}
+input,select{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ddd}
 .regbtn{width:100%;padding:14px;background:#ff4d4d;border:none;border-radius:25px;color:white;font-weight:bold;margin-top:15px}
-#popup,#betModal{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:9999}
+#popup,#betModal,#adminBox{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:9999}
 .popBox{background:white;width:90%;max-width:330px;border-radius:20px;padding:20px;text-align:center}
 .winC{color:#16a34a}.lossC{color:#dc2626}
 .betOpt{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}
 .betOpt button{padding:8px 14px;border-radius:20px;border:1px solid #ddd;background:white;font-weight:bold}
-.betOpt.a{background:#ff4d4d;color:white;border-color:#ff4d4d}
+.betOpt.a{background:#ff4d4d;color:white}
 .qty{display:flex;align-items:center;justify-content:center;gap:15px;margin:10px 0}
 .qty button{width:35px;height:35px;border-radius:50%;border:1px solid #ddd;font-size:20px}
 </style>
@@ -40,38 +40,36 @@ input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #
 
 <div id="registerPage">
 <h2 style="text-align:center;color:#ff4d4d">55 CLUB - Register</h2>
-<input id="rPhone" type="number" placeholder="10 akda no number">
+<input id="rPhone" type="number" placeholder="10 akda number">
 <input id="rPass" type="password" placeholder="Password">
 <input id="rInvite" placeholder="Invite code">
 <button class="regbtn" onclick="doReg()">Register</button>
-<p style="text-align:center;margin-top:15px" onclick="showLogin()">Already account? <b>Login</b></p>
+<p style="text-align:center;margin-top:15px" onclick="showLogin()">Login</p>
 </div>
 
 <div id="loginPage" style="display:none">
 <h2 style="text-align:center;color:#ff4d4d">55 CLUB - Login</h2>
-<input id="lPhone" type="number" placeholder="10 akda no number">
+<input id="lPhone" type="number" placeholder="10 akda number">
 <input id="lPass" type="password" placeholder="Password">
 <button class="regbtn" onclick="doLogin()">Log in</button>
-<p style="text-align:center;margin-top:15px" onclick="showReg()">No account? <b>Register</b></p>
+<p style="text-align:center;margin-top:15px" onclick="showReg()">Register</p>
 </div>
 
 <div id="gamePage" style="display:none">
-<div class="top">55CLUB - DEMO (Fake Points) | <span id="userShow"></span> <span style="float:right" onclick="doLogout()">Logout</span></div>
+<div class="top" onclick="openAdmin()"><span id="topText">55CLUB - DEMO (Fake Points)</span> | <span id="userShow"></span> <span style="float:right" onclick="doLogout()">Logout</span></div>
 <div class="wallet">
 <div style="display:flex;justify-content:space-between;align-items:center">
 <h2>₹ <span id="bal">0.00</span></h2>
 <button onclick="refreshBal()" style="padding:6px 12px;border-radius:15px;border:1px solid #ddd;background:white">🔄 Refresh</button>
 </div>
-<small>Wallet balance - Demo | Saved</small>
+<small>Wallet balance - Demo (Saved)</small>
 <p id="myBet" style="margin-top:8px;font-weight:bold;color:#ff4d4d">Bet: -</p>
-<div class="btns">
-<button class="b1" onclick="openDep()">Deposit (Demo)</button>
-<button class="b2" onclick="alert('Demo ma Withdraw band che')">Withdraw</button>
-</div>
+<p id="adminStatus" style="font-size:11px;color:orange;margin-top:5px"></p>
+<div class="btns"><button class="b1" onclick="openDep()">Deposit (Demo)</button><button class="b2" onclick="alert('Demo ma Withdraw band che')">Withdraw</button></div>
 </div>
 
 <div class="playbox">
-<div class="timer"><span>WinGo 30sec <br><small id="pid">20260928...</small></span><span><small>Time remaining</small><br><b id="tm">00:30</b></span></div>
+<div class="timer"><span>WinGo 30sec <br><small id="pid">20260928...</small></span><span><b id="tm">00:30</b></span></div>
 <div class="colors"><button class="cG" onclick="openBetModal('Green')">Green</button><button class="cV" onclick="openBetModal('Violet')">Violet</button><button class="cR" onclick="openBetModal('Red')">Red</button></div>
 <div class="nums">
 <button style="background:#9c27b0" onclick="openBetModal('Num0')">0</button><button style="background:#4caf50" onclick="openBetModal('Num1')">1</button><button style="background:#f44336" onclick="openBetModal('Num2')">2</button><button style="background:#4caf50" onclick="openBetModal('Num3')">3</button><button style="background:#4caf50" onclick="openBetModal('Num4')">4</button>
@@ -80,152 +78,43 @@ input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #
 <div class="bigsmall"><button style="background:orange" onclick="openBetModal('Big')">Big</button><button style="background:#2196F3" onclick="openBetModal('Small')">Small</button></div>
 </div>
 
-<div class="history">
-<table><tr><th>Period</th><th>Number</th><th>Big Small</th><th>Color</th></tr><tbody id="hist"></tbody></table>
-</div>
+<div class="history"><table><tr><th>Period</th><th>Number</th><th>Big Small</th><th>Color</th></tr><tbody id="hist"></tbody></table></div>
 
-<div id="depBox" style="display:none;position:fixed;bottom:0;left:0;right:0;background:white;padding:20px;border-radius:20px 20px 0 0;box-shadow:0 -2px 10px #0003;z-index:100">
+<div id="depBox" style="display:none;position:fixed;bottom:0;left:0;right:0;background:white;padding:20px;border-radius:20px 20px 0 0;z-index:100">
 <h3>Demo Deposit</h3><input id="depAmt" type="number" placeholder="Amount"><button class="regbtn" onclick="addBal()">Submit (Fake Add)</button><button onclick="depBox.style.display='none'" style="width:100%;margin-top:10px">Close</button>
 </div>
 
-<div id="betModal">
-<div class="popBox">
-<h3 id="betTitle">Green</h3>
-<div class="betOpt">
-<button onclick="setModalAmt(10,this)" class="a">10</button>
-<button onclick="setModalAmt(100,this)">100</button>
-<button onclick="setModalAmt(500,this)">500</button>
-<button onclick="setModalAmt(1000,this)">1000</button>
-</div>
-<div class="qty">
-<button onclick="changeQty(-1)">-</button><span id="qtyShow">X1</span><button onclick="changeQty(1)">+</button>
-</div>
-<p>Total: ₹<b id="totalAmt">10</b></p>
-<button class="regbtn" onclick="confirmBet()">OK - Bet Lagao</button>
-<button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button>
-</div>
-</div>
+<div id="betModal"><div class="popBox"><h3 id="betTitle"></h3><p style="font-size:13px">Kitni bet lagani hai?</p><div class="betOpt"><button onclick="setModalAmt(10,this)" class="a">10</button><button onclick="setModalAmt(100,this)">100</button><button onclick="setModalAmt(500,this)">500</button><button onclick="setModalAmt(1000,this)">1000</button></div><div class="qty"><button onclick="changeQty(-1)">-</button><span id="qtyShow">X1</span><button onclick="changeQty(1)">+</button></div><p>Total: ₹<b id="totalAmt">10</b></p><button class="regbtn" onclick="confirmBet()">OK - Bet Lagao</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
 
-<div id="popup">
-<div class="popBox">
-<h2 id="popTitle">WIN</h2>
-<p id="popMsg"></p><h3 id="popAmt"></h3>
-<button class="regbtn" onclick="closePop()">OK</button>
-</div>
-</div>
+<div id="popup"><div class="popBox"><h2 id="popTitle"></h2><p id="popMsg"></p><h3 id="popAmt"></h3><button class="regbtn" onclick="closePop()">OK</button></div></div>
+
+<div id="adminBox"><div class="popBox" style="text-align:left;max-width:350px"><h2 style="text-align:center;color:#ff4d4d">🔐 Admin Control</h2><p style="font-size:12px;text-align:center">Khali tame j joisako cho</p><label>Next Result:</label><select id="adminNum"><option value="">Random (Auto)</option><option value="0">0 - Violet - Small</option><option value="1">1 - Green - Small</option><option value="2">2 - Red - Small</option><option value="3">3 - Green - Small</option><option value="4">4 - Green - Small</option><option value="5">5 - Violet - Big</option><option value="6">6 - Red - Big</option><option value="7">7 - Green - Big</option><option value="8">8 - Red - Big</option><option value="9">9 - Green - Big</option></select><label style="margin-top:10px">Mode:</label><select id="adminMode"><option value="single">Ek vaar j</option><option value="always">Hamesha aa j</option></select><button class="regbtn" onclick="setAdmin()">Set Karo</button><button class="regbtn" style="background:#333" onclick="clearAdmin()">Random</button><button onclick="adminBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
+
 </div>
 
 <script>
-let bal=0, time=30, period=Date.now(), myBets=[], currentUser=null;
-let tempBetType="", tempAmt=10, tempQty=1;
-
+let bal=0,time=30,period=Date.now(),myBets=[],currentUser=null,tempBetType="",tempAmt=10,tempQty=1,nextResult=null,adminAlways=false,topClicks=0,timerOn=false;
 function showReg(){loginPage.style.display='none';registerPage.style.display='block'}
 function showLogin(){registerPage.style.display='none';loginPage.style.display='block'}
-
-function getUsers(){ return JSON.parse(localStorage.getItem("55_users")||"{}"); }
-function saveUsers(u){ localStorage.setItem("55_users", JSON.stringify(u)); }
-function saveBal(){ if(!currentUser) return; let users=getUsers(); users[currentUser].bal=bal; saveUsers(users); }
-
-function doReg(){
- let phone=rPhone.value.trim(); let pass=rPass.value.trim();
- if(phone.length!=10 || isNaN(phone)){ alert("Number 10 akda no hovo joye!"); return; }
- if(pass.length<4){ alert("Password 4 akshar thi vadhu lakho"); return; }
- let users=getUsers();
- if(users[phone]){ alert("Aa number thi pehla register thai gayu che! Login karo"); showLogin(); lPhone.value=phone; return; }
- users[phone]={pass:pass, bal:100}; // nava user ne 100 demo balance
- saveUsers(users);
- alert("Register thai gayu! Hve Login karo");
- lPhone.value=phone; showLogin();
-}
-function doLogin(){
- let phone=lPhone.value.trim(); let pass=lPass.value.trim();
- if(phone.length!=10){ alert("10 akda no number nakho"); return; }
- let users=getUsers();
- if(!users[phone]){ alert("Aa number thi register nathi! Pehla Register karo"); showReg(); return; }
- if(users[phone].pass!=pass){ alert("Password khoto che!"); return; }
- currentUser=phone;
- bal=users[phone].bal;
- localStorage.setItem("55_current", phone);
- userShow.innerText=phone;
- document.getElementById('bal').innerText=bal.toFixed(2);
- registerPage.style.display='none'; loginPage.style.display='none'; gamePage.style.display='block';
- start();
-}
-function doLogout(){ saveBal(); localStorage.removeItem("55_current"); location.reload(); }
-function refreshBal(){ if(!currentUser) return; let users=getUsers(); bal=users[currentUser].bal; document.getElementById('bal').innerText=bal.toFixed(2); alert("Balance Refresh thai gayu: ₹"+bal.toFixed(2)); }
-
+function getUsers(){return JSON.parse(localStorage.getItem("55_users")||"{}")}
+function saveUsers(u){localStorage.setItem("55_users",JSON.stringify(u))}
+function saveBal(){if(!currentUser)return;let u=getUsers();u[currentUser].bal=bal;saveUsers(u);}
+function doReg(){let p=rPhone.value.trim(),ps=rPass.value.trim();if(p.length!=10||isNaN(p)){alert("10 akda no number joye");return}if(getUsers()[p]){alert("Aa number thi register thai gayu che, login karo");showLogin();lPhone.value=p;return}let u=getUsers();u[p]={pass:ps,bal:100};saveUsers(u);alert("Register ok, hve login karo");lPhone.value=p;showLogin();}
+function doLogin(){let p=lPhone.value.trim(),ps=lPass.value.trim();let u=getUsers();if(!u[p]){alert("Register nathi");showReg();return}if(u[p].pass!=ps){alert("Password khoto");return}currentUser=p;bal=u[p].bal;localStorage.setItem("55_current",p);userShow.innerText=p;document.getElementById('bal').innerText=bal.toFixed(2);registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block';start();}
+function doLogout(){saveBal();localStorage.removeItem("55_current");location.reload();}
+function refreshBal(){let u=getUsers();bal=u[currentUser].bal;document.getElementById('bal').innerText=bal.toFixed(2);alert("Refresh: ₹"+bal.toFixed(2));}
 function openDep(){depBox.style.display='block'}
-function addBal(){let a=parseFloat(depAmt.value)||0; bal+=a; document.getElementById('bal').innerText=bal.toFixed(2); saveBal(); depBox.style.display='none';}
-
-function openBetModal(type){
- if(time<=7){ alert("7 sec pehla betting bandh!"); return; }
- tempBetType=type; tempAmt=10; tempQty=1;
- betTitle.innerText=type+" par bet";
- qtyShow.innerText="X"+tempQty; totalAmt.innerText=tempAmt*tempQty;
- document.querySelectorAll('.betOpt button').forEach(b=>b.classList.remove('a'));
- document.querySelector('.betOpt button').classList.add('a');
- betModal.style.display='flex';
-}
-function setModalAmt(a,el){ tempAmt=a; document.querySelectorAll('.betOpt button').forEach(b=>b.classList.remove('a')); el.classList.add('a'); updateTotal(); }
-function changeQty(n){ tempQty+=n; if(tempQty<1) tempQty=1; qtyShow.innerText="X"+tempQty; updateTotal(); }
-function updateTotal(){ totalAmt.innerText=tempAmt*tempQty; }
-function confirmBet(){
- let total=tempAmt*tempQty;
- if(bal<total){ alert("Balance kam che! Deposit karo"); return; }
- bal-=total; myBets.push({type:tempBetType, amt:total});
- document.getElementById('bal').innerText=bal.toFixed(2); saveBal();
- myBet.innerText="Bet: "+myBets.map(b=>b.type+" ₹"+b.amt).join(", ");
- betModal.style.display='none';
-}
-function closePop(){ popup.style.display='none'; myBets=[]; myBet.innerText="Bet: -"; }
-
-let timerOn=false;
-function start(){
- if(timerOn) return; timerOn=true;
- setInterval(()=>{
-  time--;
-  if(time<0){
-    time=30;
-    let winNum=Math.floor(Math.random()*10);
-    let winCol=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
-    let winBS= winNum>=5?"Big":"Small";
-    hist.innerHTML=`<tr><td>${period}</td><td>${winNum}</td><td>${winBS}</td><td>${winCol}</td></tr>`+hist.innerHTML;
-    if(myBets.length>0){
-        let totalWin=0, totalBet=myBets.reduce((s,b)=>s+b.amt,0);
-        myBets.forEach(b=>{
-            let won=false;
-            if(b.type==winCol) won=true;
-            if(b.type==winBS) won=true;
-            if(b.type=="Num"+winNum) won=true;
-            if(b.type=="Green" && [1,3,7,9].includes(winNum)) won=true;
-            if(b.type=="Red" && [2,4,6,8].includes(winNum)) won=true;
-            if(b.type=="Violet" && [0,5].includes(winNum)) won=true;
-            if(won){ if(b.type.startsWith("Num")) totalWin+=b.amt*9; else totalWin+=b.amt*2; }
-        });
-        if(totalWin>0){
-            bal+=totalWin; saveBal();
-            popTitle.innerText="YOU WIN! 🎉"; popTitle.className="winC";
-            popMsg.innerText=`Result: ${winNum} ${winCol} ${winBS}`;
-            popAmt.innerText=`+₹${totalWin.toFixed(2)} | Bet ₹${totalBet}`; popAmt.style.color="#16a34a";
-        }else{
-            popTitle.innerText="YOU LOSS! 😢"; popTitle.className="lossC";
-            popMsg.innerText=`Result: ${winNum} ${winCol} ${winBS}`;
-            popAmt.innerText=`-₹${totalBet} Loss`; popAmt.style.color="#dc2626";
-        }
-        document.getElementById('bal').innerText=bal.toFixed(2);
-        popup.style.display='flex';
-    }
-    period++;
-  }
-  tm.innerText="00:"+(time<10?"0"+time:time); pid.innerText=period;
- },1000);
-}
-
-// Auto login if already logged in
-window.onload=()=>{
- let cur=localStorage.getItem("55_current");
- if(cur){ lPhone.value=cur; let users=getUsers(); if(users[cur]){ currentUser=cur; bal=users[cur].bal; document.getElementById('bal').innerText=bal.toFixed(2); userShow.innerText=cur; registerPage.style.display='none'; loginPage.style.display='none'; gamePage.style.display='block'; start(); } }
-}
+function addBal(){let a=parseFloat(depAmt.value)||0;bal+=a;document.getElementById('bal').innerText=bal.toFixed(2);saveBal();depBox.style.display='none';}
+function openBetModal(t){if(time<=7){alert("7 sec pehla bandh");return}tempBetType=t;tempAmt=10;tempQty=1;betTitle.innerText=t+" par bet";qtyShow.innerText="X1";totalAmt.innerText=10;document.querySelectorAll('.betOpt button').forEach(b=>b.classList.remove('a'));document.querySelector('.betOpt button').classList.add('a');betModal.style.display='flex';}
+function setModalAmt(a,el){tempAmt=a;document.querySelectorAll('.betOpt button').forEach(b=>b.classList.remove('a'));el.classList.add('a');totalAmt.innerText=tempAmt*tempQty;}
+function changeQty(n){tempQty+=n;if(tempQty<1)tempQty=1;qtyShow.innerText="X"+tempQty;totalAmt.innerText=tempAmt*tempQty;}
+function confirmBet(){let total=tempAmt*tempQty;if(bal<total){alert("Balance kam");return}bal-=total;myBets.push({type:tempBetType,amt:total});document.getElementById('bal').innerText=bal.toFixed(2);saveBal();myBet.innerText="Bet: "+myBets.map(b=>b.type+" ₹"+b.amt).join(", ");betModal.style.display='none';}
+function closePop(){popup.style.display='none';myBets=[];myBet.innerText="Bet: -";}
+function openAdmin(){topClicks++;if(topClicks>=5){adminBox.style.display='flex';topClicks=0;}setTimeout(()=>topClicks=0,3000);}
+function setAdmin(){let n=adminNum.value;let m=adminMode.value;if(n===""){nextResult=null;adminStatus.innerText="";}else{nextResult=parseInt(n);adminAlways=(m=="always");adminStatus.innerText="🔐 Next = "+n+" ("+(adminAlways?"Always":"Single")+")";}adminBox.style.display='none';alert("Set thai gayu");}
+function clearAdmin(){nextResult=null;adminAlways=false;adminStatus.innerText="";adminBox.style.display='none';}
+function start(){if(timerOn)return;timerOn=true;setInterval(()=>{time--;if(time<0){time=30;let winNum;if(nextResult!==null){winNum=nextResult;if(!adminAlways)nextResult=null;if(nextResult===null&&!adminAlways)adminStatus.innerText="";}else winNum=Math.floor(Math.random()*10);let winCol=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");let winBS=winNum>=5?"Big":"Small";hist.innerHTML=`<tr><td>${period}</td><td>${winNum}</td><td>${winBS}</td><td>${winCol}</td></tr>`+hist.innerHTML;if(myBets.length>0){let totalWin=0,totalBet=myBets.reduce((s,b)=>s+b.amt,0);myBets.forEach(b=>{let won=false;if(b.type==winCol)won=true;if(b.type==winBS)won=true;if(b.type=="Num"+winNum)won=true;if(b.type=="Green"&&[1,3,7,9].includes(winNum))won=true;if(b.type=="Red"&&[2,4,6,8].includes(winNum))won=true;if(b.type=="Violet"&&[0,5].includes(winNum))won=true;if(won){if(b.type.startsWith("Num"))totalWin+=b.amt*9;else totalWin+=b.amt*2;}});if(totalWin>0){bal+=totalWin;saveBal();popTitle.innerText="YOU WIN! 🎉";popTitle.className="winC";popMsg.innerText=`Result: ${winNum} ${winCol} ${winBS}`;popAmt.innerText=`+₹${totalWin.toFixed(2)}`;popAmt.style.color="#16a34a";}else{popTitle.innerText="YOU LOSS! 😢";popTitle.className="lossC";popMsg.innerText=`Result: ${winNum} ${winCol} ${winBS}`;popAmt.innerText=`-₹${totalBet} Loss`;popAmt.style.color="#dc2626";}document.getElementById('bal').innerText=bal.toFixed(2);popup.style.display='flex';}period++;}tm.innerText="00:"+(time<10?"0"+time:time);pid.innerText=period;},1000);}
+window.onload=()=>{let cur=localStorage.getItem("55_current");if(cur){let u=getUsers();if(u[cur]){currentUser=cur;bal=u[cur].bal;document.getElementById('bal').innerText=bal.toFixed(2);userShow.innerText=cur;registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block';start();}}}
 </script>
 </body>
  </html>
