@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55 CLUB - Final</title>
+<title>55 CLUB - Admin Approval</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
 body{background:#f2f2f2}
@@ -29,16 +29,19 @@ body{background:#f2f2f2}
 input,select{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ddd}
 .regbtn{width:100%;padding:14px;background:#ff4d4d;border:none;border-radius:25px;color:white;font-weight:bold;margin-top:15px}
 #popup,#betModal,#adminBox,#adminPassBox,#depBox,#withBox,#depHistBox,#withHistBox{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:9999}
-.popBox{background:white;width:92%;max-width:360px;border-radius:20px;padding:20px;text-align:center;max-height:80vh;overflow:auto}
+.popBox{background:white;width:92%;max-width:380px;border-radius:20px;padding:20px;text-align:center;max-height:85vh;overflow:auto}
 .winC{color:#16a34a}.lossC{color:#dc2626}
 .betOpt{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}
 .betOpt button{padding:8px 14px;border-radius:20px;border:1px solid #ddd;background:white;font-weight:bold}
 .betOpt.a{background:#ff4d4d;color:white}
 .qty{display:flex;align-items:center;justify-content:center;gap:15px;margin:10px 0}
 .qty button{width:35px;height:35px;border-radius:50%;border:1px solid #ddd;font-size:20px}
-.hTable{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px}
+.hTable{width:100%;border-collapse:collapse;margin-top:10px;font-size:11px}
 .hTable th{background:#eee;padding:6px}
 .hTable td{padding:6px;border-bottom:1px solid #eee;text-align:center}
+.adminDepItem{background:#fff8e1;border:1px solid #ffe082;border-radius:10px;padding:10px;margin:8px 0;text-align:left;font-size:12px}
+.adminDepItem button{padding:6px 12px;border:none;border-radius:10px;font-weight:bold;margin-right:5px}
+.accept{background:#4caf50;color:white}.reject{background:#f44336;color:white}
 </style>
 </head>
 <body>
@@ -60,15 +63,11 @@ input,select{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px 
 </div>
 
 <div id="gamePage" style="display:none">
-<div class="top" onclick="openAdmin()"><span>55CLUB - DEMO</span> | <span id="userShow"></span> <span style="float:right" onclick="doLogout()">Logout</span></div>
+<div class="top" onclick="openAdmin()"><span>55CLUB</span> | <span id="userShow"></span> <span style="float:right" onclick="doLogout()">Logout</span></div>
 <div class="wallet">
-<div style="display:flex;justify-content:space-between;align-items:center">
-<h2>₹ <span id="bal">0.00</span></h2>
-<button onclick="refreshBal()" style="padding:6px 12px;border-radius:15px;border:1px solid #ddd;background:white">🔄</button>
-</div>
-<small>Wallet - Saved</small>
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>₹ <span id="bal">0.00</span></h2><button onclick="refreshBal()" style="padding:6px 12px;border-radius:15px;border:1px solid #ddd;background:white">🔄</button></div>
 <p id="myBet" style="margin-top:8px;font-weight:bold;color:#ff4d4d">Bet: -</p>
-<p id="adminStatus" style="font-size:11px;color:orange;margin-top:5px"></p>
+<p id="adminStatus" style="font-size:11px;color:orange"></p>
 <div class="btns"><button class="b1" onclick="openDep()">Deposit</button><button class="b2" onclick="openWith()">Withdraw</button></div>
 <div class="histBtns"><button onclick="openDepHist()">📥 Deposit History</button><button onclick="openWithHist()">📤 Withdraw History</button></div>
 </div>
@@ -85,11 +84,12 @@ input,select{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px 
 
 <div class="history"><table><tr><th>Period</th><th>Num</th><th>BS</th><th>Color</th></tr><tbody id="hist"></tbody></table></div>
 
-<div id="depBox"><div class="popBox"><h3>Deposit</h3><input id="depAmt" type="number" placeholder="Amount"><button class="regbtn" onclick="addBal()">Add</button><button onclick="depBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
+<!-- Deposit Modal with UTR -->
+<div id="depBox"><div class="popBox"><h3>Deposit</h3><p style="font-size:12px;color:gray">Pehle UPI par paisa moklo, pachi UTR nakho</p><input id="depAmt" type="number" placeholder="Amount"><input id="depUTR" type="text" placeholder="UTR Number - 12 akda (ex: 123456789012)"><button class="regbtn" onclick="addBal()">Submit UTR</button><button onclick="depBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
 
-<div id="withBox"><div class="popBox"><h3>Withdraw</h3><input id="withAmt" type="number" placeholder="Amount"><input id="withUPI" type="text" placeholder="UPI ID / Number"><button class="regbtn" onclick="doWithdraw()">Withdraw</button><button onclick="withBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
+<div id="withBox"><div class="popBox"><h3>Withdraw</h3><input id="withAmt" type="number" placeholder="Amount"><input id="withUPI" type="text" placeholder="UPI ID"><button class="regbtn" onclick="doWithdraw()">Withdraw</button><button onclick="withBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
 
-<div id="depHistBox"><div class="popBox"><h3>Deposit History</h3><table class="hTable"><tr><th>Date</th><th>Amt</th><th>Status</th></tr><tbody id="depHistBody"></tbody></table><button onclick="depHistBox.style.display='none'" class="regbtn">Close</button></div></div>
+<div id="depHistBox"><div class="popBox"><h3>Deposit History</h3><table class="hTable"><tr><th>Time</th><th>Amt</th><th>UTR</th><th>Status</th></tr><tbody id="depHistBody"></tbody></table><button onclick="depHistBox.style.display='none'" class="regbtn">Close</button></div></div>
 
 <div id="withHistBox"><div class="popBox"><h3>Withdraw History</h3><table class="hTable"><tr><th>Date</th><th>Amt</th><th>Status</th></tr><tbody id="withHistBody"></tbody></table><button onclick="withHistBox.style.display='none'" class="regbtn">Close</button></div></div>
 
@@ -99,41 +99,134 @@ input,select{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px 
 
 <div id="adminPassBox"><div class="popBox"><h3>🔐 Admin Password</h3><input id="adminPassInput" type="password" placeholder="Password"><button class="regbtn" onclick="checkAdminPass()">Open</button><button onclick="adminPassBox.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
 
-<div id="adminBox"><div class="popBox" style="text-align:left"><h2 style="text-align:center;color:#ff4d4d">Admin Control</h2><label>Next Result:</label><select id="adminNum"><option value="">Random</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select><label style="margin-top:10px">Mode:</label><select id="adminMode"><option value="single">Ek vaar</option><option value="always">Hamesha</option></select><button class="regbtn" onclick="setAdmin()">Set</button><button class="regbtn" style="background:#333" onclick="clearAdmin()">Random</button><button onclick="adminBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
+<!-- ADMIN BOX WITH DEPOSIT APPROVAL -->
+<div id="adminBox"><div class="popBox" style="text-align:left;max-width:400px">
+<h2 style="text-align:center;color:#ff4d4d">Admin Control</h2>
+
+<div style="background:#f0f0f0;padding:10px;border-radius:10px;margin:10px 0">
+<label>Next Result:</label><select id="adminNum"><option value="">Random</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+<label style="margin-top:8px">Mode:</label><select id="adminMode"><option value="single">Ek vaar</option><option value="always">Hamesha</option></select>
+<button class="regbtn" onclick="setAdmin()">Set Result</button>
+</div>
+
+<h3 style="font-size:14px;margin-top:15px">💰 Pending Deposits (10 min auto-reject)</h3>
+<div id="adminDepList" style="max-height:250px;overflow:auto;margin-top:8px"></div>
+
+<button onclick="adminBox.style.display='none'" style="width:100%;margin-top:15px;padding:10px;border:none;background:#eee;border-radius:20px">Close Admin</button>
+</div></div>
 
 </div>
 
 <script>
 let bal=0,time=30,period=Date.now(),myBets=[],currentUser=null,tempBetType="",tempAmt=10,tempQty=1,nextResult=null,adminAlways=false,topClicks=0,timerOn=false;
 const ADMIN_PASSWORD="6351";
+const AUTO_REJECT_MIN=10; // 10 minute ma auto reject
+
 function showReg(){loginPage.style.display='none';registerPage.style.display='block'}
 function showLogin(){registerPage.style.display='none';loginPage.style.display='block'}
 function getUsers(){return JSON.parse(localStorage.getItem("55_users")||"{}")}
 function saveUsers(u){localStorage.setItem("55_users",JSON.stringify(u))}
-function saveBal(){if(!currentUser)return;let u=getUsers();u[currentUser].bal=bal;saveUsers(u);}
-function saveData(){if(!currentUser)return;let u=getUsers();u[currentUser].bal=bal;saveUsers(u);localStorage.setItem("55_dep_"+currentUser,JSON.stringify(depHist));localStorage.setItem("55_with_"+currentUser,JSON.stringify(withHist));}
+function getAllDeposits(){return JSON.parse(localStorage.getItem("55_all_deposits")||"[]")}
+function saveAllDeposits(d){localStorage.setItem("55_all_deposits",JSON.stringify(d))}
 let depHist=[],withHist=[];
+
 function doReg(){let p=rPhone.value.trim(),ps=rPass.value.trim();if(p.length!=10||isNaN(p)){alert("10 akda");return}if(getUsers()[p]){alert("Already");showLogin();return}let u=getUsers();u[p]={pass:ps,bal:100};saveUsers(u);alert("ok");showLogin();}
-function doLogin(){let p=lPhone.value.trim(),ps=lPass.value.trim();let u=getUsers();if(!u[p]){alert("Register nathi");return}if(u[p].pass!=ps){alert("Password khoto");return}currentUser=p;bal=u[p].bal;depHist=JSON.parse(localStorage.getItem("55_dep_"+p)||"[]");withHist=JSON.parse(localStorage.getItem("55_with_"+p)||"[]");localStorage.setItem("55_current",p);userShow.innerText=p;document.getElementById('bal').innerText=bal.toFixed(2);registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block';start();}
-function doLogout(){saveData();localStorage.removeItem("55_current");location.reload();}
+function doLogin(){
+let p=lPhone.value.trim(),ps=lPass.value.trim();let u=getUsers();
+if(!u[p]){alert("Register nathi");return}if(u[p].pass!=ps){alert("Password khoto");return}
+currentUser=p;bal=u[p].bal;
+depHist=JSON.parse(localStorage.getItem("55_dep_"+p)||"[]");
+withHist=JSON.parse(localStorage.getItem("55_with_"+p)||"[]");
+localStorage.setItem("55_current",p);userShow.innerText=p;
+document.getElementById('bal').innerText=bal.toFixed(2);
+registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block';start();
+}
+function doLogout(){localStorage.setItem("55_dep_"+currentUser,JSON.stringify(depHist));localStorage.setItem("55_with_"+currentUser,JSON.stringify(withHist));localStorage.removeItem("55_current");location.reload();}
 function refreshBal(){let u=getUsers();bal=u[currentUser].bal;document.getElementById('bal').innerText=bal.toFixed(2);}
+
 function openDep(){depBox.style.display='flex'}
 function openWith(){withBox.style.display='flex'}
-function addBal(){let a=parseFloat(depAmt.value)||0;if(a<=0){alert("Amount nakho");return}bal+=a;document.getElementById('bal').innerText=bal.toFixed(2);depHist.unshift({date:new Date().toLocaleString(),amt:a,status:"Success"});saveData();depBox.style.display='none';depAmt.value="";alert("Deposit Success ₹"+a);}
-function doWithdraw(){let a=parseFloat(withAmt.value)||0;if(a<=0||a>bal){alert("Balance kam che");return}bal-=a;document.getElementById('bal').innerText=bal.toFixed(2);withHist.unshift({date:new Date().toLocaleString(),amt:a,status:"Pending"});saveData();withBox.style.display='none';withAmt.value="";alert("Withdraw Request ₹"+a+" Pending ma che");}
-function openDepHist(){let h="";depHist.forEach(r=>{h+=`<tr><td>${r.date}</td><td>₹${r.amt}</td><td style="color:green">${r.status}</td></tr>`});depHistBody.innerHTML=h||"<tr><td colspan=3>No data</td></tr>";depHistBox.style.display='flex';}
+
+function addBal(){
+let a=parseFloat(depAmt.value)||0;
+let utr=depUTR.value.trim();
+if(a<=0){alert("Amount nakho");return}
+if(utr.length<6){alert("UTR Number nakho - khoto che");return}
+let id=Date.now();
+let dep={id:id,user:currentUser,amt:a,utr:utr,time:Date.now(),status:"Processing"};
+let all=getAllDeposits(); all.unshift(dep); saveAllDeposits(all);
+depHist.unshift({id:id,date:new Date().toLocaleTimeString(),amt:a,utr:utr,status:"Processing"});
+localStorage.setItem("55_dep_"+currentUser,JSON.stringify(depHist));
+depBox.style.display='none';depAmt.value="";depUTR.value="";
+alert("Deposit Request mokli! Admin 10 min ma Accept karse to Success thase, nahi to Auto Reject!");
+}
+
+function approveDep(id){
+let all=getAllDeposits(); let idx=all.findIndex(d=>d.id==id); if(idx==-1)return;
+let dep=all[idx]; if(dep.status!="Processing")return;
+all[idx].status="Success"; saveAllDeposits(all);
+// add balance to that user
+let users=getUsers(); if(users[dep.user]){ users[dep.user].bal+=dep.amt; saveUsers(users); if(dep.user==currentUser){bal=users[dep.user].bal; document.getElementById('bal').innerText=bal.toFixed(2);} }
+// update user history
+let userDepHist=JSON.parse(localStorage.getItem("55_dep_"+dep.user)||"[]");
+let hIdx=userDepHist.findIndex(h=>h.id==id); if(hIdx!=-1){userDepHist[hIdx].status="Success"; localStorage.setItem("55_dep_"+dep.user,JSON.stringify(userDepHist)); if(dep.user==currentUser) depHist=userDepHist; }
+renderAdminList();
+alert("Accept Success! ₹"+dep.amt+" user "+dep.user+" ne add thai gaya");
+}
+
+function rejectDep(id){
+let all=getAllDeposits(); let idx=all.findIndex(d=>d.id==id); if(idx==-1)return;
+all[idx].status="Rejected"; saveAllDeposits(all);
+let userDepHist=JSON.parse(localStorage.getItem("55_dep_"+all[idx].user)||"[]");
+let hIdx=userDepHist.findIndex(h=>h.id==id); if(hIdx!=-1){userDepHist[hIdx].status="Rejected"; localStorage.setItem("55_dep_"+all[idx].user,JSON.stringify(userDepHist)); if(all[idx].user==currentUser) depHist=userDepHist; }
+renderAdminList();
+}
+
+function checkAutoReject(){
+let all=getAllDeposits(); let changed=false;
+all.forEach(d=>{
+if(d.status=="Processing" && (Date.now()-d.time) > AUTO_REJECT_MIN*60*1000){
+d.status="Rejected"; changed=true;
+let uHist=JSON.parse(localStorage.getItem("55_dep_"+d.user)||"[]");
+let hi=uHist.findIndex(h=>h.id==d.id); if(hi!=-1){uHist[hi].status="Rejected"; localStorage.setItem("55_dep_"+d.user,JSON.stringify(uHist)); if(d.user==currentUser) depHist=uHist;}
+}
+});
+if(changed){saveAllDeposits(all); renderAdminList();}
+}
+
+function doWithdraw(){let a=parseFloat(withAmt.value)||0;if(a<=0||a>bal){alert("Balance kam");return}bal-=a;document.getElementById('bal').innerText=bal.toFixed(2);let u=getUsers();u[currentUser].bal=bal;saveUsers(u);withHist.unshift({date:new Date().toLocaleTimeString(),amt:a,status:"Pending"});localStorage.setItem("55_with_"+currentUser,JSON.stringify(withHist));withBox.style.display='none';withAmt.value="";alert("Withdraw Pending");}
+function openDepHist(){let h="";depHist.forEach(r=>{let col=r.status=="Success"?"green":r.status=="Rejected"?"red":"orange";h+=`<tr><td>${r.date}</td><td>₹${r.amt}</td><td>${r.utr}</td><td style="color:${col}">${r.status}</td></tr>`});depHistBody.innerHTML=h||"<tr><td colspan=4>No data</td></tr>";depHistBox.style.display='flex';}
 function openWithHist(){let h="";withHist.forEach(r=>{h+=`<tr><td>${r.date}</td><td>₹${r.amt}</td><td style="color:orange">${r.status}</td></tr>`});withHistBody.innerHTML=h||"<tr><td colspan=3>No data</td></tr>";withHistBox.style.display='flex';}
 function openBetModal(t){if(time<=7){alert("7 sec bandh");return}tempBetType=t;tempAmt=10;tempQty=1;betTitle.innerText=t;qtyShow.innerText="X1";totalAmt.innerText=10;betModal.style.display='flex';}
 function setModalAmt(a,el){tempAmt=a;document.querySelectorAll('.betOpt button').forEach(b=>b.classList.remove('a'));el.classList.add('a');totalAmt.innerText=tempAmt*tempQty;}
 function changeQty(n){tempQty+=n;if(tempQty<1)tempQty=1;qtyShow.innerText="X"+tempQty;totalAmt.innerText=tempAmt*tempQty;}
-function confirmBet(){let total=tempAmt*tempQty;if(bal<total){alert("Balance kam");return}bal-=total;myBets.push({type:tempBetType,amt:total});document.getElementById('bal').innerText=bal.toFixed(2);saveData();myBet.innerText="Bet: "+myBets.map(b=>b.type).join(", ");betModal.style.display='none';}
+function confirmBet(){let total=tempAmt*tempQty;if(bal<total){alert("Balance kam");return}bal-=total;myBets.push({type:tempBetType,amt:total});document.getElementById('bal').innerText=bal.toFixed(2);let u=getUsers();u[currentUser].bal=bal;saveUsers(u);myBet.innerText="Bet: "+myBets.map(b=>b.type).join(", ");betModal.style.display='none';}
 function closePop(){popup.style.display='none';myBets=[];myBet.innerText="Bet: -";}
-function openAdmin(){topClicks++;if(topClicks>=5){adminPassBox.style.display='flex';topClicks=0; adminPassInput.value="";}setTimeout(()=>topClicks=0,3000);}
-function checkAdminPass(){if(adminPassInput.value==ADMIN_PASSWORD){adminPassBox.style.display='none';adminBox.style.display='flex';}else{alert("Password khoto!");adminPassBox.style.display='none';}}
+function openAdmin(){topClicks++;if(topClicks>=5){adminPassBox.style.display='flex';topClicks=0;adminPassInput.value="";}setTimeout(()=>topClicks=0,3000);}
+function checkAdminPass(){if(adminPassInput.value==ADMIN_PASSWORD){adminPassBox.style.display='none';adminBox.style.display='flex';renderAdminList();}else{alert("Password khoto!");adminPassBox.style.display='none';}}
 function setAdmin(){let n=adminNum.value;let m=adminMode.value;if(n===""){nextResult=null;adminStatus.innerText="";}else{nextResult=parseInt(n);adminAlways=(m=="always");adminStatus.innerText="🔐 Next="+n+" ("+(adminAlways?"Always":"Single")+")";}adminBox.style.display='none';}
 function clearAdmin(){nextResult=null;adminAlways=false;adminStatus.innerText="";adminBox.style.display='none';}
-function start(){if(timerOn)return;timerOn=true;setInterval(()=>{time--;if(time<0){time=30;let winNum;if(nextResult!==null){winNum=nextResult;if(!adminAlways)nextResult=null;if(nextResult===null&&!adminAlways)adminStatus.innerText="";}else winNum=Math.floor(Math.random()*10);let winCol=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");let winBS=winNum>=5?"Big":"Small";hist.innerHTML=`<tr><td>${period}</td><td>${winNum}</td><td>${winBS}</td><td>${winCol}</td></tr>`+hist.innerHTML;if(myBets.length>0){let totalWin=0,totalBet=myBets.reduce((s,b)=>s+b.amt,0);myBets.forEach(b=>{let won=false;if(b.type==winCol)won=true;if(b.type==winBS)won=true;if(b.type=="Num"+winNum)won=true;if(b.type=="Green"&&[1,3,7,9].includes(winNum))won=true;if(b.type=="Red"&&[2,4,6,8].includes(winNum))won=true;if(b.type=="Violet"&&[0,5].includes(winNum))won=true;if(won){if(b.type.startsWith("Num"))totalWin+=b.amt*9;else totalWin+=b.amt*2;}});if(totalWin>0){bal+=totalWin;saveData();popTitle.innerText="YOU WIN! 🎉";popTitle.className="winC";popMsg.innerText=`Result: ${winNum} ${winCol} ${winBS}`;popAmt.innerText=`+₹${totalWin.toFixed(2)}`;}else{popTitle.innerText="YOU LOSS! 😢";popTitle.className="lossC";popMsg.innerText=`Result: ${winNum} ${winCol} ${winBS}`;popAmt.innerText=`-₹${totalBet}`;}document.getElementById('bal').innerText=bal.toFixed(2);popup.style.display='flex';}period++;}tm.innerText="00:"+(time<10?"0"+time:time);pid.innerText=period;},1000);}
+
+function renderAdminList(){
+let all=getAllDeposits(); let pend=all.filter(d=>d.status=="Processing");
+let html=""; if(pend.length==0) html="<p style='text-align:center;color:gray'>Koi pending nathi</p>";
+else pend.forEach(d=>{
+let mins=Math.floor((Date.now()-d.time)/60000);
+let left=AUTO_REJECT_MIN-mins;
+html+=`<div class="adminDepItem">
+<b>User:</b> ${d.user} <br>
+<b>Amt:</b> ₹${d.amt} | <b>UTR:</b> ${d.utr}<br>
+<b>Time:</b> ${mins} min ago | <b>Left:</b> ${left} min<br>
+<button class="accept" onclick="approveDep(${d.id})">✅ Accept</button>
+<button class="reject" onclick="rejectDep(${d.id})">❌ Reject</button>
+</div>`;
+});
+adminDepList.innerHTML=html;
+}
+
+function start(){if(timerOn)return;timerOn=true;setInterval(()=>{time--;if(time<0){time=30;let winNum;if(nextResult!==null){winNum=nextResult;if(!adminAlways)nextResult=null;if(nextResult===null&&!adminAlways)adminStatus.innerText="";}else winNum=Math.floor(Math.random()*10);let winCol=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");let winBS=winNum>=5?"Big":"Small";hist.innerHTML=`<tr><td>${period}</td><td>${winNum}</td><td>${winBS}</td><td>${winCol}</td></tr>`+hist.innerHTML;if(myBets.length>0){let totalWin=0,totalBet=myBets.reduce((s,b)=>s+b.amt,0);myBets.forEach(b=>{let won=false;if(b.type==winCol)won=true;if(b.type==winBS)won=true;if(b.type=="Num"+winNum)won=true;if(b.type=="Green"&&[1,3,7,9].includes(winNum))won=true;if(b.type=="Red"&&[2,4,6,8].includes(winNum))won=true;if(b.type=="Violet"&&[0,5].includes(winNum))won=true;if(won){if(b.type.startsWith("Num"))totalWin+=b.amt*9;else totalWin+=b.amt*2;}});if(totalWin>0){bal+=totalWin;let u=getUsers();u[currentUser].bal=bal;saveUsers(u);popTitle.innerText="YOU WIN! 🎉";popTitle.className="winC";popMsg.innerText=`Result: ${winNum} ${winCol} ${winBS}`;popAmt.innerText=`+₹${totalWin.toFixed(2)}`;}else{popTitle.innerText="YOU LOSS! 😢";popTitle.className="lossC";popMsg.innerText=`Result: ${winNum} ${winCol} ${winBS}`;popAmt.innerText=`-₹${totalBet}`;}document.getElementById('bal').innerText=bal.toFixed(2);popup.style.display='flex';}period++;}tm.innerText="00:"+(time<10?"0"+time:time);pid.innerText=period;checkAutoReject();},1000);}
+
 window.onload=()=>{let cur=localStorage.getItem("55_current");if(cur){let u=getUsers();if(u[cur]){currentUser=cur;bal=u[cur].bal;depHist=JSON.parse(localStorage.getItem("55_dep_"+cur)||"[]");withHist=JSON.parse(localStorage.getItem("55_with_"+cur)||"[]");document.getElementById('bal').innerText=bal.toFixed(2);userShow.innerText=cur;registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block';start();}}}
 </script>
 </body>
-                          </html>
+                              </html>
