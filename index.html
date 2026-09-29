@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55CLUB - Only 322533 Control & Per User Data</title>
+<title>55CLUB - 100 Deposit Rule & 2-5000 Bet</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial,sans-serif}
 body{background:#f5f5f5}
@@ -50,6 +50,9 @@ body{background:#f5f5f5}
 .authTab button{flex:1;padding:10px;border:2px solid #ff4d4d;border-radius:20px;background:white;color:#ff4d4d;font-weight:bold}
 .authTab button.active{background:#ff4d4d;color:white}
 .logoutBtn{background:#222;color:white;border:none;padding:6px 12px;border-radius:15px;font-size:11px}
+.betAmtRow{display:flex;gap:8px;margin:12px 0;justify-content:center}
+.betAmtRow button{padding:8px 12px;border:1px solid #ff4d4d;border-radius:20px;background:white;color:#ff4d4d;font-weight:bold;font-size:12px}
+.betAmtRow button.active{background:#ff4d4d;color:white}
 </style>
 </head>
 <body>
@@ -57,7 +60,7 @@ body{background:#f5f5f5}
 <div id="authModal">
 <div class="authBox">
 <h2 style="color:#ff4d4d">55CLUB</h2>
-<p style="font-size:11px;color:gray;margin-top:4px">Register / Login - Bonus ₹34</p>
+<p style="font-size:11px;color:gray;margin-top:4px">Bonus ₹34 - 1 time only!</p>
 <div class="authTab">
 <button id="loginTab" class="active" onclick="switchAuth('login')">Login</button>
 <button id="regTab" onclick="switchAuth('register')">Register</button>
@@ -72,7 +75,7 @@ body{background:#f5f5f5}
 <input id="regMobile" class="inp" type="tel" maxlength="10" placeholder="Mobile Number - 10 digit" style="text-align:left">
 <input id="regPass" class="inp" type="password" placeholder="Password" style="text-align:left">
 <input id="regCpass" class="inp" type="password" placeholder="Confirm Password" style="text-align:left">
-<button class="regbtn" style="background:#4caf50" onclick="doRegister()">Register - Get ₹34 Bonus</button>
+<button class="regbtn" style="background:#4caf50" onclick="doRegister()">Register - Get ₹34 Once</button>
 </div>
 </div>
 </div>
@@ -82,7 +85,7 @@ body{background:#f5f5f5}
 <div class="userInfoCard" id="userCard" style="display:none">
 <div>
 <b id="displayName">User</b><br>
-<span>Mobile: <span id="displayMobile">-</span></span>
+<span>Mobile: <span id="displayMobile">-</span> | Dep: ₹<span id="displayDep">0</span></span>
 </div>
 <div style="text-align:right">
 <div class="uidBox">UID: <span id="displayUID">000000</span></div>
@@ -92,6 +95,7 @@ body{background:#f5f5f5}
 
 <div class="walletCard">
 <div>₹ <b id="bal">0.00</b> | <span id="curLabel" style="color:#ff4d4d;font-weight:bold">30S</span> | <span id="curPeriodFull" style="font-size:11px">20260928100051390</span></div>
+<div style="font-size:10px;color:gray;margin-top:4px">Bet: ₹2 - ₹5000 | Deposit ₹100 karse tyare j bet lagse</div>
 <div class="dwBtns">
 <button class="btnDep" onclick="openDW('Deposit')">💰 Deposit</button>
 <button class="btnWith" onclick="openDW('Withdraw')">🏦 Withdrawal</button>
@@ -112,10 +116,28 @@ body{background:#f5f5f5}
 
 <div id="passModal"><div class="popBox" style="background:#111;color:white"><h3>🔐 Admin Access</h3><p style="font-size:11px;color:#aaa;margin-top:5px">Password enter karo</p><input id="passInput" class="inp" type="password" placeholder="Password" style="background:#222;color:white;border-color:#333"><button class="regbtn" onclick="checkPass()">Unlock</button><button onclick="passModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#333;color:white;border-radius:20px">Cancel</button><p id="passErr" style="color:#ff4d4d;font-size:11px;margin-top:8px;display:none">Wrong Password!</p></div></div>
 
-<div id="adminModal"><div class="popBox"><h3>🎮 Admin Control - UID 322533</h3><p style="font-size:10px;color:green;font-weight:bold">✅ Admin Verified: UID 322533</p><p style="font-size:10px;color:gray">Game: <b id="adminCurGame">30S</b> | Next: <span id="adminNextPeriod">51391</span></p><div class="adminSection"><select id="nextNumCtrl"><option value="-1">Random (Auto)</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select><select id="nextColorCtrl"><option value="random">Random Color</option><option value="Green">Green win</option><option value="Red">Red win</option><option value="Violet">Violet win</option></select><select id="nextBSCtrl"><option value="random">Random BS</option><option value="Big">Big win</option><option value="Small">Small win</option></select><div class="ctrlGrid"><button style="background:#3cc15f" onclick="setControl('win')">User Jitadvu</button><button style="background:#ff4d4d" onclick="setControl('loss')">User Haradvu</button></div><button class="regbtn" style="background:#ff9800" onclick="applyControl()">✅ SET</button><button class="regbtn" style="background:#607d8b" onclick="clearControl()">🔄 Random</button><div style="margin-top:12px;padding:8px;background:#e8f5e9;border-radius:8px;font-size:11px;text-align:left"><b>Current:</b> <span id="ctrlStatus">Random Mode</span></div></div><div class="adminSection"><b>💰 Balance (Is user ka):</b><input id="balCtrl" class="inp" type="number" placeholder="Amount"><button class="regbtn" style="background:#4caf50" onclick="setBalance()">SET Balance</button></div><div class="adminSection"><b>⏰ Period:</b><input id="periodCtrl" class="inp" type="number" placeholder="Period"><button class="regbtn" style="background:#9c27b0" onclick="setPeriod()">SET Period</button></div><button onclick="adminModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
+<div id="adminModal"><div class="popBox"><h3>🎮 Admin Control - UID 322533</h3><p style="font-size:10px;color:green;font-weight:bold">✅ Admin Verified</p><p style="font-size:10px;color:gray">Game: <b id="adminCurGame">30S</b> | Next: <span id="adminNextPeriod">51391</span></p><div class="adminSection"><select id="nextNumCtrl"><option value="-1">Random</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select><select id="nextColorCtrl"><option value="random">Random Color</option><option value="Green">Green win</option><option value="Red">Red win</option><option value="Violet">Violet win</option></select><select id="nextBSCtrl"><option value="random">Random BS</option><option value="Big">Big win</option><option value="Small">Small win</option></select><div class="ctrlGrid"><button style="background:#3cc15f" onclick="setControl('win')">User Jitadvu</button><button style="background:#ff4d4d" onclick="setControl('loss')">User Haradvu</button></div><button class="regbtn" style="background:#ff9800" onclick="applyControl()">✅ SET</button><button class="regbtn" style="background:#607d8b" onclick="clearControl()">🔄 Random</button><div style="margin-top:12px;padding:8px;background:#e8f5e9;border-radius:8px;font-size:11px;text-align:left"><b>Current:</b> <span id="ctrlStatus">Random Mode</span></div></div><div class="adminSection"><b>💰 Balance:</b><input id="balCtrl" class="inp" type="number" placeholder="Amount"><button class="regbtn" style="background:#4caf50" onclick="setBalance()">SET Balance</button></div><div class="adminSection"><b>⏰ Period:</b><input id="periodCtrl" class="inp" type="number" placeholder="Period"><button class="regbtn" style="background:#9c27b0" onclick="setPeriod()">SET Period</button></div><button onclick="adminModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
 
-<div id="dwModal"><div class="popBox"><h3 id="dwTitle">Deposit</h3><input id="dwAmt" class="inp" type="number" placeholder="Amount"><button class="regbtn" onclick="confirmDW()">Submit</button><div class="dwHistInModal"><h4 id="dwHistTitle">My History (Only Mine)</h4><div id="dwHistListModal" style="max-height:180px;overflow:auto"></div></div><button onclick="dwModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
-<div id="betModal"><div class="popBox"><h3 id="betTitle">Bet</h3><p id="betPeriodShow" style="font-size:11px;color:gray"></p><p>₹10</p><button class="regbtn" onclick="confirmBet()">Confirm</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
+<div id="dwModal"><div class="popBox"><h3 id="dwTitle">Deposit</h3><input id="dwAmt" class="inp" type="number" placeholder="Amount - Min 100 for betting"><button class="regbtn" onclick="confirmDW()">Submit</button><div class="dwHistInModal"><h4 id="dwHistTitle">My History</h4><div id="dwHistListModal" style="max-height:180px;overflow:auto"></div></div><button onclick="dwModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
+
+<div id="betModal"><div class="popBox">
+<h3 id="betTitle">Bet</h3>
+<p id="betPeriodShow" style="font-size:11px;color:gray"></p>
+<div style="margin-top:10px">
+<p style="font-size:12px">Bet Amount (₹2 - ₹5000):</p>
+<input id="betAmtInput" class="inp" type="number" min="2" max="5000" value="10" placeholder="2 - 5000">
+<div class="betAmtRow">
+<button onclick="setBetAmt(2)">₹2</button>
+<button onclick="setBetAmt(10)">₹10</button>
+<button onclick="setBetAmt(100)">₹100</button>
+<button onclick="setBetAmt(500)">₹500</button>
+<button onclick="setBetAmt(1000)">₹1000</button>
+</div>
+</div>
+<button class="regbtn" onclick="confirmBet()">Confirm Bet</button>
+<button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button>
+</div></div>
+
 <div id="popup"><div class="popBox"><h2 id="popTitle"></h2><p id="popMsg"></p><h3 id="popAmt"></h3><button class="regbtn" onclick="popup.style.display='none';clearBets()">OK</button></div></div>
 <div id="toast" class="toast"></div>
 
@@ -132,16 +154,10 @@ let games={
  '5m':{period:parseInt(localStorage.getItem('period_5m_final')||"51390"),time:300,hist:[],bets:[],page:1,lastTs:parseInt(localStorage.getItem('ts_5m')||Date.now()),duration:300}
 };
 function getFullPeriod(n){return BASE+"1000"+String(n).padStart(5,'0');}
-function showToast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500);}
+function showToast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',3000);}
 function getCurrentUser(){return localStorage.getItem('currentUser_55club');}
-function getCurrentUID(){
- let cur=getCurrentUser();
- if(!cur) return null;
- let users=JSON.parse(localStorage.getItem('users_55club')||"{}");
- return users[cur]?users[cur].uid:null;
-}
+function getCurrentUID(){let cur=getCurrentUser();if(!cur) return null;let users=JSON.parse(localStorage.getItem('users_55club')||"{}");return users[cur]?users[cur].uid:null;}
 function saveAll(){
- // Game periods global - sab user ke liye same
  Object.keys(games).forEach(k=>{
    localStorage.setItem('period_'+k+'_final',games[k].period);
    localStorage.setItem('hist_'+k+'_final',JSON.stringify(games[k].hist));
@@ -150,7 +166,6 @@ function saveAll(){
  });
  localStorage.setItem('control_final',JSON.stringify(nextResultControl));
  localStorage.setItem('curGame_cont',curGame);
- // Per user data
  let cur=getCurrentUser();
  if(cur){
    localStorage.setItem('bal_'+cur, bal.toString());
@@ -158,16 +173,22 @@ function saveAll(){
    localStorage.setItem('bets_'+cur+'_'+curGame, JSON.stringify(games[curGame].bets));
  }
 }
+function getTotalDeposit(cur){
+ let hist=JSON.parse(localStorage.getItem('dwHistory_'+cur)||"[]");
+ let total=0;
+ hist.forEach(h=>{if(h.type=='Deposit' && h.status!='Bonus') total+=h.amt;});
+ return total;
+}
 function loadUserData(cur){
  if(!cur) return;
  let b=localStorage.getItem('bal_'+cur);
  bal = b? parseFloat(b) : 34;
  let dh=localStorage.getItem('dwHistory_'+cur);
  dwHistory = dh? JSON.parse(dh) : [];
- // Bets load for current game
  let betKey='bets_'+cur+'_'+curGame;
  let bets=localStorage.getItem(betKey);
  games[curGame].bets = bets? JSON.parse(bets) : [];
+ document.getElementById('displayDep').innerText=getTotalDeposit(cur);
 }
 function switchAuth(t){
  document.getElementById('loginTab').classList.toggle('active',t=='login');
@@ -179,9 +200,7 @@ function generateUID(){
  let existingUIDs = JSON.parse(localStorage.getItem('uid_list_55')||"[]");
  if(!existingUIDs.includes(ADMIN_UID)){existingUIDs.push(ADMIN_UID);localStorage.setItem('uid_list_55',JSON.stringify(existingUIDs));}
  let uid;
- do{
-   uid = Math.floor(100000 + Math.random()*900000);
- }while(existingUIDs.includes(uid) || uid==ADMIN_UID);
+ do{uid = Math.floor(100000 + Math.random()*900000);}while(existingUIDs.includes(uid) || uid==ADMIN_UID);
  existingUIDs.push(uid);
  localStorage.setItem('uid_list_55',JSON.stringify(existingUIDs));
  return uid;
@@ -201,28 +220,20 @@ function doRegister(){
  let hasAdmin=false;
  Object.values(users).forEach(u=>{if(u.uid==ADMIN_UID) hasAdmin=true;});
  let uid;
- if(!hasAdmin && m=="6351058448"){ // tumhara number ho to auto admin - ya confirm se
-   uid=ADMIN_UID;
- }else if(!hasAdmin){
-   // Pahla admin - puch lo
-   if(confirm("Admin UID 322533 lena hai? OK = Admin, Cancel = Normal User")){
+ if(!hasAdmin){
+   if(confirm("Admin UID 322533 lena hai? OK=Admin, Cancel=Normal")){
      uid=ADMIN_UID;
-   }else{
-     uid=generateUID();
-   }
- }else{
-   uid=generateUID();
- }
+   }else{uid=generateUID();}
+ }else{uid=generateUID();}
  if(uid==ADMIN_UID &&!existingUIDs.includes(ADMIN_UID)){existingUIDs.push(ADMIN_UID);localStorage.setItem('uid_list_55',JSON.stringify(existingUIDs));}
  users[m]={pass:p,name:name,uid:uid};
  localStorage.setItem('users_55club',JSON.stringify(users));
- // New user ko 34 bonus - akhi game refresh
+ // 34 bonus sirf ek vaar - register pe
  localStorage.setItem('bal_'+m, "34");
- localStorage.setItem('dwHistory_'+m, JSON.stringify([]));
- // Bonus history me add karo - sirf is user ka
- let bonusHist=[{type:'Deposit',amt:34,time:new Date().toLocaleDateString('en-GB')+" "+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),status:'Bonus'}];
+ let bonusHist=[{type:'Deposit',amt:34,time:new Date().toLocaleDateString('en-GB')+" "+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),status:'Bonus - One Time'}];
  localStorage.setItem('dwHistory_'+m, JSON.stringify(bonusHist));
- showToast("Register Success UID: "+uid+" - Bonus ₹34");
+ localStorage.setItem('hasBonus_'+m, "true");
+ showToast("Register Success UID: "+uid+" - Bonus ₹34 Once");
  document.getElementById('regName').value="";document.getElementById('regMobile').value="";document.getElementById('regPass').value="";document.getElementById('regCpass').value="";
  switchAuth('login');
  document.getElementById('loginMobile').value=m;
@@ -236,10 +247,16 @@ function doLogin(){
  if(users[m].pass!==p){showToast("Password khotu che");return}
  localStorage.setItem('currentUser_55club',m);
  document.getElementById('authModal').style.display='none';
+ // Bonus dobara nahi milega - sirf load hoga
+ if(!localStorage.getItem('bal_'+m)){
+   localStorage.setItem('bal_'+m, "34");
+   let bonusHist=[{type:'Deposit',amt:34,time:new Date().toLocaleDateString('en-GB')+" "+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),status:'Bonus - One Time'}];
+   localStorage.setItem('dwHistory_'+m, JSON.stringify(bonusHist));
+ }
  loadUserData(m);
  showUserInfo(m);
  document.getElementById('bal').innerText=bal.toFixed(2);
- showToast("Login Success - UID: "+users[m].uid);
+ showToast("Login Success UID: "+users[m].uid+" - Bonus var var nahi milega");
  initGame();
 }
 function showUserInfo(m){
@@ -253,75 +270,27 @@ function showUserInfo(m){
  loadUserData(m);
  document.getElementById('bal').innerText=bal.toFixed(2);
 }
-function doLogout(){
- let cur=getCurrentUser();
- if(cur){saveAll();}
- if(confirm('Logout?')){localStorage.removeItem('currentUser_55club');location.reload();}
-}
+function doLogout(){let cur=getCurrentUser();if(cur){saveAll();}if(confirm('Logout?')){localStorage.removeItem('currentUser_55club');location.reload();}}
 function checkAuth(){
  let existingUIDs = JSON.parse(localStorage.getItem('uid_list_55')||"[]");
  if(!existingUIDs.includes(ADMIN_UID)){existingUIDs.push(ADMIN_UID);localStorage.setItem('uid_list_55',JSON.stringify(existingUIDs));}
  let u=getCurrentUser();
- if(u){
-   document.getElementById('authModal').style.display='none';
-   showUserInfo(u);
-   initGame();
- }else{
-   document.getElementById('authModal').style.display='flex';
- }
+ if(u){document.getElementById('authModal').style.display='none';showUserInfo(u);initGame();}else{document.getElementById('authModal').style.display='flex';}
 }
 function secretTap(){
- // SIRF ADMIN UID 322533 HI TAP KAR SAKE - BAKI KO KUCH NAHI HOGA
  let uid=getCurrentUID();
- if(uid!=ADMIN_UID){
-   // Koi bhi response nahi - silent - user ko pata hi nahi chalega control hai
-   return;
- }
+ if(uid!=ADMIN_UID){return;}
  let now=Date.now();
  if(now-lastTapTime>3000){tapCount=0;}
  tapCount++;lastTapTime=now;
- if(tapCount>=5){
-   tapCount=0;
-   document.getElementById('passModal').style.display='flex';
-   document.getElementById('passInput').value="";
-   document.getElementById('passErr').style.display='none';
- }
+ if(tapCount>=5){tapCount=0;document.getElementById('passModal').style.display='flex';document.getElementById('passInput').value="";document.getElementById('passErr').style.display='none';}
 }
-function checkPass(){
- let uid=getCurrentUID();
- if(uid!=ADMIN_UID){return;}
- let p=document.getElementById('passInput').value;
- if(p=="9638"){
-   document.getElementById('passModal').style.display='none';
-   openAdmin();
- }else{
-   document.getElementById('passErr').style.display='block';
-   document.getElementById('passInput').value="";
- }
-}
-function openAdmin(){
- if(getCurrentUID()!=ADMIN_UID){return;}
- document.getElementById('adminCurGame').innerText=curGame.toUpperCase();
- document.getElementById('adminNextPeriod').innerText=games[curGame].period+1;
- let ctrl=nextResultControl[curGame];
- if(ctrl){document.getElementById('ctrlStatus').innerHTML=`${curGame.toUpperCase()} - Num ${ctrl.num!=-1?ctrl.num:'R'} | ${ctrl.color} | ${ctrl.bs}`;document.getElementById('nextNumCtrl').value=ctrl.num;document.getElementById('nextColorCtrl').value=ctrl.color;document.getElementById('nextBSCtrl').value=ctrl.bs;}else{document.getElementById('ctrlStatus').innerText='Random Mode';document.getElementById('nextNumCtrl').value=-1;document.getElementById('nextColorCtrl').value='random';document.getElementById('nextBSCtrl').value='random';}
- document.getElementById('adminModal').style.display='flex';
-}
+function checkPass(){let uid=getCurrentUID();if(uid!=ADMIN_UID){return;}let p=document.getElementById('passInput').value;if(p=="9638"){document.getElementById('passModal').style.display='none';openAdmin();}else{document.getElementById('passErr').style.display='block';document.getElementById('passInput').value="";}}
+function openAdmin(){if(getCurrentUID()!=ADMIN_UID){return;}document.getElementById('adminCurGame').innerText=curGame.toUpperCase();document.getElementById('adminNextPeriod').innerText=games[curGame].period+1;let ctrl=nextResultControl[curGame];if(ctrl){document.getElementById('ctrlStatus').innerHTML=`${curGame.toUpperCase()} - Num ${ctrl.num!=-1?ctrl.num:'R'} | ${ctrl.color} | ${ctrl.bs}`;document.getElementById('nextNumCtrl').value=ctrl.num;document.getElementById('nextColorCtrl').value=ctrl.color;document.getElementById('nextBSCtrl').value=ctrl.bs;}else{document.getElementById('ctrlStatus').innerText='Random Mode';document.getElementById('nextNumCtrl').value=-1;document.getElementById('nextColorCtrl').value='random';document.getElementById('nextBSCtrl').value='random';}document.getElementById('adminModal').style.display='flex';}
 function applyControl(){if(getCurrentUID()!=ADMIN_UID){return;}let num=parseInt(document.getElementById('nextNumCtrl').value);let col=document.getElementById('nextColorCtrl').value;let bs=document.getElementById('nextBSCtrl').value;nextResultControl[curGame]={num:num,color:col,bs:bs};saveAll();showToast(curGame.toUpperCase()+" SET");openAdmin();}
 function clearControl(){if(getCurrentUID()!=ADMIN_UID){return;}nextResultControl[curGame]=null;saveAll();showToast("Random Mode");openAdmin();}
 function setControl(type){if(getCurrentUID()!=ADMIN_UID){return;}let g=games[curGame];if(g.bets.length==0){showToast("Pela bet karavo");return}if(type=='win'){let userBet=g.bets[0].type;if(userBet.includes('Num')){nextResultControl[curGame]={num:parseInt(userBet.replace('Num','')),color:'random',bs:'random'};}else if(['Green','Red','Violet'].includes(userBet)){nextResultControl[curGame]={num:-1,color:userBet,bs:'random'};}else{nextResultControl[curGame]={num:-1,color:'random',bs:userBet};}}else{let userBet=g.bets[0].type;if(userBet=='Green'){nextResultControl[curGame]={num:-1,color:'Red',bs:'random'};}else if(userBet=='Red'){nextResultControl[curGame]={num:-1,color:'Green',bs:'random'};}else if(userBet=='Big'){nextResultControl[curGame]={num:-1,color:'random',bs:'Small'};}else if(userBet=='Small'){nextResultControl[curGame]={num:-1,color:'random',bs:'Big'};}else{nextResultControl[curGame]={num:userBet=='Num0'?1:0,color:'random',bs:'random'};}}saveAll();showToast(type=='win'?'Jitse':'Harse');openAdmin();}
-function setBalance(){
- if(getCurrentUID()!=ADMIN_UID){return;}
- let v=parseFloat(document.getElementById('balCtrl').value);
- if(v>=0){
-   let cur=getCurrentUser();
-   bal=v;
-   document.getElementById('bal').innerText=bal.toFixed(2);
-   localStorage.setItem('bal_'+cur, bal.toString());
-   saveAll();
-   showToast("Bal SET ₹"+v+" for UID "+getCurrentUID());
- }
-}
+function setBalance(){if(getCurrentUID()!=ADMIN_UID){return;}let v=parseFloat(document.getElementById('balCtrl').value);if(v>=0){let cur=getCurrentUser();bal=v;document.getElementById('bal').innerText=bal.toFixed(2);localStorage.setItem('bal_'+cur, bal.toString());saveAll();showToast("Bal SET ₹"+v);}}
 function setPeriod(){if(getCurrentUID()!=ADMIN_UID){return;}let v=parseInt(document.getElementById('periodCtrl').value);if(v>0){games[curGame].period=v;saveAll();renderHist(curGame);document.getElementById('adminNextPeriod').innerText=v+1;showToast("Period "+v);}}
 function openDW(type){
  dwType=type;
@@ -329,10 +298,10 @@ function openDW(type){
  loadUserData(cur);
  document.getElementById('dwTitle').innerText=type+" - My Account Only";
  document.getElementById('dwAmt').value="";
- document.getElementById('dwHistTitle').innerText=type+" - My History Only";
- let filtered=dwHistory.filter(h=>h.type==type || (type=='Deposit' && h.status=='Bonus'));
+ document.getElementById('dwHistTitle').innerText=type+" - My History Only - Total Dep: ₹"+getTotalDeposit(cur);
+ let filtered=dwHistory.filter(h=>h.type==type || (type=='Deposit'));
  let list=document.getElementById('dwHistListModal');
- if(filtered.length==0){list.innerHTML=`<div style="padding:10px;text-align:center;color:gray;font-size:11px">No ${type} - Only your data</div>`;}
+ if(filtered.length==0){list.innerHTML=`<div style="padding:10px;text-align:center;color:gray;font-size:11px">No ${type}</div>`;}
  else{let html="";filtered.slice(0,30).forEach(h=>{html+=`<div class="dwRow"><div>${h.time}</div><div style="text-align:right"><b style="color:${h.type=='Deposit'?'#3cc15f':'#ff4d4d'}">${h.type=='Deposit'?'+':'-'}₹${h.amt}</b> - <small style="color:green">${h.status}</small></div></div>`;});list.innerHTML=html;}
  document.getElementById('dwModal').style.display='flex';
 }
@@ -342,14 +311,16 @@ function confirmDW(){
  loadUserData(cur);
  let amt=parseFloat(document.getElementById('dwAmt').value);
  if(!amt||amt<=0){showToast("Amount lakh");return}
+ if(dwType=='Deposit' && amt<100){showToast("Deposit Min ₹100 - Betting ke liye");return}
  let now=new Date();
  let timeStr=now.toLocaleDateString('en-GB')+" "+now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
  if(dwType=='Deposit'){
    bal+=amt;
    dwHistory.unshift({type:'Deposit',amt:amt,time:timeStr,status:'Success'});
-   showToast("Deposit ₹"+amt+" - Only you");
+   showToast("Deposit ₹"+amt+" - Ab bet laga sakte ho");
  }else{
-   if(amt>bal){showToast("Low balance - You have ₹"+bal);return}
+   if(amt>bal){showToast("Low balance ₹"+bal);return}
+   if(amt<2){showToast("Min withdraw ₹2");return}
    bal-=amt;
    dwHistory.unshift({type:'Withdraw',amt:amt,time:timeStr,status:'Success'});
    showToast("Withdraw ₹"+amt);
@@ -419,26 +390,44 @@ function renderHist(type){
 }
 function prevPage(t){if(games[t].page>1){games[t].page--;renderHist(t);}}
 function nextPage(t){if(games[t].page<Math.ceil(games[t].hist.length/PER_PAGE)){games[t].page++;renderHist(t);}}
+function setBetAmt(a){document.getElementById('betAmtInput').value=a;}
 function bet(type){
+ let cur=getCurrentUser();
+ if(!cur) return;
+ loadUserData(cur);
+ // Check deposit 100 rule - 34 bonus se bet nahi lagega
+ let totalDep=getTotalDeposit(cur);
+ if(totalDep<100){
+   showToast("⛔ Pehle ₹100 Deposit karo - 34 Bonus se bet nahi lagega - Deposit: ₹"+totalDep+"/100");
+   openDW('Deposit');
+   return;
+ }
  if(games[curGame].time<=5){showToast("Last 5 sec band");return}
  tempBet=type;
- document.getElementById('betTitle').innerText=type+" ("+curGame.toUpperCase()+") - ₹10";
- document.getElementById('betPeriodShow').innerText="Period: "+getFullPeriod(games[curGame].period);
+ document.getElementById('betTitle').innerText=type+" ("+curGame.toUpperCase()+")";
+ document.getElementById('betPeriodShow').innerText="Period: "+getFullPeriod(games[curGame].period)+" | Balance: ₹"+bal;
+ document.getElementById('betAmtInput').value=10;
  document.getElementById('betModal').style.display='flex';
 }
 function confirmBet(){
  let cur=getCurrentUser();
  if(!cur) return;
  loadUserData(cur);
- if(bal<10){showToast("Low bal ₹"+bal);return}
- bal-=10;
+ let totalDep=getTotalDeposit(cur);
+ if(totalDep<100){showToast("Pehle ₹100 Deposit karo");return;}
+ let amt=parseFloat(document.getElementById('betAmtInput').value);
+ if(!amt || amt<2){showToast("Min Bet ₹2");return}
+ if(amt>5000){showToast("Max Bet ₹5000");return}
+ if(amt>bal){showToast("Low balance ₹"+bal+" - Bet ₹"+amt+" nahi lag sakta");return}
+ if(amt>5000){showToast("Max ₹5000");return}
+ bal-=amt;
  document.getElementById('bal').innerText=bal.toFixed(2);
- games[curGame].bets.push({type:tempBet,amt:10,period:games[curGame].period});
+ games[curGame].bets.push({type:tempBet,amt:amt,period:games[curGame].period});
  localStorage.setItem('bal_'+cur, bal.toString());
  localStorage.setItem('bets_'+cur+'_'+curGame, JSON.stringify(games[curGame].bets));
  saveAll();
  document.getElementById('betModal').style.display='none';
- showToast(tempBet+" placed - Only your bet");
+ showToast(tempBet+" ₹"+amt+" placed - Range 2-5000");
 }
 function clearBets(){
  let cur=getCurrentUser();
@@ -488,7 +477,6 @@ function startAll(){
         let curFull=getFullPeriod(curShort);
         g.hist.unshift({shortPeriod:curShort,fullPeriod:curFull,num:winNum,bs:winBS,color:winColor});
         if(g.hist.length>200) g.hist.pop();
-        // Check all logged in users? For simplicity, only current user gets win if betting - game same for all users
         let curUser=getCurrentUser();
         if(curUser){
           let curBetsKey='bets_'+curUser+'_'+type;
@@ -507,7 +495,6 @@ function startAll(){
               if(b.type=="Violet"&&[0,5].includes(winNum))won=true;
               if(won){if(b.type.startsWith("Num"))totalWin+=b.amt*9;else totalWin+=b.amt*2;}
             });
-            // Load balance for this user
             let userBal=parseFloat(localStorage.getItem('bal_'+curUser)||"0");
             let userDW=JSON.parse(localStorage.getItem('dwHistory_'+curUser)||"[]");
             if(totalWin>0){
@@ -535,9 +522,7 @@ function startAll(){
             localStorage.setItem('bal_'+curUser, userBal.toString());
             localStorage.setItem('dwHistory_'+curUser, JSON.stringify(userDW));
             localStorage.setItem(curBetsKey, JSON.stringify([]));
-            if(curUser==getCurrentUser()){
-              g.bets=[];
-            }
+            if(curUser==getCurrentUser()){g.bets=[];}
           }
         }
         g.period++; g.time=g.duration; g.lastTs=Date.now(); g.page=1;
