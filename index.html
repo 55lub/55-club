@@ -2,12 +2,11 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55CLUB - Order Number + UTR Added</title>
+<title>55CLUB - Final</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial,sans-serif}
 body{background:#f5f5f5}
-.topHead{background:#ff4d4d;color:white;padding:12px;text-align:center;font-weight:bold;user-select:none;font-size:18px;letter-spacing:1px;display:flex;justify-content:space-between;align-items:center}
-.userInfoCard{background:white;margin:10px;border-radius:15px;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px #0001;border-left:4px solid #ff4d4d}
+.topHead{background:#ff4d4d;color:white;padding:12px;text-align:center;font-weight:bold;display:flex;justify-content:space-between;align-items:center}
 .walletCard{background:white;margin:10px;border-radius:20px;padding:15px;text-align:center;box-shadow:0 2px 10px #0001}
 .dwBtns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
 .dwBtns button{flex:1;min-width:80px;padding:12px;border:none;border-radius:12px;font-weight:bold;color:white;font-size:13px;cursor:pointer}
@@ -16,7 +15,6 @@ body{background:#f5f5f5}
 .gameTop{background:#ff4d4d;margin:10px;border-radius:15px;padding:12px;color:white;display:flex;justify-content:space-between;align-items:center}
 .gameTop.g1m{background:#4caf50}.gameTop.g3m{background:#ff9800}.gameTop.g5m{background:#9c27b0}
 .timeBox{display:flex;gap:4px;align-items:center}.timeBox b{background:white;color:#333;padding:6px 8px;border-radius:6px;font-size:18px;min-width:28px;text-align:center}
-.periodSmall{font-size:10px;opacity:0.9}
 .playArea{background:white;margin:0 10px;border-radius:15px;padding:12px;position:relative;overflow:hidden}
 .colorBtns{display:flex;gap:10px;margin:10px 0}.colorBtns button{flex:1;padding:12px;border:none;border-radius:8px;color:white;font-weight:bold}.cG{background:#3cc15f}.cV{background:#9c27b0}.cR{background:#ff4d4d}
 .numGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:15px 0}.numGrid button{width:52px;height:52px;border-radius:50%;border:3px solid;font-weight:bold;font-size:18px;background:white;cursor:pointer}
@@ -30,12 +28,11 @@ body{background:#f5f5f5}
 .pageInfo{font-size:10px;font-weight:bold;color:#ff4d4d;background:white;padding:5px 10px;border-radius:15px;border:1px solid #ff4d4d}
 .countOverlay{position:absolute;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:10;gap:15px}
 .countBox{background:white;width:70px;height:70px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:bold;color:#ff4d4d}
-#popup,#betModal,#dwModal,#adminModal,#passModal,#authModal,#myHistModal,#depMethodModal,#utrModal,#adminDepModal,#withMethodModal,#adminWithModal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:9999}
+#popup,#betModal,#adminModal,#passModal,#authModal,#myHistModal,#depMethodModal,#utrModal,#adminDepModal,#withMethodModal,#adminWithModal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:9999}
 .popBox{background:white;width:92%;max-width:440px;border-radius:20px;padding:20px;text-align:center;max-height:90vh;overflow:auto}
 .regbtn{width:100%;padding:14px;background:#ff4d4d;border:none;border-radius:25px;color:white;font-weight:bold;margin-top:10px}
 .inp,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-top:10px;font-size:16px;text-align:center}
-.dwHistInModal{margin-top:15px;text-align:left;border-top:1px solid #eee;padding-top:10px}
-.dwRow{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f5f5f5;font-size:11px}
+.dwRow{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f5f5f5;font-size:12px;align-items:center}
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:12px 20px;border-radius:25px;z-index:10000;display:none}
 .gameSection{display:none}.gameSection.active{display:block}
 .adminSection{background:#fff3e0;border:2px dashed #ff9800;border-radius:12px;padding:12px;margin-top:10px;text-align:left}
@@ -48,7 +45,6 @@ body{background:#f5f5f5}
 .betAmtRow{display:flex;gap:8px;margin:12px 0;justify-content:center;flex-wrap:wrap}
 .betAmtRow button{padding:8px 12px;border:1px solid #ff4d4d;border-radius:20px;background:white;color:#ff4d4d;font-weight:bold;font-size:12px}
 .myHistRow{display:grid;grid-template-columns:1fr 0.7fr 0.6fr 0.7fr;padding:10px 8px;border-bottom:1px solid #f0f0f0;font-size:11px;align-items:center}
-.myHistHeader{background:#2196f3;color:white;display:grid;grid-template-columns:1fr 0.7fr 0.6fr 0.7fr;padding:10px 8px;font-size:11px;font-weight:bold;border-radius:10px 10px 0 0}
 .winTag{background:#3cc15f;color:white;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:bold}
 .lossTag{background:#ff4d4d;color:white;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:bold}
 .depOpt{display:flex;gap:10px;margin:15px 0}
@@ -58,8 +54,13 @@ body{background:#f5f5f5}
 .amtGrid button{padding:12px;border:2px solid #ff4d4d;border-radius:12px;background:white;color:#ff4d4d;font-weight:bold}
 .amtGrid button.active{background:#ff4d4d;color:white}
 .qrBox{background:#f9f9f9;border:2px dashed #3cc15f;border-radius:15px;padding:15px;margin:10px 0}
-.pendingRow{background:#fff8e1;border:1px solid #ffcc02;border-radius:12px;padding:10px;margin:8px 0;text-align:left;font-size:11px}
+.pendingRow{background:#fff8e1;border:1px solid #ffcc02;border-radius:12px;padding:12px;margin:8px 0;text-align:left;font-size:11px}
 .notifBell{background:#ff9800;color:white;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:bold;cursor:pointer;display:none;margin-left:6px}
+.statusSucc{background:#3cc15f;color:white;padding:4px 12px;border-radius:12px;font-size:11px;font-weight:bold}
+.statusProc{background:#ff9800;color:white;padding:4px 12px;border-radius:12px;font-size:11px;font-weight:bold}
+.statusRej{background:#ff4d4d;color:white;padding:4px 12px;border-radius:12px;font-size:11px;font-weight:bold}
+.uidBox{background:#fff0f0;padding:6px 10px;border-radius:20px;font-size:11px;font-weight:bold;color:#ff4d4d;border:1px solid #ffcccc}
+.userInfoCard{background:white;margin:10px;border-radius:15px;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px #0001;border-left:4px solid #ff4d4d}
 </style>
 </head>
 <body>
@@ -67,7 +68,6 @@ body{background:#f5f5f5}
 <div id="authModal">
 <div class="authBox">
 <h2 style="color:#ff4d4d">55CLUB</h2>
-<p style="font-size:11px;color:gray;margin-top:4px">Bonus ₹34 - 1 time only!</p>
 <div class="authTab">
 <button id="loginTab" class="active" onclick="switchAuth('login')">Login</button>
 <button id="regTab" onclick="switchAuth('register')">Register</button>
@@ -79,10 +79,10 @@ body{background:#f5f5f5}
 </div>
 <div id="registerForm" style="display:none">
 <input id="regName" class="inp" type="text" placeholder="User Name" style="text-align:left">
-<input id="regMobile" class="inp" type="tel" maxlength="10" placeholder="Mobile Number - 10 digit" style="text-align:left">
+<input id="regMobile" class="inp" type="tel" maxlength="10" placeholder="Mobile Number" style="text-align:left">
 <input id="regPass" class="inp" type="password" placeholder="Password" style="text-align:left">
 <input id="regCpass" class="inp" type="password" placeholder="Confirm Password" style="text-align:left">
-<button class="regbtn" style="background:#4caf50" onclick="doRegister()">Register - Get ₹34 Once</button>
+<button class="regbtn" style="background:#4caf50" onclick="doRegister()">Register - Get ₹34</button>
 </div>
 </div>
 </div>
@@ -90,18 +90,12 @@ body{background:#f5f5f5}
 <div class="topHead" id="secretHead" onclick="secretTap()"><span>55CLUB</span><div><span id="adminNotifDep" class="notifBell" onclick="openAdminDeposits()">🔔 Dep <span id="notifCountDep">0</span></span><span id="adminNotifWith" class="notifBell" style="background:#2196f3" onclick="openAdminWithdrawals()">🔔 With <span id="notifCountWith">0</span></span></div></div>
 
 <div class="userInfoCard" id="userCard" style="display:none">
-<div>
-<b id="displayName">User</b><br>
-<span>Mobile: <span id="displayMobile">-</span> | Dep: ₹<span id="displayDep">0</span></span>
-</div>
-<div style="text-align:right">
-<div class="uidBox">UID: <span id="displayUID">000000</span></div>
-<div style="margin-top:6px"><button class="logoutBtn" onclick="doLogout()">Logout</button></div>
-</div>
+<div><b id="displayName">User</b><br><span>Mobile: <span id="displayMobile">-</span> | Dep: ₹<span id="displayDep">0</span></span></div>
+<div style="text-align:right"><div class="uidBox">UID: <span id="displayUID">000000</span></div><div style="margin-top:6px"><button class="logoutBtn" onclick="doLogout()">Logout</button></div></div>
 </div>
 
 <div class="walletCard">
-<div>₹ <b id="bal">0.00</b> | <span id="curLabel" style="color:#ff4d4d;font-weight:bold">30S</span> | <span id="curPeriodFull" style="font-size:11px">20260928100051390</span></div>
+<div>₹ <b id="bal">0.00</b> | <span id="curLabel" style="color:#ff4d4d;font-weight:bold">30S</span></div>
 <div class="dwBtns">
 <button class="btnDep" onclick="openDepositMethods()">💰 Deposit</button>
 <button class="btnWith" onclick="openWithdrawMethods()">🏦 Withdrawal</button>
@@ -116,20 +110,19 @@ body{background:#f5f5f5}
 <div id="tab5" onclick="switchGame('5m')">WinGo<br>5 Min</div>
 </div>
 
-<div id="g30" class="gameSection active"><div class="gameTop"><div><div>WinGo 30sec</div><div class="periodSmall" id="pid30">20260928100051390</div><div style="font-size:9px">Short: <span id="short30">51390</span> -> Next: <span id="next30">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b>0</b><b>0</b><span>:</span><b id="t30_1">3</b><b id="t30_2">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov30"><div class="countBox" id="ov30_1">0</div><div class="countBox" id="ov30_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist30"></div><div class="pageCtrl"><button onclick="prevPage('30s')">◀</button><span id="info30" class="pageInfo"></span><button onclick="nextPage('30s')">▶</button></div></div></div>
-<div id="g1" class="gameSection"><div class="gameTop g1m"><div><div>WinGo 1 Min</div><div class="periodSmall" id="pid1">20260928100051390</div><div style="font-size:9px">Short: <span id="short1">51390</span> -> Next: <span id="next1">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t1_1">0</b><b id="t1_2">1</b><span>:</span><b id="t1_3">0</b><b id="t1_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov1"><div class="countBox" id="ov1_1">0</div><div class="countBox" id="ov1_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist1"></div><div class="pageCtrl"><button onclick="prevPage('1m')">◀</button><span id="info1" class="pageInfo"></span><button onclick="nextPage('1m')">▶</button></div></div></div>
-<div id="g3" class="gameSection"><div class="gameTop g3m"><div><div>WinGo 3 Min</div><div class="periodSmall" id="pid3">20260928100051390</div><div style="font-size:9px">Short: <span id="short3">51390</span> -> Next: <span id="next3">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t3_1">0</b><b id="t3_2">3</b><span>:</span><b id="t3_3">0</b><b id="t3_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov3"><div class="countBox" id="ov3_1">0</div><div class="countBox" id="ov3_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist3"></div><div class="pageCtrl"><button onclick="prevPage('3m')">◀</button><span id="info3" class="pageInfo"></span><button onclick="nextPage('3m')">▶</button></div></div></div>
-<div id="g5" class="gameSection"><div class="gameTop g5m"><div><div>WinGo 5 Min</div><div class="periodSmall" id="pid5">20260928100051390</div><div style="font-size:9px">Short: <span id="short5">51390</span> -> Next: <span id="next5">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t5_1">0</b><b id="t5_2">5</b><span>:</span><b id="t5_3">0</b><b id="t5_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov5"><div class="countBox" id="ov5_1">0</div><div class="countBox" id="ov5_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist5"></div><div class="pageCtrl"><button onclick="prevPage('5m')">◀</button><span id="info5" class="pageInfo"></span><button onclick="nextPage('5m')">▶</button></div></div></div>
+<div id="g30" class="gameSection active"><div class="gameTop"><div>WinGo 30sec</div><div class="timeBox"><b>0</b><b>0</b><span>:</span><b id="t30_1">3</b><b id="t30_2">0</b></div></div><div class="playArea"><div class="countOverlay" id="ov30"><div class="countBox" id="ov30_1">0</div><div class="countBox" id="ov30_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist30"></div><div class="pageCtrl"><button onclick="prevPage('30s')">◀</button><span id="info30" class="pageInfo"></span><button onclick="nextPage('30s')">▶</button></div></div></div>
+<div id="g1" class="gameSection"><div class="gameTop g1m"><div>WinGo 1 Min</div><div class="timeBox"><b id="t1_1">0</b><b id="t1_2">1</b><span>:</span><b id="t1_3">0</b><b id="t1_4">0</b></div></div><div class="playArea"><div class="countOverlay" id="ov1"><div class="countBox" id="ov1_1">0</div><div class="countBox" id="ov1_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist1"></div><div class="pageCtrl"><button onclick="prevPage('1m')">◀</button><span id="info1" class="pageInfo"></span><button onclick="nextPage('1m')">▶</button></div></div></div>
+<div id="g3" class="gameSection"><div class="gameTop g3m"><div>WinGo 3 Min</div><div class="timeBox"><b id="t3_1">0</b><b id="t3_2">3</b><span>:</span><b id="t3_3">0</b><b id="t3_4">0</b></div></div><div class="playArea"><div class="countOverlay" id="ov3"><div class="countBox" id="ov3_1">0</div><div class="countBox" id="ov3_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist3"></div><div class="pageCtrl"><button onclick="prevPage('3m')">◀</button><span id="info3" class="pageInfo"></span><button onclick="nextPage('3m')">▶</button></div></div></div>
+<div id="g5" class="gameSection"><div class="gameTop g5m"><div>WinGo 5 Min</div><div class="timeBox"><b id="t5_1">0</b><b id="t5_2">5</b><span>:</span><b id="t5_3">0</b><b id="t5_4">0</b></div></div><div class="playArea"><div class="countOverlay" id="ov5"><div class="countBox" id="ov5_1">0</div><div class="countBox" id="ov5_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist5"></div><div class="pageCtrl"><button onclick="prevPage('5m')">◀</button><span id="info5" class="pageInfo"></span><button onclick="nextPage('5m')">▶</button></div></div></div>
 
 <div id="depMethodModal"><div class="popBox">
 <h3>💰 Deposit Method</h3>
 <div class="depOpt">
-<button id="qrBtn" onclick="selectDepMethod('QR')"><div>📷</div>QR Pay</button>
-<button id="upiBtn" onclick="selectDepMethod('UPI')"><div>💳</div>UPI Pay</button>
+<button id="qrBtn" onclick="selectDepMethod('QR')">📷 QR Pay</button>
+<button id="upiBtn" onclick="selectDepMethod('UPI')">💳 UPI Pay</button>
 </div>
 <div id="qrShow" style="display:none" class="qrBox"><div style="width:150px;height:150px;background:white;border:2px solid #333;margin:10px auto;display:flex;align-items:center;justify-content:center;font-size:40px">QR</div><p style="font-size:11px">UPI ID: 55club@upi</p></div>
 <div id="upiShow" style="display:none" class="qrBox"><p>UPI ID: <b>55club@upi</b></p><button onclick="copyUPI()" style="padding:6px 12px;border:none;background:#3cc15f;color:white;border-radius:10px;margin-top:8px">Copy UPI</button></div>
-<p style="font-size:12px;font-weight:bold;margin-top:15px">Select Amount:</p>
 <div class="amtGrid">
 <button onclick="selectAmt(100)">₹100</button><button onclick="selectAmt(300)">₹300</button><button onclick="selectAmt(400)">₹400</button><button onclick="selectAmt(500)">₹500</button><button onclick="selectAmt(1000)">₹1000</button><button onclick="selectAmt(2000)">₹2000</button><button onclick="selectAmt(4000)">₹4000</button>
 </div>
@@ -137,63 +130,32 @@ body{background:#f5f5f5}
 <div style="margin-top:12px;padding:8px;background:#e8f5e9;border-radius:10px;font-size:11px">Selected: <b id="selMethod">None</b> | Amount: ₹<b id="selAmt">0</b></div>
 <button class="regbtn" style="background:#3cc15f" onclick="proceedToUTR()">Pay Now → Enter UTR</button>
 <button onclick="depMethodModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button>
-<div style="margin-top:15px;text-align:left;border-top:1px solid #eee;padding-top:10px">
-<h4 style="font-size:12px">📜 My Deposit History - Order No + UTR</h4>
-<div id="depHistInDepModal" style="max-height:160px;overflow:auto;margin-top:8px"></div>
+<div style="margin-top:15px;text-align:left;border-top:2px solid #ff4d4d;padding-top:10px">
+<h4 style="font-size:13px;color:#ff4d4d">📜 Deposit History - Order No + Amount + Status</h4>
+<div id="depHistInDepModal" style="max-height:200px;overflow:auto;margin-top:8px"></div>
 </div>
 </div></div>
 
 <div id="utrModal"><div class="popBox">
-<h3>✅ Enter Order No & UTR</h3>
+<h3>✅ Enter UTR</h3>
 <div style="text-align:left;background:#f5f5f5;padding:10px;border-radius:10px;margin-top:10px;font-size:11px">
-Method: <b id="utrMethodShow">-</b><br>
-Amount: ₹<b id="utrAmtShow">0</b><br>
+Method: <b id="utrMethodShow">-</b> | Amount: ₹<b id="utrAmtShow">0</b><br>
 Order No: <b id="utrOrderShow" style="color:#ff4d4d">-</b><br>
-UID: <b id="utrUIDShow">-</b><br>
-Mobile: <b id="utrMobileShow">-</b>
+UID: <b id="utrUIDShow">-</b>
 </div>
 <input id="utrInput" class="inp" type="text" placeholder="Enter UTR / Transaction ID">
-<p style="font-size:10px;color:orange;margin-top:8px">⏳ 5 min me Admin accept karega - Order No + UTR Admin ko jayega</p>
-<button class="regbtn" style="background:#2196f3" onclick="submitUTR()">Submit UTR for Approval</button>
+<button class="regbtn" style="background:#2196f3" onclick="submitUTR()">Submit UTR</button>
 <button onclick="utrModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button>
 </div></div>
 
-<div id="withMethodModal"><div class="popBox">
-<h3>🏦 Withdrawal Method</h3>
-<div class="depOpt">
-<button id="withUpiBtn" onclick="selectWithMethod('UPI')"><div>💳</div>UPI</button>
-<button id="withBankBtn" onclick="selectWithMethod('BANK')"><div>🏦</div>Bank Account</button>
-</div>
-<div id="withUpiShow" style="display:none;text-align:left"><input id="withUpiInput" class="inp" type="text" placeholder="Enter UPI ID" style="text-align:left"></div>
-<div id="withBankShow" style="display:none;text-align:left">
-<input id="withAccName" class="inp" type="text" placeholder="Account Holder Name" style="text-align:left">
-<input id="withAccNo" class="inp" type="text" placeholder="Account Number" style="text-align:left">
-<input id="withIfsc" class="inp" type="text" placeholder="IFSC Code" style="text-align:left">
-<input id="withBankName" class="inp" type="text" placeholder="Bank Name" style="text-align:left">
-</div>
-<input id="withAmtInput" class="inp" type="number" placeholder="Amount - Min 100">
-<div class="betAmtRow"><button onclick="setWithAmt(100)">₹100</button><button onclick="setWithAmt(500)">₹500</button><button onclick="setWithAmt(1000)">₹1000</button><button onclick="setWithAmt(2000)">₹2000</button></div>
-<button class="regbtn" style="background:#ff9800" onclick="submitWithdrawal()">Submit Withdrawal</button>
-<button onclick="withMethodModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button>
-<div style="margin-top:15px;text-align:left;border-top:1px solid #eee;padding-top:10px"><h4 style="font-size:12px">📜 My Withdrawal History</h4><div id="withHistInWithModal" style="max-height:120px;overflow:auto;margin-top:8px"></div></div>
-</div></div>
+<div id="withMethodModal"><div class="popBox"><h3>🏦 Withdrawal</h3><div class="depOpt"><button id="withUpiBtn" onclick="selectWithMethod('UPI')">💳 UPI</button><button id="withBankBtn" onclick="selectWithMethod('BANK')">🏦 Bank</button></div><div id="withUpiShow" style="display:none"><input id="withUpiInput" class="inp" type="text" placeholder="Enter UPI ID" style="text-align:left"></div><div id="withBankShow" style="display:none"><input id="withAccName" class="inp" type="text" placeholder="Account Holder" style="text-align:left"><input id="withAccNo" class="inp" type="text" placeholder="Account Number" style="text-align:left"><input id="withIfsc" class="inp" type="text" placeholder="IFSC" style="text-align:left"><input id="withBankName" class="inp" type="text" placeholder="Bank Name" style="text-align:left"></div><input id="withAmtInput" class="inp" type="number" placeholder="Amount - Min 100"><div class="betAmtRow"><button onclick="setWithAmt(100)">₹100</button><button onclick="setWithAmt(500)">₹500</button><button onclick="setWithAmt(1000)">₹1000</button><button onclick="setWithAmt(2000)">₹2000</button></div><button class="regbtn" style="background:#ff9800" onclick="submitWithdrawal()">Submit Withdrawal</button><button onclick="withMethodModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
 
-<div id="adminDepModal"><div class="popBox" style="max-width:480px">
-<h3>🔔 Admin Deposits - UID 322533 - Order No + UTR</h3>
-<div id="adminDepList" style="max-height:400px;overflow:auto;text-align:left;margin-top:10px"></div>
-<button onclick="adminDepModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button>
-</div></div>
-
-<div id="adminWithModal"><div class="popBox" style="max-width:480px"><h3>🔔 Admin Withdrawals - UID 322533</h3><div id="adminWithList" style="max-height:400px;overflow:auto;text-align:left;margin-top:10px"></div><button onclick="adminWithModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
-
-<div id="myHistModal"><div class="popBox" style="max-width:480px"><h3 style="color:#2196f3">📜 MY HISTORY - Win / Loss</h3><p style="font-size:10px;color:gray" id="myHistCount">0 bets</p><div style="margin-top:10px;text-align:left;max-height:400px;overflow:auto;border:1px solid #eee;border-radius:10px"><div class="myHistHeader"><span>Period / Bet</span><span>Result</span><span>Amount</span><span>Win/Loss</span></div><div id="myHistList"></div></div><button onclick="myHistModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
-
-<div id="passModal"><div class="popBox" style="background:#111;color:white"><h3>🔐 Admin Access</h3><input id="passInput" class="inp" type="password" placeholder="Password" style="background:#222;color:white;border-color:#333"><button class="regbtn" onclick="checkPass()">Unlock</button><button onclick="passModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#333;color:white;border-radius:20px">Cancel</button><p id="passErr" style="color:#ff4d4d;font-size:11px;margin-top:8px;display:none">Wrong Password!</p></div></div>
-
-<div id="adminModal"><div class="popBox"><h3>🎮 Admin Control - UID 322533</h3><div style="display:flex;gap:8px;margin-top:10px"><button class="regbtn" style="background:#3cc15f;flex:1" onclick="adminModal.style.display='none';openAdminDeposits()">🔔 Deposits - Order+UTR</button><button class="regbtn" style="background:#ff9800;flex:1" onclick="adminModal.style.display='none';openAdminWithdrawals()">🏦 Withdrawals</button></div><div class="adminSection"><select id="nextNumCtrl"><option value="-1">Random</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select><select id="nextColorCtrl"><option value="random">Random Color</option><option value="Green">Green win</option><option value="Red">Red win</option><option value="Violet">Violet win</option></select><select id="nextBSCtrl"><option value="random">Random BS</option><option value="Big">Big win</option><option value="Small">Small win</option></select><div style="display:flex;gap:8px;margin-top:8px"><button style="flex:1;padding:8px;background:#3cc15f;color:white;border:none;border-radius:10px" onclick="setControl('win')">Jitadvu</button><button style="flex:1;padding:8px;background:#ff4d4d;color:white;border:none;border-radius:10px" onclick="setControl('loss')">Haradvu</button></div><button class="regbtn" style="background:#ff9800" onclick="applyControl()">✅ SET</button><button class="regbtn" style="background:#607d8b" onclick="clearControl()">🔄 Random</button><div style="margin-top:8px;padding:8px;background:#e8f5e9;border-radius:8px;font-size:11px"><b>Current:</b> <span id="ctrlStatus">Random Mode</span></div></div><button onclick="adminModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
-
-<div id="betModal"><div class="popBox"><h3 id="betTitle">Bet</h3><p id="betPeriodShow" style="font-size:11px;color:gray"></p><input id="betAmtInput" class="inp" type="number" min="2" max="5000" value="10"><div class="betAmtRow"><button onclick="setBetAmt(2)">₹2</button><button onclick="setBetAmt(10)">₹10</button><button onclick="setBetAmt(100)">₹100</button><button onclick="setBetAmt(500)">₹500</button><button onclick="setBetAmt(1000)">₹1000</button></div><button class="regbtn" onclick="confirmBet()">Confirm Bet</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
-
+<div id="adminDepModal"><div class="popBox" style="max-width:480px"><h3>🔔 Admin 322533 - UID + Order No + UTR</h3><div id="adminDepList" style="max-height:450px;overflow:auto;text-align:left;margin-top:10px"></div><button onclick="adminDepModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
+<div id="adminWithModal"><div class="popBox" style="max-width:480px"><h3>🔔 Admin Withdrawals</h3><div id="adminWithList" style="max-height:400px;overflow:auto;text-align:left;margin-top:10px"></div><button onclick="adminWithModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
+<div id="myHistModal"><div class="popBox" style="max-width:480px"><h3>📜 MY HISTORY</h3><div id="myHistList" style="max-height:400px;overflow:auto;text-align:left"></div><button onclick="myHistModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
+<div id="passModal"><div class="popBox" style="background:#111;color:white"><h3>🔐 Admin Access</h3><input id="passInput" class="inp" type="password" placeholder="Password" style="background:#222;color:white"><button class="regbtn" onclick="checkPass()">Unlock</button><button onclick="passModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#333;color:white;border-radius:20px">Cancel</button><p id="passErr" style="color:#ff4d4d;font-size:11px;margin-top:8px;display:none">Wrong!</p></div></div>
+<div id="adminModal"><div class="popBox"><h3>🎮 Admin - UID 322533</h3><div style="display:flex;gap:8px;margin-top:10px"><button class="regbtn" style="background:#3cc15f;flex:1" onclick="adminModal.style.display='none';openAdminDeposits()">🔔 Dep</button><button class="regbtn" style="background:#ff9800;flex:1" onclick="adminModal.style.display='none';openAdminWithdrawals()">🏦 With</button></div><div class="adminSection"><select id="nextNumCtrl"><option value="-1">Random</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select><select id="nextColorCtrl"><option value="random">Random</option><option value="Green">Green</option><option value="Red">Red</option><option value="Violet">Violet</option></select><select id="nextBSCtrl"><option value="random">Random</option><option value="Big">Big</option><option value="Small">Small</option></select><button class="regbtn" style="background:#ff9800" onclick="applyControl()">✅ SET</button><button class="regbtn" style="background:#607d8b" onclick="clearControl()">🔄 Random</button><div style="margin-top:8px;padding:8px;background:#e8f5e9;border-radius:8px;font-size:11px"><b>Current:</b> <span id="ctrlStatus">Random</span></div></div><button onclick="adminModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
+<div id="betModal"><div class="popBox"><h3 id="betTitle">Bet</h3><input id="betAmtInput" class="inp" type="number" min="2" max="5000" value="10"><div class="betAmtRow"><button onclick="setBetAmt(2)">₹2</button><button onclick="setBetAmt(10)">₹10</button><button onclick="setBetAmt(100)">₹100</button><button onclick="setBetAmt(500)">₹500</button><button onclick="setBetAmt(1000)">₹1000</button></div><button class="regbtn" onclick="confirmBet()">Confirm Bet</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
 <div id="popup"><div class="popBox"><h2 id="popTitle"></h2><p id="popMsg"></p><h3 id="popAmt"></h3><button class="regbtn" onclick="popup.style.display='none';clearBets()">OK</button></div></div>
 <div id="toast" class="toast"></div>
 
@@ -225,7 +187,7 @@ function saveAll(){
 function getTotalDeposit(cur){let hist=JSON.parse(localStorage.getItem('dwHistory_'+cur)||"[]");let total=0;hist.forEach(h=>{if(h.type=='Deposit'&&h.status&&h.status.includes('Success')&&!h.status.includes('Bonus')) total+=h.amt;});return total;}
 function loadUserData(cur){
  if(!cur) return;
- let b=localStorage.getItem('bal_'+cur);bal=b?parseFloat(b):34;
+ bal=parseFloat(localStorage.getItem('bal_'+cur)||"34");
  dwHistory=JSON.parse(localStorage.getItem('dwHistory_'+cur)||"[]");
  betHistory=JSON.parse(localStorage.getItem('betHistory_'+cur)||"[]");
  pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");
@@ -242,7 +204,7 @@ function doRegister(){
  let users=JSON.parse(localStorage.getItem('users_55club')||"{}");if(users[m]){showToast("Already register");switchAuth('login');return;}
  let hasAdmin=false;Object.values(users).forEach(u=>{if(u.uid==ADMIN_UID) hasAdmin=true;});let uid;if(!hasAdmin){if(confirm("Admin UID 322533 lena hai?")){uid=ADMIN_UID;}else{uid=generateUID();}}else{uid=generateUID();}
  users[m]={pass:p,name:name,uid:uid};localStorage.setItem('users_55club',JSON.stringify(users));localStorage.setItem('bal_'+m,"34");
- let bonusHist=[{type:'Deposit',amt:34,time:new Date().toLocaleDateString('en-GB')+" "+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),status:'Bonus - One Time',orderNo:'BONUS'+uid}];
+ let bonusHist=[{type:'Deposit',amt:34,time:new Date().toLocaleDateString('en-GB')+" "+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),status:'Bonus - One Time',orderNo:'BONUS'+uid,utr:'BONUS'}];
  localStorage.setItem('dwHistory_'+m,JSON.stringify(bonusHist));localStorage.setItem('betHistory_'+m,JSON.stringify([]));
  showToast("Register UID: "+uid);switchAuth('login');document.getElementById('loginMobile').value=m;
 }
@@ -252,10 +214,9 @@ function doLogout(){if(confirm('Logout?')){localStorage.removeItem('currentUser_
 function checkAuth(){let existingUIDs=JSON.parse(localStorage.getItem('uid_list_55')||"[]");if(!existingUIDs.includes(ADMIN_UID)){existingUIDs.push(ADMIN_UID);localStorage.setItem('uid_list_55',JSON.stringify(existingUIDs));}pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");pendingWithdrawals=JSON.parse(localStorage.getItem('pendingWithdrawals_55')||"[]");let u=getCurrentUser();if(u){document.getElementById('authModal').style.display='none';showUserInfo(u);initGame();}else{document.getElementById('authModal').style.display='flex';}}
 function secretTap(){let uid=getCurrentUID();if(uid!=ADMIN_UID){return;}let now=Date.now();if(now-lastTapTime>3000){tapCount=0;}tapCount++;lastTapTime=now;if(tapCount>=5){tapCount=0;document.getElementById('passModal').style.display='flex';}}
 function checkPass(){let p=document.getElementById('passInput').value;if(p=="9638"){document.getElementById('passModal').style.display='none';openAdmin();}else{document.getElementById('passErr').style.display='block';}}
-function openAdmin(){document.getElementById('adminCurGame').innerText=curGame.toUpperCase();document.getElementById('adminNextPeriod').innerText=games[curGame].period+1;let ctrl=nextResultControl[curGame];if(ctrl){document.getElementById('ctrlStatus').innerHTML=`${curGame} - Num ${ctrl.num!=-1?ctrl.num:'R'} | ${ctrl.color} | ${ctrl.bs}`;document.getElementById('nextNumCtrl').value=ctrl.num;document.getElementById('nextColorCtrl').value=ctrl.color;document.getElementById('nextBSCtrl').value=ctrl.bs;}else{document.getElementById('ctrlStatus').innerText='Random Mode';}document.getElementById('adminModal').style.display='flex';}
+function openAdmin(){document.getElementById('adminCurGame').innerText=curGame.toUpperCase();let ctrl=nextResultControl[curGame];if(ctrl){document.getElementById('ctrlStatus').innerHTML=`${curGame} - Num ${ctrl.num!=-1?ctrl.num:'R'} | ${ctrl.color} | ${ctrl.bs}`;document.getElementById('nextNumCtrl').value=ctrl.num;document.getElementById('nextColorCtrl').value=ctrl.color;document.getElementById('nextBSCtrl').value=ctrl.bs;}else{document.getElementById('ctrlStatus').innerText='Random Mode';}document.getElementById('adminModal').style.display='flex';}
 function applyControl(){let num=parseInt(document.getElementById('nextNumCtrl').value);let col=document.getElementById('nextColorCtrl').value;let bs=document.getElementById('nextBSCtrl').value;nextResultControl[curGame]={num:num,color:col,bs:bs};saveAll();showToast(curGame+" SET");openAdmin();}
 function clearControl(){nextResultControl[curGame]=null;saveAll();showToast("Random");openAdmin();}
-function setControl(type){let g=games[curGame];if(g.bets.length==0){showToast("Pela bet");return}if(type=='win'){let b=g.bets[0].type;if(b.includes('Num')){nextResultControl[curGame]={num:parseInt(b.replace('Num','')),color:'random',bs:'random'};}else if(['Green','Red','Violet'].includes(b)){nextResultControl[curGame]={num:-1,color:b,bs:'random'};}else{nextResultControl[curGame]={num:-1,color:'random',bs:b};}}else{let b=g.bets[0].type;if(b=='Green'){nextResultControl[curGame]={num:-1,color:'Red',bs:'random'};}else if(b=='Red'){nextResultControl[curGame]={num:-1,color:'Green',bs:'random'};}else if(b=='Big'){nextResultControl[curGame]={num:-1,color:'random',bs:'Small'};}else if(b=='Small'){nextResultControl[curGame]={num:-1,color:'random',bs:'Big'};}else{nextResultControl[curGame]={num:b=='Num0'?1:0,color:'random',bs:'random'};}}saveAll();openAdmin();}
 
 function openDepositMethods(){
  let cur=getCurrentUser();loadUserData(cur);selectedDepMethod="";selectedAmt=0;
@@ -266,7 +227,21 @@ function openDepositMethods(){
  let depHistEl=document.getElementById('depHistInDepModal');
  let depFiltered=dwHistory.filter(h=>h.type=='Deposit');
  if(depFiltered.length==0){depHistEl.innerHTML=`<div style="padding:8px;text-align:center;color:gray;font-size:11px">No Deposit History</div>`;}
- else{let html="";depFiltered.slice(0,20).forEach(h=>{let col=h.status.includes('Success')?'green':h.status.includes('Pending')?'orange':'red';html+=`<div class="dwRow" style="flex-direction:column;align-items:flex-start"><div><b>Order: ${h.orderNo||'-'}</b> | UTR: <b style="color:#2196f3">${h.utr||'-'}</b></div><div style="display:flex;justify-content:space-between;width:100%"><span>${h.time} - ₹${h.amt}</span><span style="color:${col}">${h.status}</span></div></div>`;});depHistEl.innerHTML=html;}
+ else{
+   let html="";
+   depFiltered.slice(0,30).forEach(h=>{
+     let statusText="Processing";
+     let statusClass="statusProc";
+     if(h.status.includes('Success')){statusText="Success";statusClass="statusSucc";}
+     else if(h.status.includes('Reject')){statusText="Rejected";statusClass="statusRej";}
+     else if(h.status.includes('Bonus')){statusText="Bonus";statusClass="statusSucc";}
+     html+=`<div class="dwRow">
+       <div style="text-align:left"><b>Order: ${h.orderNo||'-'}</b><br><span style="font-size:10px;color:gray">${h.time}</span></div>
+       <div style="text-align:right"><b>₹${h.amt}</b><br><span class="${statusClass}">${statusText}</span></div>
+     </div>`;
+   });
+   depHistEl.innerHTML=html;
+ }
  document.getElementById('depMethodModal').style.display='flex';
 }
 function selectDepMethod(m){selectedDepMethod=m;document.getElementById('qrBtn').classList.toggle('active',m=='QR');document.getElementById('upiBtn').classList.toggle('active',m=='UPI');document.getElementById('qrShow').style.display=m=='QR'?'block':'none';document.getElementById('upiShow').style.display=m=='UPI'?'block':'none';document.getElementById('selMethod').innerText=m+"-Pay";}
@@ -281,7 +256,6 @@ function proceedToUTR(){
  document.getElementById('utrAmtShow').innerText=selectedAmt;
  document.getElementById('utrOrderShow').innerText=orderNo;
  document.getElementById('utrUIDShow').innerText=u.uid;
- document.getElementById('utrMobileShow').innerText=cur;
  document.getElementById('utrInput').value="";
  document.getElementById('depMethodModal').style.display='none';
  document.getElementById('utrModal').style.display='flex';
@@ -293,19 +267,19 @@ function submitUTR(){
  pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");
  let id=Date.now().toString();
  let now=new Date();let timeStr=now.toLocaleDateString('en-GB')+" "+now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
- let entry={id:id,orderNo:pendingOrderNo,uid:u.uid,mobile:cur,name:u.name,amount:selectedAmt,utr:utr,method:selectedDepMethod,time:timeStr,timestamp:Date.now(),status:'Pending'};
+ let entry={id:id,orderNo:pendingOrderNo,uid:u.uid,mobile:cur,name:u.name,amount:selectedAmt,utr:utr,method:selectedDepMethod,time:timeStr,timestamp:Date.now(),status:'Processing'};
  pendingDeposits.unshift(entry);
  localStorage.setItem('pendingDeposits_55',JSON.stringify(pendingDeposits));
  let userDW=JSON.parse(localStorage.getItem('dwHistory_'+cur)||"[]");
- userDW.unshift({type:'Deposit',amt:selectedAmt,time:timeStr,status:'Pending - Order: '+pendingOrderNo+' UTR: '+utr,utr:utr,orderNo:pendingOrderNo,method:selectedDepMethod,depId:id});
+ userDW.unshift({type:'Deposit',amt:selectedAmt,time:timeStr,status:'Processing',utr:utr,orderNo:pendingOrderNo,method:selectedDepMethod,depId:id});
  localStorage.setItem('dwHistory_'+cur,JSON.stringify(userDW));dwHistory=userDW;saveAll();
  document.getElementById('utrModal').style.display='none';
- showToast("Order No: "+pendingOrderNo+" | UTR: "+utr+" - Admin ko gaya - 322533 approve karega");
+ showToast("Order No: "+pendingOrderNo+" UTR: "+utr+" - Admin ko gaya");
  updateAdminNotif();
 }
 function updateAdminNotif(){
  pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");pendingWithdrawals=JSON.parse(localStorage.getItem('pendingWithdrawals_55')||"[]");
- let depCount=pendingDeposits.filter(p=>p.status=='Pending').length;let withCount=pendingWithdrawals.filter(p=>p.status.includes('Processing')).length;
+ let depCount=pendingDeposits.filter(p=>p.status=='Processing').length;let withCount=pendingWithdrawals.filter(p=>p.status.includes('Processing')).length;
  if(getCurrentUID()==ADMIN_UID){
    document.getElementById('adminNotifDep').style.display=depCount>0?'inline-block':'none';document.getElementById('notifCountDep').innerText=depCount;
    document.getElementById('adminNotifWith').style.display=withCount>0?'inline-block':'none';document.getElementById('notifCountWith').innerText=withCount;
@@ -319,17 +293,17 @@ function openAdminDeposits(){
  else{
    let html="";
    pendingDeposits.forEach(p=>{
-     let timeLeft=5*60*1000-(Date.now()-p.timestamp);let minLeft=Math.max(0,Math.floor(timeLeft/60000));let secLeft=Math.max(0,Math.floor((timeLeft%60000)/1000));
-     let col=p.status=='Pending'?'orange':p.status=='Success'?'green':'red';
-     html+=`<div class="pendingRow" style="border-color:${col}">
-       <div style="display:flex;justify-content:space-between"><b>UID: ${p.uid} - ${p.name}</b><span style="color:${col}">${p.status} ${p.status=='Pending'?'⏳ '+minLeft+':'+secLeft:''}</span></div>
-       <div style="background:#fff;padding:6px;border-radius:8px;margin:5px 0;border:1px dashed #ff4d4d">
-       <b>Order Number: <span style="color:#ff4d4d;font-size:13px">${p.orderNo}</span></b><br>
-       <b>UTR: <span style="color:#2196f3;font-size:13px">${p.utr}</span></b><br>
-       Amount: ₹${p.amount} | ${p.method}-Pay<br>
-       Mobile: ${p.mobile} | Time: ${p.time}
+     let col=p.status=='Processing'?'orange':p.status=='Success'?'green':'red';
+     let statusText=p.status=='Processing'?'Processing':p.status=='Success'?'Success':'Rejected';
+     let statusClass=p.status=='Processing'?'statusProc':p.status=='Success'?'statusSucc':'statusRej';
+     html+=`<div class="pendingRow" style="border-color:${col};background:white">
+       <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:14px;color:#ff4d4d">UID: ${p.uid}</b><span class="${statusClass}">${statusText}</span></div>
+       <div style="margin:8px 0;padding:10px;background:#fff3e0;border-radius:10px;border:2px dashed #ff9800">
+         <div style="font-size:13px"><b>Order No:</b> <span style="color:#000;font-weight:bold;font-size:14px">${p.orderNo}</span></div>
+         <div style="font-size:13px"><b>UTR:</b> <span style="color:#2196f3;font-weight:bold;font-size:14px">${p.utr}</span></div>
+         <div style="margin-top:5px"><b>Amount:</b> ₹${p.amount} | <b>${p.method}</b><br><b>Name:</b> ${p.name} | <b>Mob:</b> ${p.mobile}</div>
        </div>
-       ${p.status=='Pending'?`<div style="display:flex;gap:8px"><button onclick="approveDeposit('${p.id}')" style="flex:1;padding:8px;background:#3cc15f;color:white;border:none;border-radius:10px;font-weight:bold">✅ Accept Order ${p.orderNo}</button><button onclick="rejectDeposit('${p.id}')" style="flex:1;padding:8px;background:#ff4d4d;color:white;border:none;border-radius:10px">❌ Reject</button></div>`:''}
+       ${p.status=='Processing'?`<div style="display:flex;gap:8px"><button onclick="approveDeposit('${p.id}')" style="flex:1;padding:10px;background:#3cc15f;color:white;border:none;border-radius:10px;font-weight:bold">✅ Accept</button><button onclick="rejectDeposit('${p.id}')" style="flex:1;padding:10px;background:#ff4d4d;color:white;border:none;border-radius:10px">❌ Reject</button></div>`:''}
      </div>`;
    });
    list.innerHTML=html;
@@ -337,23 +311,19 @@ function openAdminDeposits(){
  document.getElementById('adminDepModal').style.display='flex';
 }
 function approveDeposit(id){
- pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");let idx=pendingDeposits.findIndex(p=>p.id==id);if(idx==-1) return;let p=pendingDeposits[idx];if(p.status!='Pending'){showToast("Already "+p.status);return;}p.status='Success';pendingDeposits[idx]=p;localStorage.setItem('pendingDeposits_55',JSON.stringify(pendingDeposits));
+ pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");let idx=pendingDeposits.findIndex(p=>p.id==id);if(idx==-1) return;let p=pendingDeposits[idx];if(p.status!='Processing'){showToast("Already "+p.status);return;}p.status='Success';pendingDeposits[idx]=p;localStorage.setItem('pendingDeposits_55',JSON.stringify(pendingDeposits));
  let curBal=parseFloat(localStorage.getItem('bal_'+p.mobile)||"34");curBal+=p.amount;localStorage.setItem('bal_'+p.mobile,curBal.toString());
- let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.depId==id);if(dwIdx!=-1){userDW[dwIdx].status='Success - Order: '+p.orderNo+' UTR: '+p.utr+' Approved';}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));
- if(getCurrentUser()==p.mobile){bal=curBal;dwHistory=userDW;document.getElementById('bal').innerText=bal.toFixed(2);showToast("🎉 Deposit Success Order "+p.orderNo+" UTR "+p.utr+" ₹"+p.amount);}else{let notifs=JSON.parse(localStorage.getItem('notif_'+p.mobile)||"[]");notifs.unshift({msg:`Deposit Successful! Order No: ${p.orderNo} UTR: ${p.utr} ₹${p.amount} - Thank you!`,time:new Date().toLocaleString(),type:'success'});localStorage.setItem('notif_'+p.mobile,JSON.stringify(notifs));}
+ let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.depId==id);if(dwIdx!=-1){userDW[dwIdx].status='Success';}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));
+ if(getCurrentUser()==p.mobile){bal=curBal;dwHistory=userDW;document.getElementById('bal').innerText=bal.toFixed(2);showToast("🎉 Deposit Success Order "+p.orderNo);}else{let notifs=JSON.parse(localStorage.getItem('notif_'+p.mobile)||"[]");notifs.unshift({msg:`Deposit Success! Order: ${p.orderNo} UTR: ${p.utr} ₹${p.amount}`,time:new Date().toLocaleString(),type:'success'});localStorage.setItem('notif_'+p.mobile,JSON.stringify(notifs));}
  saveAll();openAdminDeposits();updateAdminNotif();
 }
-function rejectDeposit(id){pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");let idx=pendingDeposits.findIndex(p=>p.id==id);if(idx==-1) return;let p=pendingDeposits[idx];p.status='Rejected';pendingDeposits[idx]=p;localStorage.setItem('pendingDeposits_55',JSON.stringify(pendingDeposits));let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.depId==id);if(dwIdx!=-1){userDW[dwIdx].status='Rejected - Order: '+p.orderNo+' UTR: '+p.utr;}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));saveAll();openAdminDeposits();updateAdminNotif();}
+function rejectDeposit(id){pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");let idx=pendingDeposits.findIndex(p=>p.id==id);if(idx==-1) return;let p=pendingDeposits[idx];p.status='Rejected';pendingDeposits[idx]=p;localStorage.setItem('pendingDeposits_55',JSON.stringify(pendingDeposits));let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.depId==id);if(dwIdx!=-1){userDW[dwIdx].status='Rejected';}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));saveAll();openAdminDeposits();updateAdminNotif();}
 
-// WITHDRAWAL
 function openWithdrawMethods(){
  let cur=getCurrentUser();loadUserData(cur);
  document.getElementById('withUpiBtn').classList.remove('active');document.getElementById('withBankBtn').classList.remove('active');
  document.getElementById('withUpiShow').style.display='none';document.getElementById('withBankShow').style.display='none';
  document.getElementById('withAmtInput').value="";
- let withHistEl=document.getElementById('withHistInWithModal');let withFiltered=dwHistory.filter(h=>h.type=='Withdraw');
- if(withFiltered.length==0){withHistEl.innerHTML=`<div style="padding:8px;text-align:center;color:gray">No Withdrawal</div>`;}
- else{let html="";withFiltered.slice(0,20).forEach(h=>{let col=h.status.includes('Success')?'green':h.status.includes('Processing')?'orange':'red';html+=`<div class="dwRow"><div>${h.time}<br><small>${h.method||''}</small></div><div style="text-align:right"><b style="color:#ff4d4d">-₹${h.amt}</b><br><small style="color:${col}">${h.status}</small></div></div>`;});withHistEl.innerHTML=html;}
  document.getElementById('withMethodModal').style.display='flex';
 }
 function selectWithMethod(m){selectedWithMethod=m;document.getElementById('withUpiBtn').classList.toggle('active',m=='UPI');document.getElementById('withBankBtn').classList.toggle('active',m=='BANK');document.getElementById('withUpiShow').style.display=m=='UPI'?'block':'none';document.getElementById('withBankShow').style.display=m=='BANK'?'block':'none';}
@@ -361,39 +331,35 @@ function setWithAmt(a){document.getElementById('withAmtInput').value=a;}
 function submitWithdrawal(){
  let cur=getCurrentUser();loadUserData(cur);let amt=parseFloat(document.getElementById('withAmtInput').value);
  if(!selectedWithMethod){showToast("UPI ya Bank select karo");return;}if(!amt||amt<100){showToast("Min 100");return;}if(amt>bal){showToast("Low Bal ₹"+bal);return;}
- let upiId=document.getElementById('withUpiInput').value.trim();let accName=document.getElementById('withAccName').value.trim();let accNo=document.getElementById('withAccNo').value.trim();let ifsc=document.getElementById('withIfsc').value.trim();let bankName=document.getElementById('withBankName').value.trim();
- if(selectedWithMethod=='UPI'&&upiId.length<5){showToast("UPI ID dalo");return;}if(selectedWithMethod=='BANK'&&(accName.length<2||accNo.length<5)){showToast("Account details dalo");return;}
+ let upiId=document.getElementById('withUpiInput').value.trim();let accName=document.getElementById('withAccName').value.trim();let accNo=document.getElementById('withAccNo').value.trim();
+ if(selectedWithMethod=='UPI'&&upiId.length<5){showToast("UPI ID dalo");return;}
  pendingWithdrawals=JSON.parse(localStorage.getItem('pendingWithdrawals_55')||"[]");let id=Date.now().toString();let now=new Date();let timeStr=now.toLocaleDateString('en-GB')+" "+now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});let users=JSON.parse(localStorage.getItem('users_55club')||"{}");let u=users[cur];
- let entry={id:id,uid:u.uid,mobile:cur,name:u.name,amount:amt,method:selectedWithMethod,upi:upiId,accName:accName,accNo:accNo,ifsc:ifsc,bankName:bankName,time:timeStr,timestamp:Date.now(),status:'Processing - 24 hours'};
+ let entry={id:id,uid:u.uid,mobile:cur,name:u.name,amount:amt,method:selectedWithMethod,upi:upiId,accName:accName,accNo:accNo,time:timeStr,timestamp:Date.now(),status:'Processing'};
  pendingWithdrawals.unshift(entry);localStorage.setItem('pendingWithdrawals_55',JSON.stringify(pendingWithdrawals));
  bal-=amt;document.getElementById('bal').innerText=bal.toFixed(2);localStorage.setItem('bal_'+cur,bal.toString());
- let userDW=JSON.parse(localStorage.getItem('dwHistory_'+cur)||"[]");userDW.unshift({type:'Withdraw',amt:amt,time:timeStr,status:'Processing - 24 hours me successful',method:selectedWithMethod,upi:upiId,account:accNo,withId:id});
- localStorage.setItem('dwHistory_'+cur,JSON.stringify(userDW));dwHistory=userDW;saveAll();document.getElementById('withMethodModal').style.display='none';showToast("Withdrawal Request - 24h me successful");updateAdminNotif();
+ let userDW=JSON.parse(localStorage.getItem('dwHistory_'+cur)||"[]");userDW.unshift({type:'Withdraw',amt:amt,time:timeStr,status:'Processing',method:selectedWithMethod,upi:upiId,account:accNo,withId:id});
+ localStorage.setItem('dwHistory_'+cur,JSON.stringify(userDW));dwHistory=userDW;saveAll();document.getElementById('withMethodModal').style.display='none';showToast("Withdrawal Request - Processing");updateAdminNotif();
 }
 function openAdminWithdrawals(){
  if(getCurrentUID()!=ADMIN_UID){showToast("Only Admin 322533");return;}
  pendingWithdrawals=JSON.parse(localStorage.getItem('pendingWithdrawals_55')||"[]");
  let list=document.getElementById('adminWithList');
  if(pendingWithdrawals.length==0){list.innerHTML=`<div style="padding:20px;text-align:center;color:gray">No withdrawals</div>`;}
- else{
-   let html="";pendingWithdrawals.forEach(p=>{let col=p.status.includes('Processing')?'orange':p.status.includes('Success')?'green':'red';
-     html+=`<div class="pendingRow" style="border-color:${col};background:#e3f2fd"><div style="display:flex;justify-content:space-between"><b>UID: ${p.uid} - ${p.name}</b><span style="color:${col}">${p.status}</span></div><div>Mobile: ${p.mobile} | Amount: ₹${p.amount} | ${p.method}</div><div>${p.method=='UPI'?`UPI: ${p.upi}`:`Acc: ${p.accName} - ${p.accNo}`}</div><div>Time: ${p.time}</div>${p.status.includes('Processing')?`<div style="display:flex;gap:8px;margin-top:8px"><button onclick="approveWithdrawal('${p.id}')" style="flex:1;padding:8px;background:#3cc15f;color:white;border:none;border-radius:10px;font-weight:bold">✅ Accept</button><button onclick="rejectWithdrawal('${p.id}')" style="flex:1;padding:8px;background:#ff4d4d;color:white;border:none;border-radius:10px">❌ Reject</button></div>`:''}</div>`;
-   });list.innerHTML=html;
- }
+ else{let html="";pendingWithdrawals.forEach(p=>{let col=p.status.includes('Processing')?'orange':p.status.includes('Success')?'green':'red';html+=`<div class="pendingRow" style="border-color:${col};background:#e3f2fd"><div style="display:flex;justify-content:space-between"><b>UID: ${p.uid} - ${p.name}</b><span style="color:${col}">${p.status}</span></div><div>Mobile: ${p.mobile} | Amount: ₹${p.amount} | ${p.method}</div><div>${p.method=='UPI'?`UPI: ${p.upi}`:`Acc: ${p.accName} - ${p.accNo}`}</div><div>Time: ${p.time}</div>${p.status.includes('Processing')?`<div style="display:flex;gap:8px;margin-top:8px"><button onclick="approveWithdrawal('${p.id}')" style="flex:1;padding:8px;background:#3cc15f;color:white;border:none;border-radius:10px;font-weight:bold">✅ Accept</button><button onclick="rejectWithdrawal('${p.id}')" style="flex:1;padding:8px;background:#ff4d4d;color:white;border:none;border-radius:10px">❌ Reject</button></div>`:''}</div>`;});list.innerHTML=html;}
  document.getElementById('adminWithModal').style.display='flex';
 }
-function approveWithdrawal(id){pendingWithdrawals=JSON.parse(localStorage.getItem('pendingWithdrawals_55')||"[]");let idx=pendingWithdrawals.findIndex(p=>p.id==id);if(idx==-1) return;let p=pendingWithdrawals[idx];if(!p.status.includes('Processing')){showToast("Already "+p.status);return;}p.status='Success - Paid';pendingWithdrawals[idx]=p;localStorage.setItem('pendingWithdrawals_55',JSON.stringify(pendingWithdrawals));let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.withId==id);if(dwIdx!=-1){userDW[dwIdx].status='Success - Withdrawal Paid';}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));if(getCurrentUser()!=p.mobile){let notifs=JSON.parse(localStorage.getItem('notif_'+p.mobile)||"[]");notifs.unshift({msg:`Withdrawal Successful! ₹${p.amount} sent to ${p.method} ${p.upi||p.accNo}`,time:new Date().toLocaleString(),type:'with_success'});localStorage.setItem('notif_'+p.mobile,JSON.stringify(notifs));}saveAll();openAdminWithdrawals();updateAdminNotif();}
-function rejectWithdrawal(id){pendingWithdrawals=JSON.parse(localStorage.getItem('pendingWithdrawals_55')||"[]");let idx=pendingWithdrawals.findIndex(p=>p.id==id);if(idx==-1) return;let p=pendingWithdrawals[idx];p.status='Rejected - Refunded';pendingWithdrawals[idx]=p;localStorage.setItem('pendingWithdrawals_55',JSON.stringify(pendingWithdrawals));let curBal=parseFloat(localStorage.getItem('bal_'+p.mobile)||"0");curBal+=p.amount;localStorage.setItem('bal_'+p.mobile,curBal.toString());let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.withId==id);if(dwIdx!=-1){userDW[dwIdx].status='Rejected - Refunded';}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));saveAll();openAdminWithdrawals();updateAdminNotif();}
+function approveWithdrawal(id){pendingWithdrawals=JSON.parse(localStorage.getItem('pendingWithdrawals_55')||"[]");let idx=pendingWithdrawals.findIndex(p=>p.id==id);if(idx==-1) return;let p=pendingWithdrawals[idx];p.status='Success';pendingWithdrawals[idx]=p;localStorage.setItem('pendingWithdrawals_55',JSON.stringify(pendingWithdrawals));let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.withId==id);if(dwIdx!=-1){userDW[dwIdx].status='Success';}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));saveAll();openAdminWithdrawals();updateAdminNotif();}
+function rejectWithdrawal(id){pendingWithdrawals=JSON.parse(localStorage.getItem('pendingWithdrawals_55')||"[]");let idx=pendingWithdrawals.findIndex(p=>p.id==id);if(idx==-1) return;let p=pendingWithdrawals[idx];p.status='Rejected';pendingWithdrawals[idx]=p;localStorage.setItem('pendingWithdrawals_55',JSON.stringify(pendingWithdrawals));let curBal=parseFloat(localStorage.getItem('bal_'+p.mobile)||"0");curBal+=p.amount;localStorage.setItem('bal_'+p.mobile,curBal.toString());let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.withId==id);if(dwIdx!=-1){userDW[dwIdx].status='Rejected';}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));saveAll();openAdminWithdrawals();updateAdminNotif();}
 function checkUserNotifications(){let cur=getCurrentUser();if(!cur) return;let notifs=JSON.parse(localStorage.getItem('notif_'+cur)||"[]");if(notifs.length>0){let latest=notifs[0];if(!latest.shown){showToast(latest.msg);latest.shown=true;notifs[0]=latest;localStorage.setItem('notif_'+cur,JSON.stringify(notifs));}}}
-function autoRejectCheck(){pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");let changed=false;let now=Date.now();pendingDeposits.forEach(p=>{if(p.status=='Pending'&&(now-p.timestamp)>5*60*1000){p.status='Rejected - Auto 5min';let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.depId==p.id);if(dwIdx!=-1){userDW[dwIdx].status='Rejected - Auto 5min Order: '+p.orderNo+' UTR: '+p.utr;}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));let notifs=JSON.parse(localStorage.getItem('notif_'+p.mobile)||"[]");notifs.unshift({msg:`Deposit Auto Rejected Order ${p.orderNo} UTR ${p.utr}`,time:new Date().toLocaleString(),type:'reject'});localStorage.setItem('notif_'+p.mobile,JSON.stringify(notifs));changed=true;}});if(changed){localStorage.setItem('pendingDeposits_55',JSON.stringify(pendingDeposits));updateAdminNotif();}}
-function openMyHistory(){let cur=getCurrentUser();if(!cur) return;loadUserData(cur);let list=document.getElementById('myHistList');document.getElementById('myHistCount').innerText=betHistory.length+" bets";if(betHistory.length==0){list.innerHTML=`<div style="padding:20px;text-align:center;color:gray">No bets</div>`;}else{let html="";betHistory.slice(0,100).forEach(h=>{let isWin=h.winLoss=='WIN';html+=`<div class="myHistRow"><div><b>${h.game.toUpperCase()}</b><br><span style="font-size:9px">${h.period}</span><br>${h.betType} ₹${h.betAmt}</div><div style="text-align:center">${h.resultNum} ${h.resultColor}<br>${h.resultBS}</div><div style="text-align:center">₹${h.betAmt}</div><div style="text-align:center"><span class="${isWin?'winTag':'lossTag'}">${h.winLoss}</span><br><span style="color:${isWin?'#3cc15f':'#ff4d4d'}">${isWin?'+₹'+h.winAmt:'-₹'+h.betAmt}</span></div></div>`;});list.innerHTML=html;}document.getElementById('myHistModal').style.display='flex';}
+function autoRejectCheck(){pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");let changed=false;let now=Date.now();pendingDeposits.forEach(p=>{if(p.status=='Processing'&&(now-p.timestamp)>5*60*1000){p.status='Rejected';let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.depId==p.id);if(dwIdx!=-1){userDW[dwIdx].status='Rejected';}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));changed=true;}});if(changed){localStorage.setItem('pendingDeposits_55',JSON.stringify(pendingDeposits));updateAdminNotif();}}
+function openMyHistory(){let cur=getCurrentUser();if(!cur) return;loadUserData(cur);let list=document.getElementById('myHistList');if(betHistory.length==0){list.innerHTML=`<div style="padding:20px;text-align:center;color:gray">No bets</div>`;}else{let html="";betHistory.slice(0,100).forEach(h=>{let isWin=h.winLoss=='WIN';html+=`<div class="myHistRow"><div><b>${h.game.toUpperCase()}</b><br><span style="font-size:9px">${h.period}</span><br>${h.betType} ₹${h.betAmt}</div><div style="text-align:center">${h.resultNum} ${h.resultColor}<br>${h.resultBS}</div><div style="text-align:center">₹${h.betAmt}</div><div style="text-align:center"><span class="${isWin?'winTag':'lossTag'}">${h.winLoss}</span><br><span style="color:${isWin?'#3cc15f':'#ff4d4d'}">${isWin?'+₹'+h.winAmt:'-₹'+h.betAmt}</span></div></div>`;});list.innerHTML=html;}document.getElementById('myHistModal').style.display='flex';}
 function loadAll(){Object.keys(games).forEach(k=>{let h=localStorage.getItem('hist_'+k+'_final');if(h){try{games[k].hist=JSON.parse(h);}catch(e){}}let t=localStorage.getItem('timeLeft_'+k);if(t){games[k].time=parseInt(t);}let lastTs=parseInt(localStorage.getItem('ts_'+k)||Date.now());let elapsedSec=Math.floor((Date.now()-lastTs)/1000);if(elapsedSec>0){let totalElapsed=games[k].duration-games[k].time+elapsedSec;let rounds=Math.floor(totalElapsed/games[k].duration);if(rounds>0){for(let i=0;i<rounds;i++){let winNum=Math.floor(Math.random()*10);let winColor=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");let winBS=winNum>=5?"Big":"Small";games[k].hist.unshift({shortPeriod:games[k].period,fullPeriod:getFullPeriod(games[k].period),num:winNum,bs:winBS,color:winColor});games[k].period++;}let rem=totalElapsed%games[k].duration;games[k].time=games[k].duration-rem;if(games[k].time<=0) games[k].time=games[k].duration;}}if(games[k].hist.length==0){for(let i=0;i<5;i++){let pn=games[k].period-i;let num=Math.floor(Math.random()*10);let col=(num==0||num==5)?"Violet":(num%2==0?"Red":"Green");let bs=num>=5?"Big":"Small";games[k].hist.push({shortPeriod:pn,fullPeriod:getFullPeriod(pn),num:num,bs:bs,color:col});}games[k].hist.reverse();}});}
-function switchGame(type){let cur=getCurrentUser();if(cur){saveAll();}curGame=type;localStorage.setItem('curGame_cont',curGame);if(cur){loadUserData(cur);}document.getElementById('curLabel').innerText=type.toUpperCase();document.getElementById('curPeriodFull').innerText=getFullPeriod(games[type].period);document.getElementById('tab30').classList.toggle('active',type=='30s');document.getElementById('tab1').classList.toggle('active',type=='1m');document.getElementById('tab3').classList.toggle('active',type=='3m');document.getElementById('tab5').classList.toggle('active',type=='5m');document.getElementById('g30').classList.toggle('active',type=='30s');document.getElementById('g1').classList.toggle('active',type=='1m');document.getElementById('g3').classList.toggle('active',type=='3m');document.getElementById('g5').classList.toggle('active',type=='5m');renderHist(type);}
-function renderHist(type){let g=games[type];let total=Math.max(1,Math.ceil(g.hist.length/PER_PAGE));if(g.page>total) g.page=total;if(g.page<1) g.page=1;let slice=g.hist.slice((g.page-1)*PER_PAGE,(g.page-1)*PER_PAGE+PER_PAGE);let html="";slice.forEach(r=>{let numColor=r.color=="Green"?"#3cc15f":r.color=="Red"?"#ff4d4d":"#9c27b0";let dots=r.color=="Green"?`<span class="dot dotG"></span>`:r.color=="Red"?`<span class="dot dotR"></span>`:r.num==0?`<div class="dotRV"><span class="dot dotR"></span><span class="dot dotV"></span></div>`:r.num==5?`<div class="dotRV"><span class="dot dotG"></span><span class="dot dotV"></span></div>`:`<span class="dot dotV"></span>`;html+=`<div class="histRow"><span class="periodTxt">${r.fullPeriod}</span><span class="numBig" style="color:${numColor}">${r.num}</span><span>${r.bs}</span><span>${dots}</span></div>`;});document.getElementById(type=='30s'?'hist30':type=='1m'?'hist1':type=='3m'?'hist3':'hist5').innerHTML=html;document.getElementById(type=='30s'?'info30':type=='1m'?'info1':type=='3m'?'info3':'info5').innerText=`${type.toUpperCase()} Page ${g.page}/${total}`;document.getElementById('short'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=g.period;document.getElementById('next'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=g.period+1;document.getElementById('pid'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=getFullPeriod(g.period);}
+function switchGame(type){let cur=getCurrentUser();if(cur){saveAll();}curGame=type;localStorage.setItem('curGame_cont',curGame);if(cur){loadUserData(cur);}document.getElementById('curLabel').innerText=type.toUpperCase();document.getElementById('tab30').classList.toggle('active',type=='30s');document.getElementById('tab1').classList.toggle('active',type=='1m');document.getElementById('tab3').classList.toggle('active',type=='3m');document.getElementById('tab5').classList.toggle('active',type=='5m');document.getElementById('g30').classList.toggle('active',type=='30s');document.getElementById('g1').classList.toggle('active',type=='1m');document.getElementById('g3').classList.toggle('active',type=='3m');document.getElementById('g5').classList.toggle('active',type=='5m');renderHist(type);}
+function renderHist(type){let g=games[type];let total=Math.max(1,Math.ceil(g.hist.length/PER_PAGE));if(g.page>total) g.page=total;if(g.page<1) g.page=1;let slice=g.hist.slice((g.page-1)*PER_PAGE,(g.page-1)*PER_PAGE+PER_PAGE);let html="";slice.forEach(r=>{let numColor=r.color=="Green"?"#3cc15f":r.color=="Red"?"#ff4d4d":"#9c27b0";let dots=r.color=="Green"?`<span class="dot dotG"></span>`:r.color=="Red"?`<span class="dot dotR"></span>`:r.num==0?`<div class="dotRV"><span class="dot dotR"></span><span class="dot dotV"></span></div>`:r.num==5?`<div class="dotRV"><span class="dot dotG"></span><span class="dot dotV"></span></div>`:`<span class="dot dotV"></span>`;html+=`<div class="histRow"><span class="periodTxt">${r.fullPeriod}</span><span class="numBig" style="color:${numColor}">${r.num}</span><span>${r.bs}</span><span>${dots}</span></div>`;});document.getElementById(type=='30s'?'hist30':type=='1m'?'hist1':type=='3m'?'hist3':'hist5').innerHTML=html;document.getElementById(type=='30s'?'info30':type=='1m'?'info1':type=='3m'?'info3':'info5').innerText=`${type.toUpperCase()} Page ${g.page}/${total}`;document.getElementById('short'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=g.period;}
 function prevPage(t){if(games[t].page>1){games[t].page--;renderHist(t);}}
 function nextPage(t){if(games[t].page<Math.ceil(games[t].hist.length/PER_PAGE)){games[t].page++;renderHist(t);}}
 function setBetAmt(a){document.getElementById('betAmtInput').value=a;}
-function bet(type){let cur=getCurrentUser();if(!cur) return;loadUserData(cur);let totalDep=getTotalDeposit(cur);if(totalDep<100){showToast("⛔ Pehle ₹100 Deposit karo");openDepositMethods();return;}if(games[curGame].time<=5){showToast("Last 5 sec band");return;}tempBet=type;document.getElementById('betTitle').innerText=type+" ("+curGame.toUpperCase()+")";document.getElementById('betPeriodShow').innerText="Period: "+getFullPeriod(games[curGame].period)+" | Bal: ₹"+bal;document.getElementById('betAmtInput').value=10;document.getElementById('betModal').style.display='flex';}
+function bet(type){let cur=getCurrentUser();if(!cur) return;loadUserData(cur);let totalDep=getTotalDeposit(cur);if(totalDep<100){showToast("⛔ Pehle ₹100 Deposit karo");openDepositMethods();return;}if(games[curGame].time<=5){showToast("Last 5 sec band");return;}tempBet=type;document.getElementById('betTitle').innerText=type+" ("+curGame.toUpperCase()+")";document.getElementById('betAmtInput').value=10;document.getElementById('betModal').style.display='flex';}
 function confirmBet(){let cur=getCurrentUser();if(!cur) return;loadUserData(cur);let totalDep=getTotalDeposit(cur);if(totalDep<100){showToast("Pehle ₹100 Deposit");return;}let amt=parseFloat(document.getElementById('betAmtInput').value);if(!amt||amt<2){showToast("Min 2");return;}if(amt>5000){showToast("Max 5000");return;}if(amt>bal){showToast("Low Bal ₹"+bal);return;}bal-=amt;document.getElementById('bal').innerText=bal.toFixed(2);games[curGame].bets.push({type:tempBet,amt:amt,period:games[curGame].period});localStorage.setItem('bal_'+cur,bal.toString());localStorage.setItem('bets_'+cur+'_'+curGame,JSON.stringify(games[curGame].bets));saveAll();document.getElementById('betModal').style.display='none';showToast(tempBet+" ₹"+amt);}
 function clearBets(){let cur=getCurrentUser();if(cur){games[curGame].bets=[];localStorage.setItem('bets_'+cur+'_'+curGame,JSON.stringify([]));saveAll();}}
 function startAll(){
@@ -428,4 +394,4 @@ function initGame(){loadAll();let cur=getCurrentUser();if(cur){loadUserData(cur)
 window.onload=()=>{checkAuth();}
 </script>
 </body>
-  </html>
+ </html>
