@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55CLUB - DW History Added</title>
+<title>55CLUB - DW History On Click</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial,sans-serif}
 body{background:#f5f5f5}
@@ -11,12 +11,6 @@ body{background:#f5f5f5}
 .dwBtns{display:flex;gap:10px;margin-top:12px}
 .dwBtns button{flex:1;padding:12px;border:none;border-radius:12px;font-weight:bold;color:white;font-size:14px;cursor:pointer}
 .btnDep{background:#3cc15f}.btnWith{background:#ff9800}
-.dwHistory{background:white;margin:10px;border-radius:15px;overflow:hidden;box-shadow:0 2px 10px #0001}
-.dwHistHead{background:#222;color:white;padding:10px 12px;font-weight:bold;display:flex;justify-content:space-between;align-items:center;font-size:13px}
-.dwHistHead span:last-child{font-size:11px;background:#ff4d4d;padding:4px 10px;border-radius:12px;cursor:pointer}
-.dwRow{display:flex;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #f0f0f0;font-size:12px;align-items:center}
-.dwRow.typeDep{color:#3cc15f;font-weight:bold}.dwRow.typeWith{color:#ff4d4d;font-weight:bold}
-.dwRow small{color:gray;font-size:10px}
 .tabs{display:flex;gap:8px;margin:10px;overflow:auto}.tabs div{min-width:75px;background:white;border-radius:12px;padding:10px 5px;text-align:center;font-size:12px;box-shadow:0 1px 5px #0001;border:2px solid transparent;cursor:pointer;font-weight:bold}.tabs div.active{border-color:#ff4d4d;background:#fff0f0;color:#ff4d4d}
 .gameTop{background:#ff4d4d;margin:10px;border-radius:15px;padding:12px;color:white;display:flex;justify-content:space-between;align-items:center}
 .gameTop.g1m{background:#4caf50}.gameTop.g3m{background:#ff9800}.gameTop.g5m{background:#9c27b0}
@@ -36,9 +30,12 @@ body{background:#f5f5f5}
 .countOverlay{position:absolute;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:10;gap:15px}
 .countBox{background:white;width:70px;height:70px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:bold;color:#ff4d4d}
 #popup,#betModal,#dwModal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:9999}
-.popBox{background:white;width:92%;max-width:400px;border-radius:20px;padding:20px;text-align:center}
+.popBox{background:white;width:92%;max-width:400px;border-radius:20px;padding:20px;text-align:center;max-height:90vh;overflow:auto}
 .regbtn{width:100%;padding:14px;background:#ff4d4d;border:none;border-radius:25px;color:white;font-weight:bold;margin-top:10px}
 .inp{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-top:10px;font-size:16px}
+.dwHistInModal{margin-top:15px;text-align:left;border-top:1px solid #eee;padding-top:10px}
+.dwHistInModal h4{font-size:13px;margin-bottom:8px}
+.dwRow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f5f5f5;font-size:12px}
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:12px 20px;border-radius:25px;z-index:10000;display:none}
 .gameSection{display:none}.gameSection.active{display:block}
 </style>
@@ -52,12 +49,6 @@ body{background:#f5f5f5}
 <button class="btnDep" onclick="openDW('Deposit')">💰 Deposit</button>
 <button class="btnWith" onclick="openDW('Withdraw')">🏦 Withdrawal</button>
 </div>
-</div>
-
-<!-- DEPOSIT WITHDRAWAL HISTORY ADDED -->
-<div class="dwHistory" id="dwHistoryBox">
-<div class="dwHistHead"><span>💳 Deposit / Withdraw History</span><span onclick="clearDWHistory()">Clear</span></div>
-<div id="dwHistList" style="max-height:200px;overflow:auto"><div style="padding:15px;text-align:center;color:gray;font-size:12px">No history yet</div></div>
 </div>
 
 <div class="tabs">
@@ -76,34 +67,23 @@ body{background:#f5f5f5}
 <div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist30"></div><div class="pageCtrl"><button onclick="prevPage('30s')">◀</button><span id="info30" class="pageInfo"></span><button onclick="nextPage('30s')">▶</button></div></div>
 </div>
 
-<div id="g1" class="gameSection">
-<div class="gameTop g1m"><div><div>WinGo 1 Min</div><div class="periodSmall" id="pid1">20260928100051390</div><div style="font-size:9px">Short: <span id="short1">51390</span> -> Next: <span id="next1">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t1_1">0</b><b id="t1_2">1</b><span>:</span><b id="t1_3">0</b><b id="t1_4">0</b></div></div></div>
-<div class="playArea"><div class="countOverlay" id="ov1"><div class="countBox" id="ov1_1">0</div><div class="countBox" id="ov1_2">5</div></div>
-<div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div>
-<div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div>
-<div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div>
-<div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist1"></div><div class="pageCtrl"><button onclick="prevPage('1m')">◀</button><span id="info1" class="pageInfo"></span><button onclick="nextPage('1m')">▶</button></div></div>
-</div>
+<div id="g1" class="gameSection"><div class="gameTop g1m"><div><div>WinGo 1 Min</div><div class="periodSmall" id="pid1">20260928100051390</div><div style="font-size:9px">Short: <span id="short1">51390</span> -> Next: <span id="next1">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t1_1">0</b><b id="t1_2">1</b><span>:</span><b id="t1_3">0</b><b id="t1_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov1"><div class="countBox" id="ov1_1">0</div><div class="countBox" id="ov1_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist1"></div><div class="pageCtrl"><button onclick="prevPage('1m')">◀</button><span id="info1" class="pageInfo"></span><button onclick="nextPage('1m')">▶</button></div></div></div>
 
-<div id="g3" class="gameSection">
-<div class="gameTop g3m"><div><div>WinGo 3 Min</div><div class="periodSmall" id="pid3">20260928100051390</div><div style="font-size:9px">Short: <span id="short3">51390</span> -> Next: <span id="next3">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t3_1">0</b><b id="t3_2">3</b><span>:</span><b id="t3_3">0</b><b id="t3_4">0</b></div></div></div>
-<div class="playArea"><div class="countOverlay" id="ov3"><div class="countBox" id="ov3_1">0</div><div class="countBox" id="ov3_2">5</div></div>
-<div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div>
-<div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div>
-<div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div>
-<div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist3"></div><div class="pageCtrl"><button onclick="prevPage('3m')">◀</button><span id="info3" class="pageInfo"></span><button onclick="nextPage('3m')">▶</button></div></div>
-</div>
+<div id="g3" class="gameSection"><div class="gameTop g3m"><div><div>WinGo 3 Min</div><div class="periodSmall" id="pid3">20260928100051390</div><div style="font-size:9px">Short: <span id="short3">51390</span> -> Next: <span id="next3">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t3_1">0</b><b id="t3_2">3</b><span>:</span><b id="t3_3">0</b><b id="t3_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov3"><div class="countBox" id="ov3_1">0</div><div class="countBox" id="ov3_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist3"></div><div class="pageCtrl"><button onclick="prevPage('3m')">◀</button><span id="info3" class="pageInfo"></span><button onclick="nextPage('3m')">▶</button></div></div></div>
 
-<div id="g5" class="gameSection">
-<div class="gameTop g5m"><div><div>WinGo 5 Min</div><div class="periodSmall" id="pid5">20260928100051390</div><div style="font-size:9px">Short: <span id="short5">51390</span> -> Next: <span id="next5">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t5_1">0</b><b id="t5_2">5</b><span>:</span><b id="t5_3">0</b><b id="t5_4">0</b></div></div></div>
-<div class="playArea"><div class="countOverlay" id="ov5"><div class="countBox" id="ov5_1">0</div><div class="countBox" id="ov5_2">5</div></div>
-<div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div>
-<div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div>
-<div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div>
-<div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist5"></div><div class="pageCtrl"><button onclick="prevPage('5m')">◀</button><span id="info5" class="pageInfo"></span><button onclick="nextPage('5m')">▶</button></div></div>
-</div>
+<div id="g5" class="gameSection"><div class="gameTop g5m"><div><div>WinGo 5 Min</div><div class="periodSmall" id="pid5">20260928100051390</div><div style="font-size:9px">Short: <span id="short5">51390</span> -> Next: <span id="next5">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t5_1">0</b><b id="t5_2">5</b><span>:</span><b id="t5_3">0</b><b id="t5_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov5"><div class="countBox" id="ov5_1">0</div><div class="countBox" id="ov5_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist5"></div><div class="pageCtrl"><button onclick="prevPage('5m')">◀</button><span id="info5" class="pageInfo"></span><button onclick="nextPage('5m')">▶</button></div></div></div>
 
-<div id="dwModal"><div class="popBox"><h3 id="dwTitle">Deposit</h3><input id="dwAmt" class="inp" type="number" placeholder="Amount enter karo"><button class="regbtn" onclick="confirmDW()">Submit</button><button onclick="dwModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
+<!-- DEPOSIT/WITHDRAW MODAL WITH HISTORY INSIDE -->
+<div id="dwModal"><div class="popBox">
+<h3 id="dwTitle">Deposit</h3>
+<input id="dwAmt" class="inp" type="number" placeholder="Amount enter karo">
+<button class="regbtn" onclick="confirmDW()">Submit</button>
+<div class="dwHistInModal">
+<h4 id="dwHistTitle">History</h4>
+<div id="dwHistListModal" style="max-height:180px;overflow:auto"></div>
+</div>
+<button onclick="dwModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button>
+</div></div>
 
 <div id="betModal"><div class="popBox"><h3 id="betTitle">Bet</h3><p id="betPeriodShow" style="font-size:11px;color:gray"></p><p>₹10</p><button class="regbtn" onclick="confirmBet()">Confirm</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
 <div id="popup"><div class="popBox"><h2 id="popTitle"></h2><p id="popMsg"></p><h3 id="popAmt"></h3><button class="regbtn" onclick="popup.style.display='none';clearBets()">OK</button></div></div>
@@ -133,7 +113,24 @@ function saveAll(){
    localStorage.setItem('timeLeft_'+k,games[k].time);
  });
 }
-function openDW(type){dwType=type;document.getElementById('dwTitle').innerText=type;document.getElementById('dwAmt').value="";document.getElementById('dwModal').style.display='flex';}
+function openDW(type){
+ dwType=type;
+ document.getElementById('dwTitle').innerText=type;
+ document.getElementById('dwAmt').value="";
+ document.getElementById('dwHistTitle').innerText=type+" History";
+ // HISTORY FILTER - DEPOSIT PAR CLICK KARE TO KHALI DEPOSIT, WITHDRAWAL PAR KHALI WITHDRAW
+ let filtered=dwHistory.filter(h=>h.type==type);
+ let list=document.getElementById('dwHistListModal');
+ if(filtered.length==0){list.innerHTML=`<div style="padding:10px;text-align:center;color:gray;font-size:11px">No ${type} history yet</div>`;}
+ else{
+   let html="";
+   filtered.slice(0,30).forEach(h=>{
+     html+=`<div class="dwRow"><div>${h.time}</div><div style="text-align:right"><b style="color:${h.type=='Deposit'?'#3cc15f':'#ff4d4d'}">${h.type=='Deposit'?'+':'-'}₹${h.amt}</b> - <small style="color:green">${h.status}</small></div></div>`;
+   });
+   list.innerHTML=html;
+ }
+ document.getElementById('dwModal').style.display='flex';
+}
 function confirmDW(){
  let amt=parseFloat(document.getElementById('dwAmt').value);
  if(!amt||amt<=0){showToast("Amount lakh");return}
@@ -151,20 +148,9 @@ function confirmDW(){
    showToast("Withdrawal Success ₹"+amt);
  }
  document.getElementById('bal').innerText=bal.toFixed(2);
- renderDWHistory();
  saveAll();
- document.getElementById('dwModal').style.display='none';
+ openDW(dwType); // history refresh
 }
-function renderDWHistory(){
- let list=document.getElementById('dwHistList');
- if(dwHistory.length==0){list.innerHTML=`<div style="padding:15px;text-align:center;color:gray;font-size:12px">No history yet</div>`;return}
- let html="";
- dwHistory.slice(0,50).forEach(h=>{
-   html+=`<div class="dwRow"><div><span class="${h.type=='Deposit'?'typeDep':'typeWith'}">${h.type=='Deposit'?'💰 Deposit':'🏦 Withdraw'}</span><br><small>${h.time}</small></div><div style="text-align:right"><b style="color:${h.type=='Deposit'?'#3cc15f':'#ff4d4d'}">${h.type=='Deposit'?'+':'-'}₹${h.amt}</b><br><small style="color:#3cc15f">${h.status}</small></div></div>`;
- });
- list.innerHTML=html;
-}
-function clearDWHistory(){if(confirm('History clear karvu che?')){dwHistory=[];renderDWHistory();saveAll();}}
 function loadAll(){
  Object.keys(games).forEach(k=>{
   let h=localStorage.getItem('hist_'+k+'_final2'); if(h){try{games[k].hist=JSON.parse(h);}catch(e){}}
@@ -303,10 +289,9 @@ window.onload=()=>{
  document.getElementById('bal').innerText=bal.toFixed(2);
  Object.keys(games).forEach(k=>renderHist(k));
  switchGame(curGame);
- renderDWHistory();
  startAll();
  window.addEventListener('beforeunload',saveAll);
 }
 </script>
 </body>
- </html>
+                                                                                                                                                                                                                                                                                                                                                        </html>
