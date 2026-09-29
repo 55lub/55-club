@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55CLUB - Deposit Withdraw Added</title>
+<title>55CLUB - DW History Added</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial,sans-serif}
 body{background:#f5f5f5}
@@ -11,6 +11,12 @@ body{background:#f5f5f5}
 .dwBtns{display:flex;gap:10px;margin-top:12px}
 .dwBtns button{flex:1;padding:12px;border:none;border-radius:12px;font-weight:bold;color:white;font-size:14px;cursor:pointer}
 .btnDep{background:#3cc15f}.btnWith{background:#ff9800}
+.dwHistory{background:white;margin:10px;border-radius:15px;overflow:hidden;box-shadow:0 2px 10px #0001}
+.dwHistHead{background:#222;color:white;padding:10px 12px;font-weight:bold;display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.dwHistHead span:last-child{font-size:11px;background:#ff4d4d;padding:4px 10px;border-radius:12px;cursor:pointer}
+.dwRow{display:flex;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #f0f0f0;font-size:12px;align-items:center}
+.dwRow.typeDep{color:#3cc15f;font-weight:bold}.dwRow.typeWith{color:#ff4d4d;font-weight:bold}
+.dwRow small{color:gray;font-size:10px}
 .tabs{display:flex;gap:8px;margin:10px;overflow:auto}.tabs div{min-width:75px;background:white;border-radius:12px;padding:10px 5px;text-align:center;font-size:12px;box-shadow:0 1px 5px #0001;border:2px solid transparent;cursor:pointer;font-weight:bold}.tabs div.active{border-color:#ff4d4d;background:#fff0f0;color:#ff4d4d}
 .gameTop{background:#ff4d4d;margin:10px;border-radius:15px;padding:12px;color:white;display:flex;justify-content:space-between;align-items:center}
 .gameTop.g1m{background:#4caf50}.gameTop.g3m{background:#ff9800}.gameTop.g5m{background:#9c27b0}
@@ -42,12 +48,16 @@ body{background:#f5f5f5}
 
 <div class="walletCard">
 <div>₹ <b id="bal">100.00</b> | <span id="curLabel" style="color:#ff4d4d;font-weight:bold">30S</span> | <span id="curPeriodFull" style="font-size:11px">20260928100051390</span></div>
-
-<!-- DEPOSIT & WITHDRAWAL BUTTON ADD KARYA -->
 <div class="dwBtns">
 <button class="btnDep" onclick="openDW('Deposit')">💰 Deposit</button>
 <button class="btnWith" onclick="openDW('Withdraw')">🏦 Withdrawal</button>
 </div>
+</div>
+
+<!-- DEPOSIT WITHDRAWAL HISTORY ADDED -->
+<div class="dwHistory" id="dwHistoryBox">
+<div class="dwHistHead"><span>💳 Deposit / Withdraw History</span><span onclick="clearDWHistory()">Clear</span></div>
+<div id="dwHistList" style="max-height:200px;overflow:auto"><div style="padding:15px;text-align:center;color:gray;font-size:12px">No history yet</div></div>
 </div>
 
 <div class="tabs">
@@ -93,7 +103,6 @@ body{background:#f5f5f5}
 <div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist5"></div><div class="pageCtrl"><button onclick="prevPage('5m')">◀</button><span id="info5" class="pageInfo"></span><button onclick="nextPage('5m')">▶</button></div></div>
 </div>
 
-<!-- DEPOSIT WITHDRAWAL MODAL -->
 <div id="dwModal"><div class="popBox"><h3 id="dwTitle">Deposit</h3><input id="dwAmt" class="inp" type="number" placeholder="Amount enter karo"><button class="regbtn" onclick="confirmDW()">Submit</button><button onclick="dwModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
 
 <div id="betModal"><div class="popBox"><h3 id="betTitle">Bet</h3><p id="betPeriodShow" style="font-size:11px;color:gray"></p><p>₹10</p><button class="regbtn" onclick="confirmBet()">Confirm</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
@@ -103,6 +112,7 @@ body{background:#f5f5f5}
 <script>
 const PER_PAGE=20, BASE="20260928";
 let curGame=localStorage.getItem('curGame_cont')||'30s', tempBet="", bal=parseFloat(localStorage.getItem('bal_cont')||"100"), dwType="";
+let dwHistory = JSON.parse(localStorage.getItem('dwHistory_final3')||"[]");
 let games={
  '30s':{period:parseInt(localStorage.getItem('period_30s_final2')||"51390"),time:30,hist:[],bets:[],page:1,lastTs:parseInt(localStorage.getItem('ts_30s')||Date.now()),duration:30},
  '1m':{period:parseInt(localStorage.getItem('period_1m_final2')||"51390"),time:60,hist:[],bets:[],page:1,lastTs:parseInt(localStorage.getItem('ts_1m')||Date.now()),duration:60},
@@ -114,6 +124,7 @@ function showToast(m){let t=document.getElementById('toast');t.innerText=m;t.sty
 function saveAll(){
  localStorage.setItem('bal_cont',bal);
  localStorage.setItem('curGame_cont',curGame);
+ localStorage.setItem('dwHistory_final3',JSON.stringify(dwHistory));
  Object.keys(games).forEach(k=>{
    localStorage.setItem('period_'+k+'_final2',games[k].period);
    localStorage.setItem('hist_'+k+'_final2',JSON.stringify(games[k].hist));
@@ -126,10 +137,34 @@ function openDW(type){dwType=type;document.getElementById('dwTitle').innerText=t
 function confirmDW(){
  let amt=parseFloat(document.getElementById('dwAmt').value);
  if(!amt||amt<=0){showToast("Amount lakh");return}
- if(dwType=='Deposit'){bal+=amt;showToast("Deposit Success ₹"+amt);}
- else{if(amt>bal){showToast("Balance low");return} bal-=amt;showToast("Withdrawal Success ₹"+amt);}
- document.getElementById('bal').innerText=bal.toFixed(2); saveAll(); document.getElementById('dwModal').style.display='none';
+ let now=new Date();
+ let timeStr=now.toLocaleDateString('en-GB')+" "+now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+ if(dwType=='Deposit'){
+   bal+=amt;
+   dwHistory.unshift({type:'Deposit',amt:amt,time:timeStr,status:'Success'});
+   showToast("Deposit Success ₹"+amt);
+ }
+ else{
+   if(amt>bal){showToast("Balance low");return}
+   bal-=amt;
+   dwHistory.unshift({type:'Withdraw',amt:amt,time:timeStr,status:'Success'});
+   showToast("Withdrawal Success ₹"+amt);
+ }
+ document.getElementById('bal').innerText=bal.toFixed(2);
+ renderDWHistory();
+ saveAll();
+ document.getElementById('dwModal').style.display='none';
 }
+function renderDWHistory(){
+ let list=document.getElementById('dwHistList');
+ if(dwHistory.length==0){list.innerHTML=`<div style="padding:15px;text-align:center;color:gray;font-size:12px">No history yet</div>`;return}
+ let html="";
+ dwHistory.slice(0,50).forEach(h=>{
+   html+=`<div class="dwRow"><div><span class="${h.type=='Deposit'?'typeDep':'typeWith'}">${h.type=='Deposit'?'💰 Deposit':'🏦 Withdraw'}</span><br><small>${h.time}</small></div><div style="text-align:right"><b style="color:${h.type=='Deposit'?'#3cc15f':'#ff4d4d'}">${h.type=='Deposit'?'+':'-'}₹${h.amt}</b><br><small style="color:#3cc15f">${h.status}</small></div></div>`;
+ });
+ list.innerHTML=html;
+}
+function clearDWHistory(){if(confirm('History clear karvu che?')){dwHistory=[];renderDWHistory();saveAll();}}
 function loadAll(){
  Object.keys(games).forEach(k=>{
   let h=localStorage.getItem('hist_'+k+'_final2'); if(h){try{games[k].hist=JSON.parse(h);}catch(e){}}
@@ -268,9 +303,10 @@ window.onload=()=>{
  document.getElementById('bal').innerText=bal.toFixed(2);
  Object.keys(games).forEach(k=>renderHist(k));
  switchGame(curGame);
+ renderDWHistory();
  startAll();
  window.addEventListener('beforeunload',saveAll);
 }
 </script>
 </body>
- </html>                                                                                                                               
+ </html>
