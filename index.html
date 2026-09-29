@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55CLUB - Hidden Control</title>
+<title>55CLUB - Password Hidden</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial,sans-serif}
 body{background:#f5f5f5}
@@ -65,56 +65,30 @@ body{background:#f5f5f5}
 <div id="g3" class="gameSection"><div class="gameTop g3m"><div><div>WinGo 3 Min</div><div class="periodSmall" id="pid3">20260928100051390</div><div style="font-size:9px">Short: <span id="short3">51390</span> -> Next: <span id="next3">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t3_1">0</b><b id="t3_2">3</b><span>:</span><b id="t3_3">0</b><b id="t3_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov3"><div class="countBox" id="ov3_1">0</div><div class="countBox" id="ov3_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist3"></div><div class="pageCtrl"><button onclick="prevPage('3m')">◀</button><span id="info3" class="pageInfo"></span><button onclick="nextPage('3m')">▶</button></div></div></div>
 <div id="g5" class="gameSection"><div class="gameTop g5m"><div><div>WinGo 5 Min</div><div class="periodSmall" id="pid5">20260928100051390</div><div style="font-size:9px">Short: <span id="short5">51390</span> -> Next: <span id="next5">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t5_1">0</b><b id="t5_2">5</b><span>:</span><b id="t5_3">0</b><b id="t5_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov5"><div class="countBox" id="ov5_1">0</div><div class="countBox" id="ov5_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist5"></div><div class="pageCtrl"><button onclick="prevPage('5m')">◀</button><span id="info5" class="pageInfo"></span><button onclick="nextPage('5m')">▶</button></div></div></div>
 
-<!-- PASSWORD MODAL - HIDDEN -->
+<!-- PASSWORD MODAL - 9638 HIDDEN -->
 <div id="passModal"><div class="popBox" style="background:#111;color:white">
 <h3>🔐 Admin Access</h3>
-<p style="font-size:11px;color:#aaa;margin-top:5px">Password nakho - Control khulse</p>
-<input id="passInput" class="inp" type="password" placeholder="Enter Password - 9638" style="background:#222;color:white;border-color:#333">
-<button class="regbtn" onclick="checkPass()">Unlock Control</button>
+<p style="font-size:11px;color:#aaa;margin-top:5px">Password enter karo</p>
+<input id="passInput" class="inp" type="password" placeholder="Password" style="background:#222;color:white;border-color:#333">
+<button class="regbtn" onclick="checkPass()">Unlock</button>
 <button onclick="passModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#333;color:white;border-radius:20px">Cancel</button>
 <p id="passErr" style="color:#ff4d4d;font-size:11px;margin-top:8px;display:none">Wrong Password!</p>
 </div></div>
 
-<!-- CONTROL PANEL - PASSWORD PACHI J KHULSE -->
 <div id="adminModal"><div class="popBox">
-<h3>🎮 Hidden Game Control</h3>
-<p style="font-size:10px;color:gray">Password: 9638 | Game: <b id="adminCurGame">30S</b> | Next: <span id="adminNextPeriod">51391</span></p>
-
+<h3>🎮 Hidden Control</h3>
+<p style="font-size:10px;color:gray">Game: <b id="adminCurGame">30S</b> | Next: <span id="adminNextPeriod">51391</span></p>
 <div class="adminSection">
-<label style="font-size:12px;margin-top:10px;display:block">Next Number (0-9) Fix Karo:</label>
 <select id="nextNumCtrl"><option value="-1">Random (Auto)</option><option value="0">0 - Violet Red</option><option value="1">1 - Green Small</option><option value="2">2 - Red Small</option><option value="3">3 - Green Small</option><option value="4">4 - Red Small</option><option value="5">5 - Violet Green Big</option><option value="6">6 - Red Big</option><option value="7">7 - Green Big</option><option value="8">8 - Red Big</option><option value="9">9 - Green Big</option></select>
-
-<label style="font-size:12px;margin-top:8px;display:block">Color Control:</label>
-<select id="nextColorCtrl"><option value="random">Random</option><option value="Green">Green win karavo</option><option value="Red">Red win karavo</option><option value="Violet">Violet win karavo</option></select>
-
-<label style="font-size:12px;margin-top:8px;display:block">Big/Small Control:</label>
-<select id="nextBSCtrl"><option value="random">Random</option><option value="Big">Big win karavo</option><option value="Small">Small win karavo</option></select>
-
-<div class="ctrlGrid">
-<button style="background:#3cc15f" onclick="setControl('win')">User ne Jitadvu</button>
-<button style="background:#ff4d4d" onclick="setControl('loss')">User ne Haradvu</button>
-</div>
-
-<button class="regbtn" style="background:#ff9800" onclick="applyControl()">✅ Control SET</button>
+<select id="nextColorCtrl"><option value="random">Random Color</option><option value="Green">Green win</option><option value="Red">Red win</option><option value="Violet">Violet win</option></select>
+<select id="nextBSCtrl"><option value="random">Random BS</option><option value="Big">Big win</option><option value="Small">Small win</option></select>
+<div class="ctrlGrid"><button style="background:#3cc15f" onclick="setControl('win')">User Jitadvu</button><button style="background:#ff4d4d" onclick="setControl('loss')">User Haradvu</button></div>
+<button class="regbtn" style="background:#ff9800" onclick="applyControl()">✅ SET Control</button>
 <button class="regbtn" style="background:#607d8b" onclick="clearControl()">🔄 Random</button>
-
-<div style="margin-top:12px;padding:8px;background:#e8f5e9;border-radius:8px;font-size:11px;text-align:left">
-<b>Current:</b> <span id="ctrlStatus">Random Mode</span>
+<div style="margin-top:12px;padding:8px;background:#e8f5e9;border-radius:8px;font-size:11px;text-align:left"><b>Current:</b> <span id="ctrlStatus">Random Mode</span></div>
 </div>
-</div>
-
-<div class="adminSection">
-<b>💰 Balance Control:</b>
-<input id="balCtrl" class="inp" type="number" placeholder="10000">
-<button class="regbtn" style="background:#4caf50" onclick="setBalance()">SET Balance</button>
-</div>
-
-<div class="adminSection">
-<b>⏰ Period Control:</b>
-<input id="periodCtrl" class="inp" type="number" placeholder="51400">
-<button class="regbtn" style="background:#9c27b0" onclick="setPeriod()">SET Period</button>
-</div>
-
+<div class="adminSection"><b>💰 Balance:</b><input id="balCtrl" class="inp" type="number" placeholder="Amount"><button class="regbtn" style="background:#4caf50" onclick="setBalance()">SET Balance</button></div>
+<div class="adminSection"><b>⏰ Period:</b><input id="periodCtrl" class="inp" type="number" placeholder="Period"><button class="regbtn" style="background:#9c27b0" onclick="setPeriod()">SET Period</button></div>
 <button onclick="adminModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button>
 </div></div>
 
@@ -150,7 +124,6 @@ function saveAll(){
    localStorage.setItem('timeLeft_'+k,games[k].time);
  });
 }
-// HIDDEN CONTROL LOGIC - 55CLUB PAR 5 VAAR TAP
 function secretTap(){
  let now=Date.now();
  if(now-lastTapTime>3000){tapCount=0;}
@@ -178,7 +151,7 @@ function openAdmin(){
  document.getElementById('adminCurGame').innerText=curGame.toUpperCase();
  document.getElementById('adminNextPeriod').innerText=games[curGame].period+1;
  let ctrl=nextResultControl[curGame];
- if(ctrl){document.getElementById('ctrlStatus').innerHTML=`${curGame.toUpperCase()} - Number ${ctrl.num!=-1?ctrl.num:'Random'} | Color ${ctrl.color} | BS ${ctrl.bs}`;document.getElementById('nextNumCtrl').value=ctrl.num;document.getElementById('nextColorCtrl').value=ctrl.color;document.getElementById('nextBSCtrl').value=ctrl.bs;}
+ if(ctrl){document.getElementById('ctrlStatus').innerHTML=`${curGame.toUpperCase()} - Num ${ctrl.num!=-1?ctrl.num:'R'} | ${ctrl.color} | ${ctrl.bs}`;document.getElementById('nextNumCtrl').value=ctrl.num;document.getElementById('nextColorCtrl').value=ctrl.color;document.getElementById('nextBSCtrl').value=ctrl.bs;}
  else{document.getElementById('ctrlStatus').innerText='Random Mode';document.getElementById('nextNumCtrl').value=-1;document.getElementById('nextColorCtrl').value='random';document.getElementById('nextBSCtrl').value='random';}
  document.getElementById('adminModal').style.display='flex';
 }
@@ -284,4 +257,5 @@ window.onload=()=>{
 }
 </script>
 </body>
+ </html>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </html>                                                                                                                                                                                                                                                                                                                                           </html>
