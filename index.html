@@ -1,211 +1,252 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55 CLUB - Game Start Fix</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>55CLUB - Video Jemu Live History</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-body{background:#f2f2f2}
-.top{background:#ff4d4d;color:white;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;font-weight:bold}
-.topR{display:flex;gap:14px;align-items:center}
-.bell{position:relative;font-size:22px;cursor:pointer}.bell span{position:absolute;top:-6px;right:-8px;background:yellow;color:red;font-size:10px;padding:1px 5px;border-radius:10px;font-weight:bold}
-.wallet{background:white;margin:10px;border-radius:15px;padding:15px;text-align:center}.wallet h2{font-size:22px}.btns{display:flex;gap:10px;margin-top:10px}.btns button{flex:1;padding:10px;border-radius:20px;border:none;color:white;font-weight:bold}.b1{background:#ff4d4d}.b2{background:#ff8a5b}
-.profileCard{background:white;margin:10px;border-radius:15px;padding:12px;display:flex;justify-content:space-between;align-items:center;font-size:12px}
-.lobbyTitle{margin:15px 10px 5px;font-weight:bold;font-size:14px}
-.gameLobby{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:10px}
-.gameBox{background:white;border-radius:15px;padding:18px 10px;text-align:center;box-shadow:0 2px 8px #0001;cursor:pointer;border:2px solid #ff4d4d}
-.playbox{background:white;margin:10px;border-radius:15px;padding:12px}
-.timer{display:flex;justify-content:space-between;align-items:center;background:#fff3cd;padding:10px;border-radius:10px;border:1px solid #ffe082}
-.timer b{font-size:22px;background:#222;color:#0f0;padding:5px 12px;border-radius:8px;letter-spacing:2px}
-.colors{display:flex;gap:10px;margin:12px 0}.colors button{flex:1;padding:12px;border:none;border-radius:8px;color:white;font-weight:bold;font-size:14px}
-.cG{background:#4caf50}.cV{background:#9c27b0}.cR{background:#f44336}
-.nums{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:10px 0}.nums button{width:55px;height:55px;border-radius:50%;border:none;font-weight:bold;font-size:20px;color:white;box-shadow:0 2px 5px #0003}
-.bigsmall{display:flex;gap:10px}.bigsmall button{flex:1;padding:14px;border-radius:25px;border:none;font-weight:bold;color:white;font-size:14px}
-.history{background:white;margin:10px;border-radius:15px;overflow:hidden;box-shadow:0 2px 10px #0001;border:1px solid #eee}
-.tabRow{display:flex;gap:10px;padding:10px;background:#f9f9f9}
-.tabActive{background:#ff4d4d;color:white;padding:8px 18px;border-radius:20px;border:none;font-weight:bold;font-size:12px}
-.tabOff{background:white;border:1px solid #ddd;color:gray;padding:8px 18px;border-radius:20px;font-weight:bold;font-size:12px}
-.histHeader{background:#ff5a5a;color:white;display:grid;grid-template-columns:1.8fr 0.6fr 0.7fr 0.7fr;padding:12px 5px;font-size:12px;font-weight:bold;text-align:center}
-.histRow{display:grid;grid-template-columns:1.8fr 0.6fr 0.7fr 0.7fr;padding:12px 5px;border-bottom:1px solid #eee;font-size:11px;align-items:center;text-align:center;background:white}
-.periodTxt{font-size:10px;color:#111;font-weight:bold;word-break:break-all}
-.numTxt{font-size:24px;font-weight:bold}
-.dot{width:14px;height:14px;border-radius:50%;display:inline-block}
-.dotR{background:#f44336}.dotG{background:#4caf50}.dotV{background:#9c27b0}
-.colorDots{display:flex;justify-content:center;gap:4px}
-.pageCtrl{display:flex;justify-content:space-between;align-items:center;background:#f9f9f9;padding:12px;border-top:2px solid #ff4d4d}
-.pageCtrl button{padding:10px 20px;border:none;border-radius:25px;background:#ff4d4d;color:white;font-weight:bold;font-size:12px}.pageCtrl button:disabled{background:#ccc}
-.pageInfo{background:white;border:2px solid #ff4d4d;color:#ff4d4d;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:bold}
-#registerPage,#loginPage{background:white;min-height:100vh;padding:20px}
-input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ddd}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial,sans-serif}
+body{background:#f5f5f5}
+.topHead{background:#ff4d4d;color:white;padding:12px;text-align:center;font-weight:bold;font-size:18px;position:relative}
+.walletCard{background:white;margin:10px;border-radius:20px;padding:15px;box-shadow:0 2px 10px #0001;text-align:center}
+.walletCard h2{font-size:24px;margin:5px 0}
+.walletBtns{display:flex;gap:12px;margin-top:10px}.walletBtns button{flex:1;padding:12px;border:none;border-radius:25px;color:white;font-weight:bold;font-size:14px}.wDraw{background:#ff8a5b}.wDep{background:#ff4d4d}
+.notice{background:white;margin:0 10px;padding:10px 12px;border-radius:20px;font-size:11px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 5px #0001}
+.tabs{display:flex;gap:8px;margin:10px;overflow:auto}.tabs div{min-width:70px;background:white;border-radius:12px;padding:10px 5px;text-align:center;font-size:11px;box-shadow:0 1px 5px #0001;border:2px solid transparent}.tabs .active{border-color:#ff4d4d;background:#fff0f0;color:#ff4d4d;font-weight:bold}
+.gameTop{background:#ff4d4d;margin:10px;border-radius:15px;padding:12px;color:white;display:flex;justify-content:space-between;align-items:center}
+.timeBox{display:flex;gap:4px;align-items:center}.timeBox b{background:white;color:#333;padding:6px 8px;border-radius:6px;font-size:18px;min-width:28px;text-align:center}
+.periodSmall{font-size:10px;opacity:0.9}
+.playArea{background:white;margin:0 10px;border-radius:15px;padding:12px;position:relative;overflow:hidden}
+.colorBtns{display:flex;gap:10px;margin:10px 0}.colorBtns button{flex:1;padding:12px;border:none;border-radius:8px;color:white;font-weight:bold;font-size:13px}.cG{background:#3cc15f}.cV{background:#9c27b0}.cR{background:#ff4d4d}
+.numGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:15px 0}.numGrid button{width:52px;height:52px;border-radius:50%;border:3px solid;font-weight:bold;font-size:18px;background:white;box-shadow:0 2px 4px #0002}
+.numGrid .red{border-color:#ff4d4d;color:#ff4d4d}.numGrid .green{border-color:#3cc15f;color:#3cc15f}.numGrid .redGreen{border:3px solid; border-image:linear-gradient(90deg,#ff4d4d,#3cc15f) 1; border-radius:50%}.numGrid .violetRed{border-color:#9c27b0;color:#9c27b0}.numGrid .violetGreen{border-color:#9c27b0;color:#3cc15f}
+.multiRow{display:flex;gap:6px;margin:10px 0;overflow:auto}.multiRow button{padding:6px 12px;border-radius:15px;border:1px solid #ddd;background:white;font-size:11px;white-space:nowrap}.multiRow .active{background:#ff4d4d;color:white;border-color:#ff4d4d}
+.bsRow{display:flex;gap:10px}.bsRow button{flex:1;padding:12px;border:none;border-radius:25px;font-weight:bold;font-size:14px;color:white}.bsBig{background:#ff9f43}.bsSmall{background:#3498db}
+/* LIVE GAME HISTORY - VIDEO JEMU */
+.historyWrap{background:white;margin:10px;border-radius:15px;overflow:hidden;box-shadow:0 2px 10px #0001}
+.histTabs{display:flex;gap:15px;padding:12px;border-bottom:1px solid #eee}.histTabs span{font-size:13px;padding-bottom:5px;border-bottom:2px solid transparent}.histTabs .on{color:#ff4d4d;border-color:#ff4d4d;font-weight:bold}
+.histHeader{background:#ff4d4d;color:white;display:grid;grid-template-columns:1.6fr 0.5fr 0.6fr 0.5fr;padding:10px 8px;font-size:12px;font-weight:bold;text-align:center}
+.histRow{display:grid;grid-template-columns:1.6fr 0.5fr 0.6fr 0.5fr;padding:12px 8px;border-bottom:1px solid #f0f0f0;font-size:11px;align-items:center;text-align:center;background:white}
+.periodTxt{font-size:10px;color:#333;font-weight:600;word-break:break-all}
+.numBig{font-size:20px;font-weight:bold}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}.dotR{background:#ff4d4d}.dotG{background:#3cc15f}.dotV{background:#9c27b0}.dotRV{display:flex;gap:3px;justify-content:center}
+.pageCtrl{display:flex;justify-content:space-between;align-items:center;padding:10px;background:#f9f9f9;border-top:1px solid #eee}.pageCtrl button{padding:8px 18px;border:none;border-radius:20px;background:#ff4d4d;color:white;font-weight:bold;font-size:12px}.pageCtrl button:disabled{background:#ccc}
+.pageInfo{font-size:11px;font-weight:bold;color:#ff4d4d;background:white;padding:5px 10px;border-radius:15px;border:1px solid #ff4d4d}
+/* BIG COUNTDOWN OVERLAY - VIDEO JEMU 05 04 03 */
+.countOverlay{position:absolute;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:10;gap:20px}
+.countBox{background:white;width:90px;height:90px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:60px;font-weight:bold;color:#ff4d4d;box-shadow:0 5px 20px #0005}
+/* POPUP */
+#popup,#betModal,#adminBox{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:9999}
+.popBox{background:white;width:92%;max-width:400px;border-radius:20px;padding:20px;text-align:center}
 .regbtn{width:100%;padding:14px;background:#ff4d4d;border:none;border-radius:25px;color:white;font-weight:bold;margin-top:10px}
-#popup,#betModal,#adminBox,#adminPassBox,#depBox,#withBox,#bellBox{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:9999}
-.popBox{background:white;width:94%;max-width:460px;border-radius:20px;padding:20px;text-align:center;max-height:92vh;overflow:auto}
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:12px 20px;border-radius:25px;z-index:10000;display:none;font-size:13px}
+input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ddd}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:12px 20px;border-radius:25px;z-index:10000;display:none}
 </style>
 </head>
 <body>
+<div class="topHead">55CLUB <span style="font-size:10px;opacity:0.8">| LIVE HISTORY FIX</span></div>
+<div class="walletCard"><div>₹ <b id="bal">100.00</b></div><div style="font-size:12px;color:gray">Wallet balance</div><div class="walletBtns"><button class="wDraw">Withdraw</button><button class="wDep">Deposit</button></div></div>
+<div class="notice"><span>⚠️ All players registered... </span><span style="color:#ff4d4d;font-weight:bold">Detail</span></div>
+
+<div class="tabs"><div class="active">WinGo<br>30sec</div><div>WinGo<br>1 Min</div><div>WinGo<br>3 Min</div><div>WinGo<br>5 Min</div></div>
+
+<div class="gameTop"><div><div style="font-size:12px">WinGo 30sec</div><div style="font-size:10px;display:flex;gap:5px;margin-top:4px"><span style="width:12px;height:12px;border-radius:50%;background:white;display:inline-block"></span><span style="width:12px;height:12px;border-radius:50%;background:white;display:inline-block"></span><span style="width:12px;height:12px;border-radius:50%;background:white;display:inline-block"></span><span style="width:12px;height:12px;border-radius:50%;background:white;display:inline-block"></span></div><div class="periodSmall" id="pidShow">20260928100051392</div></div><div style="text-align:right"><div style="font-size:11px">Time remaining</div><div class="timeBox"><b id="t1">0</b><b id="t2">0</b><span>:</span><b id="t3">2</b><b id="t4">9</b></div><div class="periodSmall" id="pid2">20260928100051392</div></div></div>
+
+<div class="playArea" id="playArea">
+<!-- COUNTDOWN 05 04 03 VIDEO JEMU -->
+<div class="countOverlay" id="countOverlay"><div class="countBox" id="countBox1">0</div><div class="countBox" id="countBox2">5</div></div>
+
+<div class="colorBtns"><button class="cG" onclick="placeBet('Green')">Green</button><button class="cV" onclick="placeBet('Violet')">Violet</button><button class="cR" onclick="placeBet('Red')">Red</button></div>
+
+<div class="numGrid">
+<button class="red" style="border-color:#ff4d4d;color:#9c27b0" onclick="placeBet('Num0')">0</button>
+<button class="green" onclick="placeBet('Num1')">1</button>
+<button class="red" onclick="placeBet('Num2')">2</button>
+<button class="green" onclick="placeBet('Num3')">3</button>
+<button class="green" onclick="placeBet('Num4')">4</button>
+<button class="green" style="color:#9c27b0" onclick="placeBet('Num5')">5</button>
+<button class="red" onclick="placeBet('Num6')">6</button>
+<button class="green" onclick="placeBet('Num7')">7</button>
+<button class="red" onclick="placeBet('Num8')">8</button>
+<button class="green" onclick="placeBet('Num9')">9</button>
+</div>
+
+<div class="multiRow"><button>Random</button><button class="active">X1</button><button>X5</button><button>X10</button><button>X20</button><button>X50</button><button>X100</button></div>
+
+<div class="bsRow"><button class="bsBig" onclick="placeBet('Big')">Big</button><button class="bsSmall" onclick="placeBet('Small')">Small</button></div>
+
+<div style="margin-top:10px;font-size:11px;color:#ff4d4d;font-weight:bold" id="myBet">My Bet: -</div>
+</div>
+
+<!-- LIVE GAME HISTORY - VIDEO JEMU EXACT -->
+<div class="historyWrap">
+<div class="histTabs"><span class="on">Game history</span><span>Chart</span><span>Follow Strategy</span></div>
+<div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div>
+<div id="histList"></div>
+<div class="pageCtrl"><button id="prevBtn" onclick="prevPage()">◀ Prev</button><span id="pageInfo" class="pageInfo">Page 1/1 (0) - 20 per page</span><button id="nextBtn" onclick="nextPage()">Next ▶</button></div>
+</div>
+
+<div id="betModal"><div class="popBox"><h3 id="betTitle">Bet</h3><p>Total ₹10</p><button class="regbtn" onclick="confirmBet()">Confirm ₹10</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
+<div id="popup"><div class="popBox"><h2 id="popTitle"></h2><p id="popMsg"></p><h3 id="popAmt"></h3><button class="regbtn" onclick="popup.style.display='none';myBets=[];document.getElementById('myBet').innerText='My Bet: -'">OK</button></div></div>
 <div id="toast" class="toast"></div>
-<div id="registerPage"><h2 style="text-align:center;color:#ff4d4d;margin-top:30px">55 CLUB</h2><input id="rPhone" type="number" placeholder="10 digit Mobile"><input id="rPass" type="password" placeholder="Password"><button class="regbtn" onclick="doReg()">Register</button><p style="text-align:center;margin-top:15px;color:#ff4d4d;font-weight:bold" onclick="showLogin()">Login</p></div>
-<div id="loginPage" style="display:none"><h2 style="text-align:center;color:#ff4d4d;margin-top:30px">Login</h2><input id="lPhone" type="text" placeholder="Mobile / UID"><input id="lPass" type="password" placeholder="Password"><button class="regbtn" onclick="doLogin()">Login</button><p style="text-align:center;margin-top:15px;color:#ff4d4d;font-weight:bold" onclick="showReg()">Register</p></div>
-
-<div id="gamePage" style="display:none">
-<div class="top"><div onclick="openAdmin()" style="cursor:pointer">55CLUB | <span id="userShow"></span></div><div class="topR"><div onclick="doLogout()" style="font-size:12px">Logout</div></div></div>
-<div class="profileCard"><div><b id="pUsername">-</b> | UID: <b id="pUID">-</b></div><button onclick="copyUID()" style="padding:6px 12px;background:#ff4d4d;color:white;border:none;border-radius:10px;font-size:11px">Copy</button></div>
-<div class="wallet"><h2>₹ <span id="bal">0.00</span></h2><p id="myBet" style="font-weight:bold;color:#ff4d4d">Bet: -</p><div class="btns"><button class="b1" onclick="openDep()">Deposit</button><button class="b2" onclick="openWith()">Withdraw</button></div></div>
-<div id="lobbySection"><div class="lobbyTitle">🎮 Win Go - Game Start Fix</div><div class="gameLobby"><div class="gameBox" onclick="openGame('30s')"><b>Win Go 30S</b><br><small id="lobbyP30">P: ----</small><br><small id="lobbyT30" style="color:red;font-weight:bold">00:30</small></div><div class="gameBox" onclick="openGame('1m')" style="border-color:#4caf50"><b style="color:#4caf50">Win Go 1M</b><br><small id="lobbyP1">P: ----</small><br><small id="lobbyT1" style="color:green;font-weight:bold">01:00</small></div></div></div>
-
-<div id="game30" style="display:none">
-<div style="margin:10px;display:flex;justify-content:space-between"><b style="color:#ff4d4d">← Win Go 30S - START FIX</b><button onclick="closeGame()" style="padding:6px 12px;border:1px solid #ff4d4d;background:white;color:#ff4d4d;border-radius:15px">Lobby</button></div>
-<div class="playbox"><div class="timer"><span>30S Period<br><small id="pid30" style="font-weight:bold;color:#ff4d4d">----</small></span><span><b id="tm30">00:30</b></span></div><div class="colors"><button class="cG" onclick="openBetModal('Green')">Green</button><button class="cV" onclick="openBetModal('Violet')">Violet</button><button class="cR" onclick="openBetModal('Red')">Red</button></div><div class="nums"><button style="background:#9c27b0" onclick="openBetModal('Num0')">0</button><button style="background:#4caf50" onclick="openBetModal('Num1')">1</button><button style="background:#f44336" onclick="openBetModal('Num2')">2</button><button style="background:#4caf50" onclick="openBetModal('Num3')">3</button><button style="background:#4caf50" onclick="openBetModal('Num4')">4</button><button style="background:#9c27b0" onclick="openBetModal('Num5')">5</button><button style="background:#f44336" onclick="openBetModal('Num6')">6</button><button style="background:#4caf50" onclick="openBetModal('Num7')">7</button><button style="background:#f44336" onclick="openBetModal('Num8')">8</button><button style="background:#4caf50" onclick="openBetModal('Num9')">9</button></div><div class="bigsmall"><button style="background:orange" onclick="openBetModal('Big')">Big</button><button style="background:#2196F3" onclick="openBetModal('Small')">Small</button></div></div>
-<div class="history"><div class="tabRow"><button class="tabActive">Game history</button><button class="tabOff">Chart</button></div><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist30"></div><div class="pageCtrl"><button id="prev30" onclick="prevPage('30s')">◀ Prev</button><span id="pageInfo30" class="pageInfo">Page 1/1</span><button id="next30" onclick="nextPage('30s')">Next ▶</button></div></div>
-</div>
-
-<div id="game1m" style="display:none">
-<div style="margin:10px;display:flex;justify-content:space-between"><b style="color:#4caf50">← Win Go 1M - START FIX</b><button onclick="closeGame()" style="padding:6px 12px;border:1px solid #4caf50;background:white;color:#4caf50;border-radius:15px">Lobby</button></div>
-<div class="playbox"><div class="timer"><span>1M Period<br><small id="pid1" style="font-weight:bold;color:#4caf50">----</small></span><span><b id="tm1">01:00</b></span></div><div class="colors"><button class="cG" onclick="openBetModal('Green')">Green</button><button class="cV" onclick="openBetModal('Violet')">Violet</button><button class="cR" onclick="openBetModal('Red')">Red</button></div><div class="nums"><button style="background:#9c27b0" onclick="openBetModal('Num0')">0</button><button style="background:#4caf50" onclick="openBetModal('Num1')">1</button><button style="background:#f44336" onclick="openBetModal('Num2')">2</button><button style="background:#4caf50" onclick="openBetModal('Num3')">3</button><button style="background:#4caf50" onclick="openBetModal('Num4')">4</button><button style="background:#9c27b0" onclick="openBetModal('Num5')">5</button><button style="background:#f44336" onclick="openBetModal('Num6')">6</button><button style="background:#4caf50" onclick="openBetModal('Num7')">7</button><button style="background:#f44336" onclick="openBetModal('Num8')">8</button><button style="background:#4caf50" onclick="openBetModal('Num9')">9</button></div><div class="bigsmall"><button style="background:orange" onclick="openBetModal('Big')">Big</button><button style="background:#2196F3" onclick="openBetModal('Small')">Small</button></div></div>
-<div class="history"><div class="tabRow"><button class="tabActive">Game history</button><button class="tabOff">Chart</button></div><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist1"></div><div class="pageCtrl"><button id="prev1" onclick="prevPage('1m')">◀ Prev</button><span id="pageInfo1" class="pageInfo">Page 1/1</span><button id="next1" onclick="nextPage('1m')">Next ▶</button></div></div>
-</div>
-
-<div id="depBox"><div class="popBox"><h3>Deposit</h3><input id="depAmt" type="number" placeholder="Amount"><input id="depUTR" type="text" placeholder="UTR"><button class="regbtn" onclick="submitDeposit()">Confirm</button><button onclick="depBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
-<div id="withBox"><div class="popBox"><h3>Withdraw</h3><input id="withAmt" type="number" placeholder="Amount"><input id="withUPI" type="text" placeholder="UPI"><button class="regbtn" onclick="submitWithdraw()">Submit</button><button onclick="withBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
-<div id="betModal"><div class="popBox"><h3 id="betTitle"></h3><p>Total ₹<b id="totalAmt">10</b></p><button class="regbtn" onclick="confirmBet()">Confirm Bet</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
-<div id="popup"><div class="popBox"><h2 id="popTitle"></h2><p id="popMsg"></p><h3 id="popAmt"></h3><button class="regbtn" onclick="closePop()">OK</button></div></div>
-</div>
-
-<div id="adminPassBox"><div class="popBox"><h3>Admin 6351</h3><input id="adminPassInput" type="password" placeholder="Password"><button class="regbtn" onclick="checkAdminPass()">Open</button><button onclick="adminPassBox.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
-<div id="adminBox"><div class="popBox"><h2>ADMIN</h2><select id="adminNum"><option value="">Random</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select><select id="adminGameSel"><option value="30s">30S</option><option value="1m">1M</option></select><button class="regbtn" onclick="setAdmin()">Set</button><button onclick="adminBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
 
 <script>
-const ADMIN_PASSWORD="6351"; const PER_PAGE=20;
-let bal=0,currentUser=null,tempBetType="",tempAmt=10,topClicks=0,curGame='30s';
-let period30=Math.floor(Date.now()/1000), time30=30, period1m=Math.floor(Date.now()/1000)+100, time1m=60;
-let hist30=JSON.parse(localStorage.getItem("55_hist_30_v2")||"[]");
-let hist1=JSON.parse(localStorage.getItem("55_hist_1m_v2")||"[]");
-let nextResult30=null,nextResult1m=null,myBets30=[],myBets1=[],curPage30=1,curPage1=1,timerStarted=false;
-function showToast(m){toast.innerText=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',2500);}
-function getUsers(){return JSON.parse(localStorage.getItem("55_users")||"{}")}function saveUsers(u){localStorage.setItem("55_users",JSON.stringify(u))}
-function showReg(){loginPage.style.display='none';registerPage.style.display='block';}
-function showLogin(){registerPage.style.display='none';loginPage.style.display='block';}
-function genUID(){return "55"+Math.floor(100000+Math.random()*900000);}
-function doReg(){let p=rPhone.value.trim(),ps=rPass.value.trim();if(p.length!=10){alert("10 digit");return;}let users=getUsers();if(users[p]){alert("Already");showLogin();return;}let uid=genUID();users[p]={pass:ps,bal:100,uid:uid,username:"Player"+p.slice(-4),phone:p};saveUsers(users);alert("Registered "+uid);showLogin();}
-function doLogin(){let input=lPhone.value.trim(),ps=lPass.value.trim();let users=getUsers();let key=null;if(users[input])key=input;else{let e=Object.entries(users).find(([k,u])=>u.uid==input);if(e)key=e[0];}if(!key||users[key].pass!=ps){alert("Wrong");return;}currentUser=key;bal=users[key].bal;localStorage.setItem("55_current",key);userShow.innerText=users[key].username;pUsername.innerText=users[key].username;pUID.innerText=users[key].uid;document.getElementById('bal').innerText=bal.toFixed(2);registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block';renderAll();startGame();}
-function doLogout(){localStorage.removeItem("55_current");location.reload();}
-function openDep(){depBox.style.display='flex'}function openWith(){withBox.style.display='flex'}
-function openGame(type){curGame=type;lobbySection.style.display='none';game30.style.display=type=='30s'?'block':'none';game1m.style.display=type=='1m'?'block':'none';renderHist(type);}
-function closeGame(){game30.style.display='none';game1m.style.display='none';lobbySection.style.display='block';}
-function copyUID(){navigator.clipboard.writeText(pUID.innerText);showToast("Copied");}
-function submitDeposit(){let a=parseFloat(depAmt.value)||0;if(a<1){alert("Amount");return}bal+=a;let u=getUsers();u[currentUser].bal=bal;saveUsers(u);document.getElementById('bal').innerText=bal.toFixed(2);depBox.style.display='none';showToast("Added ₹"+a);}
-function submitWithdraw(){let a=parseFloat(withAmt.value)||0;if(a<=0||a>bal){alert("Low bal");return}bal-=a;let u=getUsers();u[currentUser].bal=bal;saveUsers(u);document.getElementById('bal').innerText=bal.toFixed(2);withBox.style.display='none';showToast("Withdraw ₹"+a);}
-function openBetModal(t){if((curGame=='30s'?time30:time1m)<=5){alert("5 sec band - bet close");return}tempBetType=t;betTitle.innerText=t+" - ₹10";betModal.style.display='flex';}
-function confirmBet(){let tot=10;if(bal<tot){alert("Low balance");return}bal-=tot;if(curGame=='30s') myBets30.push({type:tempBetType,amt:tot}); else myBets1.push({type:tempBetType,amt:tot});document.getElementById('bal').innerText=bal.toFixed(2);let u=getUsers();u[currentUser].bal=bal;saveUsers(u);myBet.innerText="Bet ("+curGame+"): "+(curGame=='30s'?myBets30.map(b=>b.type).join(","):myBets1.map(b=>b.type).join(","));betModal.style.display='none';showToast("Bet placed "+tempBetType);}
-function closePop(){popup.style.display='none';myBets30=[];myBets1=[];myBet.innerText="Bet: -";}
-function openAdmin(){topClicks++;if(topClicks>=5){adminPassBox.style.display='flex';topClicks=0;}setTimeout(()=>topClicks=0,3000);}
-function checkAdminPass(){if(adminPassInput.value==ADMIN_PASSWORD){adminPassBox.style.display='none';adminBox.style.display='flex';}else alert("Wrong");}
-function setAdmin(){let n=adminNum.value;let g=adminGameSel.value;if(n===""){if(g=='30s')nextResult30=null;else nextResult1m=null;}else{if(g=='30s')nextResult30=parseInt(n);else nextResult1m=parseInt(n);}adminBox.style.display='none';showToast("Result set "+n+" for "+g);}
-function renderAll(){pid30.innerText=period30; pid1.innerText=period1m; lobbyP30.innerText="P:"+String(period30).slice(-4); lobbyP1.innerText="P:"+String(period1m).slice(-4); renderHist('30s'); renderHist('1m');}
-function formatPeriod(p){let now=new Date();let y=now.getFullYear();let m=String(now.getMonth()+1).padStart(2,'0');let d=String(now.getDate()).padStart(2,'0');return `${y}${m}${d}1000${String(p).slice(-5)}`;}
-function renderHist(type){
- let arr=type=='30s'?hist30:hist1;
- let curPage=type=='30s'?curPage30:curPage1;
- let total=Math.max(1,Math.ceil(arr.length/PER_PAGE));
+const PER_PAGE=20;
+let bal=100, period=20260928100051392, timeLeft=30, hist=[], myBets=[], curPage=1, timerStarted=false, tempBet="", nextResult=null;
+let histKey="55_live_hist_video";
+
+function loadHist(){try{hist=JSON.parse(localStorage.getItem(histKey)||"[]")}catch(e){hist=[]} if(hist.length==0){
+ // DEMO VIDEO JEVU DATA
+ hist=[
+  {period:20260928100051392,num:4,bs:"Small",color:"Red"},
+  {period:20260928100051391,num:8,bs:"Big",color:"Red"},
+  {period:20260928100051390,num:1,bs:"Small",color:"Green"},
+  {period:20260928100051389,num:2,bs:"Small",color:"Red"},
+  {period:20260928100051388,num:2,bs:"Small",color:"Red"},
+  {period:20260928100051387,num:8,bs:"Big",color:"Red"},
+  {period:20260928100051386,num:8,bs:"Big",color:"Red"},
+  {period:20260928100051385,num:3,bs:"Small",color:"Green"},
+  {period:20260928100051384,num:0,bs:"Small",color:"Violet"},
+  {period:20260928100051383,num:7,bs:"Big",color:"Green"},
+ ];
+ localStorage.setItem(histKey,JSON.stringify(hist));
+}}
+
+function showToast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2000);}
+
+function formatPeriod(p){return String(p);}
+
+function renderHistory(){
+ let total=Math.max(1,Math.ceil(hist.length/PER_PAGE));
  if(curPage>total)curPage=total; if(curPage<1)curPage=1;
- if(type=='30s')curPage30=curPage; else curPage1=curPage;
  let start=(curPage-1)*PER_PAGE;
- let slice=arr.slice(start,start+PER_PAGE);
+ let slice=hist.slice(start,start+PER_PAGE);
  let html="";
  slice.forEach(r=>{
-   let perStr=formatPeriod(r.period);
-   let numColor=r.color=="Green"?"#4caf50":r.color=="Red"?"#f44336":"#9c27b0";
-   let dots=r.color=="Green"?`<span class="dot dotG"></span>`:r.color=="Red"?`<span class="dot dotR"></span>`:r.num==0?`<span class="dot dotR"></span><span class="dot dotV"></span>`:r.num==5?`<span class="dot dotG"></span><span class="dot dotV"></span>`:`<span class="dot dotV"></span>`;
-   html+=`<div class="histRow"><span class="periodTxt">${perStr}</span><span class="numTxt" style="color:${numColor}">${r.num}</span><span>${r.bs}</span><span class="colorDots">${dots}</span></div>`;
+   let numColor=r.color=="Green"?"#3cc15f":r.color=="Red"?"#ff4d4d":"#9c27b0";
+   let bsColor=r.bs=="Big"?"#ff9f43":"#3498db";
+   let dots="";
+   if(r.color=="Green") dots=`<span class="dot dotG"></span>`;
+   else if(r.color=="Red") dots=`<span class="dot dotR"></span>`;
+   else {
+     if(r.num==0) dots=`<div class="dotRV"><span class="dot dotR"></span><span class="dot dotV"></span></div>`;
+     else if(r.num==5) dots=`<div class="dotRV"><span class="dot dotG"></span><span class="dot dotV"></span></div>`;
+     else dots=`<span class="dot dotV"></span>`;
+   }
+   html+=`<div class="histRow"><span class="periodTxt">${formatPeriod(r.period)}</span><span class="numBig" style="color:${numColor}">${r.num}</span><span style="color:${bsColor}">${r.bs}</span><span>${dots}</span></div>`;
  });
- if(type=='30s'){
-   if(html=="") html=`<div class="histRow"><span style="grid-column:1/5;color:gray">Game start thase etle result ahiya dekhase - 30s wait karo</span></div>`;
-   hist30.innerHTML=html; pageInfo30.innerText=`Page ${curPage}/${total} (${arr.length}) - 20 per page - Auto Page 1`; prev30.disabled=curPage<=1; next30.disabled=curPage>=total;
- }else{
-   if(html=="") html=`<div class="histRow"><span style="grid-column:1/5;color:gray">Result ahiya dekhase</span></div>`;
-   hist1.innerHTML=html; pageInfo1.innerText=`Page ${curPage}/${total} (${arr.length}) - 20 per page`; prev1.disabled=curPage<=1; next1.disabled=curPage>=total;
- }
+ if(html=="") html=`<div class="histRow"><span style="grid-column:1/5;color:gray">Loading live history...</span></div>`;
+ document.getElementById('histList').innerHTML=html;
+ document.getElementById('pageInfo').innerText=`Page ${curPage}/${total} (${hist.length}) - 20 per page`;
+ document.getElementById('prevBtn').disabled=curPage<=1;
+ document.getElementById('nextBtn').disabled=curPage>=total;
 }
-function prevPage(t){if(t=='30s'&&curPage30>1){curPage30--;renderHist('30s');}if(t=='1m'&&curPage1>1){curPage1--;renderHist('1m');}}
-function nextPage(t){if(t=='30s'&&curPage30<Math.ceil(hist30.length/PER_PAGE)){curPage30++;renderHist('30s');}if(t=='1m'&&curPage1<Math.ceil(hist1.length/PER_PAGE)){curPage1++;renderHist('1m');}}
 
-// GAME START - SINGLE TIMER - 100% START THASE
+function prevPage(){if(curPage>1){curPage--;renderHistory();}}
+function nextPage(){if(curPage<Math.ceil(hist.length/PER_PAGE)){curPage++;renderHistory();}}
+
+function placeBet(type){
+ if(timeLeft<=5){showToast("Bet closed for last 5 sec");return}
+ tempBet=type;
+ document.getElementById('betTitle').innerText=type+" Bet - ₹10";
+ document.getElementById('betModal').style.display='flex';
+}
+function confirmBet(){
+ if(bal<10){showToast("Low balance");return}
+ bal-=10; document.getElementById('bal').innerText=bal.toFixed(2);
+ myBets.push({type:tempBet,amt:10});
+ document.getElementById('myBet').innerText="My Bet: "+myBets.map(b=>b.type).join(", ");
+ document.getElementById('betModal').style.display='none';
+ showToast(tempBet+" ₹10 placed");
+}
+
 function startGame(){
  if(timerStarted) return; timerStarted=true;
- console.log("Game Started");
  setInterval(()=>{
-  // 30S LOGIC
-  time30--;
-  if(time30<0){ time30=30; }
-  tm30.innerText="00:"+(time30<10?"0"+time30:time30);
-  lobbyT30.innerText="00:"+(time30<10?"0"+time30:time30);
-  if(time30==0){
-   let winNum=nextResult30!==null?nextResult30:Math.floor(Math.random()*10);
-   nextResult30=null;
-   let winCol=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
-   let winBS=winNum>=5?"Big":"Small";
-   hist30.unshift({period:period30,num:winNum,bs:winBS,color:winCol});
-   localStorage.setItem("55_hist_30_v2",JSON.stringify(hist30));
-   // WIN CHECK
-   if(myBets30.length>0){
-     let totalWin=0,totalBet=0; myBets30.forEach(b=>{totalBet+=b.amt;let won=false;if(b.type==winCol)won=true;if(b.type==winBS)won=true;if(b.type=="Num"+winNum)won=true;if(b.type=="Green"&&[1,3,7,9].includes(winNum))won=true;if(b.type=="Red"&&[2,4,6,8].includes(winNum))won=true;if(b.type=="Violet"&&[0,5].includes(winNum))won=true;if(won){if(b.type.startsWith("Num"))totalWin+=b.amt*9;else totalWin+=b.amt*2;}});
-     if(totalWin>0){bal+=totalWin;let u=getUsers();u[currentUser].bal=bal;saveUsers(u);document.getElementById('bal').innerText=bal.toFixed(2);popTitle.innerText="YOU WIN!";popMsg.innerText=`${winNum} ${winCol} ${winBS}`;popAmt.innerText=`+₹${totalWin}`;popup.style.display='flex';}else if(totalBet>0){popTitle.innerText="YOU LOSS!";popMsg.innerText=`${winNum} ${winCol} ${winBS}`;popAmt.innerText=`-₹${totalBet}`;popup.style.display='flex';}
-     myBets30=[];myBet.innerText="Bet: -";
-   }
-   period30=Math.floor(Date.now()/1000);
-   pid30.innerText=period30; lobbyP30.innerText="P:"+String(period30).slice(-4);
-   curPage30=1; renderHist('30s');
-   time30=30;
+  timeLeft--;
+  if(timeLeft<0) timeLeft=30;
+  let tens=Math.floor(timeLeft/10), ones=timeLeft%10;
+  document.getElementById('t1').innerText="0";
+  document.getElementById('t2').innerText="0";
+  document.getElementById('t3').innerText=tens;
+  document.getElementById('t4').innerText=ones;
+
+  // VIDEO JEMU BIG COUNTDOWN 05 04 03 02 01 00
+  if(timeLeft<=5 && timeLeft>0){
+   document.getElementById('countOverlay').style.display='flex';
+   document.getElementById('countBox1').innerText="0";
+   document.getElementById('countBox2').innerText=timeLeft;
+  }else{
+   document.getElementById('countOverlay').style.display='none';
   }
 
-  // 1M LOGIC
-  time1m--; if(time1m<0){time1m=60;}
-  let m=Math.floor(time1m/60),s=time1m%60;
-  tm1.innerText=(m<10?"0"+m:m)+":"+(s<10?"0"+s:s);
-  lobbyT1.innerText=(m<10?"0"+m:m)+":"+(s<10?"0"+s:s);
-  if(time1m==0){
-   let winNum=nextResult1m!==null?nextResult1m:Math.floor(Math.random()*10);
-   nextResult1m=null;
-   let winCol=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
+  if(timeLeft==0){
+   // RESULT GENERATE - LIVE HISTORY MA ADD
+   let winNum=nextResult!==null?nextResult:Math.floor(Math.random()*10);
+   nextResult=null;
+   let winColor=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
    let winBS=winNum>=5?"Big":"Small";
-   hist1.unshift({period:period1m,num:winNum,bs:winBS,color:winCol});
-   localStorage.setItem("55_hist_1m_v2",JSON.stringify(hist1));
-   if(myBets1.length>0){
-     let totalWin=0,totalBet=0; myBets1.forEach(b=>{totalBet+=b.amt;let won=false;if(b.type==winCol)won=true;if(b.type==winBS)won=true;if(b.type=="Num"+winNum)won=true;if(b.type=="Green"&&[1,3,7,9].includes(winNum))won=true;if(b.type=="Red"&&[2,4,6,8].includes(winNum))won=true;if(b.type=="Violet"&&[0,5].includes(winNum))won=true;if(won){if(b.type.startsWith("Num"))totalWin+=b.amt*9;else totalWin+=b.amt*2;}});
-     if(totalWin>0){bal+=totalWin;let u=getUsers();u[currentUser].bal=bal;saveUsers(u);document.getElementById('bal').innerText=bal.toFixed(2);popTitle.innerText="YOU WIN!";popMsg.innerText=`${winNum} ${winCol} ${winBS}`;popAmt.innerText=`+₹${totalWin}`;popup.style.display='flex';}else if(totalBet>0){popTitle.innerText="YOU LOSS!";popMsg.innerText=`${winNum} ${winCol} ${winBS}`;popAmt.innerText=`-₹${totalBet}`;popup.style.display='flex';}
-     myBets1=[];myBet.innerText="Bet: -";
-   }
-   period1m=Math.floor(Date.now()/1000);
-   pid1.innerText=period1m; lobbyP1.innerText="P:"+String(period1m).slice(-4);
-   curPage1=1; renderHist('1m');
-   time1m=60;
+
+   // SHOW 00
+   document.getElementById('countOverlay').style.display='flex';
+   document.getElementById('countBox1').innerText="0";
+   document.getElementById('countBox2').innerText="0";
+
+   setTimeout(()=>{
+    // ADD TO LIVE HISTORY - TOP MA
+    hist.unshift({period:period,num:winNum,bs:winBS,color:winColor});
+    localStorage.setItem(histKey,JSON.stringify(hist));
+
+    // WIN CHECK
+    if(myBets.length>0){
+     let totalWin=0,totalBet=0;
+     myBets.forEach(b=>{
+       totalBet+=b.amt;
+       let won=false;
+       if(b.type==winColor) won=true;
+       if(b.type==winBS) won=true;
+       if(b.type=="Num"+winNum) won=true;
+       if(b.type=="Green"&&[1,3,7,9].includes(winNum)) won=true;
+       if(b.type=="Red"&&[2,4,6,8].includes(winNum)) won=true;
+       if(b.type=="Violet"&&[0,5].includes(winNum)) won=true;
+       if(won){ if(b.type.startsWith("Num")) totalWin+=b.amt*9; else totalWin+=b.amt*2; }
+     });
+     if(totalWin>0){
+       bal+=totalWin; document.getElementById('bal').innerText=bal.toFixed(2);
+       document.getElementById('popTitle').innerText="YOU WIN! 🎉";
+       document.getElementById('popMsg').innerText=`Result: ${winNum} ${winColor} ${winBS}`;
+       document.getElementById('popAmt').innerText=`+₹${totalWin}`;
+       document.getElementById('popup').style.display='flex';
+     }else if(totalBet>0){
+       document.getElementById('popTitle').innerText="YOU LOSS! 😢";
+       document.getElementById('popMsg').innerText=`Result: ${winNum} ${winColor} ${winBS}`;
+       document.getElementById('popAmt').innerText=`-₹${totalBet}`;
+       document.getElementById('popup').style.display='flex';
+     }
+     myBets=[]; document.getElementById('myBet').innerText="My Bet: -";
+    }
+
+    // NEW PERIOD - SAME AS VIDEO 20260928100051392 -> 393
+    period++;
+    document.getElementById('pidShow').innerText=period;
+    document.getElementById('pid2').innerText=period;
+
+    curPage=1; // AUTO PAGE 1 - VIDEO JEMU READY
+    renderHistory();
+
+    document.getElementById('countOverlay').style.display='none';
+    timeLeft=30;
+   },800);
   }
  },1000);
 }
 
 window.onload=()=>{
- let cur=localStorage.getItem("55_current");
- if(cur){
-  let u=getUsers();
-  if(u[cur]){
-   currentUser=cur; bal=u[cur].bal;
-   document.getElementById('bal').innerText=bal.toFixed(2); userShow.innerText=u[cur].username; pUsername.innerText=u[cur].username; pUID.innerText=u[cur].uid;
-   registerPage.style.display='none'; loginPage.style.display='none'; gamePage.style.display='block'; renderAll(); startGame();
-  }
- }
- if(hist30.length==0){
-   hist30=[
-     {period:20250929,num:6,bs:"Big",color:"Red"},
-     {period:20250928,num:2,bs:"Small",color:"Red"},
-     {period:20250927,num:5,bs:"Big",color:"Violet"},
-     {period:20250926,num:9,bs:"Big",color:"Green"},
-     {period:20250925,num:0,bs:"Small",color:"Violet"},
-   ];
-   localStorage.setItem("55_hist_30_v2",JSON.stringify(hist30));
-   renderHist('30s');
- }
+ loadHist();
+ document.getElementById('pidShow').innerText=period;
+ document.getElementById('pid2').innerText=period;
+ renderHistory();
+ startGame();
 }
 </script>
 </body>
-                                                                                                                         </html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </html>
