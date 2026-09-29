@@ -1,14 +1,14 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55CLUB - Line Removed</title>
+<title>55CLUB - Tab Time Period Removed</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial,sans-serif}
 body{background:#f5f5f5}
 .topHead{background:#ff4d4d;color:white;padding:12px;text-align:center;font-weight:bold}
 .walletCard{background:white;margin:10px;border-radius:20px;padding:15px;text-align:center;box-shadow:0 2px 10px #0001}
-.tabs{display:flex;gap:8px;margin:10px;overflow:auto}.tabs div{min-width:75px;background:white;border-radius:12px;padding:10px 5px;text-align:center;font-size:11px;box-shadow:0 1px 5px #0001;border:2px solid transparent;cursor:pointer}.tabs.active{border-color:#ff4d4d;background:#fff0f0;color:#ff4d4d;font-weight:bold}
+.tabs{display:flex;gap:8px;margin:10px;overflow:auto}.tabs div{min-width:75px;background:white;border-radius:12px;padding:10px 5px;text-align:center;font-size:12px;box-shadow:0 1px 5px #0001;border:2px solid transparent;cursor:pointer;font-weight:bold}.tabs div.active{border-color:#ff4d4d;background:#fff0f0;color:#ff4d4d}
 .gameTop{background:#ff4d4d;margin:10px;border-radius:15px;padding:12px;color:white;display:flex;justify-content:space-between;align-items:center}
 .gameTop.g1m{background:#4caf50}.gameTop.g3m{background:#ff9800}.gameTop.g5m{background:#9c27b0}
 .timeBox{display:flex;gap:4px;align-items:center}.timeBox b{background:white;color:#333;padding:6px 8px;border-radius:6px;font-size:18px;min-width:28px;text-align:center}
@@ -22,7 +22,7 @@ body{background:#f5f5f5}
 .histRow{display:grid;grid-template-columns:1.6fr 0.5fr 0.6fr 0.5fr;padding:12px 8px;border-bottom:1px solid #f0f0f0;font-size:11px;align-items:center;text-align:center;background:white}
 .periodTxt{font-size:10px;color:#333;font-weight:600;word-break:break-all}.numBig{font-size:20px;font-weight:bold}
 .dot{width:10px;height:10px;border-radius:50%;display:inline-block}.dotR{background:#ff4d4d}.dotG{background:#3cc15f}.dotV{background:#9c27b0}.dotRV{display:flex;gap:3px;justify-content:center}
-.pageCtrl{display:flex;justify-content:space-between;align-items:center;padding:10px;background:#f9f9f9;border-top:1px solid #eee}.pageCtrl button{padding:8px 18px;border:none;border-radius:20px;background:#ff4d4d;color:white;font-weight:bold;font-size:12px}.pageCtrl button:disabled{background:#ccc}
+.pageCtrl{display:flex;justify-content:space-between;align-items:center;padding:10px;background:#f9f9f9;border-top:1px solid #eee}.pageCtrl button{padding:8px 18px;border:none;border-radius:20px;background:#ff4d4d;color:white;font-weight:bold;font-size:12px}
 .pageInfo{font-size:10px;font-weight:bold;color:#ff4d4d;background:white;padding:5px 10px;border-radius:15px;border:1px solid #ff4d4d}
 .countOverlay{position:absolute;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:10;gap:15px}
 .countBox{background:white;width:70px;height:70px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:bold;color:#ff4d4d}
@@ -35,18 +35,14 @@ body{background:#f5f5f5}
 </head>
 <body>
 <div class="topHead">55CLUB</div>
+<div class="walletCard"><div>₹ <b id="bal">100.00</b> | <span id="curLabel" style="color:#ff4d4d;font-weight:bold">30S</span> | <span id="curPeriodFull" style="font-size:11px">20260928100051390</span></div></div>
 
-<!-- FOTO WALI LINE KADHI NAKHI - AHYA KHALI BALANCE J DEKHASE -->
-<div class="walletCard">
-<div>₹ <b id="bal">100.00</b> | <span id="curLabel" style="color:#ff4d4d;font-weight:bold">30S</span> | <span id="curPeriodFull" style="font-size:11px">20260928100051390</span></div>
-<!-- AHYA HATI E 2 LINE KADHI NAKHI CHE - Refresh proof ane My Bet wali -->
-</div>
-
+<!-- FOTO WALA 00:10 51697 WADA TAB MATHI KADHI NAKHYA - AHYA KHALI WinGo NAME J -->
 <div class="tabs">
-<div id="tab30" class="active" onclick="switchGame('30s')">WinGo<br>30sec<br><small id="tabT30">00:30</small><br><small id="tabP30" style="font-size:8px">51390</small></div>
-<div id="tab1" onclick="switchGame('1m')">WinGo<br>1 Min<br><small id="tabT1">01:00</small><br><small id="tabP1" style="font-size:8px">51390</small></div>
-<div id="tab3" onclick="switchGame('3m')">WinGo<br>3 Min<br><small id="tabT3">03:00</small><br><small id="tabP3" style="font-size:8px">51390</small></div>
-<div id="tab5" onclick="switchGame('5m')">WinGo<br>5 Min<br><small id="tabT5">05:00</small><br><small id="tabP5" style="font-size:8px">51390</small></div>
+<div id="tab30" class="active" onclick="switchGame('30s')">WinGo<br>30sec</div>
+<div id="tab1" onclick="switchGame('1m')">WinGo<br>1 Min</div>
+<div id="tab3" onclick="switchGame('3m')">WinGo<br>3 Min</div>
+<div id="tab5" onclick="switchGame('5m')">WinGo<br>5 Min</div>
 </div>
 
 <div id="g30" class="gameSection active">
@@ -55,7 +51,7 @@ body{background:#f5f5f5}
 <div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div>
 <div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div>
 <div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div>
-<div class="historyWrap"><div class="histHeader"><span>Period Ak No Ak</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist30"></div><div class="pageCtrl"><button id="prev30" onclick="prevPage('30s')">◀</button><span id="info30" class="pageInfo"></span><button id="next30" onclick="nextPage('30s')">▶</button></div></div>
+<div class="historyWrap"><div class="histHeader"><span>Period Ak No Ak</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist30"></div><div class="pageCtrl"><button onclick="prevPage('30s')">◀</button><span id="info30" class="pageInfo"></span><button onclick="nextPage('30s')">▶</button></div></div>
 </div>
 
 <div id="g1" class="gameSection">
@@ -64,7 +60,7 @@ body{background:#f5f5f5}
 <div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div>
 <div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div>
 <div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div>
-<div class="historyWrap"><div class="histHeader"><span>Period Ak No Ak</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist1"></div><div class="pageCtrl"><button id="prev1" onclick="prevPage('1m')">◀</button><span id="info1" class="pageInfo"></span><button id="next1" onclick="nextPage('1m')">▶</button></div></div>
+<div class="historyWrap"><div class="histHeader"><span>Period Ak No Ak</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist1"></div><div class="pageCtrl"><button onclick="prevPage('1m')">◀</button><span id="info1" class="pageInfo"></span><button onclick="nextPage('1m')">▶</button></div></div>
 </div>
 
 <div id="g3" class="gameSection">
@@ -73,7 +69,7 @@ body{background:#f5f5f5}
 <div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div>
 <div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div>
 <div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div>
-<div class="historyWrap"><div class="histHeader"><span>Period Ak No Ak</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist3"></div><div class="pageCtrl"><button id="prev3" onclick="prevPage('3m')">◀</button><span id="info3" class="pageInfo"></span><button id="next3" onclick="nextPage('3m')">▶</button></div></div>
+<div class="historyWrap"><div class="histHeader"><span>Period Ak No Ak</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist3"></div><div class="pageCtrl"><button onclick="prevPage('3m')">◀</button><span id="info3" class="pageInfo"></span><button onclick="nextPage('3m')">▶</button></div></div>
 </div>
 
 <div id="g5" class="gameSection">
@@ -82,7 +78,7 @@ body{background:#f5f5f5}
 <div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div>
 <div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div>
 <div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div>
-<div class="historyWrap"><div class="histHeader"><span>Period Ak No Ak</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist5"></div><div class="pageCtrl"><button id="prev5" onclick="prevPage('5m')">◀</button><span id="info5" class="pageInfo"></span><button id="next5" onclick="nextPage('5m')">▶</button></div></div>
+<div class="historyWrap"><div class="histHeader"><span>Period Ak No Ak</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist5"></div><div class="pageCtrl"><button onclick="prevPage('5m')">◀</button><span id="info5" class="pageInfo"></span><button onclick="nextPage('5m')">▶</button></div></div>
 </div>
 
 <div id="betModal"><div class="popBox"><h3 id="betTitle">Bet</h3><p id="betPeriodShow" style="font-size:11px;color:gray"></p><p>₹10</p><button class="regbtn" onclick="confirmBet()">Confirm</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
@@ -170,7 +166,7 @@ function switchGame(type){
  document.getElementById('g1').classList.toggle('active',type=='1m');
  document.getElementById('g3').classList.toggle('active',type=='3m');
  document.getElementById('g5').classList.toggle('active',type=='5m');
- renderHist(type); updateMyBet();
+ renderHist(type);
 }
 function renderHist(type){
  let g=games[type];
@@ -184,10 +180,9 @@ function renderHist(type){
   html+=`<div class="histRow"><span class="periodTxt">${r.fullPeriod}</span><span class="numBig" style="color:${numColor}">${r.num}</span><span>${r.bs}</span><span>${dots}</span></div>`;
  });
  document.getElementById(type=='30s'?'hist30':type=='1m'?'hist1':type=='3m'?'hist3':'hist5').innerHTML=html;
- document.getElementById(type=='30s'?'info30':type=='1m'?'info1':type=='3m'?'info3':'info5').innerText=`${type.toUpperCase()} Page ${g.page}/${total} (${g.hist.length}) - Curr:${getFullPeriod(g.period)}`;
+ document.getElementById(type=='30s'?'info30':type=='1m'?'info1':type=='3m'?'info3':'info5').innerText=`${type.toUpperCase()} Page ${g.page}/${total} - Curr:${getFullPeriod(g.period)}`;
  document.getElementById('short'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=g.period;
  document.getElementById('next'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=g.period+1;
- document.getElementById('tabP'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=g.period;
  document.getElementById('pid'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=getFullPeriod(g.period)+" - "+type.toUpperCase();
 }
 function prevPage(t){if(games[t].page>1){games[t].page--;renderHist(t);}}
@@ -203,15 +198,10 @@ function confirmBet(){
  if(bal<10){showToast("Low bal");return}
  bal-=10; document.getElementById('bal').innerText=bal.toFixed(2);
  games[curGame].bets.push({type:tempBet,amt:10,period:games[curGame].period});
- updateMyBet(); saveAll(); document.getElementById('betModal').style.display='none';
+ saveAll(); document.getElementById('betModal').style.display='none';
  showToast(tempBet+" placed");
 }
-function updateMyBet(){
- // My Bet UI gayab kari didhu - pan logic andar kaam karse - balance safe
- document.getElementById('curPeriodFull').innerText=getFullPeriod(games[curGame].period);
- document.getElementById('bal').innerText=bal.toFixed(2);
-}
-function clearBets(){games[curGame].bets=[];updateMyBet(); saveAll();}
+function clearBets(){games[curGame].bets=[]; saveAll();}
 function startAll(){
  setInterval(()=>{
   Object.keys(games).forEach(type=>{
@@ -219,10 +209,10 @@ function startAll(){
     g.time--; g.lastTs=Date.now();
     if(g.time<0) g.time=0;
     let m=Math.floor(g.time/60), s=g.time%60;
-    if(type=='30s'){document.getElementById('t30_1').innerText=Math.floor(g.time/10);document.getElementById('t30_2').innerText=g.time%10; document.getElementById('tabT30').innerText="00:"+(g.time<10?"0"+g.time:g.time);}
-    if(type=='1m'){document.getElementById('t1_1').innerText=Math.floor(m/10);document.getElementById('t1_2').innerText=m%10;document.getElementById('t1_3').innerText=Math.floor(s/10);document.getElementById('t1_4').innerText=s%10; document.getElementById('tabT1').innerText=(m<10?"0"+m:m)+":"+(s<10?"0"+s:s);}
-    if(type=='3m'){document.getElementById('t3_1').innerText=Math.floor(m/10);document.getElementById('t3_2').innerText=m%10;document.getElementById('t3_3').innerText=Math.floor(s/10);document.getElementById('t3_4').innerText=s%10; document.getElementById('tabT3').innerText=(m<10?"0"+m:m)+":"+(s<10?"0"+s:s);}
-    if(type=='5m'){document.getElementById('t5_1').innerText=Math.floor(m/10);document.getElementById('t5_2').innerText=m%10;document.getElementById('t5_3').innerText=Math.floor(s/10);document.getElementById('t5_4').innerText=s%10; document.getElementById('tabT5').innerText=(m<10?"0"+m:m)+":"+(s<10?"0"+s:s);}
+    if(type=='30s'){document.getElementById('t30_1').innerText=Math.floor(g.time/10);document.getElementById('t30_2').innerText=g.time%10;}
+    if(type=='1m'){document.getElementById('t1_1').innerText=Math.floor(m/10);document.getElementById('t1_2').innerText=m%10;document.getElementById('t1_3').innerText=Math.floor(s/10);document.getElementById('t1_4').innerText=s%10;}
+    if(type=='3m'){document.getElementById('t3_1').innerText=Math.floor(m/10);document.getElementById('t3_2').innerText=m%10;document.getElementById('t3_3').innerText=Math.floor(s/10);document.getElementById('t3_4').innerText=s%10;}
+    if(type=='5m'){document.getElementById('t5_1').innerText=Math.floor(m/10);document.getElementById('t5_2').innerText=m%10;document.getElementById('t5_3').innerText=Math.floor(s/10);document.getElementById('t5_4').innerText=s%10;}
     let ov=document.getElementById('ov'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5'));
     if(g.time<=5 && g.time>0){ov.style.display='flex'; document.getElementById('ov'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')+'_1').innerText="0"; document.getElementById('ov'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')+'_2').innerText=g.time;}
     else if(g.time>5){ov.style.display='none';}
@@ -236,13 +226,13 @@ function startAll(){
         let curFull=getFullPeriod(curShort);
         g.hist.unshift({shortPeriod:curShort,fullPeriod:curFull,num:winNum,bs:winBS,color:winColor});
         if(g.hist.length>200) g.hist.pop();
-        if(type==curGame && g.bets.length>0){
+        if(g.bets.length>0){
           let totalWin=0,totalBet=0; g.bets.forEach(b=>{totalBet+=b.amt;let won=false;if(b.type==winColor)won=true;if(b.type==winBS)won=true;if(b.type=="Num"+winNum)won=true;if(b.type=="Green"&&[1,3,7,9].includes(winNum))won=true;if(b.type=="Red"&&[2,4,6,8].includes(winNum))won=true;if(b.type=="Violet"&&[0,5].includes(winNum))won=true;if(won){if(b.type.startsWith("Num"))totalWin+=b.amt*9;else totalWin+=b.amt*2;}});
           if(totalWin>0){bal+=totalWin;document.getElementById('bal').innerText=bal.toFixed(2);document.getElementById('popTitle').innerText=type.toUpperCase()+" WIN!";document.getElementById('popMsg').innerText=`Period ${curFull} - ${winNum} ${winColor} ${winBS}`;document.getElementById('popAmt').innerText=`+₹${totalWin}`;document.getElementById('popup').style.display='flex';}else if(totalBet>0){document.getElementById('popTitle').innerText=type.toUpperCase()+" LOSS!";document.getElementById('popMsg').innerText=`Period ${curFull} - ${winNum} ${winColor} ${winBS}`;document.getElementById('popAmt').innerText=`-₹${totalBet}`;document.getElementById('popup').style.display='flex';}
           g.bets=[];
         }
         g.period++; g.time=g.duration; g.lastTs=Date.now(); g.page=1;
-        saveAll(); renderHist(type); if(type==curGame) updateMyBet();
+        saveAll(); renderHist(type);
         ov.style.display='none';
       },800);
     }
@@ -255,10 +245,9 @@ window.onload=()=>{
  document.getElementById('bal').innerText=bal.toFixed(2);
  Object.keys(games).forEach(k=>renderHist(k));
  switchGame(curGame);
- updateMyBet();
  startAll();
  window.addEventListener('beforeunload',saveAll);
 }
 </script>
 </body>
- </html>                                                                                                                         
+  </html>                                                                                                                                     
