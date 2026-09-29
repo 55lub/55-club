@@ -2,11 +2,12 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55CLUB - DW History On Click</title>
+<title>55CLUB - Full Control Added</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial,sans-serif}
 body{background:#f5f5f5}
-.topHead{background:#ff4d4d;color:white;padding:12px;text-align:center;font-weight:bold}
+.topHead{background:#ff4d4d;color:white;padding:12px;text-align:center;font-weight:bold;display:flex;justify-content:space-between;align-items:center}
+.topHead button{background:white;color:#ff4d4d;border:none;padding:5px 12px;border-radius:15px;font-weight:bold;font-size:11px}
 .walletCard{background:white;margin:10px;border-radius:20px;padding:15px;text-align:center;box-shadow:0 2px 10px #0001}
 .dwBtns{display:flex;gap:10px;margin-top:12px}
 .dwBtns button{flex:1;padding:12px;border:none;border-radius:12px;font-weight:bold;color:white;font-size:14px;cursor:pointer}
@@ -29,19 +30,21 @@ body{background:#f5f5f5}
 .pageInfo{font-size:10px;font-weight:bold;color:#ff4d4d;background:white;padding:5px 10px;border-radius:15px;border:1px solid #ff4d4d}
 .countOverlay{position:absolute;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:10;gap:15px}
 .countBox{background:white;width:70px;height:70px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:bold;color:#ff4d4d}
-#popup,#betModal,#dwModal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:9999}
-.popBox{background:white;width:92%;max-width:400px;border-radius:20px;padding:20px;text-align:center;max-height:90vh;overflow:auto}
+#popup,#betModal,#dwModal,#adminModal{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center;z-index:9999}
+.popBox{background:white;width:92%;max-width:420px;border-radius:20px;padding:20px;text-align:center;max-height:90vh;overflow:auto}
 .regbtn{width:100%;padding:14px;background:#ff4d4d;border:none;border-radius:25px;color:white;font-weight:bold;margin-top:10px}
-.inp{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-top:10px;font-size:16px}
+.inp,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-top:10px;font-size:16px}
+.ctrlGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.ctrlGrid button{padding:10px;border:none;border-radius:10px;color:white;font-weight:bold;font-size:12px}
 .dwHistInModal{margin-top:15px;text-align:left;border-top:1px solid #eee;padding-top:10px}
-.dwHistInModal h4{font-size:13px;margin-bottom:8px}
 .dwRow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f5f5f5;font-size:12px}
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:12px 20px;border-radius:25px;z-index:10000;display:none}
 .gameSection{display:none}.gameSection.active{display:block}
+.adminSection{background:#fff3e0;border:2px dashed #ff9800;border-radius:12px;padding:12px;margin-top:10px;text-align:left}
 </style>
 </head>
 <body>
-<div class="topHead">55CLUB</div>
+<div class="topHead"><span>55CLUB</span><button onclick="openAdmin()">⚙️ Control</button></div>
 
 <div class="walletCard">
 <div>₹ <b id="bal">100.00</b> | <span id="curLabel" style="color:#ff4d4d;font-weight:bold">30S</span> | <span id="curPeriodFull" style="font-size:11px">20260928100051390</span></div>
@@ -58,33 +61,58 @@ body{background:#f5f5f5}
 <div id="tab5" onclick="switchGame('5m')">WinGo<br>5 Min</div>
 </div>
 
-<div id="g30" class="gameSection active">
-<div class="gameTop"><div><div>WinGo 30sec</div><div class="periodSmall" id="pid30">20260928100051390</div><div style="font-size:9px">Short: <span id="short30">51390</span> -> Next: <span id="next30">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b>0</b><b>0</b><span>:</span><b id="t30_1">3</b><b id="t30_2">0</b></div></div></div>
-<div class="playArea"><div class="countOverlay" id="ov30"><div class="countBox" id="ov30_1">0</div><div class="countBox" id="ov30_2">5</div></div>
-<div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div>
-<div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div>
-<div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div>
-<div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist30"></div><div class="pageCtrl"><button onclick="prevPage('30s')">◀</button><span id="info30" class="pageInfo"></span><button onclick="nextPage('30s')">▶</button></div></div>
-</div>
-
+<div id="g30" class="gameSection active"><div class="gameTop"><div><div>WinGo 30sec</div><div class="periodSmall" id="pid30">20260928100051390</div><div style="font-size:9px">Short: <span id="short30">51390</span> -> Next: <span id="next30">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b>0</b><b>0</b><span>:</span><b id="t30_1">3</b><b id="t30_2">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov30"><div class="countBox" id="ov30_1">0</div><div class="countBox" id="ov30_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist30"></div><div class="pageCtrl"><button onclick="prevPage('30s')">◀</button><span id="info30" class="pageInfo"></span><button onclick="nextPage('30s')">▶</button></div></div></div>
 <div id="g1" class="gameSection"><div class="gameTop g1m"><div><div>WinGo 1 Min</div><div class="periodSmall" id="pid1">20260928100051390</div><div style="font-size:9px">Short: <span id="short1">51390</span> -> Next: <span id="next1">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t1_1">0</b><b id="t1_2">1</b><span>:</span><b id="t1_3">0</b><b id="t1_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov1"><div class="countBox" id="ov1_1">0</div><div class="countBox" id="ov1_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist1"></div><div class="pageCtrl"><button onclick="prevPage('1m')">◀</button><span id="info1" class="pageInfo"></span><button onclick="nextPage('1m')">▶</button></div></div></div>
-
 <div id="g3" class="gameSection"><div class="gameTop g3m"><div><div>WinGo 3 Min</div><div class="periodSmall" id="pid3">20260928100051390</div><div style="font-size:9px">Short: <span id="short3">51390</span> -> Next: <span id="next3">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t3_1">0</b><b id="t3_2">3</b><span>:</span><b id="t3_3">0</b><b id="t3_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov3"><div class="countBox" id="ov3_1">0</div><div class="countBox" id="ov3_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist3"></div><div class="pageCtrl"><button onclick="prevPage('3m')">◀</button><span id="info3" class="pageInfo"></span><button onclick="nextPage('3m')">▶</button></div></div></div>
+<div id="g5" class="gameSection"><div class="gameTop g5m"><div><div>WinGo 5 Min</div><div class="periodSmall" id="pid5">20260928100051390</div><div style="font-size:9px">Short: <span id="short5">51390</span> -> Next: <span id="next5">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t5_1">0</b><b id="t5_2">5</b><span>:</span><b id="t5_3">0</b><b id="t5_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov5"><div class="countBox" id="ov5_1">0</div><div class="countBox" id="ov5_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">8</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist5"></div><div class="pageCtrl"><button onclick="prevPage('5m')">◀</button><span id="info5" class="pageInfo"></span><button onclick="nextPage('5m')">▶</button></div></div></div>
 
-<div id="g5" class="gameSection"><div class="gameTop g5m"><div><div>WinGo 5 Min</div><div class="periodSmall" id="pid5">20260928100051390</div><div style="font-size:9px">Short: <span id="short5">51390</span> -> Next: <span id="next5">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t5_1">0</b><b id="t5_2">5</b><span>:</span><b id="t5_3">0</b><b id="t5_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov5"><div class="countBox" id="ov5_1">0</div><div class="countBox" id="ov5_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist5"></div><div class="pageCtrl"><button onclick="prevPage('5m')">◀</button><span id="info5" class="pageInfo"></span><button onclick="nextPage('5m')">▶</button></div></div></div>
+<!-- CONTROL PANEL -->
+<div id="adminModal"><div class="popBox">
+<h3>🎮 Game Control Panel</h3>
+<p style="font-size:11px;color:gray">Ahya thi tame game ne control kari sako</p>
 
-<!-- DEPOSIT/WITHDRAW MODAL WITH HISTORY INSIDE -->
-<div id="dwModal"><div class="popBox">
-<h3 id="dwTitle">Deposit</h3>
-<input id="dwAmt" class="inp" type="number" placeholder="Amount enter karo">
-<button class="regbtn" onclick="confirmDW()">Submit</button>
-<div class="dwHistInModal">
-<h4 id="dwHistTitle">History</h4>
-<div id="dwHistListModal" style="max-height:180px;overflow:auto"></div>
+<div class="adminSection">
+<b>Current Game: <span id="adminCurGame">30S</span> | Next Period: <span id="adminNextPeriod">51391</span></b><br>
+<small style="color:gray">Jo Next Result SET karso to ej avse, nahi to Random avse</small>
+<label style="font-size:12px;margin-top:10px;display:block">Next Number (0-9) Fix Karo:</label>
+<select id="nextNumCtrl"><option value="-1">Random (Auto)</option><option value="0">0 - Violet Red</option><option value="1">1 - Green Small</option><option value="2">2 - Red Small</option><option value="3">3 - Green Small</option><option value="4">4 - Red Small</option><option value="5">5 - Violet Green Big</option><option value="6">6 - Red Big</option><option value="7">7 - Green Big</option><option value="8">8 - Red Big</option><option value="9">9 - Green Big</option></select>
+
+<label style="font-size:12px;margin-top:8px;display:block">Color Control:</label>
+<select id="nextColorCtrl"><option value="random">Random</option><option value="Green">Green win karavo</option><option value="Red">Red win karavo</option><option value="Violet">Violet win karavo</option></select>
+
+<label style="font-size:12px;margin-top:8px;display:block">Big/Small Control:</label>
+<select id="nextBSCtrl"><option value="random">Random</option><option value="Big">Big win karavo (5-9)</option><option value="Small">Small win karavo (0-4)</option></select>
+
+<div class="ctrlGrid">
+<button style="background:#3cc15f" onclick="setControl('win')">User ne Jitadvu</button>
+<button style="background:#ff4d4d" onclick="setControl('loss')">User ne Haradvu</button>
 </div>
-<button onclick="dwModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button>
+
+<button class="regbtn" style="background:#ff9800" onclick="applyControl()">✅ Control SET Karo</button>
+<button class="regbtn" style="background:#607d8b" onclick="clearControl()">🔄 Random par Mukho</button>
+
+<div style="margin-top:12px;padding:8px;background:#e8f5e9;border-radius:8px;font-size:11px;text-align:left">
+<b>Current Control:</b><br>
+<span id="ctrlStatus">Random Mode - Koi Control Nathi</span>
+</div>
+</div>
+
+<div class="adminSection" style="margin-top:10px">
+<b>💰 Balance Control:</b>
+<input id="balCtrl" class="inp" type="number" placeholder="Balance set karo - ex: 10000">
+<button class="regbtn" style="background:#4caf50" onclick="setBalance()">Balance SET Karo</button>
+</div>
+
+<div class="adminSection" style="margin-top:10px">
+<b>⏰ Period Control:</b>
+<input id="periodCtrl" class="inp" type="number" placeholder="Period set karo - ex: 51400">
+<button class="regbtn" style="background:#9c27b0" onclick="setPeriod()">Period SET Karo</button>
+</div>
+
+<button onclick="adminModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button>
 </div></div>
 
+<div id="dwModal"><div class="popBox"><h3 id="dwTitle">Deposit</h3><input id="dwAmt" class="inp" type="number" placeholder="Amount"><button class="regbtn" onclick="confirmDW()">Submit</button><div class="dwHistInModal"><h4 id="dwHistTitle">History</h4><div id="dwHistListModal" style="max-height:180px;overflow:auto"></div></div><button onclick="dwModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
 <div id="betModal"><div class="popBox"><h3 id="betTitle">Bet</h3><p id="betPeriodShow" style="font-size:11px;color:gray"></p><p>₹10</p><button class="regbtn" onclick="confirmBet()">Confirm</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
 <div id="popup"><div class="popBox"><h2 id="popTitle"></h2><p id="popMsg"></p><h3 id="popAmt"></h3><button class="regbtn" onclick="popup.style.display='none';clearBets()">OK</button></div></div>
 <div id="toast" class="toast"></div>
@@ -93,6 +121,7 @@ body{background:#f5f5f5}
 const PER_PAGE=20, BASE="20260928";
 let curGame=localStorage.getItem('curGame_cont')||'30s', tempBet="", bal=parseFloat(localStorage.getItem('bal_cont')||"100"), dwType="";
 let dwHistory = JSON.parse(localStorage.getItem('dwHistory_final3')||"[]");
+let nextResultControl = JSON.parse(localStorage.getItem('control_final')||'{"30s":null,"1m":null,"3m":null,"5m":null}');
 let games={
  '30s':{period:parseInt(localStorage.getItem('period_30s_final2')||"51390"),time:30,hist:[],bets:[],page:1,lastTs:parseInt(localStorage.getItem('ts_30s')||Date.now()),duration:30},
  '1m':{period:parseInt(localStorage.getItem('period_1m_final2')||"51390"),time:60,hist:[],bets:[],page:1,lastTs:parseInt(localStorage.getItem('ts_1m')||Date.now()),duration:60},
@@ -105,6 +134,7 @@ function saveAll(){
  localStorage.setItem('bal_cont',bal);
  localStorage.setItem('curGame_cont',curGame);
  localStorage.setItem('dwHistory_final3',JSON.stringify(dwHistory));
+ localStorage.setItem('control_final',JSON.stringify(nextResultControl));
  Object.keys(games).forEach(k=>{
    localStorage.setItem('period_'+k+'_final2',games[k].period);
    localStorage.setItem('hist_'+k+'_final2',JSON.stringify(games[k].hist));
@@ -113,138 +143,51 @@ function saveAll(){
    localStorage.setItem('timeLeft_'+k,games[k].time);
  });
 }
-function openDW(type){
- dwType=type;
- document.getElementById('dwTitle').innerText=type;
- document.getElementById('dwAmt').value="";
- document.getElementById('dwHistTitle').innerText=type+" History";
- // HISTORY FILTER - DEPOSIT PAR CLICK KARE TO KHALI DEPOSIT, WITHDRAWAL PAR KHALI WITHDRAW
- let filtered=dwHistory.filter(h=>h.type==type);
- let list=document.getElementById('dwHistListModal');
- if(filtered.length==0){list.innerHTML=`<div style="padding:10px;text-align:center;color:gray;font-size:11px">No ${type} history yet</div>`;}
- else{
-   let html="";
-   filtered.slice(0,30).forEach(h=>{
-     html+=`<div class="dwRow"><div>${h.time}</div><div style="text-align:right"><b style="color:${h.type=='Deposit'?'#3cc15f':'#ff4d4d'}">${h.type=='Deposit'?'+':'-'}₹${h.amt}</b> - <small style="color:green">${h.status}</small></div></div>`;
-   });
-   list.innerHTML=html;
+function openAdmin(){
+ document.getElementById('adminCurGame').innerText=curGame.toUpperCase();
+ document.getElementById('adminNextPeriod').innerText=games[curGame].period+1;
+ let ctrl=nextResultControl[curGame];
+ if(ctrl){document.getElementById('ctrlStatus').innerHTML=`${curGame.toUpperCase()} - SET: Number ${ctrl.num!=-1?ctrl.num:'Random'} | Color ${ctrl.color} | BS ${ctrl.bs}`;document.getElementById('nextNumCtrl').value=ctrl.num;document.getElementById('nextColorCtrl').value=ctrl.color;document.getElementById('nextBSCtrl').value=ctrl.bs;}
+ else{document.getElementById('ctrlStatus').innerText='Random Mode - Koi Control Nathi';document.getElementById('nextNumCtrl').value=-1;document.getElementById('nextColorCtrl').value='random';document.getElementById('nextBSCtrl').value='random';}
+ document.getElementById('adminModal').style.display='flex';
+}
+function applyControl(){
+ let num=parseInt(document.getElementById('nextNumCtrl').value);
+ let col=document.getElementById('nextColorCtrl').value;
+ let bs=document.getElementById('nextBSCtrl').value;
+ nextResultControl[curGame]={num:num,color:col,bs:bs};
+ saveAll();showToast(curGame.toUpperCase()+" Control SET - Next: "+(num!=-1?num:'Random'));openAdmin();
+}
+function clearControl(){nextResultControl[curGame]=null;saveAll();showToast("Random Mode - Control Hatavi didhu");openAdmin();}
+function setControl(type){
+ let g=games[curGame];
+ if(g.bets.length==0){showToast("Pela bet karavo pachi control kaam karse");return}
+ if(type=='win'){
+   let userBet=g.bets[0].type;
+   if(userBet.includes('Num')){nextResultControl[curGame]={num:parseInt(userBet.replace('Num','')),color:'random',bs:'random'};}
+   else if(['Green','Red','Violet'].includes(userBet)){nextResultControl[curGame]={num:-1,color:userBet,bs:'random'};}
+   else{nextResultControl[curGame]={num:-1,color:'random',bs:userBet};}
+ }else{
+   let userBet=g.bets[0].type;
+   if(userBet=='Green'){nextResultControl[curGame]={num:-1,color:'Red',bs:'random'};}
+   else if(userBet=='Red'){nextResultControl[curGame]={num:-1,color:'Green',bs:'random'};}
+   else if(userBet=='Big'){nextResultControl[curGame]={num:-1,color:'random',bs:'Small'};}
+   else if(userBet=='Small'){nextResultControl[curGame]={num:-1,color:'random',bs:'Big'};}
+   else{nextResultControl[curGame]={num:userBet=='Num0'?1:0,color:'random',bs:'random'};}
  }
- document.getElementById('dwModal').style.display='flex';
+ saveAll();showToast(type=='win'?'User Jitse':'User Harse');openAdmin();
 }
-function confirmDW(){
- let amt=parseFloat(document.getElementById('dwAmt').value);
- if(!amt||amt<=0){showToast("Amount lakh");return}
- let now=new Date();
- let timeStr=now.toLocaleDateString('en-GB')+" "+now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
- if(dwType=='Deposit'){
-   bal+=amt;
-   dwHistory.unshift({type:'Deposit',amt:amt,time:timeStr,status:'Success'});
-   showToast("Deposit Success ₹"+amt);
- }
- else{
-   if(amt>bal){showToast("Balance low");return}
-   bal-=amt;
-   dwHistory.unshift({type:'Withdraw',amt:amt,time:timeStr,status:'Success'});
-   showToast("Withdrawal Success ₹"+amt);
- }
- document.getElementById('bal').innerText=bal.toFixed(2);
- saveAll();
- openDW(dwType); // history refresh
-}
-function loadAll(){
- Object.keys(games).forEach(k=>{
-  let h=localStorage.getItem('hist_'+k+'_final2'); if(h){try{games[k].hist=JSON.parse(h);}catch(e){}}
-  let b=localStorage.getItem('bets_'+k+'_final2'); if(b){try{games[k].bets=JSON.parse(b);}catch(e){}}
-  let t=localStorage.getItem('timeLeft_'+k); if(t){games[k].time=parseInt(t);}
-  let lastTs=parseInt(localStorage.getItem('ts_'+k)||Date.now());
-  let elapsedSec=Math.floor((Date.now()-lastTs)/1000);
-  if(elapsedSec>0){
-    let totalElapsed=games[k].duration - games[k].time + elapsedSec;
-    let rounds=Math.floor(totalElapsed / games[k].duration);
-    if(rounds>0){
-      for(let i=0;i<rounds;i++){
-        let winNum=Math.floor(Math.random()*10);
-        let winColor=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
-        let winBS=winNum>=5?"Big":"Small";
-        games[k].hist.unshift({shortPeriod:games[k].period,fullPeriod:getFullPeriod(games[k].period),num:winNum,bs:winBS,color:winColor});
-        games[k].period++;
-      }
-      let remaining=totalElapsed % games[k].duration;
-      games[k].time=games[k].duration - remaining;
-      if(games[k].time<=0) games[k].time=games[k].duration;
-      games[k].bets=[];
-    }else{
-      games[k].time=games[k].time-elapsedSec;
-      if(games[k].time<=0){
-        let winNum=Math.floor(Math.random()*10);
-        let winColor=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
-        let winBS=winNum>=5?"Big":"Small";
-        games[k].hist.unshift({shortPeriod:games[k].period,fullPeriod:getFullPeriod(games[k].period),num:winNum,bs:winBS,color:winColor});
-        games[k].period++;
-        games[k].time=games[k].duration + games[k].time;
-        games[k].bets=[];
-      }
-    }
-  }
-  if(games[k].hist.length==0){
-    for(let i=0;i<5;i++){
-      let pn=games[k].period-i;
-      let num=Math.floor(Math.random()*10);
-      let col=(num==0||num==5)?"Violet":(num%2==0?"Red":"Green");
-      let bs=num>=5?"Big":"Small";
-      games[k].hist.push({shortPeriod:pn,fullPeriod:getFullPeriod(pn),num:num,bs:bs,color:col});
-    }
-    games[k].hist.reverse();
-  }
- });
-}
-function switchGame(type){
- curGame=type; saveAll();
- document.getElementById('curLabel').innerText=type.toUpperCase();
- document.getElementById('curPeriodFull').innerText=getFullPeriod(games[type].period);
- document.getElementById('tab30').classList.toggle('active',type=='30s');
- document.getElementById('tab1').classList.toggle('active',type=='1m');
- document.getElementById('tab3').classList.toggle('active',type=='3m');
- document.getElementById('tab5').classList.toggle('active',type=='5m');
- document.getElementById('g30').classList.toggle('active',type=='30s');
- document.getElementById('g1').classList.toggle('active',type=='1m');
- document.getElementById('g3').classList.toggle('active',type=='3m');
- document.getElementById('g5').classList.toggle('active',type=='5m');
- renderHist(type);
-}
-function renderHist(type){
- let g=games[type];
- let total=Math.max(1,Math.ceil(g.hist.length/PER_PAGE));
- if(g.page>total) g.page=total; if(g.page<1) g.page=1;
- let slice=g.hist.slice((g.page-1)*PER_PAGE,(g.page-1)*PER_PAGE+PER_PAGE);
- let html="";
- slice.forEach(r=>{
-  let numColor=r.color=="Green"?"#3cc15f":r.color=="Red"?"#ff4d4d":"#9c27b0";
-  let dots=r.color=="Green"?`<span class="dot dotG"></span>`:r.color=="Red"?`<span class="dot dotR"></span>`:r.num==0?`<div class="dotRV"><span class="dot dotR"></span><span class="dot dotV"></span></div>`:r.num==5?`<div class="dotRV"><span class="dot dotG"></span><span class="dot dotV"></span></div>`:`<span class="dot dotV"></span>`;
-  html+=`<div class="histRow"><span class="periodTxt">${r.fullPeriod}</span><span class="numBig" style="color:${numColor}">${r.num}</span><span>${r.bs}</span><span>${dots}</span></div>`;
- });
- document.getElementById(type=='30s'?'hist30':type=='1m'?'hist1':type=='3m'?'hist3':'hist5').innerHTML=html;
- document.getElementById(type=='30s'?'info30':type=='1m'?'info1':type=='3m'?'info3':'info5').innerText=`${type.toUpperCase()} Page ${g.page}/${total}`;
- document.getElementById('short'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=g.period;
- document.getElementById('next'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=g.period+1;
- document.getElementById('pid'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=getFullPeriod(g.period);
-}
+function setBalance(){let v=parseFloat(document.getElementById('balCtrl').value);if(v>=0){bal=v;document.getElementById('bal').innerText=bal.toFixed(2);saveAll();showToast("Balance SET ₹"+v);}}
+function setPeriod(){let v=parseInt(document.getElementById('periodCtrl').value);if(v>0){games[curGame].period=v;saveAll();renderHist(curGame);document.getElementById('adminNextPeriod').innerText=v+1;showToast("Period SET "+v);}}
+function openDW(type){dwType=type;document.getElementById('dwTitle').innerText=type;document.getElementById('dwAmt').value="";document.getElementById('dwHistTitle').innerText=type+" History";let filtered=dwHistory.filter(h=>h.type==type);let list=document.getElementById('dwHistListModal');if(filtered.length==0){list.innerHTML=`<div style="padding:10px;text-align:center;color:gray;font-size:11px">No ${type} history</div>`;}else{let html="";filtered.slice(0,30).forEach(h=>{html+=`<div class="dwRow"><div>${h.time}</div><div style="text-align:right"><b style="color:${h.type=='Deposit'?'#3cc15f':'#ff4d4d'}">${h.type=='Deposit'?'+':'-'}₹${h.amt}</b> - <small style="color:green">${h.status}</small></div></div>`;});list.innerHTML=html;}document.getElementById('dwModal').style.display='flex';}
+function confirmDW(){let amt=parseFloat(document.getElementById('dwAmt').value);if(!amt||amt<=0){showToast("Amount lakh");return}let now=new Date();let timeStr=now.toLocaleDateString('en-GB')+" "+now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});if(dwType=='Deposit'){bal+=amt;dwHistory.unshift({type:'Deposit',amt:amt,time:timeStr,status:'Success'});showToast("Deposit ₹"+amt);}else{if(amt>bal){showToast("Low bal");return}bal-=amt;dwHistory.unshift({type:'Withdraw',amt:amt,time:timeStr,status:'Success'});showToast("Withdraw ₹"+amt);}document.getElementById('bal').innerText=bal.toFixed(2);saveAll();openDW(dwType);}
+function loadAll(){Object.keys(games).forEach(k=>{let h=localStorage.getItem('hist_'+k+'_final2'); if(h){try{games[k].hist=JSON.parse(h);}catch(e){}}let b=localStorage.getItem('bets_'+k+'_final2'); if(b){try{games[k].bets=JSON.parse(b);}catch(e){}}let t=localStorage.getItem('timeLeft_'+k); if(t){games[k].time=parseInt(t);}let lastTs=parseInt(localStorage.getItem('ts_'+k)||Date.now());let elapsedSec=Math.floor((Date.now()-lastTs)/1000);if(elapsedSec>0){let totalElapsed=games[k].duration - games[k].time + elapsedSec;let rounds=Math.floor(totalElapsed / games[k].duration);if(rounds>0){for(let i=0;i<rounds;i++){let winNum=Math.floor(Math.random()*10);let winColor=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");let winBS=winNum>=5?"Big":"Small";games[k].hist.unshift({shortPeriod:games[k].period,fullPeriod:getFullPeriod(games[k].period),num:winNum,bs:winBS,color:winColor});games[k].period++;}let remaining=totalElapsed % games[k].duration;games[k].time=games[k].duration - remaining;if(games[k].time<=0) games[k].time=games[k].duration;games[k].bets=[];}else{games[k].time=games[k].time-elapsedSec;if(games[k].time<=0){let winNum=Math.floor(Math.random()*10);let winColor=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");let winBS=winNum>=5?"Big":"Small";games[k].hist.unshift({shortPeriod:games[k].period,fullPeriod:getFullPeriod(games[k].period),num:winNum,bs:winBS,color:winColor});games[k].period++;games[k].time=games[k].duration + games[k].time;games[k].bets=[];}}}if(games[k].hist.length==0){for(let i=0;i<5;i++){let pn=games[k].period-i;let num=Math.floor(Math.random()*10);let col=(num==0||num==5)?"Violet":(num%2==0?"Red":"Green");let bs=num>=5?"Big":"Small";games[k].hist.push({shortPeriod:pn,fullPeriod:getFullPeriod(pn),num:num,bs:bs,color:col});}games[k].hist.reverse();}});}
+function switchGame(type){curGame=type;saveAll();document.getElementById('curLabel').innerText=type.toUpperCase();document.getElementById('curPeriodFull').innerText=getFullPeriod(games[type].period);document.getElementById('tab30').classList.toggle('active',type=='30s');document.getElementById('tab1').classList.toggle('active',type=='1m');document.getElementById('tab3').classList.toggle('active',type=='3m');document.getElementById('tab5').classList.toggle('active',type=='5m');document.getElementById('g30').classList.toggle('active',type=='30s');document.getElementById('g1').classList.toggle('active',type=='1m');document.getElementById('g3').classList.toggle('active',type=='3m');document.getElementById('g5').classList.toggle('active',type=='5m');renderHist(type);}
+function renderHist(type){let g=games[type];let total=Math.max(1,Math.ceil(g.hist.length/PER_PAGE));if(g.page>total) g.page=total; if(g.page<1) g.page=1;let slice=g.hist.slice((g.page-1)*PER_PAGE,(g.page-1)*PER_PAGE+PER_PAGE);let html="";slice.forEach(r=>{let numColor=r.color=="Green"?"#3cc15f":r.color=="Red"?"#ff4d4d":"#9c27b0";let dots=r.color=="Green"?`<span class="dot dotG"></span>`:r.color=="Red"?`<span class="dot dotR"></span>`:r.num==0?`<div class="dotRV"><span class="dot dotR"></span><span class="dot dotV"></span></div>`:r.num==5?`<div class="dotRV"><span class="dot dotG"></span><span class="dot dotV"></span></div>`:`<span class="dot dotV"></span>`;html+=`<div class="histRow"><span class="periodTxt">${r.fullPeriod}</span><span class="numBig" style="color:${numColor}">${r.num}</span><span>${r.bs}</span><span>${dots}</span></div>`;});document.getElementById(type=='30s'?'hist30':type=='1m'?'hist1':type=='3m'?'hist3':'hist5').innerHTML=html;document.getElementById(type=='30s'?'info30':type=='1m'?'info1':type=='3m'?'info3':'info5').innerText=`${type.toUpperCase()} Page ${g.page}/${total}`;document.getElementById('short'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=g.period;document.getElementById('next'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=g.period+1;document.getElementById('pid'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')).innerText=getFullPeriod(g.period);}
 function prevPage(t){if(games[t].page>1){games[t].page--;renderHist(t);}}
 function nextPage(t){if(games[t].page<Math.ceil(games[t].hist.length/PER_PAGE)){games[t].page++;renderHist(t);}}
-function bet(type){
- if(games[curGame].time<=5){showToast("Last 5 sec band");return}
- tempBet=type;
- document.getElementById('betTitle').innerText=type+" ("+curGame.toUpperCase()+") - ₹10";
- document.getElementById('betPeriodShow').innerText="Period: "+getFullPeriod(games[curGame].period);
- document.getElementById('betModal').style.display='flex';
-}
-function confirmBet(){
- if(bal<10){showToast("Low bal");return}
- bal-=10; document.getElementById('bal').innerText=bal.toFixed(2);
- games[curGame].bets.push({type:tempBet,amt:10,period:games[curGame].period});
- saveAll(); document.getElementById('betModal').style.display='none';
- showToast(tempBet+" placed");
-}
+function bet(type){if(games[curGame].time<=5){showToast("Last 5 sec band");return}tempBet=type;document.getElementById('betTitle').innerText=type+" ("+curGame.toUpperCase()+") - ₹10";document.getElementById('betPeriodShow').innerText="Period: "+getFullPeriod(games[curGame].period);document.getElementById('betModal').style.display='flex';}
+function confirmBet(){if(bal<10){showToast("Low bal");return}bal-=10;document.getElementById('bal').innerText=bal.toFixed(2);games[curGame].bets.push({type:tempBet,amt:10,period:games[curGame].period});saveAll();document.getElementById('betModal').style.display='none';showToast(tempBet+" placed");}
 function clearBets(){games[curGame].bets=[]; saveAll();}
 function startAll(){
  setInterval(()=>{
@@ -263,9 +206,25 @@ function startAll(){
     if(g.time==0){
       ov.style.display='flex'; document.getElementById('ov'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')+'_1').innerText="0"; document.getElementById('ov'+(type=='30s'?'30':type=='1m'?'1':type=='3m'?'3':'5')+'_2').innerText="0";
       setTimeout(()=>{
-        let winNum=Math.floor(Math.random()*10);
-        let winColor=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
-        let winBS=winNum>=5?"Big":"Small";
+        let ctrl=nextResultControl[type];
+        let winNum, winColor, winBS;
+        if(ctrl && (ctrl.num!=-1 || ctrl.color!='random' || ctrl.bs!='random')){
+          if(ctrl.num!=-1){winNum=ctrl.num;}
+          else if(ctrl.color=='Green'){let arr=[1,3,7,9];winNum=arr[Math.floor(Math.random()*arr.length)];}
+          else if(ctrl.color=='Red'){let arr=[2,4,6,8];winNum=arr[Math.floor(Math.random()*arr.length)];}
+          else if(ctrl.color=='Violet'){let arr=[0,5];winNum=arr[Math.floor(Math.random()*arr.length)];}
+          else if(ctrl.bs=='Big'){winNum=5+Math.floor(Math.random()*5);}
+          else if(ctrl.bs=='Small'){winNum=Math.floor(Math.random()*5);}
+          else{winNum=Math.floor(Math.random()*10);}
+          winColor=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
+          if(ctrl.color!='random' && ctrl.num==-1){if(ctrl.color=='Violet'){winColor='Violet';}else{winColor=ctrl.color;}}
+          winBS=winNum>=5?"Big":"Small";
+          nextResultControl[type]=null;
+        }else{
+          winNum=Math.floor(Math.random()*10);
+          winColor=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
+          winBS=winNum>=5?"Big":"Small";
+        }
         let curShort=g.period;
         let curFull=getFullPeriod(curShort);
         g.hist.unshift({shortPeriod:curShort,fullPeriod:curFull,num:winNum,bs:winBS,color:winColor});
@@ -294,4 +253,4 @@ window.onload=()=>{
 }
 </script>
 </body>
-                                                                                                                                                                                                                                                                                                                                                        </html>
+ </html>                                                                                                                                                                                                                                                                                                                                                  </html>
