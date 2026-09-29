@@ -2,26 +2,24 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>55CLUB - Video Jemu Live History</title>
+<title>55CLUB - 30s + 1m Live</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial,sans-serif}
 body{background:#f5f5f5}
-.topHead{background:#ff4d4d;color:white;padding:12px;text-align:center;font-weight:bold;font-size:18px;position:relative}
+.topHead{background:#ff4d4d;color:white;padding:12px;text-align:center;font-weight:bold;font-size:18px}
 .walletCard{background:white;margin:10px;border-radius:20px;padding:15px;box-shadow:0 2px 10px #0001;text-align:center}
 .walletCard h2{font-size:24px;margin:5px 0}
-.walletBtns{display:flex;gap:12px;margin-top:10px}.walletBtns button{flex:1;padding:12px;border:none;border-radius:25px;color:white;font-weight:bold;font-size:14px}.wDraw{background:#ff8a5b}.wDep{background:#ff4d4d}
-.notice{background:white;margin:0 10px;padding:10px 12px;border-radius:20px;font-size:11px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 5px #0001}
-.tabs{display:flex;gap:8px;margin:10px;overflow:auto}.tabs div{min-width:70px;background:white;border-radius:12px;padding:10px 5px;text-align:center;font-size:11px;box-shadow:0 1px 5px #0001;border:2px solid transparent}.tabs .active{border-color:#ff4d4d;background:#fff0f0;color:#ff4d4d;font-weight:bold}
+.walletBtns{display:flex;gap:12px;margin-top:10px}.walletBtns button{flex:1;padding:12px;border:none;border-radius:25px;color:white;font-weight:bold}.wDraw{background:#ff8a5b}.wDep{background:#ff4d4d}
+.notice{background:white;margin:0 10px;padding:10px 12px;border-radius:20px;font-size:11px;display:flex;justify-content:space-between;box-shadow:0 1px 5px #0001}
+.tabs{display:flex;gap:8px;margin:10px;overflow:auto}.tabs div{min-width:75px;background:white;border-radius:12px;padding:12px 5px;text-align:center;font-size:11px;box-shadow:0 1px 5px #0001;border:2px solid transparent;cursor:pointer}.tabs .active{border-color:#ff4d4d;background:#fff0f0;color:#ff4d4d;font-weight:bold}
 .gameTop{background:#ff4d4d;margin:10px;border-radius:15px;padding:12px;color:white;display:flex;justify-content:space-between;align-items:center}
 .timeBox{display:flex;gap:4px;align-items:center}.timeBox b{background:white;color:#333;padding:6px 8px;border-radius:6px;font-size:18px;min-width:28px;text-align:center}
 .periodSmall{font-size:10px;opacity:0.9}
 .playArea{background:white;margin:0 10px;border-radius:15px;padding:12px;position:relative;overflow:hidden}
 .colorBtns{display:flex;gap:10px;margin:10px 0}.colorBtns button{flex:1;padding:12px;border:none;border-radius:8px;color:white;font-weight:bold;font-size:13px}.cG{background:#3cc15f}.cV{background:#9c27b0}.cR{background:#ff4d4d}
-.numGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:15px 0}.numGrid button{width:52px;height:52px;border-radius:50%;border:3px solid;font-weight:bold;font-size:18px;background:white;box-shadow:0 2px 4px #0002}
-.numGrid .red{border-color:#ff4d4d;color:#ff4d4d}.numGrid .green{border-color:#3cc15f;color:#3cc15f}.numGrid .redGreen{border:3px solid; border-image:linear-gradient(90deg,#ff4d4d,#3cc15f) 1; border-radius:50%}.numGrid .violetRed{border-color:#9c27b0;color:#9c27b0}.numGrid .violetGreen{border-color:#9c27b0;color:#3cc15f}
+.numGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:15px 0}.numGrid button{width:52px;height:52px;border-radius:50%;border:3px solid;font-weight:bold;font-size:18px;background:white;box-shadow:0 2px 4px #0002;cursor:pointer}
 .multiRow{display:flex;gap:6px;margin:10px 0;overflow:auto}.multiRow button{padding:6px 12px;border-radius:15px;border:1px solid #ddd;background:white;font-size:11px;white-space:nowrap}.multiRow .active{background:#ff4d4d;color:white;border-color:#ff4d4d}
-.bsRow{display:flex;gap:10px}.bsRow button{flex:1;padding:12px;border:none;border-radius:25px;font-weight:bold;font-size:14px;color:white}.bsBig{background:#ff9f43}.bsSmall{background:#3498db}
-/* LIVE GAME HISTORY - VIDEO JEMU */
+.bsRow{display:flex;gap:10px}.bsRow button{flex:1;padding:12px;border:none;border-radius:25px;font-weight:bold;font-size:14px;color:white;cursor:pointer}.bsBig{background:#ff9f43}.bsSmall{background:#3498db}
 .historyWrap{background:white;margin:10px;border-radius:15px;overflow:hidden;box-shadow:0 2px 10px #0001}
 .histTabs{display:flex;gap:15px;padding:12px;border-bottom:1px solid #eee}.histTabs span{font-size:13px;padding-bottom:5px;border-bottom:2px solid transparent}.histTabs .on{color:#ff4d4d;border-color:#ff4d4d;font-weight:bold}
 .histHeader{background:#ff4d4d;color:white;display:grid;grid-template-columns:1.6fr 0.5fr 0.6fr 0.5fr;padding:10px 8px;font-size:12px;font-weight:bold;text-align:center}
@@ -31,210 +29,200 @@ body{background:#f5f5f5}
 .dot{width:10px;height:10px;border-radius:50%;display:inline-block}.dotR{background:#ff4d4d}.dotG{background:#3cc15f}.dotV{background:#9c27b0}.dotRV{display:flex;gap:3px;justify-content:center}
 .pageCtrl{display:flex;justify-content:space-between;align-items:center;padding:10px;background:#f9f9f9;border-top:1px solid #eee}.pageCtrl button{padding:8px 18px;border:none;border-radius:20px;background:#ff4d4d;color:white;font-weight:bold;font-size:12px}.pageCtrl button:disabled{background:#ccc}
 .pageInfo{font-size:11px;font-weight:bold;color:#ff4d4d;background:white;padding:5px 10px;border-radius:15px;border:1px solid #ff4d4d}
-/* BIG COUNTDOWN OVERLAY - VIDEO JEMU 05 04 03 */
 .countOverlay{position:absolute;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:10;gap:20px}
 .countBox{background:white;width:90px;height:90px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:60px;font-weight:bold;color:#ff4d4d;box-shadow:0 5px 20px #0005}
-/* POPUP */
-#popup,#betModal,#adminBox{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:9999}
+#popup,#betModal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:9999}
 .popBox{background:white;width:92%;max-width:400px;border-radius:20px;padding:20px;text-align:center}
 .regbtn{width:100%;padding:14px;background:#ff4d4d;border:none;border-radius:25px;color:white;font-weight:bold;margin-top:10px}
-input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ddd}
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:12px 20px;border-radius:25px;z-index:10000;display:none}
+.gameSection{display:none}.gameSection.active{display:block}
 </style>
 </head>
 <body>
-<div class="topHead">55CLUB <span style="font-size:10px;opacity:0.8">| LIVE HISTORY FIX</span></div>
-<div class="walletCard"><div>₹ <b id="bal">100.00</b></div><div style="font-size:12px;color:gray">Wallet balance</div><div class="walletBtns"><button class="wDraw">Withdraw</button><button class="wDep">Deposit</button></div></div>
-<div class="notice"><span>⚠️ All players registered... </span><span style="color:#ff4d4d;font-weight:bold">Detail</span></div>
+<div class="topHead">55CLUB | 30S + 1M LIVE</div>
+<div class="walletCard"><div>₹ <b id="bal">100.00</b></div><div style="font-size:12px;color:gray">Wallet balance - <span id="curGameLabel" style="color:#ff4d4d;font-weight:bold">30S</span></div><div class="walletBtns"><button class="wDraw">Withdraw</button><button class="wDep">Deposit</button></div><div style="margin-top:8px;font-size:11px;color:#ff4d4d;font-weight:bold" id="myBet">My Bet: -</div></div>
 
-<div class="tabs"><div class="active">WinGo<br>30sec</div><div>WinGo<br>1 Min</div><div>WinGo<br>3 Min</div><div>WinGo<br>5 Min</div></div>
+<!-- TABS - CLICK THI SWITCH THASE -->
+<div class="tabs">
+<div id="tab30" class="active" onclick="switchGame('30s')">WinGo<br>30sec<br><small id="tabTime30">00:30</small></div>
+<div id="tab1m" onclick="switchGame('1m')">WinGo<br>1 Min<br><small id="tabTime1">01:00</small></div>
+<div onclick="showToast('3 Min Coming Soon')">WinGo<br>3 Min</div>
+<div onclick="showToast('5 Min Coming Soon')">WinGo<br>5 Min</div>
+</div>
 
-<div class="gameTop"><div><div style="font-size:12px">WinGo 30sec</div><div style="font-size:10px;display:flex;gap:5px;margin-top:4px"><span style="width:12px;height:12px;border-radius:50%;background:white;display:inline-block"></span><span style="width:12px;height:12px;border-radius:50%;background:white;display:inline-block"></span><span style="width:12px;height:12px;border-radius:50%;background:white;display:inline-block"></span><span style="width:12px;height:12px;border-radius:50%;background:white;display:inline-block"></span></div><div class="periodSmall" id="pidShow">20260928100051392</div></div><div style="text-align:right"><div style="font-size:11px">Time remaining</div><div class="timeBox"><b id="t1">0</b><b id="t2">0</b><span>:</span><b id="t3">2</b><b id="t4">9</b></div><div class="periodSmall" id="pid2">20260928100051392</div></div></div>
-
-<div class="playArea" id="playArea">
-<!-- COUNTDOWN 05 04 03 VIDEO JEMU -->
-<div class="countOverlay" id="countOverlay"><div class="countBox" id="countBox1">0</div><div class="countBox" id="countBox2">5</div></div>
-
+<!-- 30S GAME SECTION -->
+<div id="game30Sec" class="gameSection active">
+<div class="gameTop"><div><div style="font-size:12px">WinGo 30sec</div><div class="periodSmall" id="pid30">20260928100051392</div></div><div style="text-align:right"><div style="font-size:11px">Time remaining</div><div class="timeBox"><b>0</b><b>0</b><span>:</span><b id="t30_3">3</b><b id="t30_4">0</b></div><div class="periodSmall" id="pid30_2">20260928100051392</div></div></div>
+<div class="playArea" id="playArea30">
+<div class="countOverlay" id="countOverlay30"><div class="countBox" id="countBox30_1">0</div><div class="countBox" id="countBox30_2">5</div></div>
 <div class="colorBtns"><button class="cG" onclick="placeBet('Green')">Green</button><button class="cV" onclick="placeBet('Violet')">Violet</button><button class="cR" onclick="placeBet('Red')">Red</button></div>
-
 <div class="numGrid">
-<button class="red" style="border-color:#ff4d4d;color:#9c27b0" onclick="placeBet('Num0')">0</button>
-<button class="green" onclick="placeBet('Num1')">1</button>
-<button class="red" onclick="placeBet('Num2')">2</button>
-<button class="green" onclick="placeBet('Num3')">3</button>
-<button class="green" onclick="placeBet('Num4')">4</button>
-<button class="green" style="color:#9c27b0" onclick="placeBet('Num5')">5</button>
-<button class="red" onclick="placeBet('Num6')">6</button>
-<button class="green" onclick="placeBet('Num7')">7</button>
-<button class="red" onclick="placeBet('Num8')">8</button>
-<button class="green" onclick="placeBet('Num9')">9</button>
+<button style="border-color:#9c27b0;color:#9c27b0" onclick="placeBet('Num0')">0</button><button style="border-color:#3cc15f;color:#3cc15f" onclick="placeBet('Num1')">1</button><button style="border-color:#ff4d4d;color:#ff4d4d" onclick="placeBet('Num2')">2</button><button style="border-color:#3cc15f;color:#3cc15f" onclick="placeBet('Num3')">3</button><button style="border-color:#3cc15f;color:#3cc15f" onclick="placeBet('Num4')">4</button>
+<button style="border-color:#9c27b0;color:#9c27b0" onclick="placeBet('Num5')">5</button><button style="border-color:#ff4d4d;color:#ff4d4d" onclick="placeBet('Num6')">6</button><button style="border-color:#3cc15f;color:#3cc15f" onclick="placeBet('Num7')">7</button><button style="border-color:#ff4d4d;color:#ff4d4d" onclick="placeBet('Num8')">8</button><button style="border-color:#3cc15f;color:#3cc15f" onclick="placeBet('Num9')">9</button>
 </div>
-
 <div class="multiRow"><button>Random</button><button class="active">X1</button><button>X5</button><button>X10</button><button>X20</button><button>X50</button><button>X100</button></div>
-
 <div class="bsRow"><button class="bsBig" onclick="placeBet('Big')">Big</button><button class="bsSmall" onclick="placeBet('Small')">Small</button></div>
-
-<div style="margin-top:10px;font-size:11px;color:#ff4d4d;font-weight:bold" id="myBet">My Bet: -</div>
 </div>
-
-<!-- LIVE GAME HISTORY - VIDEO JEMU EXACT -->
 <div class="historyWrap">
-<div class="histTabs"><span class="on">Game history</span><span>Chart</span><span>Follow Strategy</span></div>
+<div class="histTabs"><span class="on">Game history (30S)</span><span>Chart</span><span>My history</span></div>
 <div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div>
-<div id="histList"></div>
-<div class="pageCtrl"><button id="prevBtn" onclick="prevPage()">◀ Prev</button><span id="pageInfo" class="pageInfo">Page 1/1 (0) - 20 per page</span><button id="nextBtn" onclick="nextPage()">Next ▶</button></div>
+<div id="histList30"></div>
+<div class="pageCtrl"><button id="prev30" onclick="prevPage('30s')">◀ Prev</button><span id="pageInfo30" class="pageInfo">Page 1/1</span><button id="next30" onclick="nextPage('30s')">Next ▶</button></div>
+</div>
 </div>
 
-<div id="betModal"><div class="popBox"><h3 id="betTitle">Bet</h3><p>Total ₹10</p><button class="regbtn" onclick="confirmBet()">Confirm ₹10</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
-<div id="popup"><div class="popBox"><h2 id="popTitle"></h2><p id="popMsg"></p><h3 id="popAmt"></h3><button class="regbtn" onclick="popup.style.display='none';myBets=[];document.getElementById('myBet').innerText='My Bet: -'">OK</button></div></div>
+<!-- 1M GAME SECTION -->
+<div id="game1Min" class="gameSection">
+<div class="gameTop" style="background:#4caf50"><div><div style="font-size:12px">WinGo 1Min</div><div class="periodSmall" id="pid1">20260928100051392</div></div><div style="text-align:right"><div style="font-size:11px">Time remaining</div><div class="timeBox"><b id="t1_1">0</b><b id="t1_2">1</b><span>:</span><b id="t1_3">0</b><b id="t1_4">0</b></div><div class="periodSmall" id="pid1_2">20260928100051392</div></div></div>
+<div class="playArea" id="playArea1">
+<div class="countOverlay" id="countOverlay1"><div class="countBox" id="countBox1_1">0</div><div class="countBox" id="countBox1_2">5</div></div>
+<div class="colorBtns"><button class="cG" onclick="placeBet('Green')">Green</button><button class="cV" onclick="placeBet('Violet')">Violet</button><button class="cR" onclick="placeBet('Red')">Red</button></div>
+<div class="numGrid">
+<button style="border-color:#9c27b0;color:#9c27b0" onclick="placeBet('Num0')">0</button><button style="border-color:#3cc15f;color:#3cc15f" onclick="placeBet('Num1')">1</button><button style="border-color:#ff4d4d;color:#ff4d4d" onclick="placeBet('Num2')">2</button><button style="border-color:#3cc15f;color:#3cc15f" onclick="placeBet('Num3')">3</button><button style="border-color:#3cc15f;color:#3cc15f" onclick="placeBet('Num4')">4</button>
+<button style="border-color:#9c27b0;color:#9c27b0" onclick="placeBet('Num5')">5</button><button style="border-color:#ff4d4d;color:#ff4d4d" onclick="placeBet('Num6')">6</button><button style="border-color:#3cc15f;color:#3cc15f" onclick="placeBet('Num7')">7</button><button style="border-color:#ff4d4d;color:#ff4d4d" onclick="placeBet('Num8')">8</button><button style="border-color:#3cc15f;color:#3cc15f" onclick="placeBet('Num9')">9</button>
+</div>
+<div class="multiRow"><button>Random</button><button class="active">X1</button><button>X5</button><button>X10</button><button>X20</button><button>X50</button><button>X100</button></div>
+<div class="bsRow"><button class="bsBig" onclick="placeBet('Big')">Big</button><button class="bsSmall" onclick="placeBet('Small')">Small</button></div>
+</div>
+<div class="historyWrap">
+<div class="histTabs"><span class="on">Game history (1M)</span><span>Chart</span><span>My history</span></div>
+<div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div>
+<div id="histList1"></div>
+<div class="pageCtrl"><button id="prev1" onclick="prevPage('1m')">◀ Prev</button><span id="pageInfo1" class="pageInfo">Page 1/1</span><button id="next1" onclick="nextPage('1m')">Next ▶</button></div>
+</div>
+</div>
+
+<div id="betModal"><div class="popBox"><h3 id="betTitle">Bet</h3><p id="betAmtTxt">Total ₹10</p><button class="regbtn" onclick="confirmBet()">Confirm ₹10</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
+<div id="popup"><div class="popBox"><h2 id="popTitle"></h2><p id="popMsg"></p><h3 id="popAmt"></h3><button class="regbtn" onclick="popup.style.display='none';clearBets()">OK</button></div></div>
 <div id="toast" class="toast"></div>
 
 <script>
 const PER_PAGE=20;
-let bal=100, period=20260928100051392, timeLeft=30, hist=[], myBets=[], curPage=1, timerStarted=false, tempBet="", nextResult=null;
-let histKey="55_live_hist_video";
-
-function loadHist(){try{hist=JSON.parse(localStorage.getItem(histKey)||"[]")}catch(e){hist=[]} if(hist.length==0){
- // DEMO VIDEO JEVU DATA
- hist=[
-  {period:20260928100051392,num:4,bs:"Small",color:"Red"},
-  {period:20260928100051391,num:8,bs:"Big",color:"Red"},
-  {period:20260928100051390,num:1,bs:"Small",color:"Green"},
-  {period:20260928100051389,num:2,bs:"Small",color:"Red"},
-  {period:20260928100051388,num:2,bs:"Small",color:"Red"},
-  {period:20260928100051387,num:8,bs:"Big",color:"Red"},
-  {period:20260928100051386,num:8,bs:"Big",color:"Red"},
-  {period:20260928100051385,num:3,bs:"Small",color:"Green"},
-  {period:20260928100051384,num:0,bs:"Small",color:"Violet"},
-  {period:20260928100051383,num:7,bs:"Big",color:"Green"},
- ];
- localStorage.setItem(histKey,JSON.stringify(hist));
-}}
+let bal=100, curGame='30s';
+let period30=20260928100051392, time30=30, hist30=[], myBets30=[], curPage30=1;
+let period1=20260928100051392, time1=60, hist1=[], myBets1=[], curPage1=1;
+let tempBet="", timerStarted=false;
 
 function showToast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2000);}
 
-function formatPeriod(p){return String(p);}
+function loadHist(){
+ try{hist30=JSON.parse(localStorage.getItem("55_hist30")||"[]"); hist1=JSON.parse(localStorage.getItem("55_hist1m")||"[]");}catch(e){hist30=[];hist1=[]}
+ if(hist30.length==0){hist30=[{period:20260928100051392,num:4,bs:"Small",color:"Red"},{period:20260928100051391,num:8,bs:"Big",color:"Red"},{period:20260928100051390,num:1,bs:"Small",color:"Green"},{period:20260928100051389,num:2,bs:"Small",color:"Red"},{period:20260928100051388,num:2,bs:"Small",color:"Red"}];}
+ if(hist1.length==0){hist1=[{period:20260928100051392,num:7,bs:"Big",color:"Green"},{period:20260928100051391,num:3,bs:"Small",color:"Green"},{period:20260928100051390,num:0,bs:"Small",color:"Violet"}];}
+}
 
-function renderHistory(){
- let total=Math.max(1,Math.ceil(hist.length/PER_PAGE));
+function switchGame(type){
+ curGame=type;
+ document.getElementById('curGameLabel').innerText=type.toUpperCase();
+ document.getElementById('tab30').classList.toggle('active',type=='30s');
+ document.getElementById('tab1m').classList.toggle('active',type=='1m');
+ document.getElementById('game30Sec').classList.toggle('active',type=='30s');
+ document.getElementById('game1Min').classList.toggle('active',type=='1m');
+ renderHist(type);
+}
+
+function renderHist(type){
+ let arr=type=='30s'?hist30:hist1;
+ let curPage=type=='30s'?curPage30:curPage1;
+ let total=Math.max(1,Math.ceil(arr.length/PER_PAGE));
  if(curPage>total)curPage=total; if(curPage<1)curPage=1;
+ if(type=='30s')curPage30=curPage; else curPage1=curPage;
  let start=(curPage-1)*PER_PAGE;
- let slice=hist.slice(start,start+PER_PAGE);
+ let slice=arr.slice(start,start+PER_PAGE);
  let html="";
  slice.forEach(r=>{
    let numColor=r.color=="Green"?"#3cc15f":r.color=="Red"?"#ff4d4d":"#9c27b0";
-   let bsColor=r.bs=="Big"?"#ff9f43":"#3498db";
-   let dots="";
-   if(r.color=="Green") dots=`<span class="dot dotG"></span>`;
-   else if(r.color=="Red") dots=`<span class="dot dotR"></span>`;
-   else {
-     if(r.num==0) dots=`<div class="dotRV"><span class="dot dotR"></span><span class="dot dotV"></span></div>`;
-     else if(r.num==5) dots=`<div class="dotRV"><span class="dot dotG"></span><span class="dot dotV"></span></div>`;
-     else dots=`<span class="dot dotV"></span>`;
-   }
-   html+=`<div class="histRow"><span class="periodTxt">${formatPeriod(r.period)}</span><span class="numBig" style="color:${numColor}">${r.num}</span><span style="color:${bsColor}">${r.bs}</span><span>${dots}</span></div>`;
+   let dots=r.color=="Green"?`<span class="dot dotG"></span>`:r.color=="Red"?`<span class="dot dotR"></span>`:r.num==0?`<div class="dotRV"><span class="dot dotR"></span><span class="dot dotV"></span></div>`:r.num==5?`<div class="dotRV"><span class="dot dotG"></span><span class="dot dotV"></span></div>`:`<span class="dot dotV"></span>`;
+   html+=`<div class="histRow"><span class="periodTxt">${r.period}</span><span class="numBig" style="color:${numColor}">${r.num}</span><span>${r.bs}</span><span>${dots}</span></div>`;
  });
- if(html=="") html=`<div class="histRow"><span style="grid-column:1/5;color:gray">Loading live history...</span></div>`;
- document.getElementById('histList').innerHTML=html;
- document.getElementById('pageInfo').innerText=`Page ${curPage}/${total} (${hist.length}) - 20 per page`;
- document.getElementById('prevBtn').disabled=curPage<=1;
- document.getElementById('nextBtn').disabled=curPage>=total;
+ if(type=='30s'){
+   document.getElementById('histList30').innerHTML=html||`<div class="histRow"><span style="grid-column:1/5;color:gray">No history yet</span></div>`;
+   document.getElementById('pageInfo30').innerText=`Page ${curPage}/${total} (${arr.length}) - 20 per page - Auto Page 1`;
+   document.getElementById('prev30').disabled=curPage<=1; document.getElementById('next30').disabled=curPage>=total;
+ }else{
+   document.getElementById('histList1').innerHTML=html||`<div class="histRow"><span style="grid-column:1/5;color:gray">No history yet</span></div>`;
+   document.getElementById('pageInfo1').innerText=`Page ${curPage}/${total} (${arr.length}) - 20 per page - Auto Page 1`;
+   document.getElementById('prev1').disabled=curPage<=1; document.getElementById('next1').disabled=curPage>=total;
+ }
 }
-
-function prevPage(){if(curPage>1){curPage--;renderHistory();}}
-function nextPage(){if(curPage<Math.ceil(hist.length/PER_PAGE)){curPage++;renderHistory();}}
+function prevPage(t){if(t=='30s'&&curPage30>1){curPage30--;renderHist('30s');}if(t=='1m'&&curPage1>1){curPage1--;renderHist('1m');}}
+function nextPage(t){if(t=='30s'&&curPage30<Math.ceil(hist30.length/PER_PAGE)){curPage30++;renderHist('30s');}if(t=='1m'&&curPage1<Math.ceil(hist1.length/PER_PAGE)){curPage1++;renderHist('1m');}}
 
 function placeBet(type){
- if(timeLeft<=5){showToast("Bet closed for last 5 sec");return}
+ let t=curGame=='30s'?time30:time1;
+ if(t<=5){showToast("Bet closed last 5 sec");return}
  tempBet=type;
- document.getElementById('betTitle').innerText=type+" Bet - ₹10";
+ document.getElementById('betTitle').innerText=type+" ("+curGame.toUpperCase()+") - ₹10";
  document.getElementById('betModal').style.display='flex';
 }
 function confirmBet(){
  if(bal<10){showToast("Low balance");return}
  bal-=10; document.getElementById('bal').innerText=bal.toFixed(2);
- myBets.push({type:tempBet,amt:10});
- document.getElementById('myBet').innerText="My Bet: "+myBets.map(b=>b.type).join(", ");
- document.getElementById('betModal').style.display='none';
- showToast(tempBet+" ₹10 placed");
+ if(curGame=='30s') myBets30.push({type:tempBet,amt:10}); else myBets1.push({type:tempBet,amt:10});
+ updateMyBet(); document.getElementById('betModal').style.display='none';
+ showToast(tempBet+" placed in "+curGame);
 }
+function updateMyBet(){
+ let bets=curGame=='30s'?myBets30:myBets1;
+ document.getElementById('myBet').innerText="My Bet ("+curGame+") : "+(bets.length?bets.map(b=>b.type).join(", "):"-");
+}
+function clearBets(){if(curGame=='30s') myBets30=[]; else myBets1=[]; updateMyBet();}
 
 function startGame(){
  if(timerStarted) return; timerStarted=true;
  setInterval(()=>{
-  timeLeft--;
-  if(timeLeft<0) timeLeft=30;
-  let tens=Math.floor(timeLeft/10), ones=timeLeft%10;
-  document.getElementById('t1').innerText="0";
-  document.getElementById('t2').innerText="0";
-  document.getElementById('t3').innerText=tens;
-  document.getElementById('t4').innerText=ones;
-
-  // VIDEO JEMU BIG COUNTDOWN 05 04 03 02 01 00
-  if(timeLeft<=5 && timeLeft>0){
-   document.getElementById('countOverlay').style.display='flex';
-   document.getElementById('countBox1').innerText="0";
-   document.getElementById('countBox2').innerText=timeLeft;
-  }else{
-   document.getElementById('countOverlay').style.display='none';
+  // 30S TIMER
+  time30--;
+  if(time30<0) time30=30;
+  document.getElementById('t30_3').innerText=Math.floor(time30/10);
+  document.getElementById('t30_4').innerText=time30%10;
+  document.getElementById('tabTime30').innerText="00:"+(time30<10?"0"+time30:time30);
+  if(time30<=5 && time30>0){document.getElementById('countOverlay30').style.display='flex';document.getElementById('countBox30_1').innerText="0";document.getElementById('countBox30_2').innerText=time30;}else if(time30>5){document.getElementById('countOverlay30').style.display='none';}
+  if(time30==0){
+   document.getElementById('countOverlay30').style.display='flex';document.getElementById('countBox30_1').innerText="0";document.getElementById('countBox30_2').innerText="0";
+   setTimeout(()=>{
+    let winNum=Math.floor(Math.random()*10);
+    let winColor=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
+    let winBS=winNum>=5?"Big":"Small";
+    hist30.unshift({period:period30,num:winNum,bs:winBS,color:winColor});
+    localStorage.setItem("55_hist30",JSON.stringify(hist30));
+    if(myBets30.length>0 && curGame=='30s'){
+      let totalWin=0,totalBet=0; myBets30.forEach(b=>{totalBet+=b.amt;let won=false;if(b.type==winColor)won=true;if(b.type==winBS)won=true;if(b.type=="Num"+winNum)won=true;if(b.type=="Green"&&[1,3,7,9].includes(winNum))won=true;if(b.type=="Red"&&[2,4,6,8].includes(winNum))won=true;if(b.type=="Violet"&&[0,5].includes(winNum))won=true;if(won){if(b.type.startsWith("Num"))totalWin+=b.amt*9;else totalWin+=b.amt*2;}});
+      if(totalWin>0){bal+=totalWin;document.getElementById('bal').innerText=bal.toFixed(2);document.getElementById('popTitle').innerText="30S WIN!";document.getElementById('popMsg').innerText=`${winNum} ${winColor} ${winBS}`;document.getElementById('popAmt').innerText=`+₹${totalWin}`;document.getElementById('popup').style.display='flex';}else if(totalBet>0){document.getElementById('popTitle').innerText="30S LOSS!";document.getElementById('popMsg').innerText=`${winNum} ${winColor} ${winBS}`;document.getElementById('popAmt').innerText=`-₹${totalBet}`;document.getElementById('popup').style.display='flex';}
+      myBets30=[];
+    }
+    period30++; document.getElementById('pid30').innerText=period30; document.getElementById('pid30_2').innerText=period30;
+    curPage30=1; renderHist('30s'); updateMyBet();
+    document.getElementById('countOverlay30').style.display='none';
+    time30=30;
+   },800);
   }
 
-  if(timeLeft==0){
-   // RESULT GENERATE - LIVE HISTORY MA ADD
-   let winNum=nextResult!==null?nextResult:Math.floor(Math.random()*10);
-   nextResult=null;
-   let winColor=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
-   let winBS=winNum>=5?"Big":"Small";
-
-   // SHOW 00
-   document.getElementById('countOverlay').style.display='flex';
-   document.getElementById('countBox1').innerText="0";
-   document.getElementById('countBox2').innerText="0";
-
+  // 1M TIMER
+  time1--;
+  if(time1<0) time1=60;
+  let m=Math.floor(time1/60),s=time1%60;
+  document.getElementById('t1_1').innerText=Math.floor(m/10);document.getElementById('t1_2').innerText=m%10;
+  document.getElementById('t1_3').innerText=Math.floor(s/10);document.getElementById('t1_4').innerText=s%10;
+  document.getElementById('tabTime1').innerText=(m<10?"0"+m:m)+":"+(s<10?"0"+s:s);
+  if(time1<=5 && time1>0){document.getElementById('countOverlay1').style.display='flex';document.getElementById('countBox1_1').innerText="0";document.getElementById('countBox1_2').innerText=time1;}else if(time1>5){document.getElementById('countOverlay1').style.display='none';}
+  if(time1==0){
+   document.getElementById('countOverlay1').style.display='flex';document.getElementById('countBox1_1').innerText="0";document.getElementById('countBox1_2').innerText="0";
    setTimeout(()=>{
-    // ADD TO LIVE HISTORY - TOP MA
-    hist.unshift({period:period,num:winNum,bs:winBS,color:winColor});
-    localStorage.setItem(histKey,JSON.stringify(hist));
-
-    // WIN CHECK
-    if(myBets.length>0){
-     let totalWin=0,totalBet=0;
-     myBets.forEach(b=>{
-       totalBet+=b.amt;
-       let won=false;
-       if(b.type==winColor) won=true;
-       if(b.type==winBS) won=true;
-       if(b.type=="Num"+winNum) won=true;
-       if(b.type=="Green"&&[1,3,7,9].includes(winNum)) won=true;
-       if(b.type=="Red"&&[2,4,6,8].includes(winNum)) won=true;
-       if(b.type=="Violet"&&[0,5].includes(winNum)) won=true;
-       if(won){ if(b.type.startsWith("Num")) totalWin+=b.amt*9; else totalWin+=b.amt*2; }
-     });
-     if(totalWin>0){
-       bal+=totalWin; document.getElementById('bal').innerText=bal.toFixed(2);
-       document.getElementById('popTitle').innerText="YOU WIN! 🎉";
-       document.getElementById('popMsg').innerText=`Result: ${winNum} ${winColor} ${winBS}`;
-       document.getElementById('popAmt').innerText=`+₹${totalWin}`;
-       document.getElementById('popup').style.display='flex';
-     }else if(totalBet>0){
-       document.getElementById('popTitle').innerText="YOU LOSS! 😢";
-       document.getElementById('popMsg').innerText=`Result: ${winNum} ${winColor} ${winBS}`;
-       document.getElementById('popAmt').innerText=`-₹${totalBet}`;
-       document.getElementById('popup').style.display='flex';
-     }
-     myBets=[]; document.getElementById('myBet').innerText="My Bet: -";
+    let winNum=Math.floor(Math.random()*10);
+    let winColor=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
+    let winBS=winNum>=5?"Big":"Small";
+    hist1.unshift({period:period1,num:winNum,bs:winBS,color:winColor});
+    localStorage.setItem("55_hist1m",JSON.stringify(hist1));
+    if(myBets1.length>0 && curGame=='1m'){
+      let totalWin=0,totalBet=0; myBets1.forEach(b=>{totalBet+=b.amt;let won=false;if(b.type==winColor)won=true;if(b.type==winBS)won=true;if(b.type=="Num"+winNum)won=true;if(b.type=="Green"&&[1,3,7,9].includes(winNum))won=true;if(b.type=="Red"&&[2,4,6,8].includes(winNum))won=true;if(b.type=="Violet"&&[0,5].includes(winNum))won=true;if(won){if(b.type.startsWith("Num"))totalWin+=b.amt*9;else totalWin+=b.amt*2;}});
+      if(totalWin>0){bal+=totalWin;document.getElementById('bal').innerText=bal.toFixed(2);document.getElementById('popTitle').innerText="1M WIN!";document.getElementById('popMsg').innerText=`${winNum} ${winColor} ${winBS}`;document.getElementById('popAmt').innerText=`+₹${totalWin}`;document.getElementById('popup').style.display='flex';}else if(totalBet>0){document.getElementById('popTitle').innerText="1M LOSS!";document.getElementById('popMsg').innerText=`${winNum} ${winColor} ${winBS}`;document.getElementById('popAmt').innerText=`-₹${totalBet}`;document.getElementById('popup').style.display='flex';}
+      myBets1=[];
     }
-
-    // NEW PERIOD - SAME AS VIDEO 20260928100051392 -> 393
-    period++;
-    document.getElementById('pidShow').innerText=period;
-    document.getElementById('pid2').innerText=period;
-
-    curPage=1; // AUTO PAGE 1 - VIDEO JEMU READY
-    renderHistory();
-
-    document.getElementById('countOverlay').style.display='none';
-    timeLeft=30;
+    period1++; document.getElementById('pid1').innerText=period1; document.getElementById('pid1_2').innerText=period1;
+    curPage1=1; renderHist('1m'); updateMyBet();
+    document.getElementById('countOverlay1').style.display='none';
+    time1=60;
    },800);
   }
  },1000);
@@ -242,11 +230,12 @@ function startGame(){
 
 window.onload=()=>{
  loadHist();
- document.getElementById('pidShow').innerText=period;
- document.getElementById('pid2').innerText=period;
- renderHistory();
+ document.getElementById('pid30').innerText=period30;document.getElementById('pid30_2').innerText=period30;
+ document.getElementById('pid1').innerText=period1;document.getElementById('pid1_2').innerText=period1;
+ renderHist('30s');renderHist('1m');
  startGame();
 }
 </script>
 </body>
+                                                                                                                                                                                                                                                                          </html>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </html>
