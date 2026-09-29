@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55 CLUB - 30S & 1M Separate</title>
+<title>55 CLUB - 20 History Pages</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
 body{background:#f2f2f2}
@@ -22,8 +22,11 @@ body{background:#f2f2f2}
 .cG{background:#4caf50}.cV{background:#9c27b0}.cR{background:#f44336}
 .nums{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:10px 0}.nums button{width:50px;height:50px;border-radius:50%;border:none;font-weight:bold;font-size:18px;color:white}
 .bigsmall{display:flex;gap:10px}.bigsmall button{flex:1;padding:12px;border-radius:20px;border:none;font-weight:bold;color:white}
-.history{background:white;margin:10px;border-radius:10px;padding:10px;font-size:12px}.history table{width:100%;border-collapse:collapse}.history th{background:#ff4d4d;color:white;padding:6px}.history td{padding:5px;text-align:center;border-bottom:1px solid #eee}
-.pageCtrl{display:flex;justify-content:space-between;align-items:center;margin-top:10px;background:#f9f9f9;padding:8px;border-radius:10px}.pageCtrl button{padding:6px 14px;border:none;border-radius:15px;background:#ff4d4d;color:white;font-weight:bold}.pageCtrl button:disabled{background:#ccc}
+.history{background:white;margin:10px;border-radius:15px;padding:10px;font-size:12px}.history h4{font-size:13px;margin-bottom:6px;color:#ff4d4d}
+.history table{width:100%;border-collapse:collapse}.history th{background:#ff4d4d;color:white;padding:8px 4px;font-size:11px}.history td{padding:7px 4px;text-align:center;border-bottom:1px solid #eee;font-size:11px}
+.pageCtrl{display:flex;justify-content:space-between;align-items:center;margin-top:12px;background:#f9f9f9;padding:10px;border-radius:12px}
+.pageCtrl button{padding:8px 16px;border:none;border-radius:20px;background:#ff4d4d;color:white;font-weight:bold;font-size:12px}.pageCtrl button:disabled{background:#ccc}
+.pageInfo{font-weight:bold;font-size:12px;background:white;padding:5px 10px;border-radius:15px;border:1px solid #eee}
 #registerPage,#loginPage{background:white;min-height:100vh;padding:20px}
 input,select{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ddd}
 .regbtn{width:100%;padding:14px;background:#ff4d4d;border:none;border-radius:25px;color:white;font-weight:bold;margin-top:10px}
@@ -50,171 +53,22 @@ input,select{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px 
 <div class="profileCard"><div><b id="pUsername">-</b><br>UID: <b id="pUID">-</b> | <span id="pMobile"></span></div><button onclick="copyUID()" style="padding:6px 12px;background:#ff4d4d;color:white;border:none;border-radius:10px;font-size:11px">Copy UID</button></div>
 <div class="wallet"><div style="display:flex;justify-content:space-between"><h2>₹ <span id="bal">0.00</span></h2><button onclick="refreshBal()" style="padding:6px 12px;border-radius:15px;border:1px solid #ddd;background:white">🔄</button></div><p id="myBet" style="font-weight:bold;color:#ff4d4d">Bet: -</p><div class="btns"><button class="b1" onclick="openDep()">Deposit</button><button class="b2" onclick="openWith()">Withdraw</button></div><div class="histBtns"><button onclick="openDepHist()">📥 Deposit History</button><button onclick="openWithHist()">📤 Withdraw History</button></div></div>
 
-<!-- LOBBY 30S + 1M BAJU MA -->
 <div id="lobbySection">
 <div class="lobbyTitle">🎮 Lottery Games - Alag Period</div>
 <div class="gameLobby">
-<div class="gameBox" onclick="openGame('30s')">
-<div style="font-size:28px">⚡</div>
-<b>Win Go 30S</b><br><small id="lobbyP30">Period: ----</small><br><small id="lobbyT30" style="color:red;font-weight:bold">00:30</small><br><span style="background:#ff4d4d;color:white;padding:3px 10px;border-radius:10px;font-size:10px;margin-top:5px;display:inline-block">PLAY</span>
+<div class="gameBox" onclick="openGame('30s')"><div style="font-size:28px">⚡</div><b>Win Go 30S</b><br><small id="lobbyP30">Period: ----</small><br><small id="lobbyT30" style="color:red;font-weight:bold">00:30</small><br><span style="background:#ff4d4d;color:white;padding:3px 10px;border-radius:10px;font-size:10px;margin-top:5px;display:inline-block">PLAY</span></div>
+<div class="gameBox" onclick="openGame('1m')" style="border-color:#4caf50"><div style="font-size:28px">⏱️</div><b style="color:#4caf50">Win Go 1M</b><br><small id="lobbyP1">Period: ----</small><br><small id="lobbyT1" style="color:green;font-weight:bold">01:00</small><br><span style="background:#4caf50;color:white;padding:3px 10px;border-radius:10px;font-size:10px;margin-top:5px;display:inline-block">PLAY</span></div>
 </div>
-<div class="gameBox" onclick="openGame('1m')" style="border-color:#4caf50">
-<div style="font-size:28px">⏱️</div>
-<b style="color:#4caf50">Win Go 1M</b><br><small id="lobbyP1">Period: ----</small><br><small id="lobbyT1" style="color:green;font-weight:bold">01:00</small><br><span style="background:#4caf50;color:white;padding:3px 10px;border-radius:10px;font-size:10px;margin-top:5px;display:inline-block">PLAY</span>
-</div>
-</div>
-<p style="text-align:center;font-size:10px;color:gray;margin:5px">30s ane 1M no Period alag che - Copy nai thai</p>
 </div>
 
-<!-- 30S GAME -->
+<!-- 30S GAME WITH 20 HISTORY + PAGES -->
 <div id="game30" style="display:none">
 <div style="margin:10px;display:flex;justify-content:space-between;align-items:center"><b style="color:#ff4d4d">← Win Go 30S</b><button onclick="closeGame()" style="padding:6px 12px;border:1px solid #ff4d4d;background:white;color:#ff4d4d;border-radius:15px;font-size:11px">Lobby</button></div>
 <div class="playbox"><div class="timer"><span>WinGo 30s<br><small id="pid30"></small></span><span><b id="tm30">00:30</b></span></div><div class="colors"><button class="cG" onclick="openBetModal('Green')">Green</button><button class="cV" onclick="openBetModal('Violet')">Violet</button><button class="cR" onclick="openBetModal('Red')">Red</button></div><div class="nums"><button style="background:#9c27b0" onclick="openBetModal('Num0')">0</button><button style="background:#4caf50" onclick="openBetModal('Num1')">1</button><button style="background:#f44336" onclick="openBetModal('Num2')">2</button><button style="background:#4caf50" onclick="openBetModal('Num3')">3</button><button style="background:#4caf50" onclick="openBetModal('Num4')">4</button><button style="background:#9c27b0" onclick="openBetModal('Num5')">5</button><button style="background:#f44336" onclick="openBetModal('Num6')">6</button><button style="background:#4caf50" onclick="openBetModal('Num7')">7</button><button style="background:#f44336" onclick="openBetModal('Num8')">8</button><button style="background:#4caf50" onclick="openBetModal('Num9')">9</button></div><div class="bigsmall"><button style="background:orange" onclick="openBetModal('Big')">Big</button><button style="background:#2196F3" onclick="openBetModal('Small')">Small</button></div></div>
-<div class="history"><table><tr><th>Period</th><th>Num</th><th>BS</th><th>Color</th></tr><tbody id="hist30"></tbody></table><div class="pageCtrl"><button onclick="prevPage('30s')">◀ Prev</button><span id="pageInfo30">Page 1</span><button onclick="nextPage('30s')">Next ▶</button></div></div>
+<div class="history"><h4>📊 30S History - Period | Num | Big/Small | Color - 20 per Page</h4><table><tr><th>Period</th><th>Num</th><th>BS</th><th>Color</th></tr><tbody id="hist30"></tbody></table><div class="pageCtrl"><button id="prev30" onclick="prevPage('30s')">◀ Prev</button><span id="pageInfo30" class="pageInfo">Page 1/1 (0)</span><button id="next30" onclick="nextPage('30s')">Next ▶</button></div></div>
 </div>
 
-<!-- 1M GAME -->
+<!-- 1M GAME WITH 20 HISTORY + PAGES -->
 <div id="game1m" style="display:none">
 <div style="margin:10px;display:flex;justify-content:space-between;align-items:center"><b style="color:#4caf50">← Win Go 1M</b><button onclick="closeGame()" style="padding:6px 12px;border:1px solid #4caf50;background:white;color:#4caf50;border-radius:15px;font-size:11px">Lobby</button></div>
-<div class="playbox"><div class="timer"><span>WinGo 1M<br><small id="pid1"></small></span><span><b id="tm1">01:00</b></span></div><div class="colors"><button class="cG" onclick="openBetModal('Green')">Green</button><button class="cV" onclick="openBetModal('Violet')">Violet</button><button class="cR" onclick="openBetModal('Red')">Red</button></div><div class="nums"><button style="background:#9c27b0" onclick="openBetModal('Num0')">0</button><button style="background:#4caf50" onclick="openBetModal('Num1')">1</button><button style="background:#f44336" onclick="openBetModal('Num2')">2</button><button style="background:#4caf50" onclick="openBetModal('Num3')">3</button><button style="background:#4caf50" onclick="openBetModal('Num4')">4</button><button style="background:#9c27b0" onclick="openBetModal('Num5')">5</button><button style="background:#f44336" onclick="openBetModal('Num6')">6</button><button style="background:#4caf50" onclick="openBetModal('Num7')">7</button><button style="background:#f44336" onclick="openBetModal('Num8')">8</button><button style="background:#4caf50" onclick="openBetModal('Num9')">9</button></div><div class="bigsmall"><button style="background:orange" onclick="openBetModal('Big')">Big</button><button style="background:#2196F3" onclick="openBetModal('Small')">Small</button></div></div>
-<div class="history"><table><tr><th>Period</th><th>Num</th><th>BS</th><th>Color</th></tr><tbody id="hist1"></tbody></table><div class="pageCtrl"><button onclick="prevPage('1m')">◀ Prev</button><span id="pageInfo1">Page 1</span><button onclick="nextPage('1m')">Next ▶</button></div></div>
-</div>
-
-<div id="depBox"><div class="popBox"><h3>Deposit</h3><div class="depTabs"><button id="qrBtn" onclick="showQR()" class="active">📷 QR Pay</button><button id="upiBtn" onclick="showUPI()">💳 UPI Pay</button></div><div id="qrSection"><div class="qrBox"><input id="depAmtQR" type="number" placeholder="Amount 1-3000" oninput="genQR()"><img id="qrImg" src="" style="width:180px;height:180px;margin:10px auto;display:none"><p id="qrText" style="font-size:11px;color:gray">Amount select karo</p></div><input id="depUTR_QR" type="text" placeholder="UTR Number"><button class="regbtn" onclick="submitDeposit('QR')">Confirm QR Deposit</button></div><div id="upiSection" style="display:none"><div class="qrBox"><div class="upiCopy" id="myUPI">6351@ybl</div><button onclick="copyUPI()" style="padding:6px 15px;background:#4caf50;color:white;border:none;border-radius:15px">Copy UPI</button><input id="depAmtUPI" type="number" placeholder="Amount 1-3000"></div><input id="depUTR_UPI" type="text" placeholder="UTR Number"><button class="regbtn" onclick="submitDeposit('UPI')">Confirm UPI Deposit</button></div><button onclick="depBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
-<div id="withBox"><div class="popBox"><h3>Withdraw</h3><input id="withAmt" type="number" placeholder="Amount"><input id="withUPI" type="text" placeholder="UPI ID"><button class="regbtn" onclick="submitWithdraw()">Submit</button><button onclick="withBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
-<div id="depHistBox"><div class="popBox"><h3>📥 Deposit History</h3><table class="hTable"><tr><th>Time</th><th>Order No</th><th>Amount</th><th>Type</th><th>Status</th></tr><tbody id="depHistBody"></tbody></table><button onclick="depHistBox.style.display='none'" class="regbtn">Close</button></div></div>
-<div id="withHistBox"><div class="popBox"><h3>📤 Withdraw History</h3><table class="hTable"><tr><th>Time</th><th>Order No</th><th>Amount</th><th>Status</th></tr><tbody id="withHistBody"></tbody></table><button onclick="withHistBox.style.display='none'" class="regbtn">Close</button></div></div>
-<div id="betModal"><div class="popBox"><h3 id="betTitle"></h3><div class="betOpt"><button onclick="setModalAmt(10,this)" class="a">10</button><button onclick="setModalAmt(100,this)">100</button><button onclick="setModalAmt(500,this)">500</button></div><div class="qty"><button onclick="changeQty(-1)">-</button><span id="qtyShow">X1</span><button onclick="changeQty(1)">+</button></div><p>Total ₹<b id="totalAmt">10</b></p><button class="regbtn" onclick="confirmBet()">OK</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
-<div id="popup"><div class="popBox"><h2 id="popTitle"></h2><p id="popMsg"></p><h3 id="popAmt"></h3><button class="regbtn" onclick="closePop()">OK</button></div></div>
-</div>
-
-<div id="bellBox"><div class="popBox" style="text-align:left"><h2 style="text-align:center;color:#ff4d4d">🔔 Notification</h2><p id="bellWelcome" style="text-align:center;font-size:12px;color:gray;margin-bottom:10px"></p><div id="bellList" style="max-height:400px;overflow:auto"></div><button onclick="bellBox.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
-<div id="adminPassBox"><div class="popBox"><h3>🔐 Admin Password</h3><input id="adminPassInput" type="password" placeholder="Password 6351"><button class="regbtn" onclick="checkAdminPass()">Open</button><button onclick="adminPassBox.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
-<div id="adminBox"><div class="popBox" style="text-align:left"><h2 style="text-align:center;color:#ff4d4d">ADMIN PANEL</h2><div style="background:#f5f5f5;padding:10px;border-radius:10px;margin:10px 0"><p style="font-size:11px">Current Game: <b id="adminCurGame">30S</b></p><select id="adminNum"><option value="">Random Result</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select><select id="adminGameSel"><option value="30s">For 30S</option><option value="1m">For 1M</option></select><button class="regbtn" onclick="setAdmin()">Set Result</button><input id="adminUPISet" type="text" value="6351@ybl" oninput="saveMyUPI()" style="margin-top:8px"></div><h3 style="font-size:13px;color:green">💰 Deposit <span id="depCount" style="background:red;color:white;padding:2px 6px;border-radius:10px">0</span></h3><div id="adminDepList" style="max-height:150px;overflow:auto"></div><h3 style="font-size:13px;color:red;margin-top:8px">💸 Withdraw <span id="withCount" style="background:red;color:white;padding:2px 6px;border-radius:10px">0</span></h3><div id="adminWithList" style="max-height:120px;overflow:auto"></div><button onclick="adminBox.style.display='none'" style="width:100%;margin-top:15px;padding:10px;border:none;background:#eee;border-radius:20px">Close Admin</button></div></div>
-
-<script>
-const ADMIN_PASSWORD="6351";
-let bal=0, currentUser=null, tempBetType="", tempAmt=10, tempQty=1, topClicks=0, curGame='30s';
-let MY_UPI=localStorage.getItem("55_my_upi")||"6351@ybl";
-let period30=parseInt((Date.now()).toString().slice(-7)), time30=30;
-let period1m=parseInt((Date.now()+1111).toString().slice(-7)), time1m=60;
-let hist30=JSON.parse(localStorage.getItem("55_hist_30")||"[]");
-let hist1=JSON.parse(localStorage.getItem("55_hist_1m")||"[]");
-let nextResult30=null, nextResult1m=null;
-let myBets30=[], myBets1=[];
-let curPage30=1, curPage1=1;
-let timerStarted=false;
-
-function showToast(m){toast.innerText=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',3000);}
-function getUsers(){return JSON.parse(localStorage.getItem("55_users")||"{}")}function saveUsers(u){localStorage.setItem("55_users",JSON.stringify(u))}
-function getAllDeposits(){return JSON.parse(localStorage.getItem("55_all_deposits")||"[]")}function saveAllDeposits(d){localStorage.setItem("55_all_deposits",JSON.stringify(d))}
-function getAllWithdraws(){return JSON.parse(localStorage.getItem("55_all_withdraws")||"[]")}function saveAllWithdraws(d){localStorage.setItem("55_all_withdraws",JSON.stringify(d))}
-function saveMyUPI(){MY_UPI=adminUPISet.value.trim()||"6351@ybl";localStorage.setItem("55_my_upi",MY_UPI);myUPI.innerText=MY_UPI;}
-function showQR(){qrSection.style.display='block';upiSection.style.display='none';qrBtn.classList.add('active');upiBtn.classList.remove('active');}
-function showUPI(){upiSection.style.display='block';qrSection.style.display='none';upiBtn.classList.add('active');qrBtn.classList.remove('active');}
-function genQR(){let amt=parseFloat(depAmtQR.value)||0;if(amt<1||amt>3000){qrImg.style.display='none';qrText.innerText="Amount select karo";return;}let url=`upi://pay?pa=${MY_UPI}&pn=55CLUB&am=${amt}&cu=INR`;qrImg.src=`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;qrImg.style.display='block';qrText.innerText=`₹${amt} QR`;}
-function copyUPI(){navigator.clipboard.writeText(MY_UPI);showToast("UPI Copied");}
-function copyUID(){navigator.clipboard.writeText(pUID.innerText);showToast("UID Copied");}
-function showReg(){loginPage.style.display='none';registerPage.style.display='block'}function showLogin(){registerPage.style.display='none';loginPage.style.display='block'}
-let depHist=[],withHist=[];
-function genUID(){return "55"+Math.floor(100000+Math.random()*900000);}function genUsername(ph){return "Player"+ph.slice(-4)+Math.floor(10+Math.random()*90);}
-function doReg(){let p=rPhone.value.trim(),ps=rPass.value.trim();if(p.length!=10){alert("10 digit");return}let users=getUsers();if(users[p]){alert("Already");showLogin();return}let uid=genUID();while(Object.values(users).some(u=>u.uid==uid))uid=genUID();let username=genUsername(p);users[p]={pass:ps,bal:100,uid:uid,username:username,phone:p};saveUsers(users);alert(`Registered ${username} UID:${uid}`);showLogin();}
-function doLogin(){let input=lPhone.value.trim(),ps=lPass.value.trim();let users=getUsers();let key=null;if(users[input])key=input;else{let e=Object.entries(users).find(([k,u])=>u.uid==input);if(e)key=e[0];}if(!key){alert("Not found");return}if(users[key].pass!=ps){alert("Wrong");return}currentUser=key;bal=users[key].bal;depHist=JSON.parse(localStorage.getItem("55_dep_"+key)||"[]");withHist=JSON.parse(localStorage.getItem("55_with_"+key)||"[]");localStorage.setItem("55_current",key);userShow.innerText=users[key].username;pUsername.innerText=users[key].username;pUID.innerText=users[key].uid;pMobile.innerText=users[key].phone;document.getElementById('bal').innerText=bal.toFixed(2);myUPI.innerText=MY_UPI;adminUPISet.value=MY_UPI;registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block';renderAll();startTimers();updateBell();}
-function doLogout(){localStorage.setItem("55_dep_"+currentUser,JSON.stringify(depHist));localStorage.setItem("55_with_"+currentUser,JSON.stringify(withHist));localStorage.removeItem("55_current");location.reload();}
-function refreshBal(){bal=getUsers()[currentUser].bal;document.getElementById('bal').innerText=bal.toFixed(2);}
-function openDep(){depBox.style.display='flex';showQR();}function openWith(){withBox.style.display='flex'}
-
-function openGame(type){curGame=type;adminCurGame.innerText=type.toUpperCase();lobbySection.style.display='none';game30.style.display=type=='30s'?'block':'none';game1m.style.display=type=='1m'?'block':'none';}
-function closeGame(){game30.style.display='none';game1m.style.display='none';lobbySection.style.display='block';}
-
-function openBell(){let now=new Date();bellWelcome.innerHTML=`Welcome <b>${getUsers()[currentUser]?.username||'User'}</b><br>${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;let html="";depHist.forEach(d=>{let st=d.status=="Success"?'<span class="statusS">Success thai gayu</span>':d.status=="Rejected"?'<span class="statusR">Failed</span>':'<span class="statusP">Processing thakyu</span>';html+=`<div class="notifItem ${d.status=="Success"?'success':d.status=="Processing"?'process':''}">💰 Deposit ₹${d.amt} - ${st}<br><small>Order: ${d.orderNo} | ${d.method} | ${d.date}</small></div>`;});withHist.forEach(w=>{let st=w.status=="Success"?'<span class="statusS">Success</span>':w.status=="Rejected"?'<span class="statusR">Failed</span>':'<span class="statusP">Processing</span>';html+=`<div class="notifItem ${w.status=="Success"?'success':w.status=="Processing"?'process':''}">💸 Withdraw ₹${w.amt} - ${st}<br><small>Order: ${w.orderNo} | ${w.date}</small></div>`;});if(html=="") html=`<div class="notifItem">👋 Welcome! Koi notification nathi<br><small>${now.toLocaleString()}</small></div>`;bellList.innerHTML=html;bellBox.style.display='flex';bellCnt.style.display='none';}
-function updateBell(){let unread=depHist.filter(d=>d.status=="Processing").length + withHist.filter(w=>w.status=="Processing").length;if(unread>0){bellCnt.innerText=unread; bellCnt.style.display='block';} else {bellCnt.style.display='none';}}
-
-function submitDeposit(method){let amt,utr;if(method=='QR'){amt=parseFloat(depAmtQR.value)||0;utr=depUTR_QR.value.trim();}else{amt=parseFloat(depAmtUPI.value)||0;utr=depUTR_UPI.value.trim();}if(amt<1||amt>3000){alert("Amount select karo");return}if(utr.length<6){alert("UTR nakho");return}let id=Date.now();let orderNo="ORD"+id.toString().slice(-8);let u=getUsers()[currentUser];let dep={id:id,orderNo:orderNo,user:currentUser,uid:u.uid,username:u.username,amt:amt,utr:utr,method:method,time:Date.now(),dateStr:new Date().toLocaleString(),status:"Processing"};let all=getAllDeposits();all.unshift(dep);saveAllDeposits(all);depHist.unshift({id:id,orderNo:orderNo,date:new Date().toLocaleString(),amt:amt,utr:utr,method:method,status:"Processing"});localStorage.setItem("55_dep_"+currentUser,JSON.stringify(depHist));depBox.style.display='none';depAmtQR.value="";depAmtUPI.value="";depUTR_QR.value="";depUTR_UPI.value="";qrImg.style.display='none';showToast(`Deposit ₹${amt} Processing - ${method}`); updateBell();}
-function approveDep(id){let all=getAllDeposits();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Success";saveAllDeposits(all);let users=getUsers();users[all[i].user].bal+=all[i].amt;saveUsers(users);if(all[i].user==currentUser){bal=users[all[i].user].bal;document.getElementById('bal').innerText=bal.toFixed(2);}let uH=JSON.parse(localStorage.getItem("55_dep_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Success";localStorage.setItem("55_dep_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)depHist=uH;}showToast("Success thai gayu");updateBell();renderAdminList();}
-function rejectDep(id){let all=getAllDeposits();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Rejected";saveAllDeposits(all);let uH=JSON.parse(localStorage.getItem("55_dep_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Rejected";localStorage.setItem("55_dep_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)depHist=uH;}updateBell();renderAdminList();}
-function submitWithdraw(){let a=parseFloat(withAmt.value)||0;let upi=withUPI.value.trim();if(a<=0||a>bal){alert("Low");return}if(upi.length<4){alert("UPI");return}bal-=a;document.getElementById('bal').innerText=bal.toFixed(2);let users=getUsers();users[currentUser].bal=bal;saveUsers(users);let id=Date.now();let orderNo="WTH"+id.toString().slice(-8);let user=users[currentUser];let w={id:id,orderNo:orderNo,user:currentUser,uid:user.uid,username:user.username,amt:a,upi:upi,time:Date.now(),dateStr:new Date().toLocaleString(),status:"Processing"};let all=getAllWithdraws();all.unshift(w);saveAllWithdraws(all);withHist.unshift({id:id,orderNo:orderNo,date:new Date().toLocaleString(),amt:a,upi:upi,status:"Processing"});localStorage.setItem("55_with_"+currentUser,JSON.stringify(withHist));withBox.style.display='none';withAmt.value="";withUPI.value="";showToast("Withdraw Processing");updateBell();}
-function approveWith(id){let all=getAllWithdraws();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Success";saveAllWithdraws(all);let uH=JSON.parse(localStorage.getItem("55_with_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Success";localStorage.setItem("55_with_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)withHist=uH;}showToast("Withdraw Success");updateBell();renderAdminList();}
-function rejectWith(id){let all=getAllWithdraws();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Rejected";saveAllWithdraws(all);let users=getUsers();users[all[i].user].bal+=all[i].amt;saveUsers(users);if(all[i].user==currentUser){bal=users[all[i].user].bal;document.getElementById('bal').innerText=bal.toFixed(2);}let uH=JSON.parse(localStorage.getItem("55_with_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Rejected";localStorage.setItem("55_with_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)withHist=uH;}updateBell();renderAdminList();}
-
-function openDepHist(){let h="";depHist.forEach(r=>{let col=r.status=="Success"?"statusS":r.status=="Rejected"?"statusR":"statusP";let typeBadge=r.method=="QR"?"📷 QR":"💳 UPI";h+=`<tr><td>${r.date}</td><td><b>${r.orderNo}</b></td><td>₹${r.amt}</td><td>${typeBadge}</td><td class="${col}">${r.status=="Processing"?"Processing thakyu":r.status=="Success"?"Success thai gayu":"Failed"}</td></tr>`;});depHistBody.innerHTML=h||"<tr><td colspan=5>No Deposit</td></tr>";depHistBox.style.display='flex';}
-function openWithHist(){let h="";withHist.forEach(r=>{let col=r.status=="Success"?"statusS":r.status=="Rejected"?"statusR":"statusP";h+=`<tr><td>${r.date}</td><td><b>${r.orderNo}</b></td><td>₹${r.amt}</td><td class="${col}">${r.status}</td></tr>`;});withHistBody.innerHTML=h||"<tr><td colspan=4>No Withdraw</td></tr>";withHistBox.style.display='flex';}
-
-function openBetModal(t){let curT=curGame=='30s'?time30:time1m;if(curT<=7){alert("7 sec band");return}tempBetType=t;tempAmt=10;tempQty=1;betTitle.innerText=t+" ("+curGame.toUpperCase()+")";qtyShow.innerText="X1";totalAmt.innerText=10;betModal.style.display='flex';}
-function setModalAmt(a,el){tempAmt=a;document.querySelectorAll('.betOpt button').forEach(b=>b.classList.remove('a'));el.classList.add('a');totalAmt.innerText=tempAmt*tempQty;}
-function changeQty(n){tempQty+=n;if(tempQty<1)tempQty=1;qtyShow.innerText="X"+tempQty;totalAmt.innerText=tempAmt*tempQty;}
-function confirmBet(){let tot=tempAmt*tempQty;if(bal<tot){alert("Low");return}bal-=tot;if(curGame=='30s') myBets30.push({type:tempBetType,amt:tot}); else myBets1.push({type:tempBetType,amt:tot});document.getElementById('bal').innerText=bal.toFixed(2);let u=getUsers();u[currentUser].bal=bal;saveUsers(u);myBet.innerText="Bet ("+curGame+"): "+(curGame=='30s'?myBets30.map(b=>b.type).join(","):myBets1.map(b=>b.type).join(","));betModal.style.display='none';}
-function closePop(){popup.style.display='none';myBets30=[];myBets1=[];myBet.innerText="Bet: -";}
-function openAdmin(){topClicks++;if(topClicks>=5){adminPassBox.style.display='flex';topClicks=0;adminPassInput.value="";}setTimeout(()=>topClicks=0,3000);}
-function checkAdminPass(){if(adminPassInput.value==ADMIN_PASSWORD){adminPassBox.style.display='none';adminBox.style.display='flex';renderAdminList();}else{alert("Wrong");adminPassBox.style.display='none';}}
-function setAdmin(){let n=adminNum.value;let g=adminGameSel.value;if(n===""){if(g=='30s')nextResult30=null;else nextResult1m=null;}else{if(g=='30s')nextResult30=parseInt(n);else nextResult1m=parseInt(n);}adminBox.style.display='none';showToast("Result set for "+g.toUpperCase());}
-function renderAdminList(){let dAll=getAllDeposits().filter(d=>d.status=="Processing");let wAll=getAllWithdraws().filter(d=>d.status=="Processing");depCount.innerText=dAll.length;withCount.innerText=wAll.length;let dh="";if(dAll.length==0)dh="<p style='color:gray;font-size:11px;text-align:center'>No pending</p>";else dAll.forEach(d=>{dh+=`<div class="adminItem"><b>${d.username} (${d.uid})</b> ₹${d.amt} - ${d.method}<br>Order:${d.orderNo} | UTR:${d.utr}<br><small>${d.dateStr}</small><br><button class="accept" onclick="approveDep(${d.id})">✅ Accept</button><button class="reject" onclick="rejectDep(${d.id})">❌ Reject</button></div>`;});adminDepList.innerHTML=dh;let wh="";if(wAll.length==0)wh="<p style='color:gray;font-size:11px;text-align:center'>No pending</p>";else wAll.forEach(d=>{wh+=`<div class="adminItem" style="background:#ffebee"><b>${d.username}</b> ₹${d.amt}<br>Order:${d.orderNo}<br>${d.upi}<br><button class="accept" onclick="approveWith(${d.id})">✅</button><button class="reject" onclick="rejectWith(${d.id})">❌</button></div>`;});adminWithList.innerHTML=wh;}
-
-function renderAll(){renderHist('30s');renderHist('1m');pid30.innerText=period30;pid1.innerText=period1m;lobbyP30.innerText="Period: "+period30;lobbyP1.innerText="Period: "+period1m;}
-function renderHist(type){
- let arr=type=='30s'?hist30:hist1;
- let curPage=type=='30s'?curPage30:curPage1;
- let total=Math.max(1,Math.ceil(arr.length/20));
- if(curPage>total)curPage=total;
- if(type=='30s')curPage30=curPage; else curPage1=curPage;
- let s=(curPage-1)*20;let slice=arr.slice(s,s+20);
- let h="";slice.forEach(r=>{h+=`<tr><td>${r.period}</td><td>${r.num}</td><td>${r.bs}</td><td>${r.color}</td></tr>`});
- if(type=='30s'){hist30.innerHTML=h||"<tr><td colspan=4>No data</td></tr>";pageInfo30.innerText=`Page ${curPage}/${total}`;}
- else{hist1.innerHTML=h||"<tr><td colspan=4>No data</td></tr>";pageInfo1.innerText=`Page ${curPage}/${total}`;}
-}
-function prevPage(t){if(t=='30s'&&curPage30>1){curPage30--;renderHist('30s');} if(t=='1m'&&curPage1>1){curPage1--;renderHist('1m');}}
-function nextPage(t){if(t=='30s'&&curPage30<Math.ceil(hist30.length/20)){curPage30++;renderHist('30s');} if(t=='1m'&&curPage1<Math.ceil(hist1.length/20)){curPage1++;renderHist('1m');}}
-
-function startTimers(){
- if(timerStarted) return; timerStarted=true;
- setInterval(()=>{
-  // 30S TIMER - ALAG
-  time30--;
-  tm30.innerText="00:"+(time30<10?"0"+time30:time30);
-  lobbyT30.innerText="00:"+(time30<10?"0"+time30:time30);
-  if(time30<0){
-   time30=30;
-   let winNum=nextResult30!==null?nextResult30:Math.floor(Math.random()*10); nextResult30=null;
-   let winCol=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
-   let winBS=winNum>=5?"Big":"Small";
-   hist30.unshift({period:period30,num:winNum,bs:winBS,color:winCol});
-   localStorage.setItem("55_hist_30",JSON.stringify(hist30));
-   if(myBets30.length>0){checkWin(winNum,winCol,winBS,myBets30); myBets30=[];}
-   period30++; pid30.innerText=period30; lobbyP30.innerText="Period: "+period30; curPage30=1; renderHist('30s');
-  }
-  // 1M TIMER - ALAG PERIOD
-  time1m--;
-  let m=Math.floor(time1m/60), s=time1m%60;
-  tm1.innerText=(m<10?"0"+m:m)+":"+(s<10?"0"+s:s);
-  lobbyT1.innerText=(m<10?"0"+m:m)+":"+(s<10?"0"+s:s);
-  if(time1m<0){
-   time1m=60;
-   let winNum=nextResult1m!==null?nextResult1m:Math.floor(Math.random()*10); nextResult1m=null;
-   let winCol=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");
-   let winBS=winNum>=5?"Big":"Small";
-   hist1.unshift({period:period1m,num:winNum,bs:winBS,color:winCol});
-   localStorage.setItem("55_hist_1m",JSON.stringify(hist1));
-   if(myBets1.length>0){checkWin(winNum,winCol,winBS,myBets1); myBets1=[];}
-   period1m++; pid1.innerText=period1m; lobbyP1.innerText="Period: "+period1m; curPage1=1; renderHist('1m');
-  }
- },1000);
-}
-function checkWin(winNum,winCol,winBS,bets){
- let totalWin=0,totalBet=bets.reduce((a,b)=>a+b.amt,0);
- bets.forEach(b=>{
-  let won=false;
-  if(b.type==winCol)won=true; if(b.type==winBS)won=true; if(b.type=="Num"+winNum)won=true;
-  if(b.type=="Green"&&[1,3,7,9].includes(winNum))won=true;
-  if(b.type=="Red"&&[2,4,6,8].includes(winNum))won=true;
-  if(b.type=="Violet"&&[0,5].includes(winNum))won=true;
-  if(won){if(b.type.startsWith("Num"))totalWin+=b.amt*9;else totalWin+=b.amt*2;}
- });
- if(totalWin>0){bal+=totalWin;let u=getUsers();u[currentUser].bal=bal;saveUsers(u);popTitle.innerText="YOU WIN!";popMsg.innerText=`${winNum} ${winCol} ${winBS}`;popAmt.innerText=`+₹${totalWin.toFixed(2)}`;}
- else{popTitle.innerText="YOU LOSS!";popMsg.innerText=`${winNum} ${winCol} ${winBS}`;popAmt.innerText=`-₹${totalBet}`;}
- document.getElementById('bal').innerText=bal.toFixed(2);popup.style.display='flex';
-}
-window.onload=()=>{let cur=localStorage.getItem("55_current");if(cur){let u=getUsers();if(u[cur]){currentUser=cur;bal=u[cur].bal;depHist=JSON.parse(localStorage.getItem("55_dep_"+cur)||"[]");withHist=JSON.parse(localStorage.getItem("55_with_"+cur)||"[]");document.getElementById('bal').innerText=bal.toFixed(2);userShow.innerText=u[cur].username;pUsername.innerText=u[cur].username;pUID.innerText=u[cur].uid;pMobile.innerText=u[cur].phone;myUPI.innerText=MY_UPI;adminUPISet.value=MY_UPI;registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block';renderAll();startTimers();updateBell();}}}
-</script>
-</body>
-                                                                                                               </html>
-                                                                                                                                                                                                                            
+<div class="playbox"><div class="timer"><span>WinGo 1M<br><small id="pid1"></small></span><span><b id="tm1">01:00</b></span></div><div class="colors"><button class="cG" onclick="openBetModal('Green')">Green</button><button class="cV" onclick="openBetModal('Violet')">Violet</button><button class="cR" onclick="openBetModal('Red')">Red</button></div><div class="nums"><button style="background:#9c27b0" onclick="openBetModal('Num0')">0</button><button style="background:#4caf50" onclick="openBetModal('Num1')">1</button><button style="background:#f44336" onclick="openBetModal('Num2')">2</                                                                                                                                                                                                                   
