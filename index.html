@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55 CLUB - Full History</title>
+<title>55 CLUB - No UTR History</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
 body{background:#f2f2f2}
@@ -26,34 +26,32 @@ input,select{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px 
 .depTabs{display:flex;gap:10px;margin:10px 0}.depTabs button{flex:1;padding:12px;border-radius:12px;border:2px solid #ff4d4d;background:white;color:#ff4d4d;font-weight:bold}.depTabs button.active{background:#ff4d4d;color:white}
 .qrBox{background:#f9f9f9;border-radius:15px;padding:15px;margin:10px 0}.upiCopy{background:#e8f5e9;padding:10px;border-radius:10px;font-weight:bold;word-break:break-all}
 .adminItem{background:#fff8e1;border:1px solid #ffe082;border-radius:10px;padding:10px;margin:8px 0;text-align:left;font-size:12px;border-left:5px solid #ff4d4d}.adminItem button{padding:6px 12px;border:none;border-radius:10px;font-weight:bold;margin-right:5px;margin-top:5px}.accept{background:#4caf50;color:white}.reject{background:#f44336;color:white}
-.hTable{width:100%;border-collapse:collapse;margin-top:10px;font-size:10px}.hTable th{background:#ff4d4d;color:white;padding:7px 4px;font-size:10px}.hTable td{padding:7px 4px;border-bottom:1px solid #eee;text-align:center;font-size:10px;word-break:break-all}
+.hTable{width:100%;border-collapse:collapse;margin-top:10px;font-size:11px}.hTable th{background:#ff4d4d;color:white;padding:8px 5px;font-size:11px}.hTable td{padding:8px 5px;border-bottom:1px solid #eee;text-align:center;font-size:11px}
 .qty{display:flex;align-items:center;justify-content:center;gap:15px;margin:10px 0}.qty button{width:35px;height:35px;border-radius:50%;border:1px solid #ddd;font-size:20px}
 .betOpt{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}.betOpt button{padding:8px 14px;border-radius:20px;border:1px solid #ddd;background:white;font-weight:bold}.betOpt.a{background:#ff4d4d;color:white}
 .notifItem{background:#f9f9f9;border-radius:12px;padding:10px;margin:8px 0;text-align:left;font-size:12px;border-left:4px solid #ff4d4d}.notifItem.success{border-left-color:#4caf50;background:#e8f5e9}.notifItem.process{border-left-color:orange;background:#fff8e1}
 .statusP{color:orange;font-weight:bold}.statusS{color:green;font-weight:bold}.statusR{color:red;font-weight:bold}
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:12px 20px;border-radius:25px;z-index:10000;display:none;font-size:13px}
-.scrollX{overflow-x:auto}
 </style>
 </head>
 <body>
 <div id="toast" class="toast"></div>
-
 <div id="registerPage"><h2 style="text-align:center;color:#ff4d4d">55 CLUB</h2><input id="rPhone" type="number" placeholder="10 digit Mobile"><input id="rPass" type="password" placeholder="Password"><button class="regbtn" onclick="doReg()">Register Auto UID</button><p style="text-align:center;margin-top:15px" onclick="showLogin()">Login</p></div>
 <div id="loginPage" style="display:none"><h2 style="text-align:center;color:#ff4d4d">Login</h2><input id="lPhone" type="text" placeholder="Mobile / UID"><input id="lPass" type="password" placeholder="Password"><button class="regbtn" onclick="doLogin()">Login</button><p style="text-align:center;margin-top:15px" onclick="showReg()">Register</p></div>
 
 <div id="gamePage" style="display:none">
 <div class="top"><div onclick="openAdmin()" style="cursor:pointer">55CLUB | <span id="userShow"></span></div><div class="topR"><div class="bell" onclick="openBell()">🔔<span id="bellCnt" style="display:none">0</span></div><div onclick="doLogout()" style="font-size:12px">Logout</div></div></div>
 <div class="profileCard"><div><b id="pUsername">-</b><br>UID: <b id="pUID">-</b> | <span id="pMobile"></span></div><button onclick="copyUID()" style="padding:6px 12px;background:#ff4d4d;color:white;border:none;border-radius:10px;font-size:11px">Copy UID</button></div>
-<div class="wallet"><div style="display:flex;justify-content:space-between"><h2>₹ <span id="bal">0.00</span></h2><button onclick="refreshBal()" style="padding:6px 12px;border-radius:15px;border:1px solid #ddd;background:white">🔄</button></div><p id="myBet" style="font-weight:bold;color:#ff4d4d">Bet: -</p><div class="btns"><button class="b1" onclick="openDep()">Deposit</button><button class="b2" onclick="openWith()">Withdraw</button></div><div class="histBtns"><button onclick="openDepHist()">📥 Deposit Full History</button><button onclick="openWithHist()">📤 Withdraw History</button></div></div>
+<div class="wallet"><div style="display:flex;justify-content:space-between"><h2>₹ <span id="bal">0.00</span></h2><button onclick="refreshBal()" style="padding:6px 12px;border-radius:15px;border:1px solid #ddd;background:white">🔄</button></div><p id="myBet" style="font-weight:bold;color:#ff4d4d">Bet: -</p><div class="btns"><button class="b1" onclick="openDep()">Deposit</button><button class="b2" onclick="openWith()">Withdraw</button></div><div class="histBtns"><button onclick="openDepHist()">📥 Deposit History</button><button onclick="openWithHist()">📤 Withdraw History</button></div></div>
 <div class="playbox"><div class="timer"><span>WinGo 30s<br><small id="pid"></small></span><span><b id="tm">00:30</b></span></div><div class="colors"><button class="cG" onclick="openBetModal('Green')">Green</button><button class="cV" onclick="openBetModal('Violet')">Violet</button><button class="cR" onclick="openBetModal('Red')">Red</button></div><div class="nums"><button style="background:#9c27b0" onclick="openBetModal('Num0')">0</button><button style="background:#4caf50" onclick="openBetModal('Num1')">1</button><button style="background:#f44336" onclick="openBetModal('Num2')">2</button><button style="background:#4caf50" onclick="openBetModal('Num3')">3</button><button style="background:#4caf50" onclick="openBetModal('Num4')">4</button><button style="background:#9c27b0" onclick="openBetModal('Num5')">5</button><button style="background:#f44336" onclick="openBetModal('Num6')">6</button><button style="background:#4caf50" onclick="openBetModal('Num7')">7</button><button style="background:#f44336" onclick="openBetModal('Num8')">8</button><button style="background:#4caf50" onclick="openBetModal('Num9')">9</button></div><div class="bigsmall"><button style="background:orange" onclick="openBetModal('Big')">Big</button><button style="background:#2196F3" onclick="openBetModal('Small')">Small</button></div></div>
 <div class="history"><table><tr><th>Period</th><th>Num</th><th>BS</th><th>Color</th></tr><tbody id="hist"></tbody></table><div class="pageCtrl"><button id="prevBtn" onclick="prevPage()">◀ Prev</button><span id="pageInfo">Page 1</span><button id="nextBtn" onclick="nextPage()">Next ▶</button></div></div>
 
-<div id="depBox"><div class="popBox"><h3>Deposit</h3><div class="depTabs"><button id="qrBtn" onclick="showQR()" class="active">📷 QR Pay</button><button id="upiBtn" onclick="showUPI()">💳 UPI Pay</button></div><div id="qrSection"><div class="qrBox"><input id="depAmtQR" type="number" placeholder="Select Amount 1-3000" oninput="genQR()"><img id="qrImg" src="" style="width:180px;height:180px;margin:10px auto;display:none"><p id="qrText" style="font-size:11px;color:gray">Amount select karo</p></div><input id="depUTR_QR" type="text" placeholder="UTR Number"><button class="regbtn" onclick="submitDeposit('QR')">Confirm QR Deposit</button></div><div id="upiSection" style="display:none"><div class="qrBox"><div class="upiCopy" id="myUPI">6351@ybl</div><button onclick="copyUPI()" style="padding:6px 15px;background:#4caf50;color:white;border:none;border-radius:15px">Copy UPI</button><input id="depAmtUPI" type="number" placeholder="Select Amount 1-3000"></div><input id="depUTR_UPI" type="text" placeholder="UTR Number"><button class="regbtn" onclick="submitDeposit('UPI')">Confirm UPI Deposit</button></div><button onclick="depBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
+<div id="depBox"><div class="popBox"><h3>Deposit</h3><div class="depTabs"><button id="qrBtn" onclick="showQR()" class="active">📷 QR Pay</button><button id="upiBtn" onclick="showUPI()">💳 UPI Pay</button></div><div id="qrSection"><div class="qrBox"><input id="depAmtQR" type="number" placeholder="Amount 1-3000" oninput="genQR()"><img id="qrImg" src="" style="width:180px;height:180px;margin:10px auto;display:none"><p id="qrText" style="font-size:11px;color:gray">Amount select karo</p></div><input id="depUTR_QR" type="text" placeholder="UTR Number"><button class="regbtn" onclick="submitDeposit('QR')">Confirm QR Deposit</button></div><div id="upiSection" style="display:none"><div class="qrBox"><div class="upiCopy" id="myUPI">6351@ybl</div><button onclick="copyUPI()" style="padding:6px 15px;background:#4caf50;color:white;border:none;border-radius:15px">Copy UPI</button><input id="depAmtUPI" type="number" placeholder="Amount 1-3000"></div><input id="depUTR_UPI" type="text" placeholder="UTR Number"><button class="regbtn" onclick="submitDeposit('UPI')">Confirm UPI Deposit</button></div><button onclick="depBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
 <div id="withBox"><div class="popBox"><h3>Withdraw</h3><input id="withAmt" type="number" placeholder="Amount"><input id="withUPI" type="text" placeholder="UPI ID"><button class="regbtn" onclick="submitWithdraw()">Submit</button><button onclick="withBox.style.display='none'" style="width:100%;margin-top:10px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
 
-<!-- FULL DEPOSIT HISTORY -->
-<div id="depHistBox"><div class="popBox" style="max-width:480px"><h3>📥 Deposit Full History</h3><div class="scrollX"><table class="hTable"><tr><th>Time</th><th>Order No</th><th>Amt</th><th>Type</th><th>UTR</th><th>Status</th></tr><tbody id="depHistBody"></tbody></table></div><button onclick="depHistBox.style.display='none'" class="regbtn">Close</button></div></div>
-<div id="withHistBox"><div class="popBox"><h3>📤 Withdraw History</h3><div class="scrollX"><table class="hTable"><tr><th>Time</th><th>Order No</th><th>Amt</th><th>UPI</th><th>Status</th></tr><tbody id="withHistBody"></tbody></table></div><button onclick="withHistBox.style.display='none'" class="regbtn">Close</button></div></div>
+<!-- DEPOSIT HISTORY WITHOUT UTR -->
+<div id="depHistBox"><div class="popBox"><h3>📥 Deposit History</h3><table class="hTable"><tr><th>Time</th><th>Order No</th><th>Amount</th><th>Type</th><th>Status</th></tr><tbody id="depHistBody"></tbody></table><button onclick="depHistBox.style.display='none'" class="regbtn">Close</button></div></div>
+<div id="withHistBox"><div class="popBox"><h3>📤 Withdraw History</h3><table class="hTable"><tr><th>Time</th><th>Order No</th><th>Amount</th><th>Status</th></tr><tbody id="withHistBody"></tbody></table><button onclick="withHistBox.style.display='none'" class="regbtn">Close</button></div></div>
 
 <div id="betModal"><div class="popBox"><h3 id="betTitle"></h3><div class="betOpt"><button onclick="setModalAmt(10,this)" class="a">10</button><button onclick="setModalAmt(100,this)">100</button><button onclick="setModalAmt(500,this)">500</button></div><div class="qty"><button onclick="changeQty(-1)">-</button><span id="qtyShow">X1</span><button onclick="changeQty(1)">+</button></div><p>Total ₹<b id="totalAmt">10</b></p><button class="regbtn" onclick="confirmBet()">OK</button><button onclick="betModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
 <div id="popup"><div class="popBox"><h2 id="popTitle"></h2><p id="popMsg"></p><h3 id="popAmt"></h3><button class="regbtn" onclick="closePop()">OK</button></div></div>
@@ -82,7 +80,7 @@ function getAllWithdraws(){return JSON.parse(localStorage.getItem("55_all_withdr
 function saveMyUPI(){MY_UPI=adminUPISet.value.trim()||"6351@ybl";localStorage.setItem("55_my_upi",MY_UPI);myUPI.innerText=MY_UPI;}
 function showQR(){qrSection.style.display='block';upiSection.style.display='none';qrBtn.classList.add('active');upiBtn.classList.remove('active');}
 function showUPI(){upiSection.style.display='block';qrSection.style.display='none';upiBtn.classList.add('active');qrBtn.classList.remove('active');}
-function genQR(){let amt=parseFloat(depAmtQR.value)||0;if(amt<1||amt>3000){qrImg.style.display='none';qrText.innerText="Amount 1-3000 select karo";return;}let url=`upi://pay?pa=${MY_UPI}&pn=55CLUB&am=${amt}&cu=INR`;qrImg.src=`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;qrImg.style.display='block';qrText.innerText=`₹${amt} QR - ${amt} select karyu`;}
+function genQR(){let amt=parseFloat(depAmtQR.value)||0;if(amt<1||amt>3000){qrImg.style.display='none';qrText.innerText="Amount select karo";return;}let url=`upi://pay?pa=${MY_UPI}&pn=55CLUB&am=${amt}&cu=INR`;qrImg.src=`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;qrImg.style.display='block';qrText.innerText=`₹${amt} QR`;}
 function copyUPI(){navigator.clipboard.writeText(MY_UPI);showToast("UPI Copied");}
 function copyUID(){navigator.clipboard.writeText(pUID.innerText);showToast("UID Copied");}
 function showReg(){loginPage.style.display='none';registerPage.style.display='block'}function showLogin(){registerPage.style.display='none';loginPage.style.display='block'}
@@ -93,7 +91,6 @@ function doLogin(){let input=lPhone.value.trim(),ps=lPass.value.trim();let users
 function doLogout(){localStorage.setItem("55_dep_"+currentUser,JSON.stringify(depHist));localStorage.setItem("55_with_"+currentUser,JSON.stringify(withHist));localStorage.removeItem("55_current");location.reload();}
 function refreshBal(){bal=getUsers()[currentUser].bal;document.getElementById('bal').innerText=bal.toFixed(2);}
 function openDep(){depBox.style.display='flex';showQR();}function openWith(){withBox.style.display='flex'}
-
 function openBell(){
  let now=new Date();
  bellWelcome.innerHTML=`Welcome <b>${getUsers()[currentUser]?.username||'User'}</b><br>${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
@@ -103,7 +100,7 @@ function openBell(){
    html+=`<div class="notifItem ${d.status=="Success"?'success':d.status=="Processing"?'process':''}">💰 Deposit ₹${d.amt} - ${st}<br><small>Order: ${d.orderNo} | ${d.method} | ${d.date}</small></div>`;
  });
  withHist.forEach(w=>{
-   let st=w.status=="Success"?'<span class="statusS">Success thai gayu</span>':w.status=="Rejected"?'<span class="statusR">Failed</span>':'<span class="statusP">Processing thakyu</span>';
+   let st=w.status=="Success"?'<span class="statusS">Success</span>':w.status=="Rejected"?'<span class="statusR">Failed</span>':'<span class="statusP">Processing</span>';
    html+=`<div class="notifItem ${w.status=="Success"?'success':w.status=="Processing"?'process':''}">💸 Withdraw ₹${w.amt} - ${st}<br><small>Order: ${w.orderNo} | ${w.date}</small></div>`;
  });
  if(html=="") html=`<div class="notifItem">👋 Welcome! Koi notification nathi<br><small>${now.toLocaleString()}</small></div>`;
@@ -115,12 +112,11 @@ function updateBell(){
  let unread=depHist.filter(d=>d.status=="Processing").length + withHist.filter(w=>w.status=="Processing").length;
  if(unread>0){bellCnt.innerText=unread; bellCnt.style.display='block';} else {bellCnt.style.display='none';}
 }
-
 function submitDeposit(method){
  let amt,utr;
  if(method=='QR'){amt=parseFloat(depAmtQR.value)||0;utr=depUTR_QR.value.trim();}
  else{amt=parseFloat(depAmtUPI.value)||0;utr=depUTR_UPI.value.trim();}
- if(amt<1||amt>3000){alert("1-3000 Amount select karo");return}
+ if(amt<1||amt>3000){alert("Amount select karo");return}
  if(utr.length<6){alert("UTR nakho");return}
  let id=Date.now();
  let orderNo="ORD"+id.toString().slice(-8);
@@ -130,15 +126,14 @@ function submitDeposit(method){
  depHist.unshift({id:id,orderNo:orderNo,date:new Date().toLocaleString(),amt:amt,utr:utr,method:method,status:"Processing"});
  localStorage.setItem("55_dep_"+currentUser,JSON.stringify(depHist));
  depBox.style.display='none';depAmtQR.value="";depAmtUPI.value="";depUTR_QR.value="";depUTR_UPI.value="";qrImg.style.display='none';
- showToast(`Deposit ₹${amt} Processing thakyu - ${method}`); updateBell();
+ showToast(`Deposit ₹${amt} Processing - ${method}`); updateBell();
 }
-function approveDep(id){let all=getAllDeposits();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Success";saveAllDeposits(all);let users=getUsers();users[all[i].user].bal+=all[i].amt;saveUsers(users);if(all[i].user==currentUser){bal=users[all[i].user].bal;document.getElementById('bal').innerText=bal.toFixed(2);}let uH=JSON.parse(localStorage.getItem("55_dep_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Success";localStorage.setItem("55_dep_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)depHist=uH;}showToast("Deposit Success thai gayu!");updateBell();renderAdminList();}
+function approveDep(id){let all=getAllDeposits();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Success";saveAllDeposits(all);let users=getUsers();users[all[i].user].bal+=all[i].amt;saveUsers(users);if(all[i].user==currentUser){bal=users[all[i].user].bal;document.getElementById('bal').innerText=bal.toFixed(2);}let uH=JSON.parse(localStorage.getItem("55_dep_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Success";localStorage.setItem("55_dep_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)depHist=uH;}showToast("Success thai gayu");updateBell();renderAdminList();}
 function rejectDep(id){let all=getAllDeposits();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Rejected";saveAllDeposits(all);let uH=JSON.parse(localStorage.getItem("55_dep_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Rejected";localStorage.setItem("55_dep_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)depHist=uH;}updateBell();renderAdminList();}
-function submitWithdraw(){let a=parseFloat(withAmt.value)||0;let upi=withUPI.value.trim();if(a<=0||a>bal){alert("Low balance");return}if(upi.length<4){alert("UPI nakho");return}bal-=a;document.getElementById('bal').innerText=bal.toFixed(2);let users=getUsers();users[currentUser].bal=bal;saveUsers(users);let id=Date.now();let orderNo="WTH"+id.toString().slice(-8);let user=users[currentUser];let w={id:id,orderNo:orderNo,user:currentUser,uid:user.uid,username:user.username,amt:a,upi:upi,time:Date.now(),dateStr:new Date().toLocaleString(),status:"Processing"};let all=getAllWithdraws();all.unshift(w);saveAllWithdraws(all);withHist.unshift({id:id,orderNo:orderNo,date:new Date().toLocaleString(),amt:a,upi:upi,status:"Processing"});localStorage.setItem("55_with_"+currentUser,JSON.stringify(withHist));withBox.style.display='none';withAmt.value="";withUPI.value="";showToast("Withdraw Processing thakyu");updateBell();}
-function approveWith(id){let all=getAllWithdraws();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Success";saveAllWithdraws(all);let uH=JSON.parse(localStorage.getItem("55_with_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Success";localStorage.setItem("55_with_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)withHist=uH;}showToast("Withdraw Success thai gayu");updateBell();renderAdminList();}
+function submitWithdraw(){let a=parseFloat(withAmt.value)||0;let upi=withUPI.value.trim();if(a<=0||a>bal){alert("Low");return}if(upi.length<4){alert("UPI");return}bal-=a;document.getElementById('bal').innerText=bal.toFixed(2);let users=getUsers();users[currentUser].bal=bal;saveUsers(users);let id=Date.now();let orderNo="WTH"+id.toString().slice(-8);let user=users[currentUser];let w={id:id,orderNo:orderNo,user:currentUser,uid:user.uid,username:user.username,amt:a,upi:upi,time:Date.now(),dateStr:new Date().toLocaleString(),status:"Processing"};let all=getAllWithdraws();all.unshift(w);saveAllWithdraws(all);withHist.unshift({id:id,orderNo:orderNo,date:new Date().toLocaleString(),amt:a,upi:upi,status:"Processing"});localStorage.setItem("55_with_"+currentUser,JSON.stringify(withHist));withBox.style.display='none';withAmt.value="";withUPI.value="";showToast("Withdraw Processing");updateBell();}
+function approveWith(id){let all=getAllWithdraws();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Success";saveAllWithdraws(all);let uH=JSON.parse(localStorage.getItem("55_with_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Success";localStorage.setItem("55_with_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)withHist=uH;}showToast("Withdraw Success");updateBell();renderAdminList();}
 function rejectWith(id){let all=getAllWithdraws();let i=all.findIndex(d=>d.id==id);if(i==-1)return;all[i].status="Rejected";saveAllWithdraws(all);let users=getUsers();users[all[i].user].bal+=all[i].amt;saveUsers(users);if(all[i].user==currentUser){bal=users[all[i].user].bal;document.getElementById('bal').innerText=bal.toFixed(2);}let uH=JSON.parse(localStorage.getItem("55_with_"+all[i].user)||"[]");let hi=uH.findIndex(h=>h.id==id);if(hi!=-1){uH[hi].status="Rejected";localStorage.setItem("55_with_"+all[i].user,JSON.stringify(uH));if(all[i].user==currentUser)withHist=uH;}updateBell();renderAdminList();}
 
-// FULL HISTORY DISPLAY - AMOUNT, ORDER, TYPE, TIME, STATUS
 function openDepHist(){
  let h="";
  depHist.forEach(r=>{
@@ -149,20 +144,19 @@ function openDepHist(){
      <td><b>${r.orderNo}</b></td>
      <td>₹${r.amt}</td>
      <td>${typeBadge}</td>
-     <td>${r.utr}</td>
      <td class="${col}">${r.status=="Processing"?"Processing thakyu":r.status=="Success"?"Success thai gayu":"Failed"}</td>
    </tr>`;
  });
- depHistBody.innerHTML=h||"<tr><td colspan=6>No Deposit</td></tr>";
+ depHistBody.innerHTML=h||"<tr><td colspan=5>No Deposit</td></tr>";
  depHistBox.style.display='flex';
 }
 function openWithHist(){
  let h="";
  withHist.forEach(r=>{
    let col=r.status=="Success"?"statusS":r.status=="Rejected"?"statusR":"statusP";
-   h+=`<tr><td>${r.date}</td><td><b>${r.orderNo}</b></td><td>₹${r.amt}</td><td>${r.upi}</td><td class="${col}">${r.status=="Processing"?"Processing":r.status=="Success"?"Success":"Failed"}</td></tr>`;
+   h+=`<tr><td>${r.date}</td><td><b>${r.orderNo}</b></td><td>₹${r.amt}</td><td class="${col}">${r.status}</td></tr>`;
  });
- withHistBody.innerHTML=h||"<tr><td colspan=5>No Withdraw</td></tr>";
+ withHistBody.innerHTML=h||"<tr><td colspan=4>No Withdraw</td></tr>";
  withHistBox.style.display='flex';
 }
 
@@ -179,4 +173,5 @@ function start(){if(timerOn)return;timerOn=true;pid.innerText=period;tm.innerTex
 window.onload=()=>{let cur=localStorage.getItem("55_current");if(cur){let u=getUsers();if(u[cur]){currentUser=cur;bal=u[cur].bal;depHist=JSON.parse(localStorage.getItem("55_dep_"+cur)||"[]");withHist=JSON.parse(localStorage.getItem("55_with_"+cur)||"[]");document.getElementById('bal').innerText=bal.toFixed(2);userShow.innerText=u[cur].username;pUsername.innerText=u[cur].username;pUID.innerText=u[cur].uid;pMobile.innerText=u[cur].phone;myUPI.innerText=MY_UPI;adminUPISet.value=MY_UPI;registerPage.style.display='none';loginPage.style.display='none';gamePage.style.display='block';initWingoState();renderHistory();start();updateBell();}}}
 </script>
 </body>
+                                                                                    </html>
                                                                                                                                                                                                                                                                                                                                                                                             </html>
