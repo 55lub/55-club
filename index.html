@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>55CLUB - Final System</title>
+<title>55CLUB</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial,sans-serif}
 body{background:#f5f5f5}
@@ -29,7 +29,7 @@ body{background:#f5f5f5}
 .pageInfo{font-size:10px;font-weight:bold;color:#ff4d4d;background:white;padding:5px 10px;border-radius:15px;border:1px solid #ff4d4d}
 .countOverlay{position:absolute;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:10;gap:15px}
 .countBox{background:white;width:70px;height:70px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:bold;color:#ff4d4d}
-#popup,#betModal,#adminModal,#passModal,#authModal,#myHistModal,#depMethodModal,#utrModal,#adminDepModal,#withMethodModal,#adminWithModal,#startGameModal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:9999}
+#popup,#betModal,#adminModal,#passModal,#authModal,#myHistModal,#depMethodModal,#utrModal,#adminDepModal,#withMethodModal,#adminWithModal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:9999}
 .popBox{background:white;width:92%;max-width:440px;border-radius:20px;padding:20px;text-align:center;max-height:90vh;overflow:auto}
 .regbtn{width:100%;padding:14px;background:#ff4d4d;border:none;border-radius:25px;color:white;font-weight:bold;margin-top:10px}
 .inp,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-top:10px;font-size:16px;text-align:center}
@@ -62,10 +62,11 @@ body{background:#f5f5f5}
 .statusRej{background:#ff4d4d;color:white;padding:4px 12px;border-radius:12px;font-size:11px;font-weight:bold}
 .uidBox{background:#fff0f0;padding:6px 10px;border-radius:20px;font-size:11px;font-weight:bold;color:#ff4d4d;border:1px solid #ffcccc}
 .userInfoCard{background:white;margin:10px;border-radius:15px;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px #0001;border-left:4px solid #ff4d4d}
-/* NAYA START BOX STYLE */
-.startBox{background:white;width:92%;max-width:340px;border-radius:25px;padding:30px 20px;text-align:center;animation:pop 0.3s ease}
-@keyframes pop{0%{transform:scale(0.8)}100%{transform:scale(1)}}
-.startIcon{width:80px;height:80px;background:linear-gradient(135deg,#ff4d4d,#ff8a65);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 15px}
+/* HOME PAGE WINGO BOX */
+.homePage{display:none;padding:10px}
+.wingoCard{background:white;border-radius:16px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:12px;box-shadow:0 2px 10px #0001;cursor:pointer;border-left:5px solid #ff4d4d}
+.wingoCard:active{transform:scale(0.97)}
+.wingoIcon{width:55px;height:55px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:24px;font-weight:bold}
 </style>
 </head>
 <body>
@@ -73,7 +74,7 @@ body{background:#f5f5f5}
 <div id="authModal">
 <div class="authBox">
 <h2 style="color:#ff4d4d">55CLUB</h2>
-<p style="font-size:11px;color:gray">Bonus ₹34 - Register -> Login -> Game Start</p>
+<p style="font-size:11px;color:gray">Bonus ₹34 - Register -> Login -> Home -> WinGo</p>
 <div class="authTab">
 <button id="loginTab" class="active" onclick="switchAuth('login')">Login</button>
 <button id="regTab" onclick="switchAuth('register')">Register</button>
@@ -93,18 +94,6 @@ body{background:#f5f5f5}
 </div>
 </div>
 
-<!-- NAYA START GAME BOX -->
-<div id="startGameModal" style="background:linear-gradient(135deg,#ff4d4d,#ff8a65);">
-<div class="startBox">
-<div class="startIcon">🎮</div>
-<h2 style="color:#333">Welcome!</h2>
-<p style="font-size:12px;color:gray;margin:8px 0">Tamari game ready che.<br>Start karva mate niche click karo.</p>
-<div style="background:#fff0f0;padding:10px;border-radius:12px;margin:12px 0;font-size:11px"><b id="startUserName">User</b> | UID: <b id="startUID">000000</b><br>Balance: ₹<b id="startBal">34.00</b></div>
-<button class="regbtn" style="font-size:16px;padding:16px;background:#4caf50" onclick="startGameNow()">▶️ START GAME</button>
-<p style="font-size:10px;color:gray;margin-top:10px">Click kari ne game chalu karo</p>
-</div>
-</div>
-
 <div class="topHead" id="secretHead" onclick="secretTap()"><span>55CLUB</span><div><span id="adminNotifDep" class="notifBell" onclick="openAdminDeposits()">🔔 Dep <span id="notifCountDep">0</span></span><span id="adminNotifWith" class="notifBell" style="background:#2196f3" onclick="openAdminWithdrawals()">🔔 With <span id="notifCountWith">0</span></span></div></div>
 
 <div class="userInfoCard" id="userCard" style="display:none">
@@ -113,7 +102,7 @@ body{background:#f5f5f5}
 </div>
 
 <div class="walletCard">
-<div>₹ <b id="bal">0.00</b> | <span id="curLabel" style="color:#ff4d4d;font-weight:bold">30S</span> | <span id="curPeriodFull" style="font-size:11px">20260928100051390</span></div>
+<div>₹ <b id="bal">0.00</b> | <span id="curLabel" style="color:#ff4d4d;font-weight:bold">HOME</span> | <span id="curPeriodFull" style="font-size:11px">20260928100051390</span></div>
 <div class="dwBtns">
 <button class="btnDep" onclick="openDepositMethods()">💰 Deposit</button>
 <button class="btnWith" onclick="openWithdrawMethods()">🏦 Withdrawal</button>
@@ -121,54 +110,47 @@ body{background:#f5f5f5}
 </div>
 </div>
 
-<div class="tabs">
-<div id="tab30" class="active" onclick="switchGame('30s')">WinGo<br>30sec</div>
-<div id="tab1" onclick="switchGame('1m')">WinGo<br>1 Min</div>
-<div id="tab3" onclick="switchGame('3m')">WinGo<br>3 Min</div>
-<div id="tab5" onclick="switchGame('5m')">WinGo<br>5 Min</div>
+<!-- HOME PAGE - AHI WINGO BOX CHE -->
+<div id="homePage" class="homePage">
+<h3 style="margin:10px 5px;color:#333">🎮 Games</h3>
+
+<div class="wingoCard" onclick="openWinGo('30s')">
+<div class="wingoIcon" style="background:#ff4d4d">30S</div>
+<div><b>WinGo 30 Sec</b><br><span style="font-size:11px;color:gray">Fast game - Har 30 sec ma result</span></div>
+<div style="margin-left:auto;color:#ff4d4d;font-weight:bold">▶</div>
 </div>
 
-<div id="g30" class="gameSection active"><div class="gameTop"><div><div>WinGo 30sec</div><div class="periodSmall" id="pid30">20260928100051390</div><div style="font-size:9px">Short: <span id="short30">51390</span> -> Next: <span id="next30">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b>0</b><b>0</b><span>:</span><b id="t30_1">3</b><b id="t30_2">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov30"><div class="countBox" id="ov30_1">0</div><div class="countBox" id="ov30_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist30"></div><div class="pageCtrl"><button onclick="prevPage('30s')">◀</button><span id="info30" class="pageInfo"></span><button onclick="nextPage('30s')">▶</button></div></div></div>
-<div id="g1" class="gameSection"><div class="gameTop g1m"><div><div>WinGo 1 Min</div><div class="periodSmall" id="pid1">20260928100051390</div><div style="font-size:9px">Short: <span id="short1">51390</span> -> Next: <span id="next1">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t1_1">0</b><b id="t1_2">1</b><span>:</span><b id="t1_3">0</b><b id="t1_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov1"><div class="countBox" id="ov1_1">0</div><div class="countBox" id="ov1_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist1"></div><div class="pageCtrl"><button onclick="prevPage('1m')">◀</button><span id="info1" class="pageInfo"></span><button onclick="nextPage('1m')">▶</button></div></div></div>
-<div id="g3" class="gameSection"><div class="gameTop g3m"><div><div>WinGo 3 Min</div><div class="periodSmall" id="pid3">20260928100051390</div><div style="font-size:9px">Short: <span id="short3">51390</span> -> Next: <span id="next3">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t3_1">0</b><b id="t3_2">3</b><span>:</span><b id="t3_3">0</b><b id="t3_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov3"><div class="countBox" id="ov3_1">0</div><div class="countBox" id="ov3_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist3"></div><div class="pageCtrl"><button onclick="prevPage('3m')">◀</button><span id="info3" class="pageInfo"></span><button onclick="nextPage('3m')">▶</button></div></div></div>
-<div id="g5" class="gameSection"><div class="gameTop g5m"><div><div>WinGo 5 Min</div><div class="periodSmall" id="pid5">20260928100051390</div><div style="font-size:9px">Short: <span id="short5">51390</span> -> Next: <span id="next5">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t5_1">0</b><b id="t5_2">5</b><span>:</span><b id="t5_3">0</b><b id="t5_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov5"><div class="countBox" id="ov5_1">0</div><div class="countBox" id="ov5_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist5"></div><div class="pageCtrl"><button onclick="prevPage('5m')">◀</button><span id="info5" class="pageInfo"></span><button onclick="nextPage('5m')">▶</button></div></div></div>
+<div class="wingoCard" onclick="openWinGo('1m')" style="border-left-color:#4caf50">
+<div class="wingoIcon" style="background:#4caf50">1M</div>
+<div><b>WinGo 1 Min</b><br><span style="font-size:11px;color:gray">1 minute wala game</span></div>
+<div style="margin-left:auto;color:#4caf50;font-weight:bold">▶</div>
+</div>
 
-<div id="depMethodModal"><div class="popBox">
-<h3>💰 Deposit Method</h3>
-<div class="depOpt">
-<button id="qrBtn" onclick="selectDepMethod('QR')">📷 QR Pay</button>
-<button id="upiBtn" onclick="selectDepMethod('UPI')">💳 UPI Pay</button>
+<div class="wingoCard" onclick="openWinGo('3m')" style="border-left-color:#ff9800">
+<div class="wingoIcon" style="background:#ff9800">3M</div>
+<div><b>WinGo 3 Min</b><br><span style="font-size:11px;color:gray">3 minute wala game</span></div>
+<div style="margin-left:auto;color:#ff9800;font-weight:bold">▶</div>
 </div>
-<div id="qrShow" style="display:none" class="qrBox"><div style="width:150px;height:150px;background:white;border:2px solid #333;margin:10px auto;display:flex;align-items:center;justify-content:center;font-size:40px">QR</div><p style="font-size:11px">UPI ID: 55club@upi</p></div>
-<div id="upiShow" style="display:none" class="qrBox"><p>UPI ID: <b>55club@upi</b></p><button onclick="copyUPI()" style="padding:6px 12px;border:none;background:#3cc15f;color:white;border-radius:10px;margin-top:8px">Copy UPI</button></div>
-<div class="amtGrid">
-<button onclick="selectAmt(100)">₹100</button><button onclick="selectAmt(300)">₹300</button><button onclick="selectAmt(400)">₹400</button><button onclick="selectAmt(500)">₹500</button><button onclick="selectAmt(1000)">₹1000</button><button onclick="selectAmt(2000)">₹2000</button><button onclick="selectAmt(4000)">₹4000</button>
-</div>
-<input id="customAmt" class="inp" type="number" placeholder="Custom Amount - Min 100" oninput="selectAmt(this.value)">
-<div style="margin-top:12px;padding:8px;background:#e8f5e9;border-radius:10px;font-size:11px">Selected: <b id="selMethod">None</b> | Amount: ₹<b id="selAmt">0</b></div>
-<button class="regbtn" style="background:#3cc15f" onclick="proceedToUTR()">Pay Now → Enter UTR</button>
-<button onclick="depMethodModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button>
-<div style="margin-top:15px;text-align:left;border-top:2px solid #ff4d4d;padding-top:10px">
-<h4 style="font-size:13px;color:#ff4d4d">📜 Deposit History - Order No + Amount + Status</h4>
-<div id="depHistInDepModal" style="max-height:200px;overflow:auto;margin-top:8px"></div>
-</div>
-</div></div>
 
-<div id="utrModal"><div class="popBox">
-<h3>✅ Enter UTR</h3>
-<div style="text-align:left;background:#f5f5f5;padding:10px;border-radius:10px;margin-top:10px;font-size:11px">
-Method: <b id="utrMethodShow">-</b> | Amount: ₹<b id="utrAmtShow">0</b><br>
-Order No: <b id="utrOrderShow" style="color:#ff4d4d">-</b><br>
-UID: <b id="utrUIDShow">-</b>
+<div class="wingoCard" onclick="openWinGo('5m')" style="border-left-color:#9c27b0">
+<div class="wingoIcon" style="background:#9c27b0">5M</div>
+<div><b>WinGo 5 Min</b><br><span style="font-size:11px;color:gray">5 minute wala game</span></div>
+<div style="margin-left:auto;color:#9c27b0;font-weight:bold">▶</div>
 </div>
-<input id="utrInput" class="inp" type="text" placeholder="Enter UTR / Transaction ID">
-<button class="regbtn" style="background:#2196f3" onclick="submitUTR()">Submit UTR</button>
-<button onclick="utrModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button>
-</div></div>
 
+<button onclick="showToast('More games coming soon!')" style="width:100%;margin-top:10px;padding:12px;border:2px dashed #ccc;border-radius:12px;background:white;color:gray">+ More Games Coming Soon</button>
+</div>
+
+<!-- GAME SECTIONS -->
+<div id="g30" class="gameSection"><div style="padding:10px"><button onclick="backToHome()" style="padding:8px 14px;border:none;background:#222;color:white;border-radius:20px">← Back to Home</button></div><div class="gameTop"><div><div>WinGo 30sec</div><div class="periodSmall" id="pid30">20260928100051390</div><div style="font-size:9px">Short: <span id="short30">51390</span> -> Next: <span id="next30">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b>0</b><b>0</b><span>:</span><b id="t30_1">3</b><b id="t30_2">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov30"><div class="countBox" id="ov30_1">0</div><div class="countBox" id="ov30_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist30"></div><div class="pageCtrl"><button onclick="prevPage('30s')">◀</button><span id="info30" class="pageInfo"></span><button onclick="nextPage('30s')">▶</button></div></div></div>
+<div id="g1" class="gameSection"><div style="padding:10px"><button onclick="backToHome()" style="padding:8px 14px;border:none;background:#222;color:white;border-radius:20px">← Back to Home</button></div><div class="gameTop g1m"><div><div>WinGo 1 Min</div><div class="periodSmall" id="pid1">20260928100051390</div><div style="font-size:9px">Short: <span id="short1">51390</span> -> Next: <span id="next1">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t1_1">0</b><b id="t1_2">1</b><span>:</span><b id="t1_3">0</b><b id="t1_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov1"><div class="countBox" id="ov1_1">0</div><div class="countBox" id="ov1_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist1"></div><div class="pageCtrl"><button onclick="prevPage('1m')">◀</button><span id="info1" class="pageInfo"></span><button onclick="nextPage('1m')">▶</button></div></div></div>
+<div id="g3" class="gameSection"><div style="padding:10px"><button onclick="backToHome()" style="padding:8px 14px;border:none;background:#222;color:white;border-radius:20px">← Back to Home</button></div><div class="gameTop g3m"><div><div>WinGo 3 Min</div><div class="periodSmall" id="pid3">20260928100051390</div><div style="font-size:9px">Short: <span id="short3">51390</span> -> Next: <span id="next3">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t3_1">0</b><b id="t3_2">3</b><span>:</span><b id="t3_3">0</b><b id="t3_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov3"><div class="countBox" id="ov3_1">0</div><div class="countBox" id="ov3_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist3"></div><div class="pageCtrl"><button onclick="prevPage('3m')">◀</button><span id="info3" class="pageInfo"></span><button onclick="nextPage('3m')">▶</button></div></div></div>
+<div id="g5" class="gameSection"><div style="padding:10px"><button onclick="backToHome()" style="padding:8px 14px;border:none;background:#222;color:white;border-radius:20px">← Back to Home</button></div><div class="gameTop g5m"><div><div>WinGo 5 Min</div><div class="periodSmall" id="pid5">20260928100051390</div><div style="font-size:9px">Short: <span id="short5">51390</span> -> Next: <span id="next5">51391</span></div></div><div style="text-align:right"><div class="timeBox"><b id="t5_1">0</b><b id="t5_2">5</b><span>:</span><b id="t5_3">0</b><b id="t5_4">0</b></div></div></div><div class="playArea"><div class="countOverlay" id="ov5"><div class="countBox" id="ov5_1">0</div><div class="countBox" id="ov5_2">5</div></div><div class="colorBtns"><button class="cG" onclick="bet('Green')">Green</button><button class="cV" onclick="bet('Violet')">Violet</button><button class="cR" onclick="bet('Red')">Red</button></div><div class="numGrid"><button onclick="bet('Num0')">0</button><button onclick="bet('Num1')">1</button><button onclick="bet('Num2')">2</button><button onclick="bet('Num3')">3</button><button onclick="bet('Num4')">4</button><button onclick="bet('Num5')">5</button><button onclick="bet('Num6')">6</button><button onclick="bet('Num7')">7</button><button onclick="bet('Num8')">8</button><button onclick="bet('Num9')">9</button></div><div class="bsRow"><button class="bsBig" onclick="bet('Big')">Big</button><button class="bsSmall" onclick="bet('Small')">Small</button></div></div><div class="historyWrap"><div class="histHeader"><span>Period</span><span>Number</span><span>Big Small</span><span>Color</span></div><div id="hist5"></div><div class="pageCtrl"><button onclick="prevPage('5m')">◀</button><span id="info5" class="pageInfo"></span><button onclick="nextPage('5m')">▶</button></div></div></div>
+
+<div id="depMethodModal"><div class="popBox"><h3>💰 Deposit Method</h3><div class="depOpt"><button id="qrBtn" onclick="selectDepMethod('QR')">📷 QR Pay</button><button id="upiBtn" onclick="selectDepMethod('UPI')">💳 UPI Pay</button></div><div id="qrShow" style="display:none" class="qrBox"><div style="width:150px;height:150px;background:white;border:2px solid #333;margin:10px auto;display:flex;align-items:center;justify-content:center;font-size:40px">QR</div><p style="font-size:11px">UPI ID: 55club@upi</p></div><div id="upiShow" style="display:none" class="qrBox"><p>UPI ID: <b>55club@upi</b></p><button onclick="copyUPI()" style="padding:6px 12px;border:none;background:#3cc15f;color:white;border-radius:10px;margin-top:8px">Copy UPI</button></div><div class="amtGrid"><button onclick="selectAmt(100)">₹100</button><button onclick="selectAmt(300)">₹300</button><button onclick="selectAmt(400)">₹400</button><button onclick="selectAmt(500)">₹500</button><button onclick="selectAmt(1000)">₹1000</button><button onclick="selectAmt(2000)">₹2000</button><button onclick="selectAmt(4000)">₹4000</button></div><input id="customAmt" class="inp" type="number" placeholder="Custom Amount - Min 100" oninput="selectAmt(this.value)"><div style="margin-top:12px;padding:8px;background:#e8f5e9;border-radius:10px;font-size:11px">Selected: <b id="selMethod">None</b> | Amount: ₹<b id="selAmt">0</b></div><button class="regbtn" style="background:#3cc15f" onclick="proceedToUTR()">Pay Now → Enter UTR</button><button onclick="depMethodModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button><div style="margin-top:15px;text-align:left;border-top:2px solid #ff4d4d;padding-top:10px"><h4 style="font-size:13px;color:#ff4d4d">📜 Deposit History</h4><div id="depHistInDepModal" style="max-height:200px;overflow:auto;margin-top:8px"></div></div></div></div>
+<div id="utrModal"><div class="popBox"><h3>✅ Enter UTR</h3><div style="text-align:left;background:#f5f5f5;padding:10px;border-radius:10px;margin-top:10px;font-size:11px">Method: <b id="utrMethodShow">-</b> | Amount: ₹<b id="utrAmtShow">0</b><br>Order No: <b id="utrOrderShow" style="color:#ff4d4d">-</b><br>UID: <b id="utrUIDShow">-</b></div><input id="utrInput" class="inp" type="text" placeholder="Enter UTR / Transaction ID"><button class="regbtn" style="background:#2196f3" onclick="submitUTR()">Submit UTR</button><button onclick="utrModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Cancel</button></div></div>
 <div id="withMethodModal"><div class="popBox"><h3>🏦 Withdrawal</h3><div class="depOpt"><button id="withUpiBtn" onclick="selectWithMethod('UPI')">💳 UPI</button><button id="withBankBtn" onclick="selectWithMethod('BANK')">🏦 Bank</button></div><div id="withUpiShow" style="display:none"><input id="withUpiInput" class="inp" type="text" placeholder="Enter UPI ID" style="text-align:left"></div><div id="withBankShow" style="display:none"><input id="withAccName" class="inp" type="text" placeholder="Account Holder" style="text-align:left"><input id="withAccNo" class="inp" type="text" placeholder="Account Number" style="text-align:left"><input id="withIfsc" class="inp" type="text" placeholder="IFSC" style="text-align:left"><input id="withBankName" class="inp" type="text" placeholder="Bank Name" style="text-align:left"></div><input id="withAmtInput" class="inp" type="number" placeholder="Amount - Min 100"><div class="betAmtRow"><button onclick="setWithAmt(100)">₹100</button><button onclick="setWithAmt(500)">₹500</button><button onclick="setWithAmt(1000)">₹1000</button><button onclick="setWithAmt(2000)">₹2000</button></div><button class="regbtn" style="background:#ff9800" onclick="submitWithdrawal()">Submit Withdrawal</button><button onclick="withMethodModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
-
-<div id="adminDepModal"><div class="popBox" style="max-width:480px"><h3>🔔 Admin 322533 - UID + Order No + UTR</h3><div id="adminDepList" style="max-height:450px;overflow:auto;text-align:left;margin-top:10px"></div><button onclick="adminDepModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
+<div id="adminDepModal"><div class="popBox" style="max-width:480px"><h3>🔔 Admin 322533</h3><div id="adminDepList" style="max-height:450px;overflow:auto;text-align:left;margin-top:10px"></div><button onclick="adminDepModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
 <div id="adminWithModal"><div class="popBox" style="max-width:480px"><h3>🔔 Admin Withdrawals</h3><div id="adminWithList" style="max-height:400px;overflow:auto;text-align:left;margin-top:10px"></div><button onclick="adminWithModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
 <div id="myHistModal"><div class="popBox" style="max-width:480px"><h3>📜 MY HISTORY</h3><div id="myHistList" style="max-height:400px;overflow:auto;text-align:left"></div><button onclick="myHistModal.style.display='none'" style="width:100%;margin-top:12px;padding:10px;border:none;background:#eee;border-radius:20px">Close</button></div></div>
 <div id="passModal"><div class="popBox" style="background:#111;color:white"><h3>🔐 Admin Access</h3><input id="passInput" class="inp" type="password" placeholder="Password" style="background:#222;color:white"><button class="regbtn" onclick="checkPass()">Unlock</button><button onclick="passModal.style.display='none'" style="width:100%;margin-top:8px;padding:10px;border:none;background:#333;color:white;border-radius:20px">Cancel</button><p id="passErr" style="color:#ff4d4d;font-size:11px;margin-top:8px;display:none">Wrong!</p></div></div>
@@ -212,7 +194,7 @@ function loadUserData(cur){
  pendingWithdrawals=JSON.parse(localStorage.getItem('pendingWithdrawals_55')||"[]");
  games[curGame].bets=JSON.parse(localStorage.getItem('bets_'+cur+'_'+curGame)||"[]")||[];
  document.getElementById('displayDep').innerText=getTotalDeposit(cur);
- updateAdminNotif();checkUserNotifications();
+ updateAdminNotif();
 }
 function switchAuth(t){document.getElementById('loginTab').classList.toggle('active',t=='login');document.getElementById('regTab').classList.toggle('active',t=='register');document.getElementById('loginForm').style.display=t=='login'?'block':'none';document.getElementById('registerForm').style.display=t=='register'?'block':'none';}
 function generateUID(){let existingUIDs=JSON.parse(localStorage.getItem('uid_list_55')||"[]");if(!existingUIDs.includes(ADMIN_UID)){existingUIDs.push(ADMIN_UID);localStorage.setItem('uid_list_55',JSON.stringify(existingUIDs));}let uid;do{uid=Math.floor(100000+Math.random()*900000);}while(existingUIDs.includes(uid)||uid==ADMIN_UID);existingUIDs.push(uid);localStorage.setItem('uid_list_55',JSON.stringify(existingUIDs));return uid;}
@@ -237,7 +219,8 @@ function doLogin(){
  if(!localStorage.getItem('bal_'+m)){localStorage.setItem('bal_'+m,"34");}
  loadUserData(m);showUserInfo(m);
  document.getElementById('bal').innerText=bal.toFixed(2);
- showStartBox(); // NAYA - Direct game nahi, box batavse
+ initGame();
+ showHomePage();
 }
 function showUserInfo(m){let users=JSON.parse(localStorage.getItem('users_55club')||"{}");let u=users[m];if(!u) return;document.getElementById('userCard').style.display='flex';document.getElementById('displayName').innerText=u.name+(u.uid==ADMIN_UID?" (ADMIN)":"");document.getElementById('displayMobile').innerText=m;document.getElementById('displayUID').innerText=u.uid;loadUserData(m);document.getElementById('bal').innerText=bal.toFixed(2);}
 function doLogout(){if(confirm('Logout?')){localStorage.removeItem('currentUser_55club');location.reload();}}
@@ -245,33 +228,37 @@ function checkAuth(){
  let existingUIDs=JSON.parse(localStorage.getItem('uid_list_55')||"[]");if(!existingUIDs.includes(ADMIN_UID)){existingUIDs.push(ADMIN_UID);localStorage.setItem('uid_list_55',JSON.stringify(existingUIDs));}
  pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");pendingWithdrawals=JSON.parse(localStorage.getItem('pendingWithdrawals_55')||"[]");
  let u=getCurrentUser();
- if(u){document.getElementById('authModal').style.display='none';showUserInfo(u);showStartBox();}
+ if(u){document.getElementById('authModal').style.display='none';showUserInfo(u);initGame();showHomePage();}
  else{document.getElementById('authModal').style.display='flex';}
 }
-// NAYA FUNCTION - BOX BATAVVA MATE
-function showStartBox(){
- let cur=getCurrentUser();if(!cur) return;
- let users=JSON.parse(localStorage.getItem('users_55club')||"{}");let u=users[cur];
- document.getElementById('startUserName').innerText=u.name;
- document.getElementById('startUID').innerText=u.uid;
- document.getElementById('startBal').innerText=bal.toFixed(2);
- document.getElementById('startGameModal').style.display='flex';
+function showHomePage(){
+ document.getElementById('homePage').style.display='block';
+ document.querySelectorAll('.gameSection').forEach(el=>el.classList.remove('active'));
+ document.getElementById('curLabel').innerText='HOME';
+ document.querySelector('.tabs').style.display='none';
 }
-// NAYA FUNCTION - GAME CHALU KARVA MATE
-function startGameNow(){
- document.getElementById('startGameModal').style.display='none';
- if(!gameStarted){
-   initGame();
-   gameStarted=true;
- }
- showToast("Game Started! 🎮");
+function openWinGo(type){
+ curGame=type;
+ localStorage.setItem('curGame_cont',type);
+ document.getElementById('homePage').style.display='none';
+ document.querySelector('.tabs').style.display='flex';
+ document.getElementById('curLabel').innerText=type.toUpperCase();
+ document.getElementById('tab30').classList.toggle('active',type=='30s');
+ document.getElementById('tab1').classList.toggle('active',type=='1m');
+ document.getElementById('tab3').classList.toggle('active',type=='3m');
+ document.getElementById('tab5').classList.toggle('active',type=='5m');
+ document.getElementById('g30').classList.toggle('active',type=='30s');
+ document.getElementById('g1').classList.toggle('active',type=='1m');
+ document.getElementById('g3').classList.toggle('active',type=='3m');
+ document.getElementById('g5').classList.toggle('active',type=='5m');
+ renderHist(type);
 }
+function backToHome(){showHomePage();}
 function secretTap(){let uid=getCurrentUID();if(uid!=ADMIN_UID){return;}let now=Date.now();if(now-lastTapTime>3000){tapCount=0;}tapCount++;lastTapTime=now;if(tapCount>=5){tapCount=0;document.getElementById('passModal').style.display='flex';}}
 function checkPass(){let p=document.getElementById('passInput').value;if(p=="9638"){document.getElementById('passModal').style.display='none';openAdmin();}else{document.getElementById('passErr').style.display='block';}}
 function openAdmin(){document.getElementById('adminModal').style.display='flex';}
 function applyControl(){let num=parseInt(document.getElementById('nextNumCtrl').value);let col=document.getElementById('nextColorCtrl').value;let bs=document.getElementById('nextBSCtrl').value;nextResultControl[curGame]={num:num,color:col,bs:bs};saveAll();showToast(curGame+" SET");openAdmin();}
 function clearControl(){nextResultControl[curGame]=null;saveAll();showToast("Random");openAdmin();}
-
 function openDepositMethods(){
  let cur=getCurrentUser();if(!cur){showToast("Login karo");return;}loadUserData(cur);
  selectedDepMethod="";selectedAmt=0;
@@ -283,15 +270,13 @@ function openDepositMethods(){
  let depFiltered=dwHistory.filter(h=>h.type=='Deposit');
  if(depFiltered.length==0){depHistEl.innerHTML=`<div style="padding:8px;text-align:center;color:gray;font-size:11px">No Deposit History</div>`;}
  else{
-   let html="";
-   depFiltered.slice(0,30).forEach(h=>{
+   let html="";depFiltered.slice(0,30).forEach(h=>{
      let statusText="Processing";let statusClass="statusProc";
      if(h.status.includes('Success')){statusText="Success";statusClass="statusSucc";}
      else if(h.status.includes('Reject')){statusText="Rejected";statusClass="statusRej";}
      else if(h.status.includes('Bonus')){statusText="Bonus";statusClass="statusSucc";}
      html+=`<div class="dwRow"><div style="text-align:left"><b>Order: ${h.orderNo||'-'}</b><br><span style="font-size:10px;color:gray">${h.time}</span></div><div style="text-align:right"><b>₹${h.amt}</b><br><span class="${statusClass}">${statusText}</span></div></div>`;
-   });
-   depHistEl.innerHTML=html;
+   });depHistEl.innerHTML=html;
  }
  document.getElementById('depMethodModal').style.display='flex';
 }
@@ -325,7 +310,7 @@ function submitUTR(){
  userDW.unshift({type:'Deposit',amt:selectedAmt,time:timeStr,status:'Processing',utr:utr,orderNo:pendingOrderNo,method:selectedDepMethod,depId:id});
  localStorage.setItem('dwHistory_'+cur,JSON.stringify(userDW));dwHistory=userDW;saveAll();
  document.getElementById('utrModal').style.display='none';
- showToast("Order No: "+pendingOrderNo+" UTR: "+utr+" - Admin 322533 ko gaya");
+ showToast("Order No: "+pendingOrderNo+" - Admin ko gaya");
  updateAdminNotif();
 }
 function updateAdminNotif(){
@@ -342,21 +327,11 @@ function openAdminDeposits(){
  let list=document.getElementById('adminDepList');
  if(pendingDeposits.length==0){list.innerHTML=`<div style="padding:20px;text-align:center;color:gray">No deposits</div>`;}
  else{
-   let html="";
-   pendingDeposits.forEach(p=>{
+   let html="";pendingDeposits.forEach(p=>{
      let statusText=p.status=='Processing'?'Processing':p.status=='Success'?'Success':'Rejected';
      let statusClass=p.status=='Processing'?'statusProc':p.status=='Success'?'statusSucc':'statusRej';
-     html+=`<div class="pendingRow" style="border-color:${statusText=='Processing'?'orange':statusText=='Success'?'green':'red'};background:white">
-       <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:14px;color:#ff4d4d">UID: ${p.uid}</b><span class="${statusClass}">${statusText}</span></div>
-       <div style="margin:8px 0;padding:10px;background:#fff3e0;border-radius:10px;border:2px dashed #ff9800">
-         <div><b>Order No:</b> <span style="font-weight:bold;font-size:14px">${p.orderNo}</span></div>
-         <div><b>UTR:</b> <span style="color:#2196f3;font-weight:bold;font-size:14px">${p.utr}</span></div>
-         <div style="margin-top:5px"><b>Amount:</b> ₹${p.amount} | <b>${p.method}</b><br><b>Name:</b> ${p.name} | <b>Mob:</b> ${p.mobile}</div>
-       </div>
-       ${p.status=='Processing'?`<div style="display:flex;gap:8px"><button onclick="approveDeposit('${p.id}')" style="flex:1;padding:10px;background:#3cc15f;color:white;border:none;border-radius:10px;font-weight:bold">✅ Accept</button><button onclick="rejectDeposit('${p.id}')" style="flex:1;padding:10px;background:#ff4d4d;color:white;border:none;border-radius:10px">❌ Reject</button></div>`:''}
-     </div>`;
-   });
-   list.innerHTML=html;
+     html+=`<div class="pendingRow"><div style="display:flex;justify-content:space-between"><b>UID: ${p.uid}</b><span class="${statusClass}">${statusText}</span></div><div><b>Order:</b> ${p.orderNo} | <b>UTR:</b> ${p.utr}</div><div>₹${p.amount} | ${p.method} | ${p.name} | ${p.mobile}</div>${p.status=='Processing'?`<div style="display:flex;gap:8px;margin-top:8px"><button onclick="approveDeposit('${p.id}')" style="flex:1;padding:8px;background:#3cc15f;color:white;border:none;border-radius:10px">✅ Accept</button><button onclick="rejectDeposit('${p.id}')" style="flex:1;padding:8px;background:#ff4d4d;color:white;border:none;border-radius:10px">❌ Reject</button></div>`:''}</div>`;
+   });list.innerHTML=html;
  }
  document.getElementById('adminDepModal').style.display='flex';
 }
@@ -364,7 +339,7 @@ function approveDeposit(id){
  pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");let idx=pendingDeposits.findIndex(p=>p.id==id);if(idx==-1) return;let p=pendingDeposits[idx];if(p.status!='Processing'){showToast("Already "+p.status);return;}p.status='Success';pendingDeposits[idx]=p;localStorage.setItem('pendingDeposits_55',JSON.stringify(pendingDeposits));
  let curBal=parseFloat(localStorage.getItem('bal_'+p.mobile)||"34");curBal+=p.amount;localStorage.setItem('bal_'+p.mobile,curBal.toString());
  let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.depId==id);if(dwIdx!=-1){userDW[dwIdx].status='Success';}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));
- if(getCurrentUser()==p.mobile){bal=curBal;dwHistory=userDW;document.getElementById('bal').innerText=bal.toFixed(2);showToast("🎉 Success Order "+p.orderNo);}
+ if(getCurrentUser()==p.mobile){bal=curBal;dwHistory=userDW;document.getElementById('bal').innerText=bal.toFixed(2);}
  saveAll();openAdminDeposits();updateAdminNotif();
 }
 function rejectDeposit(id){pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");let idx=pendingDeposits.findIndex(p=>p.id==id);if(idx==-1) return;let p=pendingDeposits[idx];p.status='Rejected';pendingDeposits[idx]=p;localStorage.setItem('pendingDeposits_55',JSON.stringify(pendingDeposits));let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.depId==id);if(dwIdx!=-1){userDW[dwIdx].status='Rejected';}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));saveAll();openAdminDeposits();updateAdminNotif();}
@@ -375,8 +350,6 @@ function submitWithdrawal(){let cur=getCurrentUser();loadUserData(cur);let amt=p
 function openAdminWithdrawals(){if(getCurrentUID()!=ADMIN_UID){showToast("Only Admin 322533");return;}pendingWithdrawals=JSON.parse(localStorage.getItem('pendingWithdrawals_55')||"[]");let list=document.getElementById('adminWithList');if(pendingWithdrawals.length==0){list.innerHTML=`<div style="padding:20px;text-align:center;color:gray">No withdrawals</div>`;}else{let html="";pendingWithdrawals.forEach(p=>{let col=p.status.includes('Processing')?'orange':p.status.includes('Success')?'green':'red';html+=`<div class="pendingRow" style="border-color:${col};background:#e3f2fd"><div style="display:flex;justify-content:space-between"><b>UID: ${p.uid} - ${p.name}</b><span style="color:${col}">${p.status}</span></div><div>Mobile: ${p.mobile} | Amount: ₹${p.amount} | ${p.method}</div><div>${p.method=='UPI'?`UPI: ${p.upi}`:`Acc: ${p.accName} - ${p.accNo}`}</div><div>Time: ${p.time}</div>${p.status.includes('Processing')?`<div style="display:flex;gap:8px;margin-top:8px"><button onclick="approveWithdrawal('${p.id}')" style="flex:1;padding:8px;background:#3cc15f;color:white;border:none;border-radius:10px;font-weight:bold">✅ Accept</button><button onclick="rejectWithdrawal('${p.id}')" style="flex:1;padding:8px;background:#ff4d4d;color:white;border:none;border-radius:10px">❌ Reject</button></div>`:''}</div>`;});list.innerHTML=html;}document.getElementById('adminWithModal').style.display='flex';}
 function approveWithdrawal(id){pendingWithdrawals=JSON.parse(localStorage.getItem('pendingWithdrawals_55')||"[]");let idx=pendingWithdrawals.findIndex(p=>p.id==id);if(idx==-1) return;let p=pendingWithdrawals[idx];p.status='Success';pendingWithdrawals[idx]=p;localStorage.setItem('pendingWithdrawals_55',JSON.stringify(pendingWithdrawals));let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.withId==id);if(dwIdx!=-1){userDW[dwIdx].status='Success';}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));saveAll();openAdminWithdrawals();updateAdminNotif();}
 function rejectWithdrawal(id){pendingWithdrawals=JSON.parse(localStorage.getItem('pendingWithdrawals_55')||"[]");let idx=pendingWithdrawals.findIndex(p=>p.id==id);if(idx==-1) return;let p=pendingWithdrawals[idx];p.status='Rejected';pendingWithdrawals[idx]=p;localStorage.setItem('pendingWithdrawals_55',JSON.stringify(pendingWithdrawals));let curBal=parseFloat(localStorage.getItem('bal_'+p.mobile)||"0");curBal+=p.amount;localStorage.setItem('bal_'+p.mobile,curBal.toString());let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.withId==id);if(dwIdx!=-1){userDW[dwIdx].status='Rejected';}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));saveAll();openAdminWithdrawals();updateAdminNotif();}
-function checkUserNotifications(){let cur=getCurrentUser();if(!cur) return;let notifs=JSON.parse(localStorage.getItem('notif_'+cur)||"[]");if(notifs.length>0){let latest=notifs[0];if(!latest.shown){showToast(latest.msg);latest.shown=true;notifs[0]=latest;localStorage.setItem('notif_'+cur,JSON.stringify(notifs));}}}
-function autoRejectCheck(){pendingDeposits=JSON.parse(localStorage.getItem('pendingDeposits_55')||"[]");let changed=false;let now=Date.now();pendingDeposits.forEach(p=>{if(p.status=='Processing'&&(now-p.timestamp)>5*60*1000){p.status='Rejected';let userDW=JSON.parse(localStorage.getItem('dwHistory_'+p.mobile)||"[]");let dwIdx=userDW.findIndex(d=>d.depId==p.id);if(dwIdx!=-1){userDW[dwIdx].status='Rejected';}localStorage.setItem('dwHistory_'+p.mobile,JSON.stringify(userDW));changed=true;}});if(changed){localStorage.setItem('pendingDeposits_55',JSON.stringify(pendingDeposits));updateAdminNotif();}}
 function openMyHistory(){let cur=getCurrentUser();if(!cur) return;loadUserData(cur);let list=document.getElementById('myHistList');if(betHistory.length==0){list.innerHTML=`<div style="padding:20px;text-align:center;color:gray">No bets</div>`;}else{let html="";betHistory.slice(0,100).forEach(h=>{let isWin=h.winLoss=='WIN';html+=`<div class="myHistRow"><div><b>${h.game.toUpperCase()}</b><br><span style="font-size:9px">${h.period}</span><br>${h.betType} ₹${h.betAmt}</div><div style="text-align:center">${h.resultNum} ${h.resultColor}<br>${h.resultBS}</div><div style="text-align:center">₹${h.betAmt}</div><div style="text-align:center"><span class="${isWin?'winTag':'lossTag'}">${h.winLoss}</span><br><span style="color:${isWin?'#3cc15f':'#ff4d4d'}">${isWin?'+₹'+h.winAmt:'-₹'+h.betAmt}</span></div></div>`;});list.innerHTML=html;}document.getElementById('myHistModal').style.display='flex';}
 function loadAll(){Object.keys(games).forEach(k=>{let h=localStorage.getItem('hist_'+k+'_final');if(h){try{games[k].hist=JSON.parse(h);}catch(e){}}let t=localStorage.getItem('timeLeft_'+k);if(t){games[k].time=parseInt(t);}let lastTs=parseInt(localStorage.getItem('ts_'+k)||Date.now());let elapsedSec=Math.floor((Date.now()-lastTs)/1000);if(elapsedSec>0){let totalElapsed=games[k].duration-games[k].time+elapsedSec;let rounds=Math.floor(totalElapsed/games[k].duration);if(rounds>0){for(let i=0;i<rounds;i++){let winNum=Math.floor(Math.random()*10);let winColor=(winNum==0||winNum==5)?"Violet":(winNum%2==0?"Red":"Green");let winBS=winNum>=5?"Big":"Small";games[k].hist.unshift({shortPeriod:games[k].period,fullPeriod:getFullPeriod(games[k].period),num:winNum,bs:winBS,color:winColor});games[k].period++;}let rem=totalElapsed%games[k].duration;games[k].time=games[k].duration-rem;if(games[k].time<=0) games[k].time=games[k].duration;}}if(games[k].hist.length==0){for(let i=0;i<5;i++){let pn=games[k].period-i;let num=Math.floor(Math.random()*10);let col=(num==0||num==5)?"Violet":(num%2==0?"Red":"Green");let bs=num>=5?"Big":"Small";games[k].hist.push({shortPeriod:pn,fullPeriod:getFullPeriod(pn),num:num,bs:bs,color:col});}games[k].hist.reverse();}});}
 function switchGame(type){let cur=getCurrentUser();if(cur){saveAll();}curGame=type;localStorage.setItem('curGame_cont',curGame);if(cur){loadUserData(cur);}document.getElementById('curLabel').innerText=type.toUpperCase();document.getElementById('curPeriodFull').innerText=getFullPeriod(games[type].period);document.getElementById('tab30').classList.toggle('active',type=='30s');document.getElementById('tab1').classList.toggle('active',type=='1m');document.getElementById('tab3').classList.toggle('active',type=='3m');document.getElementById('tab5').classList.toggle('active',type=='5m');document.getElementById('g30').classList.toggle('active',type=='30s');document.getElementById('g1').classList.toggle('active',type=='1m');document.getElementById('g3').classList.toggle('active',type=='3m');document.getElementById('g5').classList.toggle('active',type=='5m');renderHist(type);}
@@ -413,7 +386,7 @@ function startAll(){
       },800);
     }
   });if(Math.floor(Date.now()/1000)%2==0) saveAll();
- },1000);setInterval(()=>{autoRejectCheck();},10000);
+ },1000);
 }
 function initGame(){
  loadAll();
@@ -421,11 +394,10 @@ function initGame(){
  if(cur){loadUserData(cur);document.getElementById('bal').innerText=bal.toFixed(2);}
  Object.keys(games).forEach(k=>renderHist(k));
  switchGame(curGame);
- startAll();
+ if(!gameStarted){startAll();gameStarted=true;}
  window.addEventListener('beforeunload',saveAll);
- autoRejectCheck();
 }
 window.onload=()=>{checkAuth();}
 </script>
 </body>
-</html>￼Enter
+ </html>
